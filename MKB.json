@@ -1,0 +1,77 @@
+{
+	// http://www.sublimetext.com/docs/3/color_schemes.html
+	"variables": 
+	{
+		"mc0": "#000000",
+		"mc1": "#0000AA",
+		"mc2": "#00AA00",
+		"mc3": "#00AAAA",
+		"mc4": "#AA0000",
+		"mc5": "#AA00AA",
+		"mc6": "#FFAA00",
+		"mc7": "#AAAAAA",
+		"mc8": "#555555",
+		"mc9": "#5555FF",
+		"mca": "#55FF55",
+		"mcb": "#55FFFF",
+		"mcc": "#FF5555",
+		"mcd": "#FF55FF",
+		"mce": "#FFFF55",
+		"mcf": "#FFFFFF"
+	},
+	"rules": 
+	[
+		{
+			"scope": "mcdefault",
+			"foreground": "var(mcf)",
+		},
+		{
+			"scope": "mccomments",
+			"foreground": "var(mc7)",
+		},
+		{
+			"scope": "mcparameters",
+			"foreground": "var(mc6)",
+		},
+		{
+			"scope": "mcstrings",
+			"foreground": "var(mca)",
+		},
+		{
+			"scope": "mckeywords",
+			"foreground": "var(mcd)",
+		},
+		{
+			"scope": "mcnumbers",
+			"foreground": "var(mc9)",
+		},
+		{
+			"scope": "mcactions",
+			"foreground": "var(mc5)",
+		},
+		{
+			"scope": "mcvariables",
+			"foreground": "var(mcb)",
+		},
+		{
+			"scope": "mciterators",
+			"foreground": "var(mc3)",
+		},
+		{
+			"scope": "mcprefixes",
+			"foreground": "var(mcc)",
+		},
+		{
+			"scope": "mcoperators",
+			"foreground": "var(mce)",
+		},
+		{
+			"scope": "mcbooleans",
+			"foreground": "var(mc4)",
+		},
+		{
+			"scope": "mcrepl",
+			"foreground": "var(mc1)",
+		},
+	],
+}
