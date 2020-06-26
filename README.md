@@ -10,6 +10,7 @@ Macro/Keybind Mod Syntax Highlighting for Sublime Text 3
 **Set Up:**
 
 There are 2 files: __MKB.yaml__ which is a YAML file, with the regexes and assigning scopes to them. __MKB.json__ is for the custom colors and rules. 
+
 *Note that the menus might be different depending on your os, so you can always use the app's help, or ask me*
 
 **Useful links:**
@@ -19,12 +20,14 @@ https://packagecontrol.io/installation
 https://github.com/SublimeText/PackageDev/blob/master/README.md
 
 You need to get PackageDev for this, by doing `Preferences > Package Control` and then type `Package Control: Install Package`, afterwards find `PackageDev` in the menu and install it. 
-To install __MKB.sublime-sytax__, you need to go to `Tools > Developer > New Syntax...` and paste everything into the page.
+
+To install __MKB.yaml__, you need to go to `Tools > Developer > New Syntax...` and paste everything into the page, save it as MKB.sublime-syntax.
+
 Next you need to add the custom colors in __MKB.json__, and to do that you go to. `Tools > Packages > Package Development > Edit Current Color Scheme...` Paste the entire json contents into the **Right Side** of the color scheme, for the user. 
 
 **Usage:**
 
-When opening a txt or rtf file (can be configured), if the first line is `$${` it will automatically change to `MKB` syntax. But if it doesnt work, then you can go to the bottom left corner, and change `Plain Text` to `MKB`. 
+When opening a txt or rtf file (can be configured), if the first line is `$${` it will automatically change to `MKB` syntax. But if it doesnt work, then you can go to the bottom left corner, and click `User`, and change `Plain Text` to `MKB`. 
 
 **How does it work?**
 
