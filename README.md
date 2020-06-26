@@ -11,7 +11,7 @@ Macro/Keybind Mod Syntax Highlighting for Sublime Text 3
 
 There are 2 files: __MKB.yaml__ which is a YAML file, with the regexes and assigning scopes to them. __MKB.json__ is for the custom colors and rules. 
 
-*Note that the menus might be different depending on your os, so you can always use the app's help, or ask me*
+*Note that the menus might be different depending on your os, so you can always use the text editor's help, or ask me*
 
 **Useful links:**
 
@@ -34,4 +34,5 @@ When opening a txt or rtf file (can be configured), if the first line is `$${` i
 The new sublime syntax will recognize the actions, variables, parameters, iterators... of macro mod and common modules, using regex it assigns a scope to it. The scope is then assigned a color in the color scheme file, and then you get custom syntax highlighting!
 
 **Others**
+
 If there are any bugs, please tell me! My discord is TKM#6228. If there is any suggestions please tell me too! 
