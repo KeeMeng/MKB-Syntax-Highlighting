@@ -10,7 +10,7 @@
 
 There are 2 files: __MKB.yaml__ which is a YAML file, with the regexes and assigning scopes to them. __MKB.json__ is for the custom colors and rules. 
 
-## Useful links:
+**Useful links:**
 
 https://packagecontrol.io/installation
 
