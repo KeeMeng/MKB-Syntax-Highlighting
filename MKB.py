@@ -2,7 +2,7 @@ import sublime
 import sublime_plugin
 import json
 import os 
-dir_path = os.path.dirname(os.path.realpath(__file__)) + "/mkbdocs.json"
+dir_path = os.path.dirname(os.path.realpath(__file__)) + "/MKBdocs.json"
 print(dir_path)
 # https://beta.mkb.gorlem.ml/api/docs
 
