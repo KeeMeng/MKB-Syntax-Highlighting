@@ -1,5 +1,4 @@
 # MKB-Syntax-Highlighting
-
 ## Macro/Keybind Mod Syntax Highlighting for Sublime Text 3 with Auto Complete
 
 **Supports common modules too**
@@ -25,6 +24,8 @@ There are 5 files which you need to download, and place in your Packages/User fo
 - https://docs.sublimetext.io/guide/extensibility/completions.html#completed-completions
 - https://docs.sublimetext.io/guide/extensibility/plugins/
 
+---
+
 ## Set Up: 
 
 You need to get the PackageDev for this, by doing `Preferences > Package Control` and then type `Package Control: Install Package`. Afterwards, search `PackageDev` in the menu and install it. You might need to restart Sublime Text 3. 
@@ -33,13 +34,13 @@ First, you need to add the custom colors in **MKB.json**, and to do that you go 
 
 Next, you can drag the other 4 files (**MKB.py**, **MKB.sublime-completions**, **MKB.sublime-syntax**, **MKBdocs.json**) into the place where you Sublime Text 3 folder is (For Mac, it is located in `/Users/NAME/Library/Application Support/Sublime Text 3/Packages/User`).
 
-*Note that the menus might be different depending on your os, so you can always use the text editor's help*
+*Note that the menus might be different depending on your os, so you can always use the text editor's help.*
 
 ---
 
 ## Usage:
 
-When opening a txt or rtf file (can be configured), and the first line is `$${`, it will automatically change to `MKB` syntax. But if it doesnt work, then you can go to the bottom left corner, and click `User`, and change `Plain Text` to `MKB`. After that, the colors should appear, along with the auto complete functions. 
+When opening a txt or rtf file (can be configured), and the first line is `$${`, it will automatically change to `MKB` syntax. But if it doesnt work, then you can go to the bottom left corner, and click `User`, and change `Plain Text` to `MKB`. After that, the colors should appear automatically, along with the auto complete functions. To auto complete a statement, press tab and cycle through the options, or CMD/CTRL + Space to see a list of the possible auto completions. 
 
 ---
 
@@ -51,4 +52,4 @@ The new sublime syntax will recognize the actions, variables, parameters, iterat
 
 ## Others
 
-If there are any bugs, please tell me, or report it in GitHub! My discord is TKM#6228. If there are any suggestions, please tell me too! 
+If there are any bugs, please tell me, or report it in GitHub. My discord is TKM#6228. If there are any suggestions, please tell me too! 
