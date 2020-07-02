@@ -1,0 +1,35 @@
+{
+	"scope": "mkb",
+
+	"completions": 
+	[
+		{ "trigger": "if\tif…endif", "contents": "if();\n    \nendif;"},
+		{ "trigger": "if\tif…elseif…endif", "contents": "if();\n    \nelseif();\n    \nendif;"},
+		{ "trigger": "if\tif…else…endif", "contents": "if();\n    \nelse;\n    \nendif;"},
+		{ "trigger": "if\tif…elseif…else…endif", "contents": "if();\n    \nelseif();\n    \nelse;\n    \nendif;"},
+		{ "trigger": "ifbeginswith\tif…endif", "contents": "ifbeginswith();\n    \nendif;" },
+		{ "trigger": "ifbeginswith\tif…elseif…endif", "contents": "ifbeginswith();\n    \nelseif();\n    \nendif;"},
+		{ "trigger": "ifbeginswith\tif…else…endif", "contents": "ifbeginswith();\n    \nelse;\n    \nendif;"},
+		{ "trigger": "ifbeginswith\tif…elseif…else…endif", "contents": "ifbeginswith();\n    \nelseif();\n    \nelse;\n    \nendif;"},
+		{ "trigger": "ifcontains\tif…endif", "contents": "ifcontains();\n    \nendif;" },
+		{ "trigger": "ifcontains\tif…elseif…endif", "contents": "ifcontains();\n    \nelseif();\n    \nendif;"},
+		{ "trigger": "ifcontains\tif…else…endif", "contents": "ifcontains();\n    \nelse;\n    \nendif;"},
+		{ "trigger": "ifcontains\tif…elseif…else…endif", "contents": "ifcontains();\n    \nelseif();\n    \nelse;\n    \nendif;"},
+		{ "trigger": "ifendswith\tif…endif", "contents": "ifendswith();\n    \nendif;" },
+		{ "trigger": "ifendswith\tif…elseif…endif", "contents": "ifendswith();\n    \nelseif();\n    \nendif;"},
+		{ "trigger": "ifendswith\tif…else…endif", "contents": "ifendswith();\n    \nelse;\n    \nendif;"},
+		{ "trigger": "ifendswith\tif…elseif…else…endif", "contents": "ifendswith();\n    \nelseif();\n    \nelse;\n    \nendif;"},
+		{ "trigger": "ifmatches\tif…endif", "contents": "ifmatches();\n    \nendif;" },
+		{ "trigger": "ifmatches\tif…elseif…endif", "contents": "ifmatches();\n    \nelseif();\n    \nendif;"},
+		{ "trigger": "ifmatches\tif…else…endif", "contents": "ifmatches();\n    \nelse;\n    \nendif;"},
+		{ "trigger": "ifmatches\tif…elseif…else…endif", "contents": "ifmatches();\n    \nelseif();\n    \nelse;\n    \nendif;"},
+		{ "trigger": "foreach\tforeach…next", "contents": "foreach();\n    \nnext;"},
+		{ "trigger": "foreach\tforeach…break…next", "contents": "foreach();\n    break;\nnext;"},
+		{ "trigger": "for\tfor…next", "contents": "for();\n    \nnext;"},
+		{ "trigger": "for\tfor…break…next", "contents": "for();\n    break;\nnext;"},
+		{ "trigger": "unsafe", "contents": "unsafe(100);\n    \nendunsafe;"},
+		{ "trigger": "do\tdo…loop", "contents": "do();\n    \nloop;"},
+		{ "trigger": "do\tdo…while", "contents": "do();\n    \nwhile;"},
+		{ "trigger": "do\tdo…until", "contents": "do();\n    \nuntil;"},
+	]
+}
