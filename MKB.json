@@ -21,56 +21,57 @@
 	},
 	"rules": 
 	[
+		//Minecraft Macro/Keybind Mod
 		{
-			"scope": "mcdefault",
+			"scope": "mkb",
 			"foreground": "var(mcf)",
 		},
 		{
-			"scope": "mccomments",
+			"scope": "mkb.comments",
 			"foreground": "var(mc7)",
 		},
 		{
-			"scope": "mcparameters",
+			"scope": "mkb.parameters",
 			"foreground": "var(mc6)",
 		},
 		{
-			"scope": "mcstrings",
+			"scope": "mkb.strings",
 			"foreground": "var(mca)",
 		},
 		{
-			"scope": "mckeywords",
+			"scope": "mkb.keywords",
 			"foreground": "var(mcd)",
 		},
 		{
-			"scope": "mcnumbers",
+			"scope": "mkb.numbers",
 			"foreground": "var(mc9)",
 		},
 		{
-			"scope": "mcactions",
+			"scope": "mkb.actions",
 			"foreground": "var(mc5)",
 		},
 		{
-			"scope": "mcvariables",
+			"scope": "mkb.variables",
 			"foreground": "var(mcb)",
 		},
 		{
-			"scope": "mciterators",
+			"scope": "mkb.iterators",
 			"foreground": "var(mc3)",
 		},
 		{
-			"scope": "mcprefixes",
+			"scope": "mkb.prefixes",
 			"foreground": "var(mcc)",
 		},
 		{
-			"scope": "mcoperators",
+			"scope": "mkb.operators",
 			"foreground": "var(mce)",
 		},
 		{
-			"scope": "mcbooleans",
+			"scope": "mkb.booleans",
 			"foreground": "var(mc4)",
 		},
 		{
-			"scope": "mcrepl",
+			"scope": "mkb.repl",
 			"foreground": "var(mc1)",
 		},
 	],
