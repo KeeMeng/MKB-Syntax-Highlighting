@@ -29,7 +29,7 @@ contexts:
       scope: mkb
     - match: '(?<!\\)"'
       push: strings
-    - match: '<.*?>'
+    - match: '<[^ ]*?>'
       scope: mkb.keywords
     - include: keywords
     - include: numbers
