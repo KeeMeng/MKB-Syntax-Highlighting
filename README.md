@@ -15,6 +15,7 @@ There are 5 files which you need to download, and place in your Packages/User fo
 - **MKB.sublime-completions**:  Is a JSON file, containing specific "triggers", which will activate the auto complete, adding in the "contents". 
 - **MKB.sublime-syntax**: Is a YAML file, with many regexes and assigning scopes to them.
 - **MKBdocs.json**: Is a JSON API, containing the MKB wiki made by gorlem, found here https://beta.mkb.gorlem.ml/api/docs. This page might be updated from time to time. 
+- **MKBdocs.css**: Is a optional css file to make https://beta.mkb.gorlem.ml/docs/actions have a dark mode. You can use a chrome extension called stylus to change the css. 
 
 **Useful links:**
 - https://packagecontrol.io/installation
@@ -23,6 +24,9 @@ There are 5 files which you need to download, and place in your Packages/User fo
 - http://www.sublimetext.com/docs/3/color_schemes.html
 - https://docs.sublimetext.io/guide/extensibility/completions.html#completed-completions
 - https://docs.sublimetext.io/guide/extensibility/plugins/
+- https://beta.mkb.gorlem.ml/docs/actions
+- https://beta.mkb.gorlem.ml/docs/actions
+- https://beta.mkb.gorlem.ml/api/docs
 
 ---
 
