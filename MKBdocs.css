@@ -1,0 +1,127 @@
+body {
+    background: #000000;
+    color: #fff;
+}
+select {
+    color: #fff;
+}
+input::placeholder {
+    color: #969696;
+}
+a:not([class]),
+input[type=button],
+input[type=submit] {
+    color: #0a84ff;
+}
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+input[type="submit"]:active,
+a:not([class]):active,
+a:not([class]):focus,
+a:not([class]):hover,
+input[type=button]:active,
+input[type=button]:focus,
+input[type=button]:hover {
+    color: #5ac8fa;
+}
+.table .row:not(.row--head):hover,
+.table tbody tr:hover {
+    animation: fadein 0.25s linear 1;
+    background: #555555;
+}
+@keyframes fadein {
+    0% {
+        background: #000000
+    }
+    100% {
+        background: #555555;
+    }
+}
+.table .row:not(.row--head),
+.table tbody tr {
+    animation: fadeout 0.25s linear 1;
+    background: #000000;
+}
+@keyframes fadeout {
+    0% {
+        background: #555555
+    }
+    100% {
+        background: #000000;
+    }
+}
+a:not([class]):hover,
+input[type=button]:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    animation: underlinein 0.25s linear 1;
+}
+@keyframes underlinein {
+    0% {
+        color: #0a84ff;
+        border-bottom: 3px solid #000000;
+    }
+    100% {
+        color: #5ac8fa;
+        border-bottom: 3px solid #5ac8fa;
+    }
+}
+a:not([class]),
+input[type=button],
+input[type="submit"],
+input[type="button"] {
+    animation: underlineout 0.25s linear 1;
+}
+@keyframes underlineout {
+    0% {
+        color: #5ac8fa;
+        border-bottom: 3px solid #5ac8fa;
+    }
+    100% {
+        color: #0a84ff;
+        border-bottom: 3px solid #000000;
+    }
+}
+input[type="search"]::placeholder {
+    color: #ffffff;
+}
+input[type="search"] {
+    color: #ffffff;
+}
+input[type="search"]:hover,
+input[type="search"]:focus,
+input[type="search"]:active,
+input[type="text"]:hover,
+input[type="text"]:focus,
+input[type="text"]:active {
+    animation: underlinein2 0.25s linear 1;
+    border-bottom: 3px solid #969696;
+}
+input[type="search"],
+input[type="text"] {
+    animation: underlineout2 0.25s linear 1;
+}
+select:hover,
+select:focus,
+select:active {
+    border-bottom: 3px solid #969696;
+}
+@keyframes underlinein2 {
+    0% {
+        border-bottom: 3px solid #000000;
+    }
+    100% {
+        border-bottom: 3px solid #969696;
+    }
+}
+@keyframes underlineout2 {
+    0% {
+        border-bottom: 3px solid #969696;
+    }
+    100% {
+        border-bottom: 3px solid #000000;
+    }
+}
+input[type="search"] {
+    width: 25
+}
