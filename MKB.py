@@ -3,7 +3,6 @@ import sublime_plugin
 import json
 import os 
 dir_path = os.path.dirname(os.path.realpath(__file__)) + "/mkbdocs.json"
-print(dir_path)
 # https://beta.mkb.gorlem.ml/api/docs
 
 class mkbcompletions(sublime_plugin.EventListener):
