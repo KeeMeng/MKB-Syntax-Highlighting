@@ -74,5 +74,9 @@
 			"scope": "mkb.repl",
 			"foreground": "var(mc1)",
 		},
+		{
+			"scope": "mkb.binds",
+			"foreground": "var(mc2)",
+		},
 	],
 }
