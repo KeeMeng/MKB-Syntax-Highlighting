@@ -1,7 +1,7 @@
 # MKB-Syntax-Highlighting
 ## Macro/Keybind Mod Syntax Highlighting for Sublime Text 3 with Auto Complete
 
-**Supports common modules too**
+**Syntax highlighting & auto complete supports modules from https://spthiel.github.io/Modules/**
 
 *You could modify it to work on your own text editor, probably by using the regular expression matches and captures. You could also reference the minecraft hex color codes, which are pretty nice.*
 
@@ -24,7 +24,6 @@ There are 5 files which you need to download, and place in your Packages/User fo
 - http://www.sublimetext.com/docs/3/color_schemes.html
 - https://docs.sublimetext.io/guide/extensibility/completions.html#completed-completions
 - https://docs.sublimetext.io/guide/extensibility/plugins/
-- https://beta.mkb.gorlem.ml/docs/actions
 - https://beta.mkb.gorlem.ml/docs/actions
 - https://beta.mkb.gorlem.ml/api/docs
 
