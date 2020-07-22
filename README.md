@@ -44,7 +44,7 @@ Next, you can drag the other 4 files (**MKB.py**, **MKB.sublime-completions**, *
 
 ## Usage:
 
-When opening a txt or rtf file (can be configured), and the first line is `$${`, it will automatically change to `MKB` syntax. But if it doesnt work, then you can go to the bottom right corner, and change `Plain Text` to `MKB` syntax. After that, the colors should appear automatically, along with the auto complete functions. To auto complete a statement, press tab and cycle through the options, or CMD/CTRL + Space to see a list of the possible auto completions. 
+When opening a .txt file (can be configured), and the first line is `$${`, it will automatically change to `MKB` syntax. But if it doesnt work, then you can go to the bottom right corner, and change `Plain Text` to `MKB` syntax. After that, the colors should appear automatically, along with the auto complete functions. To auto complete a statement, press tab and cycle through the options, or CMD/CTRL + Space to see a list of the possible auto completions. 
 
 ---
 
