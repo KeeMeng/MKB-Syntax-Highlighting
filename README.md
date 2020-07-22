@@ -56,3 +56,6 @@ The new sublime syntax will recognize the actions, variables, parameters, iterat
 ## Others
 
 If there are any bugs, please tell me, or report it in GitHub. My discord is TKM#6228. If there are any suggestions, please tell me too! 
+
+Example of the syntax highlighter and the auto complete:
+![Example](MKB-syntax-highlighting.png?raw=true)
