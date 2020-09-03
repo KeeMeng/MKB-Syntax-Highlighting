@@ -23,59 +23,59 @@
 	[
 		//Minecraft Macro/Keybind Mod
 		{
-			"scope": "mkb",
+			"scope": "source.mkb",
 			"foreground": "var(mcf)",
 		},
 		{
-			"scope": "mkb.comments",
+			"scope": "source.mkb.comments",
 			"foreground": "var(mc7)",
 		},
 		{
-			"scope": "mkb.parameters",
+			"scope": "source.mkb.parameters",
 			"foreground": "var(mc6)",
 		},
 		{
-			"scope": "mkb.strings",
+			"scope": "source.mkb.strings",
 			"foreground": "var(mca)",
 		},
 		{
-			"scope": "mkb.keywords",
+			"scope": "source.mkb.keywords",
 			"foreground": "var(mcd)",
 		},
 		{
-			"scope": "mkb.numbers",
+			"scope": "source.mkb.numbers",
 			"foreground": "var(mc9)",
 		},
 		{
-			"scope": "mkb.actions",
+			"scope": "source.mkb.actions",
 			"foreground": "var(mc5)",
 		},
 		{
-			"scope": "mkb.variables",
+			"scope": "source.mkb.variables",
 			"foreground": "var(mcb)",
 		},
 		{
-			"scope": "mkb.iterators",
+			"scope": "source.mkb.iterators",
 			"foreground": "var(mc3)",
 		},
 		{
-			"scope": "mkb.prefixes",
+			"scope": "source.mkb.prefixes",
 			"foreground": "var(mcc)",
 		},
 		{
-			"scope": "mkb.operators",
+			"scope": "source.mkb.operators",
 			"foreground": "var(mce)",
 		},
 		{
-			"scope": "mkb.booleans",
+			"scope": "source.mkb.booleans",
 			"foreground": "var(mc4)",
 		},
 		{
-			"scope": "mkb.repl",
+			"scope": "source.mkb.repl",
 			"foreground": "var(mc1)",
 		},
 		{
-			"scope": "mkb.binds",
+			"scope": "source.mkb.binds",
 			"foreground": "var(mc2)",
 		},
 	],

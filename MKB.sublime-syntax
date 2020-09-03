@@ -5,13 +5,13 @@ name: MKB
 first_line_match: '\$\$\{'
 file_extensions:
   - txt
-scope: mkb
+scope: source.mkb
 
 variables:
-  actions: '\b(HACK|GETSLOTITEMENCHANTS|GETSLOTITEMEXT|GETSLOTITEMNBT|GETSIGNTEXT|SETSIGNTEXT|GETCLIPBOARD|SETCLIPBOARD|ADDDOCS|LISTDOCS|JSONADD|ISINTEGER|JSONREMOVE|GETJSONASARRAY|JSONARRAYADD|ISJSONOBJECT|ISSTRING|JSONARRAYGET|JSONGET|ISFLOAT|ISJSONPRIMITIVE|ISBOOLEAN|ISJSONARRAY|ISNUMBER|GETJSONKEYS|JSONARRAYSIZE|JSONHAS|NOTIFY|SHUFFLE|TRIM|FUNCTIONNOTEXISTING|CHAR|EVAL|MOD|OLDNAME|PLAYERLIST|READFILE|UNIX|FILEEXISTS|MKDIR|WRITEFILE|HTTPPUT|HTTPPOST|URLENCODE|HTTPDELETE|HTTPGET|SETREQUESTHEADER|NULL|CLEARCRAFTING|CRAFT|CRAFTANDWAIT|DISCONNECT|GETID|GETIDREL|GETITEMINFO|GETSLOT|GETSLOTITEM|INVENTORYDOWN|INVENTORYUP|ITEMID|ITEMNAME|LOOK|LOOKS|PICK|PLACESIGN|PLAYSOUND|RESPAWN|SETSLOTITEM|SLOT|SLOTCLICK|SPRINT|TILEID|TILENAME|TRACE|UNSPRINT|SELECTCHANNEL|SENDMESSAGE|KEY\b|KEYDOWN|KEYUP|PRESS|TOGGLEKEY|TYPE|ARRAYSIZE|ASSIGN|BREAK|CALCYAWTO|DEC|DECODE|DO|ECHO|ELSE|ELSEIF|ENCODE|ENDIF|ENDUNSAFE|EXEC|FOR|FOREACH|GETPROPERTY|IF|IFBEGINSWITH|IFCONTAINS|IFENDSWITH|IFMATCHES|IIF|INC|INDEXOF|ISRUNNING|JOIN|LCASE|LOG|LOGRAW|LOGTO|LOOP|MATCH|NEXT|POP|PROMPT|PUSH|PUT|RANDOM|REGEXREPLACE|REPLACE|SET|SETLABEL|SETPROPERTY|SPLIT|SQRT|STOP|STRIP|TOGGLE|UCASE|UNSAFE|UNSET|UNTIL|WAIT|WHILE|CONFIG|IMPORT|UNIMPORT|BIND|CAMERA|CHATHEIGHT|CHATHEIGHTFOCUSED|CHATOPACITY|CHATSCALE|CHATVISIBLE|CHATWIDTH|FOG|FOV|GAMMA|MUSIC|RELOADRESOURCES|RESOURCEPACKS|SENSITIVITY|SETRES|SHADERGROUP|VOLUME|ACHIEVEMENTGET|BINDGUI|CLEARCHAT|GUI|POPUPMESSAGE|REPL|SHOWGUI|STORE|STOREOVER|TIME|TITLE|TOAST|CHATFILTER|FILTER|MODIFY|PASS|HTTP|IFFILEEXISTS|SORT|TEAMMEMBERS|SCORE|COUNTDOWNTO|COUNTDOWNFROM|COUNTER|COUNTUP|LEFTPAD|TIMETOSEC|SECTOTIME|GETSLOTITEMINV|GETSLOTINV|IFINVISFULL|IFENCHANTED|GETMOUSEITEM|GETEMPTYSLOTS|GETCHESTNAME|GETFISHHOOK|hack|getslotitemenchants|getslotitemext|getslotitemnbt|getsigntext|setsigntext|getclipboard|setclipboard|adddocs|listdocs|jsonadd|isinteger|jsonremove|getjsonasarray|jsonarrayadd|isjsonobject|isstring|jsonarrayget|jsonget|isfloat|isjsonprimitive|isboolean|isjsonarray|isnumber|getjsonkeys|jsonarraysize|jsonhas|notify|shuffle|trim|functionnotexisting|char|eval|mod|oldname|playerlist|readfile|unix|fileexists|mkdir|writefile|httpput|httppost|urlencode|httpdelete|httpget|setrequestheader|null|clearcrafting|craft|craftandwait|disconnect|getid|getidrel|getiteminfo|getslot|getslotitem|inventorydown|inventoryup|itemid|itemname|look|looks|pick|placesign|playsound|respawn|setslotitem|slot|slotclick|sprint|tileid|tilename|trace|unsprint|selectchannel|sendmessage|key|keydown|keyup|press|togglekey|type|arraysize|assign|break|calcyawto|dec|decode|do|echo|else|elseif|encode|endif|endunsafe|exec|for|foreach|getproperty|if|ifbeginswith|ifcontains|ifendswith|ifmatches|iif|inc|indexof|isrunning|join|lcase|log|lograw|logto|loop|match|next|pop|prompt|push|put|random|regexreplace|replace|set|setlabel|setproperty|split|sqrt|stop|strip|toggle|ucase|unsafe|unset|until|wait|while|config|import|unimport|bind|camera|chatheight|chatheightfocused|chatopacity|chatscale|chatvisible|chatwidth|fog|fov|gamma|music|reloadresources|resourcepacks|sensitivity|setres|shadergroup|volume|achievementget|bindgui|clearchat|gui|popupmessage|repl|showgui|store|storeover|time|title|toast|chatfilter|filter|modify|pass|http|iffileexists|sort|teammembers|score|countdownto|countdownfrom|counter|countup|leftpad|timetosec|sectotime|getslotiteminv|getslotinv|ifinvisfull|ifenchanted|getmouseitem|getemptyslots|getchestname|getfishhook)\b'
+  actions: '\b(GETSLOTITEMENCHANTS|GETSLOTITEMEXT|GETSLOTITEMNBT|GETSIGNTEXT|SETSIGNTEXT|GETCLIPBOARD|SETCLIPBOARD|ADDDOCS|LISTDOCS|JSONADD|ISINTEGER|JSONREMOVE|GETJSONASARRAY|JSONARRAYADD|ISJSONOBJECT|ISSTRING|JSONARRAYGET|JSONGET|ISFLOAT|ISJSONPRIMITIVE|ISBOOLEAN|ISJSONARRAY|ISNUMBER|GETJSONKEYS|JSONARRAYSIZE|JSONHAS|NOTIFY|SHUFFLE|TRIM|FUNCTIONNOTEXISTING|CHAR|EVAL|MOD|OLDNAME|PLAYERLIST|READFILE|UNIX|FILEEXISTS|MKDIR|WRITEFILE|HTTPPUT|HTTPPOST|URLENCODE|HTTPDELETE|HTTPGET|SETREQUESTHEADER|NULL|CLEARCRAFTING|CRAFT|CRAFTANDWAIT|DISCONNECT|GETID|GETIDREL|GETITEMINFO|GETSLOT|GETSLOTITEM|INVENTORYDOWN|INVENTORYUP|ITEMID|ITEMNAME|LOOK|LOOKS|PICK|PLACESIGN|PLAYSOUND|RESPAWN|SETSLOTITEM|SLOT|SLOTCLICK|SPRINT|TILEID|TILENAME|TRACE|UNSPRINT|SELECTCHANNEL|SENDMESSAGE|KEY\b|KEYDOWN|KEYUP|PRESS|TOGGLEKEY|TYPE|ARRAYSIZE|ASSIGN|BREAK|CALCYAWTO|DEC|DECODE|DO|ECHO|ELSE|ELSEIF|ENCODE|ENDIF|ENDUNSAFE|EXEC|FOR|FOREACH|GETPROPERTY|IF|IFBEGINSWITH|IFCONTAINS|IFENDSWITH|IFMATCHES|IIF|INC|INDEXOF|ISRUNNING|JOIN|LCASE|LOG|LOGRAW|LOGTO|LOOP|MATCH|NEXT|POP|PROMPT|PUSH|PUT|RANDOM|REGEXREPLACE|REPLACE|SET|SETLABEL|SETPROPERTY|SPLIT|SQRT|STOP|STRIP|TOGGLE|UCASE|UNSAFE|UNSET|UNTIL|WAIT|WHILE|CONFIG|IMPORT|UNIMPORT|BIND|CAMERA|CHATHEIGHT|CHATHEIGHTFOCUSED|CHATOPACITY|CHATSCALE|CHATVISIBLE|CHATWIDTH|FOG|FOV|GAMMA|MUSIC|RELOADRESOURCES|RESOURCEPACKS|SENSITIVITY|SETRES|SHADERGROUP|VOLUME|ACHIEVEMENTGET|BINDGUI|CLEARCHAT|GUI|POPUPMESSAGE|REPL|SHOWGUI|STORE|STOREOVER|TIME|TITLE|TOAST|CHATFILTER|FILTER|MODIFY|PASS|HTTP|IFFILEEXISTS|SORT|TEAMMEMBERS|SCORE|COUNTDOWNTO|COUNTDOWNFROM|COUNTER|COUNTUP|LEFTPAD|TIMETOSEC|SECTOTIME|GETSLOTITEMINV|GETSLOTINV|IFINVISFULL|IFENCHANTED|GETMOUSEITEM|GETEMPTYSLOTS|GETCHESTNAME|GETFISHHOOK|RUN|GETDENSITY|GETITEMSTACKSIZE|GETPERCENTAGE|GETSLOTPOSITIONS|PRESSBUTTON|MOD|TRUNC|ACKERMANN|CALCSTACKS|PICKMOD|ANTIGHOST|getslotitemenchants|getslotitemext|getslotitemnbt|getsigntext|setsigntext|getclipboard|setclipboard|adddocs|listdocs|jsonadd|isinteger|jsonremove|getjsonasarray|jsonarrayadd|isjsonobject|isstring|jsonarrayget|jsonget|isfloat|isjsonprimitive|isboolean|isjsonarray|isnumber|getjsonkeys|jsonarraysize|jsonhas|notify|shuffle|trim|functionnotexisting|char|eval|mod|oldname|playerlist|readfile|unix|fileexists|mkdir|writefile|httpput|httppost|urlencode|httpdelete|httpget|setrequestheader|null|clearcrafting|craft|craftandwait|disconnect|getid|getidrel|getiteminfo|getslot|getslotitem|inventorydown|inventoryup|itemid|itemname|look|looks|pick|placesign|playsound|respawn|setslotitem|slot|slotclick|sprint|tileid|tilename|trace|unsprint|selectchannel|sendmessage|key|keydown|keyup|press|togglekey|type|arraysize|assign|break|calcyawto|dec|decode|do|echo|else|elseif|encode|endif|endunsafe|exec|for|foreach|getproperty|if|ifbeginswith|ifcontains|ifendswith|ifmatches|iif|inc|indexof|isrunning|join|lcase|log|lograw|logto|loop|match|next|pop|prompt|push|put|random|regexreplace|replace|set|setlabel|setproperty|split|sqrt|stop|strip|toggle|ucase|unsafe|unset|until|wait|while|config|import|unimport|bind|camera|chatheight|chatheightfocused|chatopacity|chatscale|chatvisible|chatwidth|fog|fov|gamma|music|reloadresources|resourcepacks|sensitivity|setres|shadergroup|volume|achievementget|bindgui|clearchat|gui|popupmessage|repl|showgui|store|storeover|time|title|toast|chatfilter|filter|modify|pass|http|iffileexists|sort|teammembers|score|countdownto|countdownfrom|counter|countup|leftpad|timetosec|sectotime|getslotiteminv|getslotinv|ifinvisfull|ifenchanted|getmouseitem|getemptyslots|getchestname|getfishhook|run|getdensity|getitemstacksize|getpercentage|getslotpositions|pressbutton|mod|trunc|ackermann|calcstacks|pickmod|antighost)\b'
   booleans: 'true|false|TRUE|FALSE'
   parameters: '\$\$!|\$\$\?|\$\$\[([a-zA-Z0-9%&#@]*?\[.*?\])?.*?\]|\$\$<.+\.txt>|\$\$\d|\$\$f|\$\$h|\$\$i:d|\$\$k|\$\$m|\$\$p|\$\$s|\$\$t|\$\$u|\$\$w'
-  variables: 'AMBIENTVOLUME|ARMOUR|ATTACKPOWER|ATTACKSPEED|BIOME|BLOCKVOLUME|BOOTS(DAMAGE|DURABILITY|ID|NAME)|BOWCHARGE|CAMERA|CANFLY|CARDINALYAW|CHESTPLATE(DAMAGE|DURABILITY|ID|NAME)|CHUNKUPDATES|CONFIG|CONTAINERSLOTS|COOLDOWN|DATE|DATETIME|DAY|DAYTICKS|DAYTIME|DIFFICULTY|DIMENSION|DIRECTION|DISPLAYHEIGHT|DISPLAYNAME|DISPLAYWIDTH|DURABILITY|FILESEPARATOR|FLYING|FOV|FPS|GAMEMODE|GAMMA|GUI|HACKED|HEALTH|HELMDAMAGE|HELM(DURABILITY|ID|NAME)|HIT(\b|DATA|ID|NAME|PROGRESS|SIDE|UUID|X|Y|Z)|TRACE(\b|DATA|ID|NAME|PROGRESS|SIDE|UUID|TYPE|X|Y|Z)|((TRACE|HIT)_(AGE|ATTACHED|AXIS|BITES|CHECK_DECAY|COLOR|CONDITIONAL|CONTENTS|DAMAGE|DECAYABLE|DELAY|DISARMED|DOWN|EAST|ENABLED|EXPLODE|EXTENDED|EYE|FACING|HALF|HAS_BOTTLE_0|HAS_BOTTLE_1|HAS_BOTTLE_2|HAS_RECORD|HINGE|IN_WALL|LAYERS|LEGACY_DATA|LEVEL|LOCKED|MODE|MOISTURE|NODROP|NORTH|OCCUPIED|OPEN|PART|POWER|POWERED|ROTATION|SEAMLESS|SHAPE|SHORT|SNOWY|SOUTH|STAGE|TRIGGERED|TYPE|UP|VARIANT|WEST|WET)|HOSTILEVOLUME|HUNGER|INVSLOT|ITEM(\b|CODE|DAMAGE|IDDMG|NAME|USEPCT|USETICKS)|KEYID|KEYNAME|LATENCY|LEGGINGS(DAMAGE|DURABILITY|ID|NAME)|LEVEL|LIGHT|LOCALDIFFICULTY|MACROSCONFIGDIR|MAINHAND(COOLDOWN|DURABILITY|ITEM|ITEMCODE|ITEMDAMAGE|ITEMIDDMG|ITEMNAME|STACKSIZE))|MAXPLAYERS|MINECRAFTDIR|MODE|MODULE(CLIPBOARD|GETSLOTITEMEXT|HTTP|JSON|NEI|SIGNTEXT)|MUSIC|NEUTRALVOLUME|NOTIFICATIONMODULE|OFFHAND(COOLDOWN|DURABILITY|ITEM|ITEMCODE|ITEMDAMAGE|ITEMIDDMG|ITEMNAME|STACKSIZE)|ONLINEPLAYERS|OXYGEN|PITCH|PLAYERVOLUME|RAIN|RECORDVOLUME|RESOURCEPACKS|SATURATION|SCREEN|SCREENNAME|SEED|SENSITIVITY|SERVER|SERVERMOTD|SERVERNAME|SHADERGROUP|SOUND|STACKSIZE|TICKS|TIME|TIMESTAMP|TOTALTICKS|TOTALXP|UNIQUEID|UUID|VEHICLE|VEHICLEHEALTH|WEATHERVOLUME|XP|XPOS|XPOSF|YAW|YPOS|YPOSF|ZPOS|ZPOSF|FARHIT(\b|ID|DATA|NAME|SIDE|X|Y|Z|UUID|DIST)|MODULEFARHIT|ENTITY(TYPE|NAME|UUID|XPOSF|YPOSF|ZPOSF|XPOS|YPOS|ZPOS|TAG|DX|DY|DZ|PITCHFROMPLAYER|YAWFROMPLAYER|NBT|DIR|PITCH|YAW|HEALTH|MAXHEALTH|ISITEM|ITEM(AGE|OWNER|UNLOCALIZEDNAME|COUNT|DISPLAYNAME|DAMAGE|MAXDAMAGE|METADATA|ENCHANTED|STACKABLE)|(MAINHAND|OFFHAND|BOOTS|LEGGINGS|CHESTPLATE|HELMET)(NAME|ID|NID|DAMAGE|COUNT|ENCHANTMENTS))|PLAYER(\b|NAME|UUID|DISPLAYNAME|TEAM|PING|ISLEGACY)|TEAM(ALLOWFRIENDLYFIRE|COLLISIONRULE|COLOR|DEATHMESSAGEVISIBILITY|DISPLAYNAME|NAME|NAMETAGVISIBILITY|SEEFRIENDLYINVISIBLES|PREFIX|SUFFIX|MEMBERS)|OBJECTIVE(CRITERIA|DISPLAYNAME|NAME|RENDERTYPE)|SCORE(OBJECTIVENAME|PLAYERNAME|VALUE)|REASON|CHAT(\b|CLEAN|PLAYER|MESSAGE|JSON)|OLDINVSLOT|PICKUP(AMOUNT|ITEM|DATA|ID)|JOINEDPLAYER|SOUND(XPOSF|YPOSF|ZPOSF|XPOS|YPOS|ZPOS|CANREPEAT|ATTENUATIONTYPE|CATEGORY|PITCH|VOLUME|RESOURCE)|NEWEFFECT|NEWEFFECT(ID|NAME|POWER|TIME)|~?((ALT|CTRL|LMOUSE|MIDDLEMOUSE|RMOUSE|SHIFT)|KEY_(0|1|2|3|4|5|6|7|8|9|A|ADD|APOSTROPHE|APPS|AT|AX|B|BACK|BACKSLASH|C|CAPITAL|CIRCUMFLEX|CLEAR|COLON|COMMA|CONVERT|D|DECIMAL|DELETE|DIVIDE|DOWN|E|END|EQUALS|ESCAPE|F|F1|F10|F11|F12|F13|F14|F15|F16|F17|F18|F19|F2|F3|F4|F5|F6|F7|F8|F9|FUNCTION|G|GRAVE|H|HOME|I|INSERT|J|K|KANA|KANJI|L|LBRACKET|LCONTROL|LEFT|LMENU|LMETA|LSHIFT|M|MINUS|MOUSE3|MOUSE4|MULTIPLY|N|NEXT|NOCONVERT|NONE|NUMLOCK|NUMPAD0|NUMPAD1|NUMPAD2|NUMPAD3|NUMPAD4|NUMPAD5|NUMPAD6|NUMPAD7|NUMPAD8|NUMPAD9|NUMPADCOMMA|NUMPADENTER|NUMPADEQUALS|O|P|PAUSE|PERIOD|POWER|PRIOR|Q|R|RBRACKET|RCONTROL|RETURN|RIGHT|RMENU|RMETA|RSHIFT|S|SCROLL|SECTION|SEMICOLON|SLASH|SLEEP|SPACE|STOP|SUBTRACT|SYSRQ|T|TAB|U|UNDERLINE|UNLABELED|UP|V|W|X|Y|YEN|Z))'
+  variables: 'AMBIENTVOLUME|ARMOUR|ATTACKPOWER|ATTACKSPEED|BIOME|BLOCKVOLUME|BOOTS(DAMAGE|DURABILITY|ID|NAME)|BOWCHARGE|CAMERA|CANFLY|CARDINALYAW|CHESTPLATE(DAMAGE|DURABILITY|ID|NAME)|CHUNKUPDATES|CONFIG|CONTAINERSLOTS|COOLDOWN|DATE|DATETIME|DAY|DAYTICKS|DAYTIME|DIFFICULTY|DIMENSION|DIRECTION|DISPLAYHEIGHT|DISPLAYNAME|DISPLAYWIDTH|DURABILITY|FILESEPARATOR|FLYING|FOV|FPS|GAMEMODE|GAMMA|GUI|HACKED|HEALTH|HELMDAMAGE|HELM(DURABILITY|ID|NAME)|HIT(\b|DATA|ID|NAME|PROGRESS|SIDE|UUID|X|Y|Z)|TRACE(\b|DATA|ID|NAME|PROGRESS|SIDE|UUID|TYPE|X|Y|Z)|((TRACE|HIT)_(AGE|ATTACHED|AXIS|BITES|CHECK_DECAY|COLOR|CONDITIONAL|CONTENTS|DAMAGE|DECAYABLE|DELAY|DISARMED|DOWN|EAST|ENABLED|EXPLODE|EXTENDED|EYE|FACING|HALF|HAS_BOTTLE_0|HAS_BOTTLE_1|HAS_BOTTLE_2|HAS_RECORD|HINGE|IN_WALL|LAYERS|LEGACY_DATA|LEVEL|LOCKED|MODE|MOISTURE|NODROP|NORTH|OCCUPIED|OPEN|PART|POWER|POWERED|ROTATION|SEAMLESS|SHAPE|SHORT|SNOWY|SOUTH|STAGE|TRIGGERED|TYPE|UP|VARIANT|WEST|WET)|HOSTILEVOLUME|HUNGER|INVSLOT|ITEM(\b|CODE|DAMAGE|IDDMG|NAME|USEPCT|USETICKS)|KEYID|KEYNAME|LATENCY|LEGGINGS(DAMAGE|DURABILITY|ID|NAME)|LEVEL|LIGHT|LOCALDIFFICULTY|MACROSCONFIGDIR|MAINHAND(COOLDOWN|DURABILITY|ITEM|ITEMCODE|ITEMDAMAGE|ITEMIDDMG|ITEMNAME|STACKSIZE))|MAXPLAYERS|MINECRAFTDIR|MODE|MODULE(CLIPBOARD|FARHIT|GETSLOTITEMEXT|HTTP|JSON|NEI|SIGNTEXT)|MUSIC|NEUTRALVOLUME|NOTIFICATIONMODULE|OFFHAND(COOLDOWN|DURABILITY|ITEM|ITEMCODE|ITEMDAMAGE|ITEMIDDMG|ITEMNAME|STACKSIZE)|ONLINEPLAYERS|OXYGEN|PITCH|PLAYERVOLUME|RAIN|RECORDVOLUME|RESOURCEPACKS|SATURATION|SCREEN|SCREENNAME|SEED|SENSITIVITY|SERVER|SERVERMOTD|SERVERNAME|SHADERGROUP|SOUND|STACKSIZE|TICKS|TIME|TIMESTAMP|TOTALTICKS|TOTALXP|UNIQUEID|UUID|VEHICLE|VEHICLEHEALTH|WEATHERVOLUME|XP\b|XPOS\b|XPOSF|YAW|YPOS\b|YPOSF|ZPOS\b|ZPOSF|FARHIT(\b|ID|DATA|NAME|SIDE|X|Y|Z|UUID|DIST)|ENTITY(TYPE|NAME|UUID|XPOSF|YPOSF|ZPOSF|XPOS\b|YPOS\b|ZPOS\b|TAG|DX|DY|DZ|PITCHFROMPLAYER|YAWFROMPLAYER|NBT|DIR|PITCH|YAW|HEALTH|MAXHEALTH|ISITEM|ITEM(AGE|OWNER|THROWER|NAME|UNLOCALIZEDNAME|COUNT|DISPLAYNAME|DAMAGE|MAXDAMAGE|METADATA|ENCHANTED|STACKABLE)|(MAINHAND|OFFHAND|BOOTS|LEGGINGS|CHESTPLATE|HELMET)(NAME|ID|NID|DAMAGE|COUNT|ENCHANTMENTS))|PLAYER(\b|NAME|UUID|DISPLAYNAME|TEAM|PING|ISLEGACY)|TEAM(ALLOWFRIENDLYFIRE|COLLISIONRULE|COLOR|DEATHMESSAGEVISIBILITY|DISPLAYNAME|NAME|NAMETAGVISIBILITY|SEEFRIENDLYINVISIBLES|PREFIX|SUFFIX|MEMBERS)|OBJECTIVE(CRITERIA|DISPLAYNAME|NAME|RENDERTYPE)|SCORE(OBJECTIVENAME|PLAYERNAME|VALUE)|REASON|CHAT(\b|CLEAN|PLAYER|MESSAGE|JSON)|OLDINVSLOT|PICKUP(AMOUNT|ITEM|DATA|ID)|JOINEDPLAYER|SOUND(XPOSF|YPOSF|ZPOSF|XPOS\b|YPOS\b|ZPOS\b|CANREPEAT|ATTENUATIONTYPE|CATEGORY|PITCH|VOLUME|RESOURCE)|NEWEFFECT|NEWEFFECT(ID|NAME|POWER|TIME)|~?((ALT|CTRL|LMOUSE|MIDDLEMOUSE|RMOUSE|SHIFT)|KEY_(0|1|2|3|4|5|6|7|8|9|A|ADD|APOSTROPHE|APPS|AT|AX|B|BACK|BACKSLASH|C|CAPITAL|CIRCUMFLEX|CLEAR|COLON|COMMA|CONVERT|D|DECIMAL|DELETE|DIVIDE|DOWN|E|END|EQUALS|ESCAPE|F|F1|F10|F11|F12|F13|F14|F15|F16|F17|F18|F19|F2|F3|F4|F5|F6|F7|F8|F9|FUNCTION|G|GRAVE|H|HOME|I|INSERT|J|K|KANA|KANJI|L|LBRACKET|LCONTROL|LEFT|LMENU|LMETA|LSHIFT|M|MINUS|MOUSE3|MOUSE4|MULTIPLY|N|NEXT|NOCONVERT|NONE|NUMLOCK|NUMPAD0|NUMPAD1|NUMPAD2|NUMPAD3|NUMPAD4|NUMPAD5|NUMPAD6|NUMPAD7|NUMPAD8|NUMPAD9|NUMPADCOMMA|NUMPADENTER|NUMPADEQUALS|O|P|PAUSE|PERIOD|POWER|PRIOR|Q|R|RBRACKET|RCONTROL|RETURN|RIGHT|RMENU|RMETA|RSHIFT|S|SCROLL|SECTION|SEMICOLON|SLASH|SLEEP|SPACE|STOP|SUBTRACT|SYSRQ|T|TAB|U|UNDERLINE|UNLABELED|UP|V|W|X|Y|YEN|Z)\b)'
 
 contexts:
   # The prototype context is prepended to all contexts but those setting
@@ -25,8 +25,8 @@ contexts:
     # Include other contexts from here (or specify them directly).
     - match: '(?<!\\)\"'
       push: strings
-    - match: '<[^\d]*?>'
-      scope: mkb.keywords
+    - match: '(&|#)?((<[\w@#&\[\]\|=\. /_-]*?>)|(\[[\w@#&\[\]\|=\. /_-]*?\])):?'
+      scope: source.mkb.keywords
 
     - include: actions
     - include: binds
@@ -41,92 +41,92 @@ contexts:
     - include: variables
 
   strings:
-    - meta_scope: mkb.strings
+    - meta_scope: source.mkb.strings
     - match: '(\]%)'
-      scope: mkb.keywords
+      scope: source.mkb.keywords
     - match: '(?<!\\)"'
       pop: true
     - match: '\\\\\"'
-      scope: mkb.strings
+      scope: source.mkb.strings
       pop: true
     - match: '\\\\'
-      scope: mkb.strings
+      scope: source.mkb.strings
     - match: '({{parameters}})|((%)(({{variables}})|([^%\[\]"]*?))(%))'
       captures:
-        1: mkb.parameters
-        4: mkb.keywords
-        6: mkb.variables
-        36: mkb.prefixes
-        37: mkb.keywords
+        1: source.mkb.parameters
+        4: source.mkb.keywords
+        6: source.mkb.variables
+        36: source.mkb.prefixes
+        37: source.mkb.keywords
     - match: '({{parameters}})|((%)([^%\[\]"]*?)(\[))'
       captures:
-        1: mkb.parameters
-        4: mkb.keywords
-        5: mkb.prefixes
-        6: mkb.keywords
+        1: source.mkb.parameters
+        4: source.mkb.keywords
+        5: source.mkb.prefixes
+        6: source.mkb.keywords
       push: strings2
 
   strings2:
-    - meta_scope: mkb.strings
+    - meta_scope: source.mkb.strings
     - match: '[^\"\[\]%]*?((-?[\d.]+(ms|t)?)|({{booleans}})|(<|>|==|!=|!|>=|<=|\+|\-(?!\d)|\*|\/|=|:=|\(|\))|({{parameters}})|((%)(({{variables}})|([^%\[\]"]*?))(\[|%)))'
       captures:
-        2: mkb.numbers
-        4: mkb.booleans
-        5: mkb.operators
-        6: mkb.parameters
-        9: mkb.keywords
-        11: mkb.variables
-        41: mkb.prefixes
-        42: mkb.keywords
+        2: source.mkb.numbers
+        4: source.mkb.booleans
+        5: source.mkb.operators
+        6: source.mkb.parameters
+        9: source.mkb.keywords
+        11: source.mkb.variables
+        41: source.mkb.prefixes
+        42: source.mkb.keywords
     - match: '(\]%)'
-      scope: mkb.keywords
+      scope: source.mkb.keywords
     - match: '\b\"|'
       pop: true
 
   actions:
     - match: '{{actions}}'
-      scope: mkb.actions
+      scope: source.mkb.actions
 
   binds:
     - match: '\b(inventory|drop|chat|attack|use|pick|screenshot|smoothcamera|swaphands|forward|back|left|right|jump|sneak|playerlist|sprint)\b'
-      scope: mkb.binds
+      scope: source.mkb.binds
 
   booleans:
     - match: '{{booleans}}'
-      scope: mkb.booleans
+      scope: source.mkb.booleans
 
   comments:
     - match: '((^|;)\s*//.*;?)'
-      scope: mkb.comments
+      scope: source.mkb.comments
 
   iterators:
     - match: 'iterators|controls|teams|scores|players|trades|enchantments|env|running|effects|entities|objectives|actions|events|properties'
-      scope: mkb.iterators
+      scope: source.mkb.iterators
 
   keywords:
     - match: '\$\$\{|\}\$\$|;|,|%|\(|\)|\[|\]|'
-      scope: mkb.keywords
+      scope: source.mkb.keywords
 
   numbers:
     - match: '-?[\d.]+(ms|t)?'
-      scope: mkb.numbers
+      scope: source.mkb.numbers
 
   operators:
     - match: '<|>|==|!=|!|>=|<=|&&|\|\||to|as|step|=>|\+|\-(?!\d)|\*|\/|=|:='
-      scope: mkb.operators
+      scope: source.mkb.operators
 
   parameters:
     - match: '{{parameters}}'
-      scope: mkb.parameters
+      scope: source.mkb.parameters
 
   prefixes:
   - match: '(?<!~)((@)??[#&\b]??[a-z0-9_-]*(?=\b))'
-    scope: mkb.prefixes
+    scope: source.mkb.prefixes
 
   repl:
     - match: 'BEGIN|CAT <.+\.txt>|CLS|EDIT .+\.txt|END|EXIT|HELP .*|KILL .*|LIST|LIVE .*|RM <.+\.txt>|RUN <.+\.txt> .*|SAY .*|SHUTDOWN|TASKS|VERSION|WHOAMI'
-      scope: mkb.repl
+      scope: source.mkb.repl
 
   variables:
     - match: '{{variables}}'
-      scope: mkb.variables
+      scope: source.mkb.variables
