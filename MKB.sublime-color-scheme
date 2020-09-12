@@ -71,6 +71,10 @@
 			"foreground": "var(mc4)",
 		},
 		{
+			"scope": "source.mkb.booleans2",
+			"foreground": "var(mc2)",
+		},
+		{
 			"scope": "source.mkb.repl",
 			"foreground": "var(mc1)",
 		},

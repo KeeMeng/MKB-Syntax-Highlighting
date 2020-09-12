@@ -234,7 +234,7 @@ class hint(sublime_plugin.TextCommand):
                 """.format(data["extendedName"],data["type"],data["category"],data["description"],example,data["example"],)
             if data != None:
                 linkstring = "https://beta.mkb.gorlem.ml{}".format(data["resource"].replace("api",""))
-                self.view.show_popup(html, sublime.COOPERATE_WITH_AUTO_COMPLETE|sublime.HIDE_ON_MOUSE_MOVE_AWAY, pos, self.view.viewport_extent()[0], self.view.line_height()*3+5, lambda link: webbrowser.get(using=config("browser")).open(linkstring, new=2), "")
+                self.view.show_popup(html, sublime.COOPERATE_WITH_AUTO_COMPLETE|sublime.HIDE_ON_MOUSE_MOVE_AWAY, pos, self.view.viewport_extent()[0], self.view.line_height()*3+4, lambda link: webbrowser.get(using=config("browser")).open(linkstring, new=2), "")
 
             else:
                 self.view.hide_popup()

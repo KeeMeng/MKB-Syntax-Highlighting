@@ -74,9 +74,9 @@ The linter reads each line and checks if theres an even number of `%% () "" []`
 
 **MKBdocs.css**: Is a css file to make https://beta.mkb.gorlem.ml/docs/actions have a dark mode. You can use a chrome extension called stylus to change the css. 
 
-[Chrome Extension](https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne?hl=en-GB)
-[Safari Modify Elements](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/Web_Inspector_Tutorial/EditingCode/EditingCode.html)
-[Mozilla/Firefox Style Editor](https://developer.mozilla.org/en-US/docs/Tools/Style_Editor)
+- [Chrome Extension](https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne?hl=en-GB)
+- [Safari Modify Elements](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/Web_Inspector_Tutorial/EditingCode/EditingCode.html)
+- [Mozilla/Firefox Style Editor](https://developer.mozilla.org/en-US/docs/Tools/Style_Editor)
 
 ---
 
@@ -89,13 +89,13 @@ Example of the syntax highlighter and the auto complete:
 ![Example](MKB-syntax-highlighting.png?raw=true)
 
 Credits to:
-Federal for the Indenter
-Gorlem for the wiki
-Sublime Text Community for help (https://discord.gg/TZ5WN8t)
+- Federal for the Indenter
+- Gorlem for the wiki
+- Sublime Text Community for help (https://discord.gg/TZ5WN8t)
 
 ---
 
-**Useful links:**
+## Useful links
 - https://packagecontrol.io/installation
 - https://github.com/SublimeText/PackageDev/blob/master/README.md
 - https://www.sublimetext.com/docs/3/syntax.html
