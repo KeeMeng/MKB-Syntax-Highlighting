@@ -1,0 +1,9 @@
+[
+  { "caption": "MKB Indentation",
+    "command": "mkbindentation" },
+  { "caption": "MKB Hint",
+    "command": "hint",
+    "args": {"event": "None"} },
+  { "caption": "MKB Linter",
+    "command": "mkbdebug" },
+]

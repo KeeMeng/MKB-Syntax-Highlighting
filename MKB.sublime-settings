@@ -1,0 +1,57 @@
+{
+	// Whether or not for the auto complete to be in uppercase
+	"autocomplete_caps": false,
+
+	// What character to use as the whitespace for the buffer
+	"indent_character": "\t",
+
+	// Whether or not to end lines with semicolon ;
+	"semicolon_end": true,
+
+	// Whether or not to indent script between $${ and }$$
+	"extra_indent": false,
+
+	// Whether or not to automatically indent after saving the file
+	"enable_indent": false,
+
+	// Whether or not to prompt a message before indenting, only if enable_indent is on
+	"ask_before_indent": false,
+
+	// Whether or not to use fancy indenting. Put "null" for normal indenting, or put a number representing the delay in ms
+	"fancy_indent": null,
+
+	// Whether or not to show a message telling you indenting finished
+	"message_after_indenting": false,
+
+	// Whether or not to show hints automatically
+	"show_hints": true,
+
+	// Whether or not to indent code after linting code
+	"indent_after_linting": false,
+
+	// Whether or not to show a message after linting code
+	"message_after_linting": true,
+
+	// Which browser to use to open the wiki
+	"browser": "chrome",
+	// Open in OS default browser:
+	// windows-default
+	// macosx
+
+	// Typical browsers:
+	// safari
+	// chrome
+	// firefox
+
+
+
+	//DO NOT EDIT UNLESS YOU ARE SURE:
+	"auto_complete_triggers": 
+	[
+		{"characters": "~", "selector": "source.mkb"},
+	],
+	"word_wrap": true,
+	
+	// "color_scheme": "MKB.sublime-color-scheme",
+
+}

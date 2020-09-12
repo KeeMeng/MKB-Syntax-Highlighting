@@ -1,4 +1,19 @@
+html {
+    font-family: "DejaVu Sans Mono";
+    font-weight: bold;
+}
+main {
+    font-family: "DejaVu Sans Mono";
+}
+code {
+    font-family: "DejaVu Sans Mono";
+}
+small {
+    font-size: 1em;
+    font-weight: bold;
+}
 body {
+    font-family: "DejaVu Sans Mono";
     background: #000000;
     color: #fff;
 }
@@ -11,7 +26,7 @@ input::placeholder {
 a:not([class]),
 input[type=button],
 input[type=submit] {
-    color: #0a84ff;
+    color: #0d80e6;
 }
 input[type="submit"]:hover,
 input[type="submit"]:focus,
@@ -27,14 +42,14 @@ input[type=button]:hover {
 .table .row:not(.row--head):hover,
 .table tbody tr:hover {
     animation: fadein 0.25s linear 1;
-    background: #555555;
+    background: #484848;
 }
 @keyframes fadein {
     0% {
         background: #000000
     }
     100% {
-        background: #555555;
+        background: #484848;
     }
 }
 .table .row:not(.row--head),
@@ -44,7 +59,7 @@ input[type=button]:hover {
 }
 @keyframes fadeout {
     0% {
-        background: #555555
+        background: #484848;
     }
     100% {
         background: #000000;
@@ -55,10 +70,12 @@ input[type=button]:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover {
     animation: underlinein 0.25s linear 1;
+    font-family: "DejaVu Sans Mono";
+    font-weight: bold;
 }
 @keyframes underlinein {
     0% {
-        color: #0a84ff;
+        color: #0d80e6;
         border-bottom: 3px solid #000000;
     }
     100% {
@@ -71,6 +88,8 @@ input[type=button],
 input[type="submit"],
 input[type="button"] {
     animation: underlineout 0.25s linear 1;
+    font-family: "DejaVu Sans Mono";
+    font-weight: bold;
 }
 @keyframes underlineout {
     0% {
@@ -78,7 +97,7 @@ input[type="button"] {
         border-bottom: 3px solid #5ac8fa;
     }
     100% {
-        color: #0a84ff;
+        color: #0d80e6;
         border-bottom: 3px solid #000000;
     }
 }
@@ -95,28 +114,39 @@ input[type="text"]:hover,
 input[type="text"]:focus,
 input[type="text"]:active {
     animation: underlinein2 0.25s linear 1;
-    border-bottom: 3px solid #969696;
+    border-bottom: 3px solid #fff;
+    font-family: "DejaVu Sans Mono";
+    font-weight: bold;
 }
 input[type="search"],
 input[type="text"] {
     animation: underlineout2 0.25s linear 1;
+    font-family: "DejaVu Sans Mono";
+    font-weight: bold;
 }
-select:hover,
-select:focus,
-select:active {
-    border-bottom: 3px solid #969696;
+select:hover {
+    border-bottom: 3px solid #fff;
+    animation: underlinein2 0.25s linear 1;
+    font-family: "DejaVu Sans Mono";
+    font-weight: bold;
+    outline:0px;
+}
+select {
+    animation: underlineout2 0.25s linear 1;
+    font-family: "DejaVu Sans Mono";
+    font-weight: bold;
 }
 @keyframes underlinein2 {
     0% {
         border-bottom: 3px solid #000000;
     }
     100% {
-        border-bottom: 3px solid #969696;
+        border-bottom: 3px solid #fff;
     }
 }
 @keyframes underlineout2 {
     0% {
-        border-bottom: 3px solid #969696;
+        border-bottom: 3px solid #fff;
     }
     100% {
         border-bottom: 3px solid #000000;
@@ -124,4 +154,87 @@ select:active {
 }
 input[type="search"] {
     width: 25
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.ace-chrome .ace_gutter {
+    background: #222;
+    color: #fff;
+    overflow: hidden;
+}
+
+.ace-chrome .ace_print-margin {
+    width: 1px;
+    background: #e8e8e8;
+}
+
+.ace-chrome {
+    background-color: #111;
+    color: #f5f;
+    font: 16px DejaVu Sans Mono, sans-serif;
+}
+
+.ace-chrome .ace_cursor {
+    color: #fff;
+}
+
+.ace-chrome .ace_keyword.ace_operator {
+    color: #FFFF55
+}
+
+.ace-chrome .ace_comment {
+    color: #AAAAAA;
+}
+
+.ace-chrome .ace_comment.ace_doc {
+    color: #AAAAAA;
+}
+
+.ace-chrome .ace_comment.ace_doc.ace_tag {
+    color: #AAAAAA;
+}
+
+.ace-chrome .ace_constant.ace_numeric {
+    color: #5555FF;
+}
+
+.ace-chrome .ace_variable {
+    color: #FF5555
+}
+
+.ace-chrome .ace_marker-layer .ace_selection {
+    background: #555
+}
+
+.ace-chrome .ace_marker-layer .ace_active-line {
+    background: rgba(0, 0, 0, 0.07);
+}
+
+.ace-chrome .ace_gutter-active-line {
+    background-color: #555;
+}
+
+.ace-chrome .ace_marker-layer .ace_selected-word {
+    background: #333;
+    border: 2px solid #555;
+}
+
+.ace-chrome .ace_storage,
+.ace-chrome .ace_keyword,
+.ace-chrome .ace_meta.ace_tag {
+    color: #AA00AA;
+}
+
+.ace-chrome .ace_string {
+    color: #55FF55;
 }
