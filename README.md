@@ -43,30 +43,24 @@ You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to d
 
 ## Usage:
 
-When opening a .txt file (can be configured), and the first line is `$${`, it will automatically change to `MKB` syntax. But if it doesnt work, then you can go to the bottom right corner, and change `Plain Text` to `MKB` syntax. After that, the colors should appear automatically, along with the auto complete functions. 
-
-To auto complete a statement, the auto complete menu should automatically appear. Press arrow key up or down to scroll through, press enter to auto complete. Then, press tab and jump to the next parameters. 
-
-Or press CMD/CTRL + Space to see a list of the possible auto completions. 
-
-To indent your code, you can mess with the settings (Indent when you save, or prompt before it indents). Or, if you want to manually indent, right click the screen and press `MKB indent`.
-
-By default, when you hover over a keyword, you will see a popup with information. To manually show the hint, you can press `MKB Hint` when you right click. Scroll down for examples, or click "Open Wiki" to open the wiki page on your browser (Can be specified).
+- When opening a .txt file (can be configured), and the first line is `$${`, it will automatically change to `MKB` syntax. But if it doesnt work, then you can go to the bottom right corner, and change `Plain Text` to `MKB` syntax. After that, the colors should appear automatically, along with the auto complete functions. 
+- To auto complete a statement, the auto complete menu should automatically appear. Press arrow key up or down to scroll through, press enter to auto complete. Then, press tab and jump to the next parameters. 
+- Or press CMD/CTRL + Space to see a list of the possible auto completions. 
+- To indent your code, you can mess with the settings (Indent when you save, or prompt before it indents). Or, if you want to manually indent, right click the screen and press `MKB indent`.
+- By default, when you hover over a keyword, you will see a popup with information. To manually show the hint, you can press `MKB Hint` when you right click. Scroll down for examples, or click "Open Wiki" to open the wiki page on your browser (Can be specified).
+- Right click the screen for some actions
+- Click the MKB at the top of the app to see some settings/actions
 
 
 ---
 
 ## How does it work?
 
-The new sublime syntax will recognize the actions, variables, parameters, iterators and many more keywords of the Macro/Keybind Mod (Also the modules from https://spthiel.github.io/Modules + a few others), using regex statements it assigns a scope to the different parts of your script. The scope is then assigned a color in the color scheme file, and then you get custom syntax highlighting! The default scope is source.mkb. 
-
-The completions file will help you auto complete statements, also showing basic help for the statement when you press tab. This uses the snippet function of sublime text. 
-
-The popup uses sublime's API and gorlem's API to find the information for the popup. 
-
-The indenter reads each line, and will automatically put tabs in front of the lines. Fancy indent adds a delay between indenting the lines, to make it look like a wave. 
-
-The linter reads each line and checks if theres an even number of `%% () "" []`
+- The new sublime syntax will recognize the actions, variables, parameters, iterators and many more keywords of the Macro/Keybind Mod (Also the modules from https://spthiel.github.io/Modules + a few others), using regex statements it assigns a scope to the different parts of your script. The scope is then assigned a color in the color scheme file, and then you get custom syntax highlighting! The default scope is source.mkb. 
+- The completions file will help you auto complete statements, also showing basic help for the statement when you press tab. This uses the snippet function of sublime text. 
+- The popup uses sublime's API and gorlem's API to find the information for the popup. 
+- The indenter reads each line, and will automatically put tabs in front of the lines. Fancy indent adds a delay between indenting the lines, to make it look like a wave. 
+- The linter reads each line and checks if theres an even number of `%% () "" []`
 
 ---
 
