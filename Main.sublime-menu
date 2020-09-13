@@ -20,6 +20,9 @@
       { "caption": "Lint Code",
         "command": "mkbdebug" 
       },
+      { "caption": "Minifier",
+        "command": "mkbmini" 
+      },
     ]
   }
 ]

@@ -75,12 +75,8 @@
 			"foreground": "var(mc2)",
 		},
 		{
-			"scope": "source.mkb.repl",
-			"foreground": "var(mc1)",
-		},
-		{
 			"scope": "source.mkb.binds",
-			"foreground": "var(mc2)",
+			"foreground": "var(mc1)",
 		},
 	],
 }

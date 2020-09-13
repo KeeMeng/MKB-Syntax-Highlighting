@@ -239,6 +239,36 @@ class hint(sublime_plugin.TextCommand):
             else:
                 self.view.hide_popup()
 
+class mkbmini(sublime_plugin.TextCommand):
+    def run(self, edit):
+        if self.view.match_selector(0, "source.mkb"):
+            filelines = self.view.substr(sublime.Region(0, len(self.view))).split("\n")
+            string = ""
+            for l in filelines:
+                l = l.strip()
+                if l.endswith(";"):
+                    string += l
+                else:
+                    string += l + ";"
+            string = re.sub("//.*?;","",string)
+            while True:
+                match1 = re.search("(?<!i)if\(([^;]*?)\);echo\(([^;]*?)\);endif(;)?",string)
+                match2 = re.search("(?<!i)if\(([^;]*?)\);echo\(([^;]*?)\);else;echo\(([^;]*?)\);endif(;)?",string)
+                if match1:
+                    original = match1.group(0).replace("\"","\\\"").replace("(","\(").replace(")","\)")
+                    iif = "iif(" + match1.group(1) + "," + match1.group(2) + ");"
+                    string = re.sub(original,iif,string)
+                elif match2:
+                    original = match2.group(0).replace("\"","\\\"").replace("(","\(").replace(")","\)")
+                    iif = "iif(" + match2.group(1) + "," + match2.group(2) + "," + match2.group(3) + ");"
+                    string = re.sub(original,iif,string)
+                else:
+                    break
+            string = string.replace("$${;","$${").replace(";}$$;","}$$").replace(";}$$","}$$").replace("}$$;","}$$")
+            string = string.replace(";;",";")
+            print(string)
+            sublime.active_window().run_command("show_panel", {"panel": "console", "toggle": True})
+
 class mkbdebug(sublime_plugin.TextCommand):
     def run(self, edit):
         if config("indent_after_linting"):
@@ -323,7 +353,6 @@ class mkbdebug(sublime_plugin.TextCommand):
             if config("message_after_linting"):
                 sublime.message_dialog("Check console for linting errors")
             sublime.active_window().run_command("show_panel", {"panel": "console", "toggle": True})
-            # self.view.add_regions("mkblinter", [sublime.Region(0, 50)], "source.mkb.booleans", "dot", sublime.DRAW_NO_FILL)
 
 
 # 1000+ Lines of auto complete below!!
@@ -789,7 +818,6 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["ASSIGN\tInternal function","<var> = <value>;"],
                 ["ATTACKPOWER\tAttack power","%ATTACKPOWER%"],
                 ["ATTACKSPEED\tAttack speed","%ATTACKSPEED%"],
-                ["BEGIN\tEnters multi-line mode, allows entry of a script over multiple lines terminated by END","BEGIN;"],
                 ["BIND\tSet the specified key binding to the specified key code","BIND(${1:<bind>},${2:<keycode>});"],
                 ["BINDGUI\tBinds the specified custom screen to the slot specified","BINDGUI(${1:<slot>},${2:<screen>});"],
                 ["BIOME\tBiome the Player is currently in","%BIOME%"],
@@ -805,7 +833,6 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["CAMERA\tCurrent camera mode","%CAMERA%"],
                 ["CANFLY\tWhether the Player can fly","%CANFLY%"],
                 ["CARDINALYAW\tYaw of the player relative to north (YAW + 180)","%CARDINALYAW%"],
-                ["CAT\tLists the contents of the specified file into the console window","cat ${1:<file.txt>};"],
                 ["CHAT\t(onChat) Chat message with control codes","%CHAT%"],
                 ["CHATCLEAN\t(onChat) Chat message without control codes","%CHATCLEAN%"],
                 ["CHATFILTER\tEnable or disable the chat filter","CHATFILTER(${1:<enabled>});"],
@@ -825,7 +852,6 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["CHUNKUPDATES\tAmount of chunk updates","%CHUNKUPDATES%"],
                 ["CLEARCHAT\tClears all messages from the chat window","CLEARCHAT();"],
                 ["CLEARCRAFTING\tCancels any queued crafting jobs","CLEARCRAFTING();"],
-                ["CLS\tClears the console display","CLS;"],
                 ["CONFIG\tSwitch to the specified configuration","CONFIG(${1:<configname>});"],
                 ["CONFIG\tLoaded config","%CONFIG%"],
                 ["CONTAINERSLOTS\tAmount of slots in opened container","%CONTAINERSLOTS%"],
@@ -853,7 +879,6 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["DISPLAYWIDTH\tWidth of the minecraft window","%DISPLAYWIDTH%"],
                 ["DURABILITY\tDurability of the equipped item","%DURABILITY%"],
                 ["ECHO\tSends the specified message to the server","ECHO(${1:<text>});"],
-                ["EDIT\tOpens an editor for the specified file","edit ${1:[file.txt]};"],
                 ["EFFECT\t(effects iterator) Internal string id of the effect","%EFFECT%"],
                 ["EFFECTID\t(effects iterator) Internal numeric id of the effect","%EFFECTID%"],
                 ["EFFECTNAME\t(effects iterator) Display name of the effect","%EFFECTNAME%"],
@@ -865,10 +890,8 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["ENCHANTMENTPOWER\t(enchantments iterator) Power of the enchantment","%ENCHANTMENTPOWER%"],
                 ["ENCHANTMENTS\tIterates over all enchantments on the equipped item","enchantments"],
                 ["ENCODE\tConverts an string to base 64","ENCODE(${1:<input>},&${2:[output]});"],
-                ["END\tEnds a multi-line script and executes the contents of the buffer","END;"],
                 ["ENV\tIterates over all available variables","env"],
                 ["EXEC\tCreates a task by running the specified script file","EXEC(${1:<file.txt>},${2:[taskname]},${3:[params]});"],
-                ["EXIT\tClose the console window","EXIT;"],
                 ["EXPAND","?% <variable>;"],
                 ["FILTER\tIndicate that this chat meesage should be filtered and terminate","FILTER;"],
                 ["FLYING\tWhether the Player is flying","%FLYING%"],
@@ -892,7 +915,6 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["HELMDURABILITY\tDurability of the Players helm","%HELMDURABILITY%"],
                 ["HELMID\tID of the Players helm","%HELMID%"],
                 ["HELMNAME\tDisplayname of the Players helm","%HELMNAME%"],
-                ["HELP\tDisplays help on the specified console command","help ${1:[command name]};"],
                 ["HIT\tType of the thing the Player is looking at","%HIT%"],
                 ["HIT_AGE","%HIT_AGE%"],
                 ["HIT_ATTACHED","%HIT_ATTACHED%"],
@@ -1114,7 +1136,6 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["KEYID\tKey ID of the key that started this script","%KEYID%"],
                 ["KEYNAME\tKeyname of the key that started this script","%KEYNAME%"],
                 ["KEYUP\tSets the specified key binding state to unpressed, only works with pressable bindings","KEYUP(${1:<bind>});"],
-                ["KILL\tTerminate a running macro by ID, use TASKS to list available tasks","kill ${1:[taskid]};"],
                 ["LCASE\tConverts the input string to lower case and stores it in output","LCASE(${1:<input>},&${2:[output]});"],
                 ["LEGGINGSDAMAGE\tMaximum uses of the Players leggings","%LEGGINGSDAMAGE%"],
                 ["LEGGINGSDURABILITY\tDurability of the Players leggings","%LEGGINGSDURABILITY%"],
@@ -1122,8 +1143,6 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["LEGGINGSNAME\tDisplayname of the Players leggings","%LEGGINGSNAME%"],
                 ["LEVEL\tXP level","%LEVEL%"],
                 ["LIGHT\tLight level at current location","%LIGHT%"],
-                ["LIST\tList available macro files in the macros directory","LIST;"],
-                ["LIVE\tEnables or disables live mode","live ${1:[status]};"],
                 ["LMOUSE","%LMOUSE%"],
                 ["LOCALDIFFICULTY\tLocal difficulty of the world","%LOCALDIFFICULTY%"],
                 ["LOG\tShows the specified text only on the client-side in the chat window","LOG(${1:<text>});"],
@@ -1196,12 +1215,9 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["RESOURCEPACKS\tSets the resource pack stack to the order matching the specified patterns","RESOURCEPACKS(${1:[pattern]},${2:[pattern...]});"],
                 ["RESOURCEPACKS[]\tArray of selected resource packs","%RESOURCEPACKS[]%"],
                 ["RESPAWN\tRespawns the player if you are dead","RESPAWN();"],
-                ["RM\tRemoves (deletes) the specified file","rm ${1:<file.txt>};"],
                 ["RMOUSE","%RMOUSE%"],
-                ["RUN\tRuns the specified script synchronously","run ${1:<file.txt>} ${2:[arg1]} ${3:[arg2]};"],
                 ["RUNNING\tIterates over all currently running macros","running"],
                 ["SATURATION\tSaturation level (normally hidden from the Player)","%SATURATION%"],
-                ["SAY\tSends the specified message as chat or remotely","say ${1:<message>};"],
                 ["SCREEN\tName of the current custom GUI","%SCREEN%"],
                 ["SCREENNAME\tDisplay name of the current custom GUI","%SCREENNAME%"],
                 ["SEED\tSeed of the world (only available in SP)","%SEED%"],
@@ -1222,7 +1238,6 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["SHADERGROUPS[]\tArray of available shaders","%SHADERGROUPS[]%"],
                 ["SHIFT","%SHIFT%"],
                 ["SHOWGUI\tShow a custom gui screen, creates it if it doesn't exist","SHOWGUI(${1:<screen>},${2:[esc_screen]},${3:[macro_keys]});"],
-                ["SHUTDOWN\tShut down the minecraft client","SHUTDOWN;"],
                 ["SIGNTEXT[]\tArray of lines on a sign the Player is looking at","%SIGNTEXT[]%"],
                 ["SLOT\tSelects the specified slot on the hot bar","SLOT(${1:<slot>});"],
                 ["SLOTCLICK\tSimulates clicking on the specified slot in the current GUI","SLOTCLICK(${1:<slot>},${2:[button]},${3:[shift]});"],
@@ -1235,7 +1250,6 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["STORE\tStores a value into one of the predefined parameter lists","STORE(${1:<type>},${2:[name]});"],
                 ["STOREOVER\tStores a value into one of the predefined parameter lists and overwrites an entry if it already exists","STOREOVER(${1:<type>},${2:[name]});"],
                 ["STRIP\tStrips all formatting codes from the specified text and assigns the result to &target","STRIP(&${1:<target>},${2:<text>});"],
-                ["TASKS\tList currently executing tasks","TASKS;"],
                 ["TEXTUREPACK","texturepack${1:([pattern]});"],
                 ["TEXTUREPACK","%TEXTUREPACK%"],
                 ["TICKS\tcurrent world time value (which will be a static number if doDayNightCycle game rule is false)","%TICKS%"],
@@ -1322,12 +1336,10 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["VARNAME\t(env iterator) Contains the variable name","%VARNAME%"],
                 ["VEHICLE\tVehicle type","%VEHICLE%"],
                 ["VEHICLEHEALTH\tVehicle health","%VEHICLEHEALTH%"],
-                ["VERSION\tDisplays current version","VERSION;"],
                 ["VOLUME\tSets the sound volume for the specified category","VOLUME(${1:<value>},${2:[category]});"],
                 ["WAIT\tPauses the script for the time specified","WAIT(${1:<time>});"],
                 ["WALKTO\tWas never offically in the mod","WALKTO(${1:<x>},${2:<y>},${3:<z>},${4:[speed]},${5:[radius]});"],
                 ["WEATHERVOLUME\tVolume level for Weather","%WEATHERVOLUME%"],
-                ["WHOAMI\tDisplays current user name","WHOAMI;"],
                 ["XP\tCurrent amount of experience points","%XP%"],
                 ["XPOS\tPosition in X direction","%XPOS%"],
                 ["XPOSF\tThe position in X direction with three decimal places after the comma as a string","%XPOSF%"],

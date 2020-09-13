@@ -127,10 +127,6 @@ contexts:
   - match: '(?<!~)((@)??[#&\b]??[a-z0-9_-]*(?=\b))'
     scope: source.mkb.prefixes
 
-  repl:
-    - match: 'BEGIN|CAT <.+\.txt>|CLS|EDIT .+\.txt|END|EXIT|HELP .*|KILL .*|LIST|LIVE .*|RM <.+\.txt>|RUN <.+\.txt> .*|SAY .*|SHUTDOWN|TASKS|VERSION|WHOAMI'
-      scope: source.mkb.repl
-
   variables:
     - match: '{{variables}}'
       scope: source.mkb.variables
