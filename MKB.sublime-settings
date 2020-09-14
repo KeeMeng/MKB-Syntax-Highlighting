@@ -26,6 +26,9 @@
 	// Whether or not to show hints automatically
 	"show_hints": true,
 
+	// Number of lines to show in the pop up, put a big number to show everything
+	"popup_line_height": 3,
+
 	// Whether or not to indent code after linting code
 	"indent_after_linting": false,
 
