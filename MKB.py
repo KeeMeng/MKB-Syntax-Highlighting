@@ -7,7 +7,10 @@ import json
 import copy
 import webbrowser
 
-settings = sublime.load_settings("MKB.sublime-settings")
+def plugin_loaded():
+    settings = sublime.load_settings("MKB.sublime-settings")
+    print("Settings loaded")
+
 def config(key):
     return settings.get(key)
 
@@ -268,9 +271,9 @@ class mkbmini(sublime_plugin.TextCommand):
             string = string.replace(";;",";")
             print()
             print("Minifier:")
+            print()
             print(string)
             print()
-            print(self.view.wrap_width)
             sublime.active_window().run_command("show_panel", {"panel": "console", "toggle": True})
             if config("message_after_minifying"):
                 sublime.message_dialog("Check console for minifier results")
