@@ -21,11 +21,13 @@ Brief description of the files in the package include:
 | **Context.sublime-menu**       | JSON file for the menu when you right click the screen.                                      |
 | **MKB.sublime-settings**       | JSON file for the settings to customize the package.                                         |
 | **Miscellaneous.tmPreferences**| Helps with toggling comments.                                                                |
+| **Default.sublime-keymapp**    | Auto %% when typing one %                                                                    |
+| **LICENSE**                    | A simple MIT license                                                                         |
 | **MKBdocs.json**               | Gorlem's wiki API used for popup hints.                                                      |
 
 ---
 
-## Installing using Package Control (Recommended)
+## Installing using Package Control (NOT WORKING YET)
 
 **Automatic download:** 
 1. If you haven't, install [Package Control](http://www.sublimelinter.com/en/stable/installation.html). 
@@ -37,7 +39,15 @@ Brief description of the files in the package include:
 ---
 ## Manual installation (Not sure why you want to do this)
 
-You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to do this
+**1)** Install Sublime Text
+**2)** Install Package Dev
+**3)** Download/clone the repository from https://github.com/KeeMeng/MKB-Syntax-Highlighting
+**4)** Copy and paste everything from "MKB.color-scheme" into `tools > packages > package development > edit current colour scheme`
+**5)** Put all the files from the repository into `Sublime Text 3/Packages/MKB`, you have to make a new folder called MKB
+**6)** Select MKB as you language by clicking the bottom right box (If it doesn't show go `view > show status bar`)
+**7)** Enjoy! If there's anything wrong ask in #•help
+
+You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to do this if you have any problems. 
 
 ---
 

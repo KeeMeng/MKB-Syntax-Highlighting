@@ -7,8 +7,8 @@ import json
 import copy
 import webbrowser
 
+settings = sublime.load_settings("MKB.sublime-settings")
 def config(key):
-    settings = sublime.load_settings("MKB.sublime-settings")
     return settings.get(key)
 
 class mkbindentation(sublime_plugin.TextCommand):
@@ -266,8 +266,14 @@ class mkbmini(sublime_plugin.TextCommand):
                     break
             string = string.replace("$${;","$${").replace(";}$$;","}$$").replace(";}$$","}$$").replace("}$$;","}$$")
             string = string.replace(";;",";")
+            print()
+            print("Minifier:")
             print(string)
+            print()
+            print(self.view.wrap_width)
             sublime.active_window().run_command("show_panel", {"panel": "console", "toggle": True})
+            if config("message_after_minifying"):
+                sublime.message_dialog("Check console for minifier results")
 
 class mkbdebug(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -348,10 +354,11 @@ class mkbdebug(sublime_plugin.TextCommand):
             if not quotserror:
                 print(" All strings are enclosed")
             self.view.add_regions("mkblinter", regionlist, "source.mkb.booleans", "dot", sublime.DRAW_NO_FILL)
-            print("\n You should run the linter\n again after fixing errors")
+            if bracketerror or bracketerror2 or varerror or quotserror:
+                print("\n You should run the linter\n again after fixing errors")
             print("----------------------------")
             if config("message_after_linting"):
-                sublime.message_dialog("Check console for linting errors")
+                sublime.message_dialog("Check console for linting results")
             sublime.active_window().run_command("show_panel", {"panel": "console", "toggle": True})
 
 
