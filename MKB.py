@@ -83,8 +83,6 @@ class lineindenter(sublime_plugin.TextCommand):
 # Indenter by Federal
 class Indenter:
 
-    char = config("indent_character")
-
     def __init__(self, code): # Pass the code its self intead of lines
         self.lines = code.split(";")
         self.stack = [] # It stores the serching endings
@@ -116,9 +114,9 @@ class Indenter:
 
     def indent_line(self, line):
         if line and config("semicolon_end") and line != "$${" and line != "}$$":
-            self.indented.append(Indenter.char * self.level + line + ";")
+            self.indented.append(config("indent_character") * self.level + line + ";")
         else:
-            self.indented.append(Indenter.char * self.level + line) # Inserts a line into  the indented output list lines
+            self.indented.append(config("indent_character") * self.level + line) # Inserts a line into  the indented output list lines
 
     def indent(self, debug):
         count = 0
