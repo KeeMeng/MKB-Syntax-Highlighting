@@ -8,6 +8,7 @@ import copy
 import webbrowser
 
 def plugin_loaded():
+    global settings
     settings = sublime.load_settings("MKB.sublime-settings")
     print("Settings loaded")
 
