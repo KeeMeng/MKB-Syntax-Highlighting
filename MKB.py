@@ -96,12 +96,15 @@ class Indenter:
             'IFBEGINSWITH': ['ELSEIF', 'ELSE', 'ENDIF'],
             'IFENDSWITH':   ['ELSEIF', 'ELSE', 'ENDIF'],
             'IFCONTAINS':   ['ELSEIF', 'ELSE', 'ENDIF'],
+            'IFFILEEXISTS':   ['ELSEIF', 'ELSE', 'ENDIF'],
+            'IFINVISFULL':   ['ELSEIF', 'ELSE', 'ENDIF'],
+            'IFENCHANTED':   ['ELSEIF', 'ELSE', 'ENDIF'],
             'FOR':          ['NEXT'],
             'FOREACH':      ['NEXT'],
             'DO':           ['UNTIL','WHILE','LOOP'],
             'UNSAFE':       ['ENDUNSAFE']
         }
-        self.openings = "IF|ELSEIF|ELSE|IFMATCHES|IFBEGINSWITH|IFENDSWITH|IFCONTAINS|FOR|FOREACH|DO|UNSAFE"
+        self.openings = "IF|ELSEIF|ELSE|IFMATCHES|IFBEGINSWITH|IFENDSWITH|IFCONTAINS|IFFILEEXISTS|IFINVISFULL|IFENCHANTED|FOR|FOREACH|DO|UNSAFE"
         self.lintlines = []
 
         if config("extra_indent"):
@@ -442,7 +445,7 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["COUNTUP\tcreates a countup from the current time","COUNTUP();"],
                 ["COUNTER\tcurrent value of the countdown or countup","COUNTER(${1:<id>});"],
                 ["SECTOTIME\tformats the amount of seconds to time","&${1:time} = SECTOTIME(${2:<seconds>},${3:[format]});"],
-                ["GETCHESTNAME\treturns the name of the open chest","&${1:name} = getchestname;"],
+                ["GETCHESTNAME\treturns the name of the open chest","&${1:name} = GETCHESTNAME();"],
                 ["GETEMPTYSLOTS\treturns empty slots in inventory","#${1:slots} = GETEMPTYSLOTS(${2:[include non full slots]});"],
                 ["GETMOUSEITEM\tgets info about the held item","${2:&${1:[id]} = }GETMOUSEITEM(&${1:[id]},#${3:[stacksizevar]},#${4:[datavar]},&${5:[nbt]});"],
                 ["GETSLOTINV\tgets slot containing item in inventory","#${1:[slot]} = GETSLOTINV(${2:<item>}:${3:[damage]},#${4:<idvar>},${5:[startfromslotid]});"],
@@ -450,6 +453,10 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["IFENCHANTED\tchecks if the item is enchanted","IFENCHANTED(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});"],
                 ["SETSLOTITEM\tset the contents of a hotbar slot","SETSLOTITEM(${1:<item>}:${2:[damage]}${3:,<slot>},${4:[amount]},${5:[nbt]});"],
                 ["GETFISHHOOK\tget the x, y and z (3dp) of the bobber","${2:#${1:[ytotal]} = }GETFISHHOOK(#${3:[x]},#${4:[xprecision]},#${5:[y]},#${6:[yprecision]},#${7:[z]},#${8:[zprecision]});"],
+                ["MAP","#${1:result} = MAP(${2:<x>},${3:<minfrom>},${4:<maxfrom>},${5:<minto>},${6:<maxto>})"],
+                ["PARTICLE\tSpawns particles similar to the vanilla command","${2:&${1:errors}[] = }PARTICLE(${3:<particlename>},${4:<x>},${5:<y>},${6:<z>},${7:<dx>},${8:<dy>},${9:<dz>},${10:[count]},${11:[mode]})"],
+                ["COUNTITEM\tAmount of items in your current inventory","#${1:count} = COUNTITEM(${2:<item>}:${3:[damage]})"],
+                ["COUNTITEMINV\tAmount of items in your survival inventory","#${1:count} = COUNTITEMINV(${2:<item>}:${3:[damage]})"],
                 ["NOTIFY\tcreates a system tray","NOTIFY(${1:[title]},${2:[message]});"],
                 ["GETSLOTITEMEXT\t+ argument for the itemname of item","${2:&${1:[itemid]} = }GETSLOTITEMEXT(#${3:<slotid>},&${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[itemname]});"],
                 ["GETSLOTITEMNBT\t+ argument for the nbt of item","${2:&${1:[itemid]} = }GETSLOTITEMNBT(#${3:<slotid>},${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[nbt]});"],
@@ -911,8 +918,8 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["GAMEMODE\tGamemode of the player as a string","%GAMEMODE%"],
                 ["GAMMA\tSets the brightness value (percent), specifying time causes the value to change smoothly","GAMMA(${1:<value>},${2:[time]});"],
                 ["GAMMA\tBrightness level","%GAMMA%"],
-                ["GETID\tGets the ID and data value of the block at the specified coordinates","GETID(${1:<x>},${2:<y>},${3:<z>},&${4:[idvar]},#${5:[datavar]});"],
-                ["GETIDREL\tGets the ID and data value of the block at the specified coordinates relative to the player","GETIDREL(${1:<xoffset>},${2:<yoffset>},${3:<zoffset>},&${4:[idvar]},#${5:[datavar]});"],
+                ["GETID\tGets the ID and data value of the block at the specified coordinates","GETID(${1:<x>},${2:<y>},${3:<z>},&${4:[idvar]},#${5:[datavar]},&${6:[variants]});"],
+                ["GETIDREL\tGets the ID and data value of the block at the specified coordinates relative to the player","GETIDREL(${1:<xoffset>},${2:<yoffset>},${3:<zoffset>},&${4:[idvar]},#${5:[datavar]},&${6:[variants]});"],
                 ["GETITEMINFO\tGets the name and other info for the specified item id","GETITEMINFO(${1:<item>}:${2:[damage]},&${3:[namevar]},#${4:[maxstacksize]},&${5:[type]},&${6:[dropid]});"],
                 ["GETPROPERTY\tReturns the value of the specified property from the specified GUI control","GETPROPERTY(${1:<control>},${2:<property>});"],
                 ["GETSLOT\tGets the id of the slot containing an item matching the specified item id","GETSLOT(${1:<item>}:${2:[damage]},#${3:<slotid>},${4:[startfromslotid]});"],
