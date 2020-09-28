@@ -26,18 +26,7 @@ Brief description of the files in the package include:
 | **MKBdocs.json**               | Gorlem's wiki API used for popup hints.                                                      |
 
 ---
-
-## Installing using Package Control (NOT WORKING YET)
-
-**Automatic download:** 
-1. If you haven't, install [Package Control](http://www.sublimelinter.com/en/stable/installation.html). 
-2. Open Package Control: Install Package in the command palette, and search for MKB. Install it, and you might need to restart sublime. 
-3. Then, you need to add the custom colors from **MKB.sublime-color-scheme**, and to do that you go to. `Tools > Packages > Package Development > Edit Current Color Scheme...` Paste the entire json contents into the **Right Side** of the color scheme, the top of the file should say "THEME.sublime-color-scheme — USER". 4. Change the language from `Plain Text` to `MKB` as your language. You can do this by selecting it at the bottom right corner menu. Sometimes you need to show your status bar (`View/Show Status Bar`)
-5. Go to the top menu, and click `MKB/Package Settings`, and personalize the package!
-6. If anything goes wrong or your have questions, you can always ask me. 
-
----
-## Manual installation (Not sure why you want to do this)
+## Manual installation
 
 **1)** Install Sublime Text
 **2)** Install Package Dev
@@ -48,6 +37,17 @@ Brief description of the files in the package include:
 **7)** Enjoy! If there's anything wrong ask in #•help
 
 You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to do this if you have any problems. 
+
+---
+
+## Installing using Package Control (NOT WORKING YET)
+
+**Automatic download:** 
+1. If you haven't, install [Package Control](http://www.sublimelinter.com/en/stable/installation.html). 
+2. Open Package Control: Install Package in the command palette, and search for MKB. Install it, and you might need to restart sublime. 
+3. Then, you need to add the custom colors from **MKB.sublime-color-scheme**, and to do that you go to. `Tools > Packages > Package Development > Edit Current Color Scheme...` Paste the entire json contents into the **Right Side** of the color scheme, the top of the file should say "THEME.sublime-color-scheme — USER". 4. Change the language from `Plain Text` to `MKB` as your language. You can do this by selecting it at the bottom right corner menu. Sometimes you need to show your status bar (`View/Show Status Bar`)
+5. Go to the top menu, and click `MKB/Package Settings`, and personalize the package!
+6. If anything goes wrong or your have questions, you can always ask me. 
 
 ---
 
@@ -71,6 +71,7 @@ You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to d
 - The popup uses sublime's API and gorlem's API to find the information for the popup. 
 - The indenter reads each line, and will automatically put tabs in front of the lines. Fancy indent adds a delay between indenting the lines, to make it look like a wave. 
 - The linter reads each line and checks if theres an even number of `%% () "" []`
+- The variable inserter finds all variables from the script
 
 ---
 

@@ -23,6 +23,9 @@
       { "caption": "Minifier",
         "command": "mkbmini" 
       },
+      { "caption": "Variables",
+        "command": "mkbvariables" 
+      },
     ]
   }
 ]

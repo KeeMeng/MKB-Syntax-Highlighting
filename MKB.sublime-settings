@@ -52,10 +52,6 @@
 
 
 	//DO NOT EDIT UNLESS YOU ARE SURE:
-	"auto_complete_triggers": 
-	[
-		{"characters": "~", "selector": "source.mkb"},
-	],
 	"word_wrap": true,
 	
 	// "color_scheme": "MKB.sublime-color-scheme",

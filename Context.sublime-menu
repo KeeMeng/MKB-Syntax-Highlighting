@@ -1,11 +1,13 @@
 [
-	{ "caption": "MKB Indentation",
+	{ "caption": "MKB: Indentation",
 		"command": "mkbindentation" },
-	{ "caption": "MKB Hint",
+	{ "caption": "MKB: Hint",
 		"command": "hint",
 		"args": {"event": "None"} },
-	{ "caption": "MKB Linter",
+	{ "caption": "MKB: Linter",
 		"command": "mkbdebug" },
-	{ "caption": "MKB Minifier",
+	{ "caption": "MKB: Minifier",
 		"command": "mkbmini" },
+	{ "caption": "MKB: Variables",
+		"command": "mkbvariables" },
 ]

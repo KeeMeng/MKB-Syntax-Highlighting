@@ -9,4 +9,5 @@
 			{ "key": "selector", "operator": "equal","operand": "source.mkb"}
 		]
 	},
+	{ "keys": ["super+shift+`"], "command": "mkbvariables"},
 ]

@@ -47,11 +47,6 @@ class mkbindent(sublime_plugin.ViewEventListener):
             mkbindent.lineindentermode(self, indentedlines.indent(debug=False))
         else:
             results = indentedlines.indent(debug=True)
-            # for line in results[1]:
-            #     print(line)
-        # lintregions = self.view.get_regions("mkblinter")
-        # lintregions.append([self.view.line(self.view.text_point(row-1,0))])
-        # self.view.add_regions("mkblinter", lintregions, "source.mkb.booleans", "dot", sublime.DRAW_NO_FILL)
 
     def lineindentermode(self, args):
         if config("fancy_indent") != None and config("fancy_indent") != 0:
@@ -180,6 +175,29 @@ class hoverinfo(sublime_plugin.ViewEventListener):
                 hint.showpopup(self, data, point, False)
             else:
                 hint.showpopup(self, data, point, False)
+
+class mkbvariables(sublime_plugin.TextCommand):
+    def run(self, edit):
+        if self.view.match_selector(0, "source.mkb"):
+            filelines = self.view.substr(sublime.Region(0, len(self.view))).split("\n")
+            string = ""
+            for l in filelines:
+                l = l.strip()
+                if l.endswith(";"):
+                    string += l
+                else:
+                    string += l + ";"
+            variables = re.findall("(@|set|SET)?(&|#)([a-z_\-1-9]+)",string)
+            var = []
+            global var
+            for i in variables:
+                if i[1]+i[2] not in var:
+                    var.append(i[1]+i[2])
+            sublime.Window.show_quick_panel(sublime.active_window(), var, self.on_done, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
+    
+    def on_done(self, index):
+        if index != -1:
+            sublime.active_window().run_command('insert', {'characters': var[index]})
 
 class hint(sublime_plugin.TextCommand):
     def run(self, edit, event=None):
