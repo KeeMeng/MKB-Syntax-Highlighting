@@ -11,6 +11,8 @@ def plugin_loaded():
     global settings
     settings = sublime.load_settings("MKB.sublime-settings")
     print("Settings loaded")
+    global globalvars
+    globalvars = []
 
 def config(key):
     return settings.get(key)
@@ -32,6 +34,20 @@ class mkbindent(sublime_plugin.ViewEventListener):
             elif config("enable_indent"):
                 self.openfile(self, True)
 
+    def on_post_save(self):
+            filelines = self.view.substr(sublime.Region(0, len(self.view))).split("\n")
+            string = ""
+            for l in filelines:
+                l = l.strip()
+                if l.endswith(";"):
+                    string += l
+                else:
+                    string += l + ";"
+            variables = re.findall("(@(#|&)?[a-z_\-1-9]+)",string)
+            if variables:
+                for i in variables:
+                    if i[0] not in globalvars:
+                        globalvars.append(i[0])
 
     def openfile(self, indent):
         filelines = self.view.substr(sublime.Region(0, len(self.view))).split("\n")
@@ -193,6 +209,9 @@ class mkbvariables(sublime_plugin.TextCommand):
             for i in variables:
                 if i[1]+i[2] not in var:
                     var.append(i[1]+i[2])
+            for i in globalvars:
+                if i not in var:
+                    var.append(i)
             sublime.Window.show_quick_panel(sublime.active_window(), var, self.on_done, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
     
     def on_done(self, index):
