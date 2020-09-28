@@ -187,9 +187,9 @@ class mkbvariables(sublime_plugin.TextCommand):
                     string += l
                 else:
                     string += l + ";"
-            variables = re.findall("(@|set|SET)?(&|#)([a-z_\-1-9]+)",string)
-            var = []
+            variables = re.findall("(set\(|SET\()?(@&|@#|&|#|@)([a-z_\-1-9]+)",string)
             global var
+            var = []
             for i in variables:
                 if i[1]+i[2] not in var:
                     var.append(i[1]+i[2])
