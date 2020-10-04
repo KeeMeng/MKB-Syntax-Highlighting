@@ -15,7 +15,21 @@ def plugin_loaded():
     globalvars = []
 
 def config(key):
-    return settings.get(key)
+    if settings.get(key):
+        return settings.get(key)
+    else:
+        print("Error loading setting")
+
+def viewlines():
+    filelines = sublime.active_window().active_view().substr(sublime.Region(0, len(sublime.active_window().active_view()))).split("\n")
+    string = ""
+    for l in filelines:
+        l = l.strip()
+        if l.endswith(";"):
+            string += l
+        else:
+            string += l + ";"
+    return string
 
 class mkbindentation(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -35,30 +49,14 @@ class mkbindent(sublime_plugin.ViewEventListener):
                 self.openfile(self, True)
 
     def on_post_save(self):
-            filelines = self.view.substr(sublime.Region(0, len(self.view))).split("\n")
-            string = ""
-            for l in filelines:
-                l = l.strip()
-                if l.endswith(";"):
-                    string += l
-                else:
-                    string += l + ";"
-            variables = re.findall("(@(#|&)?[a-z_\-1-9]+)",string)
-            if variables:
-                for i in variables:
-                    if i[0] not in globalvars:
-                        globalvars.append(i[0])
+        variables = re.findall("(@(#|&)?[a-z_\-1-9]+)",viewlines())
+        if variables:
+            for i in variables:
+                if i[0] not in globalvars:
+                    globalvars.append(i[0])
 
     def openfile(self, indent):
-        filelines = self.view.substr(sublime.Region(0, len(self.view))).split("\n")
-        string = ""
-        for l in filelines:
-            l = l.strip()
-            if l.endswith(";"):
-                string += l
-            else:
-                string += l + ";"
-        indentedlines = Indenter(code=string)
+        indentedlines = Indenter(code=viewlines())
         if indent:
             mkbindent.lineindentermode(self, indentedlines.indent(debug=False))
         else:
@@ -107,9 +105,9 @@ class Indenter:
             'IFBEGINSWITH': ['ELSEIF', 'ELSE', 'ENDIF'],
             'IFENDSWITH':   ['ELSEIF', 'ELSE', 'ENDIF'],
             'IFCONTAINS':   ['ELSEIF', 'ELSE', 'ENDIF'],
-            'IFFILEEXISTS':   ['ELSEIF', 'ELSE', 'ENDIF'],
-            'IFINVISFULL':   ['ELSEIF', 'ELSE', 'ENDIF'],
-            'IFENCHANTED':   ['ELSEIF', 'ELSE', 'ENDIF'],
+            'IFFILEEXISTS': ['ELSEIF', 'ELSE', 'ENDIF'],
+            'IFINVISFULL':  ['ELSEIF', 'ELSE', 'ENDIF'],
+            'IFENCHANTED':  ['ELSEIF', 'ELSE', 'ENDIF'],
             'FOR':          ['NEXT'],
             'FOREACH':      ['NEXT'],
             'DO':           ['UNTIL','WHILE','LOOP'],
@@ -195,15 +193,7 @@ class hoverinfo(sublime_plugin.ViewEventListener):
 class mkbvariables(sublime_plugin.TextCommand):
     def run(self, edit):
         if self.view.match_selector(0, "source.mkb"):
-            filelines = self.view.substr(sublime.Region(0, len(self.view))).split("\n")
-            string = ""
-            for l in filelines:
-                l = l.strip()
-                if l.endswith(";"):
-                    string += l
-                else:
-                    string += l + ";"
-            variables = re.findall("(set\(|SET\()?(@&|@#|&|#|@)([a-z_\-1-9]+)",string)
+            variables = re.findall("(set\(|SET\()?(@&|@#|&|#|@)([a-z_\-1-9]+)",viewlines())
             global var
             var = []
             for i in variables:
@@ -254,7 +244,6 @@ class hint(sublime_plugin.TextCommand):
                 else:
                     break
 
-
             if data["example"]:
                 data["example"] = data["example"].replace("&","&amp;")
                 data["example"] = data["example"].replace("<","&lt;").replace(">","&gt;").replace("\\\"","&quot;")
@@ -284,15 +273,7 @@ class hint(sublime_plugin.TextCommand):
 class mkbmini(sublime_plugin.TextCommand):
     def run(self, edit):
         if self.view.match_selector(0, "source.mkb"):
-            filelines = self.view.substr(sublime.Region(0, len(self.view))).split("\n")
-            string = ""
-            for l in filelines:
-                l = l.strip()
-                if l.endswith(";"):
-                    string += l
-                else:
-                    string += l + ";"
-            string = re.sub("//.*?;","",string)
+            string = re.sub("//.*?;","",viewlines())
             while True:
                 match1 = re.search("(?<!i)if\(([^;]*?)\);echo\(([^;]*?)\);endif(;)?",string)
                 match2 = re.search("(?<!i)if\(([^;]*?)\);echo\(([^;]*?)\);else;echo\(([^;]*?)\);endif(;)?",string)
@@ -308,9 +289,9 @@ class mkbmini(sublime_plugin.TextCommand):
                     break
             string = string.replace("$${;","$${").replace(";}$$;","}$$").replace(";}$$","}$$").replace("}$$;","}$$")
             string = string.replace(";;",";")
-            print()
-            print("Minifier:")
-            print()
+            print("+---------+")
+            print("|Minifier:|")
+            print("+---------+")
             print(string)
             print()
             sublime.active_window().run_command("show_panel", {"panel": "console", "toggle": True})
