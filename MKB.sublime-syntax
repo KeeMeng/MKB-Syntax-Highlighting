@@ -27,7 +27,7 @@ contexts:
     - match: '(?<!\\)\"'
       push: strings
     - match: '(&|#)?((<[\w@#&\[\]\|=\. /_-]*?>)|(\[[\w@#&\[\]\|=\. /_-]*?\])):?'
-      scope: source.mkb.keywords
+      scope: keyword.other.mkb
 
     - include: actions
     - include: binds
@@ -42,91 +42,91 @@ contexts:
     - include: variables
 
   strings:
-    - meta_scope: source.mkb.strings
+    - meta_scope: string.mkb
     - match: '(\]%)'
-      scope: source.mkb.keywords
+      scope: keyword.other.mkb
     - match: '(?<!\\)"'
       pop: true
     - match: '\\\\\"'
-      scope: source.mkb.strings
+      scope: string.mkb
       pop: true
     - match: '\\\\'
-      scope: source.mkb.strings
+      scope: string.mkb
     - match: '({{parameters}})|((%)(({{variables}})|([^%\[\]"]*?))(%))'
       captures:
-        1: source.mkb.parameters
-        4: source.mkb.keywords
-        6: source.mkb.variables
-        36: source.mkb.prefixes
-        37: source.mkb.keywords
+        1: variable.parameter.mkb
+        4: keyword.other.mkb
+        6: variable.mkb
+        36: punctuation.definition.keyword.mkb
+        37: keyword.other.mkb
     - match: '({{parameters}})|((%)([^%\[\]"]*?)(\[))'
       captures:
-        1: source.mkb.parameters
-        4: source.mkb.keywords
-        5: source.mkb.prefixes
-        6: source.mkb.keywords
+        1: variable.parameter.mkb
+        4: keyword.other.mkb
+        5: punctuation.definition.keyword.mkb
+        6: keyword.other.mkb
       push: strings2
 
   strings2:
-    - meta_scope: source.mkb.strings
+    - meta_scope: string.mkb
     - match: '[^\"\[\]%]*?((-?[\d.]+(ms|t)?)|(({{booleans_true}})|({{booleans_false}}))|(<|>|==|!=|!|>=|<=|\+|\-(?!\d)|\*|\/|=|:=|\(|\))|({{parameters}})|((%)(({{variables}})|([^%\[\]"]*?))(\[|%)))'
       captures:
-        2: source.mkb.numbers
-        5: source.mkb.booleans2
-        6: source.mkb.booleans
-        7: source.mkb.operators
-        8: source.mkb.parameters
-        11: source.mkb.keywords
-        13: source.mkb.variables
-        43: source.mkb.prefixes
-        44: source.mkb.keywords
+        2: constant.numeric.mkb
+        5: constant.language.true.mkb
+        6: constant.language.false.mkb
+        7: keyword.operator.mkb
+        8: variable.parameter.mkb
+        11: keyword.other.mkb
+        13: variable.mkb
+        43: punctuation.definition.keyword.mkb
+        44: keyword.other.mkb
     - match: '(\]%)'
-      scope: source.mkb.keywords
+      scope: keyword.other.mkb
     - match: '\b\"|'
       pop: true
 
   actions:
     - match: '{{actions}}'
-      scope: source.mkb.actions
+      scope: keyword.control.mkb
 
   binds:
     - match: '\b(inventory|drop|chat|attack|use|pick|screenshot|smoothcamera|swaphands|forward|back|left|right|jump|sneak|playerlist|sprint)\b'
-      scope: source.mkb.binds
+      scope: keyword.control.import.mkb
 
   booleans:
     - match: '(({{booleans_true}})|({{booleans_false}}))'
       captures:
-        2: source.mkb.booleans2
-        3: source.mkb.booleans
+        2: constant.language.true.mkb
+        3: constant.language.false.mkb
 
   comments:
     - match: '((^|;)\s*//.*;?)'
-      scope: source.mkb.comments
+      scope: comment.mkb
 
   iterators:
     - match: 'iterators|controls|teams|scores|players|trades|enchantments|env|running|effects|entities|objectives|actions|events|properties'
-      scope: source.mkb.iterators
+      scope: keyword.operator.word.mkb
 
   keywords:
     - match: '\$\$\{|\}\$\$|;|,|%|\(|\)|\[|\]|'
-      scope: source.mkb.keywords
+      scope: keyword.other.mkb
 
   numbers:
     - match: '-?[\d.]+(ms|t)?'
-      scope: source.mkb.numbers
+      scope: constant.numeric.mkb
 
   operators:
     - match: '<|>|==|!=|!|>=|<=|&&|\|\||to|as|step|=>|\+|\-(?!\d)|\*|\/|=|:='
-      scope: source.mkb.operators
+      scope: keyword.operator.mkb
 
   parameters:
     - match: '{{parameters}}'
-      scope: source.mkb.parameters
+      scope: variable.parameter.mkb
 
   prefixes:
   - match: '(?<!~)((@)??[#&\b]??[a-z0-9_-]*(?=\b))'
-    scope: source.mkb.prefixes
+    scope: punctuation.definition.keyword.mkb
 
   variables:
     - match: '{{variables}}'
-      scope: source.mkb.variables
+      scope: variable.mkb

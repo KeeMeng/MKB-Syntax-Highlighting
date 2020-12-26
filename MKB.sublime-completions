@@ -89,6 +89,7 @@
 		{ "trigger": "countiteminv\tamount of items in your survival inventory", "contents": "#${1:count} = countiteminv(${2:<item>}:${3:[damage]})"},
 		{ "trigger": "createcontrol\tCreates a control on the specified screen at row and column position", "contents": "${2:[&${1:controlname}] = }createcontrol(${3:<screenname|layouts|types>},${4:[element type]},${5:[row]},${6:[column]});"},
 		{ "trigger": "deletecontrol\tDeletes a control by name from any gui", "contents": "deletecontrol(${1:<controlname>});"},
+		{ "trigger": "timestamptodate\tFormat a timestamp in seconds", "contents": "&${1:date} = timestamptodate(${2:<timestamp>},${3:[in milliseconds|date format]},${4:[in milliseconds]});"},
 
 		{ "trigger": "notify\tcreates a system tray", "contents": "notify(${1:[title]},${2:[message]});"},
 		{ "trigger": "getslotitemext\t+ argument for the itemname of item", "contents": "${2:&${1:[itemid]} = }getslotitemext(#${3:<slotid>},&${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[itemname]});"},

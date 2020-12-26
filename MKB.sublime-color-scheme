@@ -27,56 +27,60 @@
 			"foreground": "var(mcf)",
 		},
 		{
-			"scope": "source.mkb.comments",
+			"scope": "comment.mkb",
 			"foreground": "var(mc7)",
 		},
 		{
-			"scope": "source.mkb.parameters",
+			"scope": "variable.parameter.mkb",
 			"foreground": "var(mc6)",
 		},
 		{
-			"scope": "source.mkb.strings",
+			"scope": "string.mkb",
 			"foreground": "var(mca)",
 		},
 		{
-			"scope": "source.mkb.keywords",
+			"scope": "keyword.other.mkb",
 			"foreground": "var(mcd)",
 		},
 		{
-			"scope": "source.mkb.numbers",
+			"scope": "constant.numeric.mkb",
 			"foreground": "var(mc9)",
 		},
 		{
-			"scope": "source.mkb.actions",
+			"scope": "keyword.control.mkb",
 			"foreground": "var(mc5)",
 		},
 		{
-			"scope": "source.mkb.variables",
+			"scope": "variable.mkb",
 			"foreground": "var(mcb)",
 		},
 		{
-			"scope": "source.mkb.iterators",
+			"scope": "keyword.operator.word",
 			"foreground": "var(mc3)",
 		},
 		{
-			"scope": "source.mkb.prefixes",
+			"scope": "punctuation.definition.keyword",
 			"foreground": "var(mcc)",
 		},
 		{
-			"scope": "source.mkb.operators",
+			"scope": "keyword.operator.mkb",
 			"foreground": "var(mce)",
 		},
 		{
-			"scope": "source.mkb.booleans",
+			"scope": "constant.language.false.mkb",
 			"foreground": "var(mc4)",
 		},
 		{
-			"scope": "source.mkb.booleans2",
+			"scope": "constant.language.true.mkb",
 			"foreground": "var(mc2)",
 		},
 		{
-			"scope": "source.mkb.binds",
+			"scope": "keyword.control.import",
 			"foreground": "var(mc1)",
+		},
+		{
+			"scope": "invalid.mkb",
+			"foreground": "var(mc4)",
 		},
 	],
 }

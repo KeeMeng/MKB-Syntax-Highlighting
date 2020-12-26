@@ -17,8 +17,6 @@ def plugin_loaded():
 def config(key):
     if settings.get(key):
         return settings.get(key)
-    else:
-        print("Error loading setting")
 
 def viewlines():
     filelines = sublime.active_window().active_view().substr(sublime.Region(0, len(sublime.active_window().active_view()))).split("\n")
@@ -376,7 +374,7 @@ class mkbdebug(sublime_plugin.TextCommand):
                 print(" All variables are enclosed")
             if not quotserror:
                 print(" All strings are enclosed")
-            self.view.add_regions("mkblinter", regionlist, "source.mkb.booleans", "dot", sublime.DRAW_NO_FILL)
+            self.view.add_regions("mkblinter", regionlist, "invalid.mkb", "dot", sublime.DRAW_NO_FILL)
             if bracketerror or bracketerror2 or varerror or quotserror:
                 print("\n You should run the linter\n again after fixing errors")
             print("----------------------------")
@@ -388,7 +386,7 @@ class mkbdebug(sublime_plugin.TextCommand):
 # 1000+ Lines of auto complete below!!
 class mkbcompletions(sublime_plugin.EventListener):
     def on_query_completions(self, view, prefix, locations):
-        if view.match_selector(view.line(locations[0]).a, "source.mkb.comments"):
+        if view.match_selector(view.line(locations[0]).a, "comment.mkb"):
             return ([],sublime.INHIBIT_EXPLICIT_COMPLETIONS)
         elif view.match_selector(0, "source.mkb") and config("autocomplete_caps"):
             return ([
@@ -477,6 +475,7 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["COUNTITEM\tAmount of items in your current inventory","#${1:count} = COUNTITEM(${2:<item>}:${3:[damage]})"],
                 ["COUNTITEMINV\tAmount of items in your survival inventory","#${1:count} = COUNTITEMINV(${2:<item>}:${3:[damage]})"],
                 ["CREATECONTROL\tCreates a control on the specified screen at row and column position","${2:[&${1:controlname}] = }CREATECONTROL(${3:<screenname|layouts|types>},${4:[element type]},${5:[row]},${6:[column]});"],
+                ["TIMESTAMPTODATE\tFormat a timestamp in seconds","&${1:date} = TIMESTAMPTODATE(${2:<timestamp>},${3:[in milliseconds|date format]},${4:[in milliseconds]});"],
                 ["DELETECONTROL\tDeletes a control by name from any gui","DELETECONTROL(${1:<controlname>});"],
                 ["NOTIFY\tcreates a system tray","NOTIFY(${1:[title]},${2:[message]});"],
                 ["GETSLOTITEMEXT\t+ argument for the itemname of item","${2:&${1:[itemid]} = }GETSLOTITEMEXT(#${3:<slotid>},&${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[itemname]});"],
