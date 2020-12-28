@@ -8,7 +8,7 @@
 
 ## Introduction:
 
-This package was made to help coding for Macro Keybind Mod easier. To help you, I made auto complete to suggest possible actions and variable to you, and if you hover over the keywords, you can see a description and example of the command, which was taken from https://beta.mkb.gorlem.ml/api/docs. (Thanks Gorlem!) It also has an indenter made by Federal, with a fancy indent function too! After making your code, you can also use a linter to find possible bugs, such as missing brackets. To personalize this package, go to the MKB menu at the top of the app and modify the `Package Settings`. 
+This package was made to help coding for Macro Keybind Mod easier. To help you, I made auto complete to suggest possible actions and variable to you, and if you hover over the keywords, you can see a description and example of the command, which was taken from https://beta.mkb.gorlem.ml/api/docs. (Thanks Gorlem!) It also has an indenter made by Federal, with a fancy indent function too! After making your code, you can also use a linter to find possible bugs, such as missing brackets. To personalize this package, go to the Edit > MKB menu at the top of Sublime Text 3, and modify `Package Settings`. 
 
 Brief description of the files in the package include: 
 | File                           | Description:                                                                                 |
@@ -22,32 +22,38 @@ Brief description of the files in the package include:
 | **MKB.sublime-settings**       | JSON file for the settings to customize the package.                                         |
 | **Miscellaneous.tmPreferences**| Helps with toggling comments.                                                                |
 | **Default.sublime-keymapp**    | Auto %% when typing one %                                                                    |
-| **LICENSE**                    | A simple MIT license                                                                         |
 | **MKBdocs.json**               | Gorlem's wiki API used for popup hints.                                                      |
 
 ---
+
+## Installing using Package Control
+
+**Automatic download:** 
+**1)** If you haven't, install [Package Control](http://www.sublimelinter.com/en/stable/installation.html). 
+**2)** Open Package Control: Install Package in the command palette, and search for MKB. Install it, and you might need to restart sublime. 
+**3)** Add the custom colors from **MKB.sublime-color-scheme**, into `Tools > Packages > Package Development > Edit Current Color Scheme...` Paste the entire json contents into the **Right Side** of the color scheme, the top of the file should say "THEME.sublime-color-scheme — USER". 
+**4)** Change the language from `Plain Text` to `MKB` as your language. You can do this by selecting it at the bottom right corner menu. Sometimes you need to show your status bar (`View/Show Status Bar`)
+**5)** Go to the top menu, and click `MKB/Package Settings`, and personalize the package!
+**6)** Select MKB as you language by clicking the bottom right box (If it doesn't show go `view > show status bar`)
+**7)** Enjoy! If there's anything wrong ask in #•help
+
+---
+
 ## Manual installation
 
 **1)** Install Sublime Text
 **2)** Install Package Dev
 **3)** Download/clone the repository from https://github.com/KeeMeng/MKB-Syntax-Highlighting
-**4)** Copy and paste everything from "MKB.color-scheme" into `tools > packages > package development > edit current colour scheme`
-**5)** Put all the files from the repository into `Sublime Text 3/Packages/MKB`, you have to make a new folder called MKB
-**6)** Select MKB as you language by clicking the bottom right box (If it doesn't show go `view > show status bar`)
-**7)** Enjoy! If there's anything wrong ask in #•help
+**4)** Add the custom colors from **MKB.sublime-color-scheme**, into `Tools > Packages > Package Development > Edit Current Color Scheme...` Paste the entire json contents into the **Right Side** of the color scheme, the top of the file should say "THEME.sublime-color-scheme — USER". 
+**5)** Put all the files from the repository into a MKB folder
+Path for Mac: ```/Users/NAME/Library/Application Support/Sublime Text 3/Packages/MKB```
+Path for windows: ```C:\Users\%USERNAME%\AppData\Roaming\Sublime Text 3\Packages\[MKB Folder here]```
+**6)** Change the language from `Plain Text` to `MKB` as your language. You can do this by selecting it at the bottom right corner menu. Sometimes you need to show your status bar (`View/Show Status Bar`)
+**7)** Go to the top menu, and click `MKB/Package Settings`, and personalize the package!
+**8)** Select MKB as you language by clicking the bottom right box (If it doesn't show go `view > show status bar`)
+**9)** Enjoy! If there's anything wrong ask in #•help
 
 You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to do this if you have any problems. 
-
----
-
-## Installing using Package Control (NOT WORKING YET)
-
-**Automatic download:** 
-1. If you haven't, install [Package Control](http://www.sublimelinter.com/en/stable/installation.html). 
-2. Open Package Control: Install Package in the command palette, and search for MKB. Install it, and you might need to restart sublime. 
-3. Then, you need to add the custom colors from **MKB.sublime-color-scheme**, and to do that you go to. `Tools > Packages > Package Development > Edit Current Color Scheme...` Paste the entire json contents into the **Right Side** of the color scheme, the top of the file should say "THEME.sublime-color-scheme — USER". 4. Change the language from `Plain Text` to `MKB` as your language. You can do this by selecting it at the bottom right corner menu. Sometimes you need to show your status bar (`View/Show Status Bar`)
-5. Go to the top menu, and click `MKB/Package Settings`, and personalize the package!
-6. If anything goes wrong or your have questions, you can always ask me. 
 
 ---
 
@@ -58,8 +64,7 @@ You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to d
 - Or press CMD/CTRL + Space to see a list of the possible auto completions. 
 - To indent your code, you can mess with the settings (Indent when you save, or prompt before it indents). Or, if you want to manually indent, right click the screen and press `MKB indent`.
 - By default, when you hover over a keyword, you will see a popup with information. To manually show the hint, you can press `MKB Hint` when you right click. Scroll down for examples, or click "Open Wiki" to open the wiki page on your browser (Can be specified).
-- Right click the screen for some actions
-- Click the MKB at the top of the app to see some settings/actions
+- Right click anywhere for some actions
 
 
 ---
