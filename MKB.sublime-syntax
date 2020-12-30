@@ -27,8 +27,7 @@ contexts:
     - match: '(?<!\\)\"'
       push: strings
     - match: '(&|#)?((<[\w@#&\[\]\|=\. /_-]*?>)|(\[[a-zA-Z@#&\[\]\|=\. /_-]*?\])):?'
-      scope:
-        keyword.other.mkb
+      scope: keyword.other.mkb
 
     - include: actions
     - include: binds
