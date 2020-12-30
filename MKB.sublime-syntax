@@ -26,11 +26,9 @@ contexts:
     # Include other contexts from here (or specify them directly).
     - match: '(?<!\\)\"'
       push: strings
-    - match: '(&|#)?((<[\w@#&\[\]\|=\. /_-]*?>)|(\[(\d)|([a-zA-Z@#&\[\]\|=\. /_-]*?)\])):?'
+    - match: '(&|#)?((<[\w@#&\[\]\|=\. /_-]*?>)|(\[[a-zA-Z@#&\[\]\|=\. /_-]*?\])):?'
       scope:
         keyword.other.mkb
-      captures:
-        5: constant.numeric.mkb
 
     - include: actions
     - include: binds
