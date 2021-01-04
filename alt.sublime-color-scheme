@@ -36,7 +36,7 @@
 		},
 		{
 			"scope": "string.mkb",
-			"foreground": "var(mca)",
+			"foreground": "#ffae1a",
 		},
 		{
 			"scope": "keyword.other.mkb",
@@ -52,7 +52,7 @@
 		},
 		{
 			"scope": "variable.mkb",
-			"foreground": "var(mcb)",
+			"foreground": "var(mcc)",
 		},
 		{
 			"scope": "keyword.operator.word.mkb",
@@ -60,11 +60,11 @@
 		},
 		{
 			"scope": "punctuation.definition.keyword.mkb",
-			"foreground": "var(mcc)",
+			"foreground": "var(mcf)",
 		},
 		{
 			"scope": "keyword.operator.mkb",
-			"foreground": "var(mce)",
+			"foreground": "var(mcf)",
 		},
 		{
 			"scope": "constant.language.false.mkb",
