@@ -91,21 +91,25 @@ class lineindenter(sublime_plugin.TextCommand):
 class Indenter:
 
     def __init__(self, code): # Pass the code its self intead of lines
-        self.lines = code.split(";")
+        splitted = code.split(";")
+        if splitted[-2] != "":
+            self.lines = code.split(";")
+        else:
+            self.lines = code.split(";")[:-1]
         self.stack = [] # It stores the serching endings
         self.indented = []
         self.level = 0
         self.blocks = {
-            'IF':           ['ELSEIF', 'ELSE', 'ENDIF'],
-            'ELSEIF':       ['ELSEIF', 'ELSE', 'ENDIF'],
+            'IF':           ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
+            'ELSEIF':       ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
             'ELSE':         ['ENDIF'],
-            'IFMATCHES':    ['ELSEIF', 'ELSE', 'ENDIF'],
-            'IFBEGINSWITH': ['ELSEIF', 'ELSE', 'ENDIF'],
-            'IFENDSWITH':   ['ELSEIF', 'ELSE', 'ENDIF'],
-            'IFCONTAINS':   ['ELSEIF', 'ELSE', 'ENDIF'],
-            'IFFILEEXISTS': ['ELSEIF', 'ELSE', 'ENDIF'],
-            'IFINVISFULL':  ['ELSEIF', 'ELSE', 'ENDIF'],
-            'IFENCHANTED':  ['ELSEIF', 'ELSE', 'ENDIF'],
+            'IFMATCHES':    ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
+            'IFBEGINSWITH': ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
+            'IFENDSWITH':   ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
+            'IFCONTAINS':   ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
+            'IFFILEEXISTS': ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
+            'IFINVISFULL':  ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
+            'IFENCHANTED':  ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
             'FOR':          ['NEXT'],
             'FOREACH':      ['NEXT'],
             'DO':           ['UNTIL','WHILE','LOOP'],
@@ -164,7 +168,7 @@ class Indenter:
             print(errorstring)
         elif not errorbool and debug:
             print(" No stack errors")
-        return (self.indented,self.lintlines)
+        return (self.indented, self.lintlines)
         # return '\n'.join(self.indented).replace("$${;","$${").replace("}$$;","}$$") # List to text + some adjustments
 
 path = os.path.join(os.path.dirname(os.path.realpath(__file__)),"MKBdocs.json")
@@ -184,9 +188,9 @@ class hoverinfo(sublime_plugin.ViewEventListener):
             hoverword = self.view.substr(self.view.word(point))
             data = load(hoverword)
             if data:
-                hint.showpopup(self, data, point, False)
+                mkbhint.showpopup(self, data, point, False)
             else:
-                hint.showpopup(self, data, point, False)
+                mkbhint.showpopup(self, data, point, False)
 
 class mkbvariables(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -206,7 +210,7 @@ class mkbvariables(sublime_plugin.TextCommand):
         if index != -1:
             sublime.active_window().run_command('insert', {'characters': var[index]})
 
-class hint(sublime_plugin.TextCommand):
+class mkbhint(sublime_plugin.TextCommand):
     def run(self, edit, event=None):
         if self.view.match_selector(0, "source.mkb"):
             if event:
@@ -383,6 +387,91 @@ class mkbdebug(sublime_plugin.TextCommand):
             sublime.active_window().run_command("show_panel", {"panel": "console", "toggle": True})
 
 
+
+class mkbcase1(sublime_plugin.TextCommand):
+    def run(self, edit):
+        if self.view.match_selector(0, "source.mkb"):
+            text = viewlines().split(";")
+            count = 0
+            while count < len(text):
+                matches = re.findall("^[\t ]*(\/\/)?([a-zA-Z]+)(\(|;|$)", text[count])
+                if matches != []:
+                    text[count] = text[count].replace(matches[0][1], matches[0][1].upper())
+                count += 1
+            self.view.replace(edit, sublime.Region(0, len(self.view)), '\n'.join(text[:-1]));
+            mkbindent.openfile(self, True)
+
+
+class mkbcase2(sublime_plugin.TextCommand):
+    def run(self, edit):
+        if self.view.match_selector(0, "source.mkb"):
+            text = viewlines().split(";")
+            count = 0
+            while count < len(text):
+                matches = re.findall("^[\t ]*(\/\/)?([a-zA-Z]+)(\(|;|$)", text[count])
+                if matches != []:
+                    text[count] = text[count].replace(matches[0][1], matches[0][1].lower())
+                count += 1
+            self.view.replace(edit, sublime.Region(0, len(self.view)), '\n'.join(text[:-1]));
+            mkbindent.openfile(self, True)
+
+
+class mkbcase3(sublime_plugin.TextCommand):
+    def run(self, edit):
+        if self.view.match_selector(0, "source.mkb"):
+            text = viewlines().split(";")
+            count = 0
+            while count < len(text):
+                matches = re.findall("^[\t ]*(\/\/)?([a-zA-Z]+)(\(|;|$)", text[count])
+                if matches != []:
+                    text[count] = text[count].replace(matches[0][1], matches[0][1].capitalize())
+                count += 1
+            self.view.replace(edit, sublime.Region(0, len(self.view)), '\n'.join(text[:-1]));
+            mkbindent.openfile(self, True)
+
+
+class mkbdeco(sublime_plugin.TextCommand):
+    def run(self, edit):
+        if self.view.match_selector(0, "source.mkb"):
+
+            text = viewlines().split(";")
+            count = 0
+            while count < len(text):
+                matches = re.findall("^[\t ]*(\/\/)?([a-zA-Z]+)(\(|;|$)", text[count])
+                if matches != []:
+                    text[count] = text[count].replace(matches[0][1], matches[0][1].lower())
+                count += 1
+
+            count = 0
+            while count < len(text):
+                if text[count] != "" and text[count] != "$${" and text[count] != "}$$":
+                    text[count] += ";"
+                count += 1
+            self.view.replace(edit, sublime.Region(0, len(self.view)), '\n'.join(text[:-1]));
+
+
+            regions = []
+            filelines = sublime.active_window().active_view().substr(sublime.Region(0, len(sublime.active_window().active_view()))).split("\n")
+            string = ""
+            for l in filelines:
+                if l.endswith(";"):
+                    string += l
+                else:
+                    string += l + ";"
+            count = 0
+            for match in re.finditer("\$\$\{|;+|(<|>|==|!=|>=|<=|&&|\|\||\+|\-|\*|\/|=|:=')", string):
+                if match.group() == "$${":
+                    count -= 1
+                elif match.group().startswith(";"):
+                    count += 1
+                else:
+                    # print(match.span())
+                    regions.append(sublime.Region(match.start()+count, match.end()+count))
+                    self.view.add_regions("mkblinter", regions, "invalid.mkb", "dot", sublime.DRAW_NO_FILL)
+
+            # mkbindent.openfile(self, True)
+
+
 # 1000+ Lines of auto complete below!!
 class mkbcompletions(sublime_plugin.EventListener):
     def on_query_completions(self, view, prefix, locations):
@@ -422,8 +511,9 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["DO\t…while","DO(${1:[count]});\n    $2\nWHILE;$3"],
                 ["DO\t…until","DO(${1:[count]});\n    $2\nUNTIL;$3"],
 
-                ["ELSE\tThe actions following this action will only be executed if no if-clause before evaluated to true","ELSE;\n    $1"],
-                ["ELSEIF\tThe actions following this action will only be executed when the condition evaluates to true and no if-clause before evaluated to true","ELSEIF(${1:<condition>});\n    $2"],
+                ["ELSE\tExecutes if no if-clause before evaluated to true","ELSE;\n    $1"],
+                ["ELSEIF\tExecutes when the condition evaluates to true and no if-clause before evaluated to true","ELSEIF(${1:<condition>});\n    $2"],
+                ["ELSEIFMATCHES\tExecutes when the <subject> matches the <pattern>","ELSEIFMATCHES(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n    $5"]
                 ["ENDIF\tEnds an if-clause","ENDIF;\n$1"],
 
                 ["LOOP\tCloses a do loop","LOOP;\n$1"],
@@ -476,6 +566,8 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["COUNTITEMINV\tAmount of items in your survival inventory","#${1:count} = COUNTITEMINV(${2:<item>}:${3:[damage]})"],
                 ["CREATECONTROL\tCreates a control on the specified screen at row and column position","${2:[&${1:controlname}] = }CREATECONTROL(${3:<screenname|layouts|types>},${4:[element type]},${5:[row]},${6:[column]});"],
                 ["TIMESTAMPTODATE\tFormat a timestamp in seconds","&${1:date} = TIMESTAMPTODATE(${2:<timestamp>},${3:[in milliseconds|date format]},${4:[in milliseconds]});"],
+                ["STOP\tStops macro matching regex or array","STOP(${1:[array|regex]});"]
+
                 ["DELETECONTROL\tDeletes a control by name from any gui","DELETECONTROL(${1:<controlname>});"],
                 ["NOTIFY\tcreates a system tray","NOTIFY(${1:[title]},${2:[message]});"],
                 ["GETSLOTITEMEXT\t+ argument for the itemname of item","${2:&${1:[itemid]} = }GETSLOTITEMEXT(#${3:<slotid>},&${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[itemname]});"],

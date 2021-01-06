@@ -4,7 +4,7 @@
 			{ "caption": "Indentation",
 				"command": "mkbindentation" },
 			{ "caption": "Hint",
-				"command": "hint",
+				"command": "mkbhint",
 				"args": {"event": "None"} },
 			{ "caption": "Linter",
 				"command": "mkbdebug" },
@@ -12,6 +12,21 @@
 				"command": "mkbmini" },
 			{ "caption": "Variables",
 				"command": "mkbvariables" },
+			{ "caption": "Decorate",
+            	"command": "mkbdeco",},
+			{ "caption": "Change Case",
+	            "children": [
+	            	{ "caption": "UPPERCASE",
+	            		"command": "mkbcase1",
+	            	},
+	            	{ "caption": "lowercase",
+	            		"command": "mkbcase2",
+	            	},
+	            	{ "caption": "Titlecase",
+	            		"command": "mkbcase3",
+	            	},
+	            ],
+          },
 		]
 	}
 ]

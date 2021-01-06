@@ -6,7 +6,7 @@
           { "caption": "README",
             "command": "open_file",
             "args": {
-              "file": "${packages}/MKB/README.md"
+              "file": "${packages}/MKB/README.md",
             }
           },
           { "caption": "Package Settings",
@@ -17,19 +17,35 @@
             }
           },
           { "caption": "Indent Code",
-            "command": "mkbindentation" 
+            "command": "mkbindentation",
           },
           { "caption": "Lint Code",
-            "command": "mkbdebug" 
+            "command": "mkbdebug",
           },
           { "caption": "Minifier",
-            "command": "mkbmini" 
+            "command": "mkbmini",
           },
           { "caption": "Variables",
-            "command": "mkbvariables" 
+            "command": "mkbvariables",
+          },{ "caption": "Decorate",
+            "command": "mkbdeco",
           },
+          
           { "caption": "Change Colors",
-            "command": "packagedev_edit_scheme" 
+            "command": "packagedev_edit_scheme",
+          },
+          { "caption": "Change Case",
+            "children": [
+              { "caption": "UPPERCASE",
+                "command": "mkbcase1",
+              },
+              { "caption": "lowercase",
+                "command": "mkbcase2",
+              },
+              { "caption": "Titlecase",
+                "command": "mkbcase3",
+              },
+            ],
           },
         ]
       }

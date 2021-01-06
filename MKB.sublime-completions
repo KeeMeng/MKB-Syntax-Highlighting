@@ -35,8 +35,9 @@
 		{ "trigger": "do\t…while", "contents": "do(${1:[count]});\n    $2\nwhile;$3"},
 		{ "trigger": "do\t…until", "contents": "do(${1:[count]});\n    $2\nuntil;$3"},
 
-		{ "trigger": "else\tThe actions following this action will only be executed if no if-clause before evaluated to true", "contents": "else;\n    $1"},
-		{ "trigger": "elseif\tThe actions following this action will only be executed when the condition evaluates to true and no if-clause before evaluated to true", "contents": "elseif(${1:<condition>});\n    $2"},
+		{ "trigger": "else\tExecutes if no if-clause before evaluated to true", "contents": "else;\n    $1"},
+		{ "trigger": "elseif\tExecutes when the condition evaluates to true and no if-clause before evaluated to true", "contents": "elseif(${1:<condition>});\n    $2"},
+		{ "trigger": "elseifmatches\tExecutes when the <subject> matches the <pattern>", "contents": "elseifmatches(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n    $5"},
 		{ "trigger": "endif\tEnds an if-clause", "contents": "endif;\n$1"},
 
 		{ "trigger": "loop\tCloses a do loop", "contents": "loop;\n$1"},
@@ -90,6 +91,7 @@
 		{ "trigger": "createcontrol\tCreates a control on the specified screen at row and column position", "contents": "${2:[&${1:controlname}] = }createcontrol(${3:<screenname|layouts|types>},${4:[element type]},${5:[row]},${6:[column]});"},
 		{ "trigger": "deletecontrol\tDeletes a control by name from any gui", "contents": "deletecontrol(${1:<controlname>});"},
 		{ "trigger": "timestamptodate\tFormat a timestamp in seconds", "contents": "&${1:date} = timestamptodate(${2:<timestamp>},${3:[in milliseconds|date format]},${4:[in milliseconds]});"},
+		{ "trigger": "stop\tStops macro matching regex or array", "contents": "stop(${1:[array|regex]});"},
 
 		{ "trigger": "notify\tcreates a system tray", "contents": "notify(${1:[title]},${2:[message]});"},
 		{ "trigger": "getslotitemext\t+ argument for the itemname of item", "contents": "${2:&${1:[itemid]} = }getslotitemext(#${3:<slotid>},&${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[itemname]});"},
