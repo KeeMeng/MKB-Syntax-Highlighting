@@ -30,6 +30,7 @@ Brief description of the files in the package include:
 ## Installing using Package Control
 
 **Automatic download:** 
+
 **1)** If you haven't, install [Package Control](http://www.sublimelinter.com/en/stable/installation.html). 
 
 **2)** Open Package Control: Install Package in the command palette, and search for MKB. Install it, and you might need to restart sublime. 
