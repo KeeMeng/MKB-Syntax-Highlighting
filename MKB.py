@@ -100,20 +100,24 @@ class Indenter:
         self.indented = []
         self.level = 0
         self.blocks = {
-            'IF':           ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
-            'ELSEIF':       ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
-            'ELSE':         ['ENDIF'],
-            'IFMATCHES':    ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
-            'IFBEGINSWITH': ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
-            'IFENDSWITH':   ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
-            'IFCONTAINS':   ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
-            'IFFILEEXISTS': ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
-            'IFINVISFULL':  ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
-            'IFENCHANTED':  ['ELSEIF', 'ELSEIFMATCHES', 'ELSE', 'ENDIF'],
-            'FOR':          ['NEXT'],
-            'FOREACH':      ['NEXT'],
-            'DO':           ['UNTIL','WHILE','LOOP'],
-            'UNSAFE':       ['ENDUNSAFE']
+            "IF":               ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
+            "ELSEIF":           ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
+            "ELSEIFCONTAINS":   ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
+            "ELSEIFCONTAINS":   ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
+            "ELSEIFBEGINSWITH": ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
+            "ELSEIFENDSWITH":   ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
+            "ELSE":             ["ENDIF"],
+            "IFMATCHES":        ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
+            "IFBEGINSWITH":     ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
+            "IFENDSWITH":       ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
+            "IFCONTAINS":       ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
+            "IFFILEEXISTS":     ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
+            "IFINVISFULL":      ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
+            "IFENCHANTED":      ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
+            "FOR":              ["NEXT"],
+            "FOREACH":          ["NEXT"],
+            "DO":               ["UNTIL", "WHILE", "LOOP"],
+            "UNSAFE":           ["ENDUNSAFE"]
         }
         self.openings = "IF|ELSEIF|ELSE|IFMATCHES|IFBEGINSWITH|IFENDSWITH|IFCONTAINS|IFFILEEXISTS|IFINVISFULL|IFENCHANTED|FOR|FOREACH|DO|UNSAFE"
         self.lintlines = []
@@ -146,7 +150,7 @@ class Indenter:
                 self.indent_line(l)
                 closed = True
             elif Indenter.related_command(l, self.openings) is None:
-                teststring = re.match("ELSEIF|ELSE|ENDIF|NEXT|UNTIL|WHILE|LOOP|ENDUNSAFE", line, re.IGNORECASE)
+                teststring = re.match("ELSEIF|ELSEIFMATCHES|ELSEIFCONTAINS|ELSEIFBEGINSWITH|ELSEIFENDSWITH|ELSE|ENDIF|NEXT|UNTIL|WHILE|LOOP|ENDUNSAFE", line, re.IGNORECASE)
                 if teststring is not None and debug:
                     print(" Error found on line "+str(count)+": "+line)
                     errorbool = True
@@ -171,10 +175,18 @@ class Indenter:
         return (self.indented, self.lintlines)
         # return '\n'.join(self.indented).replace("$${;","$${").replace("}$$;","}$$") # List to text + some adjustments
 
-path = os.path.join(os.path.dirname(os.path.realpath(__file__)),"MKBdocs.json")
-with open(path, "r", encoding="utf-8") as jsondocs:
-    global mkbjson
-    mkbjson = json.load(jsondocs)
+global mkbjson
+try:
+    path = os.path.join(os.path.dirname(os.path.realpath(__file__)),"MKBdocs.json")
+    with open(path, "r", encoding="utf-8") as jsondocs:
+        mkbjson = json.load(jsondocs)
+
+except:
+    print("MKBdocs being weird, falling back to web api")
+    import urllib.request
+    with urllib.request.urlopen("https://beta.mkb.gorlem.ml/api/docs") as url:
+        mkbjson = json.loads(url.read().decode())
+
 
 def load(words):
     if words.isalpha():
@@ -512,8 +524,11 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["DO\t…until","DO(${1:[count]});\n    $2\nUNTIL;$3"],
 
                 ["ELSE\tExecutes if no if-clause before evaluated to true","ELSE;\n    $1"],
-                ["ELSEIF\tExecutes when the condition evaluates to true and no if-clause before evaluated to true","ELSEIF(${1:<condition>});\n    $2"],
+                ["ELSEIF\tExecutes when the condition evaluates to true","ELSEIF(${1:<condition>});\n    $2"],
                 ["ELSEIFMATCHES\tExecutes when the <subject> matches the <pattern>","ELSEIFMATCHES(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n    $5"]
+                ["ELSEIFCONTAINS\tExecutes when the <haystack> contains the <pattern>","ELSEIFCONTAINS(${1:<haystack>},${2:<needle>});\n    $3"],
+                ["ELSEIFBEGINSWITH\tExecutes when the <haystack> begins with <pattern>","ELSEIFBEGINSWITH(${1:<haystack>},${2:<needle>});\n    $3"],
+                ["ELSEIFENDSWITH\tExecutes when the <haystack> ends with <pattern>","ELSEIFENDSWITH(${1:<haystack>},${2:<needle>});\n    $3"],
                 ["ENDIF\tEnds an if-clause","ENDIF;\n$1"],
 
                 ["LOOP\tCloses a do loop","LOOP;\n$1"],

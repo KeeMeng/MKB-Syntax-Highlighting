@@ -1,0 +1,86 @@
+{
+	// By Numericly
+	"variables": 
+	{
+		"mc0": "#000000",
+        "mc1": "#607d8b",
+        "mc2": "#607d8b",
+        "mc3": "#00AAAA",
+        "mc4": "#607d8b",
+        "mc5": "#00BCD4",
+        "mc6": "#FFAA00",
+        "mc7": "#616161",
+        "mc8": "#555555",
+        "mc9": "#FD971F",
+        "mca": "#FFD54F",
+        "mcb": "#259B24",
+        "mcc": "#8bc34a",
+        "mcd": "#FF5722",
+        "mce": "#ff5722",
+        "mcf": "#26a69a"
+	},
+	"rules": 
+	[
+		//Minecraft Macro/Keybind Mod
+		{
+			"scope": "source.mkb",
+			"foreground": "var(mcf)",
+		},
+		{
+			"scope": "comment.mkb",
+			"foreground": "var(mc7)",
+		},
+		{
+			"scope": "variable.parameter.mkb",
+			"foreground": "var(mc6)",
+		},
+		{
+			"scope": "string.mkb",
+			"foreground": "var(mca)",
+		},
+		{
+			"scope": "keyword.other.mkb",
+			"foreground": "var(mcd)",
+		},
+		{
+			"scope": "constant.numeric.mkb",
+			"foreground": "var(mc9)",
+		},
+		{
+			"scope": "keyword.control.mkb",
+			"foreground": "var(mc5)",
+		},
+		{
+			"scope": "variable.mkb",
+			"foreground": "var(mcc)",
+		},
+		{
+			"scope": "keyword.operator.word.mkb",
+			"foreground": "var(mc3)",
+		},
+		{
+			"scope": "punctuation.definition.keyword.mkb",
+			"foreground": "var(mcf)",
+		},
+		{
+			"scope": "keyword.operator.mkb",
+			"foreground": "var(mcf)",
+		},
+		{
+			"scope": "constant.language.false.mkb",
+			"foreground": "var(mc4)",
+		},
+		{
+			"scope": "constant.language.true.mkb",
+			"foreground": "var(mc2)",
+		},
+		{
+			"scope": "keyword.control.import.mkb",
+			"foreground": "var(mc1)",
+		},
+		{
+			"scope": "invalid.mkb",
+			"foreground": "var(mc4)",
+		},
+	],
+}

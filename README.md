@@ -95,6 +95,25 @@ You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to d
 
 ---
 
+## Settings: 
+
+- Whether or not for the auto complete to be in uppercase
+- What character to use as the whitespace for the buffer
+- Whether or not to end lines with semicolon ;
+- Whether or not to indent script between `$${` and `}$$`
+- Whether or not to automatically indent after saving the file
+- Whether or not to prompt a message before indenting, only if enable_indent is on
+- Whether or not to use fancy indenting. Put "null" for normal indenting, or put a number representing the delay in ms
+- Whether or not to show a message telling you indenting finished
+- Whether or not to show hints automatically
+- Number of lines to show in the pop up, put a big number to show everything
+- Whether or not to show a message after linting code
+- Whether or not to show a message after minifying code
+- Which browser to use to open the wiki
+
+
+---
+
 ## Extra: 
 
 **MKBdocs.css**: Is a css file to make https://beta.mkb.gorlem.ml/docs/actions have a dark mode. You can use a chrome extension called stylus to change the css. 
