@@ -3576,7 +3576,7 @@
         "extendedName":"FILTER",
         "category":"Mod related",
         "permission":null,
-        "description":"Indicate that this chat meesage should be filtered and terminate",
+        "description":"Indicate that this chat message should be filtered and terminate",
         "example":null,
         "sinceVersion":null,
         "related":null,

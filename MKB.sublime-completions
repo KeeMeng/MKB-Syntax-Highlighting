@@ -135,6 +135,13 @@
 		{ "trigger": "actions\tIterates over all actions", "contents": "actions"},
 		{ "trigger": "events\tIterates over all events", "contents": "events"},
 		{ "trigger": "iterators\tIterates over all iterators", "contents": "iterators"},
+		{ "trigger": "inventory\tIterates over your inventory", "contents": "inventory"},
+
+		{ "trigger": "SLOTINDEX\t(inventory iterator)", "contents": "%SLOTINDEX%"},
+		{ "trigger": "SLOTID\t(inventory iterator)", "contents": "%SLOTID%"},
+		{ "trigger": "SLOTSTACKSIZE\t(inventory iterator)", "contents": "%SLOTSTACKSIZE%"},
+		{ "trigger": "SLOTDATAVAR\t(inventory iterator)", "contents": "%SLOTDATAVAR%"},
+		{ "trigger": "SLOTTAG\t(inventory iterator)", "contents": "%SLOTTAG%"},
 
 		{ "trigger": "PLAYERUUID\t(players iterator) UUID of the player with dashes", "contents": "%PLAYERUUID%"},
 		{ "trigger": "PLAYERDISPLAYNAME\t(players iterator) Displayname of the player", "contents": "%PLAYERDISPLAYNAME%"},
@@ -173,6 +180,7 @@
 		{ "trigger": "MODULEJSON\tReturns true if the module is installed", "contents": "%MODULEJSON%"},
 		{ "trigger": "MODULESIGNTEXT\tReturns true if the module is installed", "contents": "%MODULESIGNTEXT%"},
 		{ "trigger": "MODULECLIPBOARD\tReturns true if the module is installed", "contents": "%MODULECLIPBOARD%"},
+		{ "trigger": "MOUDLEAEI\tReturns true if the module is installed", "contents": "%MOUDLEAEI%"},
 		{ "trigger": "ACTIONNAME\t(actions iterator) Action name", "contents": "%ACTIONNAME%"},
 		{ "trigger": "ACTIONUSAGE\t(actions iterator) Action usage", "contents": "%ACTIONUSAGE%"},
 		{ "trigger": "ACTIONRETURN\t(actions iterator) Action return", "contents": "%ACTIONRETURN%"},
@@ -299,6 +307,9 @@
 		{ "trigger": "ENTITYHELMETDAMAGE\t(entities iterator) Damage of the helmet item", "contents": "%ENTITYHELMETDAMAGE%"},
 		{ "trigger": "ENTITYHELMETCOUNT\t(entities iterator) Amount of the helmet item", "contents": "%ENTITYHELMETCOUNT%"},
 		{ "trigger": "ENTITYHELMETENCHANTMENTS\t(entities iterator) Enchantments of the helmet item", "contents": "%ENTITYHELMETENCHANTMENTS%"},
+		{ "trigger": "EHITX\tX value of entity your're looking at or 0 if not looking at an entity", "contents": "%EHITX%"},
+		{ "trigger": "EHITY\tY value of entity your're looking at or 0 if not looking at an entity", "contents": "%EHITY%"},
+		{ "trigger": "EHITZ\tZ value of entity your're looking at or 0 if not looking at an entity", "contents": "%EHITZ%"},
 
 		{ "trigger": "getdensity\tSearches for sugarcane in the given direction", "contents": "getdensity(${1:[N/E/S/W]},#${2:<limit_search>},&${3:<initial_position>},#${4:<blocks_searched>},#${5:<sugarcane_found>});"},
 		{ "trigger": "getitemstacksize\tSearches the inventory, returns the stacksize", "contents": "#${1:stacksize} = getitemstacksize(&${2:<item_name>},#${3:[limit_search]});"},
@@ -338,6 +349,10 @@
 		{ "trigger": "selend\tSets pos2 of selection", "contents": "selend(${1:<x>},${2:<y>},${3:<z>});"},
 		{ "trigger": "selclear\tClears selections", "contents": "selclear();"},
 		{ "trigger": "selreplace\tReplace specified block with replacement block", "contents": "selreplace(${1:<blocktoreplace>},${2:<replacementblock>});"},
+
+		{ "trigger": "getiteminfo\tGets information about the specified slot", "contents": "getiteminfo(${1:[slot]},&${2:<idvar>},#${3:<stacksize>},#${4:<datavar>},&${5:<display>},&${6:<lore>});"},
+		{ "trigger": "getguiname\tGets the display name of the current GUI", "contents": "getguiname(&${1:[name]});"},
+		{ "trigger": "invfull\tReturns empty or full in the string defined", "contents": "invfull(&${1:[string}]);"},
 
 		{ "trigger": "MODULEBARITONE\t(baritone module)", "contents": "%MODULEBARITONE%"},
 		{ "trigger": "BARITONE\t(baritone module)", "contents": "%BARITONE%"},

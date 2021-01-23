@@ -1,23 +1,23 @@
 {
-	// By Discord
+	// By Iceshades
 	"variables": 
 	{
 		"mc0": "#000000",
-		"mc1": "#0000AA",
-		"mc2": "#00AA00",
-		"mc3": "#00AAAA",
-		"mc4": "#AA0000",
-		"mc5": "#AA00AA",
-		"mc6": "#FFAA00",
-		"mc7": "#AAAAAA",
-		"mc8": "#555555",
-		"mc9": "#5555FF",
-		"mca": "#55FF55",
-		"mcb": "#55FFFF",
-		"mcc": "#FF5555",
-		"mcd": "#FF55FF",
-		"mce": "#FFFF55",
-		"mcf": "#FFFFFF",
+        "mc1": "#ab882c",
+        "mc2": "#00bb2d",
+        "mc3": "#de6d21",
+        "mc4": "#880000",
+        "mc5": "#436EEE",
+        "mc6": "#ffb347",
+        "mc7": "#aaaaaa",
+        "mc8": "#555555",
+        "mc9": "#5fc957",
+        "mca": "#c4bb97",
+        "mcb": "#d1331f",
+        "mcc": "#00d4d4",
+        "mcd": "#db2ad5",
+        "mce": "#ffff55",
+        "mcf": "#FFFFFF",
 	},
 	"globals":
     {
@@ -42,7 +42,7 @@
 		},
 		{
 			"scope": "string.mkb",
-			"foreground": "#ffae1a",
+			"foreground": "var(mca)",
 		},
 		{
 			"scope": "keyword.other.mkb",

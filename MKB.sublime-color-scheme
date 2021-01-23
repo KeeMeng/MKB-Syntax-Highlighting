@@ -17,8 +17,14 @@
 		"mcc": "#FF5555",
 		"mcd": "#FF55FF",
 		"mce": "#FFFF55",
-		"mcf": "#FFFFFF"
+		"mcf": "#FFFFFF",
 	},
+	"globals":
+    {
+        "background": "#000000",
+        "foreground": "#FFFFFF",
+        "line_highlight": "#333333",
+    },
 	"rules": 
 	[
 		//Minecraft Macro/Keybind Mod
@@ -80,7 +86,7 @@
 		},
 		{
 			"scope": "invalid.mkb",
-			"foreground": "var(mc4)",
+			"foreground": "#FFFFFF",
 		},
 	],
 }

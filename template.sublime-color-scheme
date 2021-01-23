@@ -1,23 +1,23 @@
 {
-	// By Discord
+	// Template if you want to make a color scheme
 	"variables": 
 	{
-		"mc0": "#000000",
-		"mc1": "#0000AA",
-		"mc2": "#00AA00",
-		"mc3": "#00AAAA",
-		"mc4": "#AA0000",
-		"mc5": "#AA00AA",
-		"mc6": "#FFAA00",
-		"mc7": "#AAAAAA",
-		"mc8": "#555555",
-		"mc9": "#5555FF",
-		"mca": "#55FF55",
-		"mcb": "#55FFFF",
-		"mcc": "#FF5555",
-		"mcd": "#FF55FF",
-		"mce": "#FFFF55",
-		"mcf": "#FFFFFF",
+		"mc0": "#000000", //None
+        "mc1": "#0000AA", //keybinds
+        "mc2": "#00AA00", //True
+        "mc3": "#00AAAA", //Iterators
+        "mc4": "#AA0000", //False
+        "mc5": "#AA00AA", //MKB Actions
+        "mc6": "#FFAA00", //Paramstring in prompt
+        "mc7": "#AAAAAA", //Comments
+        "mc8": "#555555", //None
+        "mc9": "#5555FF", //Numbers
+        "mca": "#55FF55", //Strings
+        "mcb": "#55FFFF", //Default Variables
+        "mcc": "#FF5555", //Variables
+        "mcd": "#FF55FF", //Symbols eg %% , ; ( ) [ ]
+        "mce": "#FFFF55", //Operators eg = < > && ||
+        "mcf": "#FFFFFF", //White for default
 	},
 	"globals":
     {
@@ -42,7 +42,7 @@
 		},
 		{
 			"scope": "string.mkb",
-			"foreground": "#ffae1a",
+			"foreground": "var(mca)",
 		},
 		{
 			"scope": "keyword.other.mkb",

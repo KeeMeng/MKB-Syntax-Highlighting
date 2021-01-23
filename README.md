@@ -12,18 +12,21 @@ https://packagecontrol.io/packages/MKB
 This package was made to help coding for Macro Keybind Mod easier. To help you, I made auto complete to suggest possible actions and variable to you, and if you hover over the keywords, you can see a description and example of the command, which was taken from https://beta.mkb.gorlem.ml/api/docs. (Thanks Gorlem!) It also has an indenter made by Federal, with a fancy indent function too! After making your code, you can also use a linter to find possible bugs, such as missing brackets. To personalize this package, go to the Edit > MKB menu at the top of Sublime Text 3, and modify `Package Settings`. 
 
 Brief description of the files in the package include: 
-| File                            | Description                                                                                   |
-|---------------------------------|-----------------------------------------------------------------------------------------------|
-| **MKB.py**                      | Is a Python plugin file, which controls all the popups, autocompletes, indenting, and linter. |
-| **MKB.sublime-color-scheme**    | Is a json file for the custom colors of the syntax highlighter.                               |
-| **MKB.sublime-completions**     | Is a JSON file, containing specific "triggers", which will activate the auto complete.        |
-| **MKB.sublime-syntax**          | Is a YAML file, with many regexes and assigning scopes to the text to make them colorful.     |
-| **Main.sublime-menu**           | JSON file for the menu at the top.                                                            |
-| **Context.sublime-menu**        | JSON file for the menu when you right click the screen.                                       |
-| **MKB.sublime-settings**        | JSON file for the settings to customize the package.                                          |
-| **Miscellaneous.tmPreferences** | Helps with toggling comments.                                                                 |
-| **Default.sublime-keymapp**     | Auto %% when typing one %.                                                                    |
-| **MKBdocs.json**                | Gorlem's wiki API used for popup hints.                                                       |
+```
+File                          | Description
+MKB.py                        | Is a Python plugin file, which controls all the popups, autocompletes, indenting, and linter.
+MKBdocs.css                   | CSS for dark mode on wiki
+MKBdocs.json                  | Gorlem's wiki API used for popup hints.
+Main.sublime-menu             | JSON file for the menu at the top.
+MKB.sublime-syntax            | Is a YAML file, with many regexes and assigning scopes to the text to make them colorful.
+Context.sublime-menu          | JSON file for the menu when you right click the screen.
+MKB.sublime-settings          | JSON file for the settings to customize the package.
+Default.sublime-keymap        | Auto %% when typing one %. 
+MKB.sublime-completions       | Is a JSON file, containing specific "triggers", which will activate the auto complete.
+MKB.sublime-color-scheme      | Is a json file for the custom colors of the syntax highlighter.
+Miscellaneous.tmPreferences   | Helps with toggling comments.
+template.sublime-color-scheme | Template to make your own color scheme (You can send it to me too)
+```
 
 ---
 
@@ -110,7 +113,6 @@ You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to d
 - Whether or not to show a message after linting code
 - Whether or not to show a message after minifying code
 - Which browser to use to open the wiki
-
 
 ---
 

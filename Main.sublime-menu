@@ -27,7 +27,7 @@
           },
           { "caption": "Variables",
             "command": "mkbvariables",
-          },{ "caption": "Decorate",
+          },{ "caption": "Debug",
             "command": "mkbdeco",
           },
           
