@@ -100,7 +100,7 @@ contexts:
         3: constant.language.false.mkb
 
   comments:
-    - match: '((^|(;))(\s*\/\/.*;?))|((?<!;)(\/\/.*))'
+    - match: '((^|(;))(\s*\/\/.*;?))|((?<!;)(\/\/[^\"\);]*$))'
       captures:
         3: keyword.other.mkb
         4: comment.mkb
