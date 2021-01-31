@@ -71,7 +71,7 @@ class lineindenter(sublime_plugin.TextCommand):
         if self.view.match_selector(0, "source.mkb"):
             count = args[1]
             if count == -1:
-                self.view.replace(edit, sublime.Region(0, len(self.view)), '\n'.join(args[0]));
+                self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(args[0]));
                 if config("message_after_indenting"):
                     sublime.message_dialog("Finished Indenting!")
             else:
@@ -90,44 +90,38 @@ class lineindenter(sublime_plugin.TextCommand):
 # Indenter by Federal
 class Indenter:
 
-    def __init__(self, code): # Pass the code its self intead of lines
+    def __init__(self, code): # Pass the code its self instead of lines
         splitted = code.split(";")
         if splitted[-2] != "":
             self.lines = code.split(";")
         else:
             self.lines = code.split(";")[:-1]
-        self.stack = [] # It stores the serching endings
+        self.stack = [] # It stores the searching endings
         self.indented = []
         self.level = 0
         self.blocks = {
-            "IF":               ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
-            "IFBEGINSWITH":     ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
-            "IFENDSWITH":       ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
-            "IFCONTAINS":       ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
-            "IFFILEEXISTS":     ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
-            "IFINVISFULL":      ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
-            "IFENCHANTED":      ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
-            "IFMATCHES":        ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
-            "ELSEIF":           ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
-            "ELSEIFCONTAINS":   ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
-            "ELSEIFCONTAINS":   ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
-            "ELSEIFBEGINSWITH": ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
-            "ELSEIFENDSWITH":   ["ELSEIF", "ELSEIFMATCHES", "ELSEIFCONTAINS", "ELSEIFBEGINSWITH", "ELSEIFENDSWITH", "ELSE", "ENDIF"],
-            "ELSE":             ["ENDIF"],
-            "FOR":              ["NEXT"],
-            "FOREACH":          ["NEXT"],
-            "DO":               ["UNTIL", "WHILE", "LOOP"],
-            "UNSAFE":           ["ENDUNSAFE"]
+            "if":       ["else", "endif"],
+            "elseif":   ["else", "endif"],
+            "else":     ["endif"],
+            "for":      ["next"],
+            "foreach":  ["next"],
+            "do":       ["until", "while", "loop"],
+            "unsafe":   ["endunsafe"]
         }
-        self.openings = "IF|ELSEIF|ELSE|IFMATCHES|IFBEGINSWITH|IFENDSWITH|IFCONTAINS|IFFILEEXISTS|IFINVISFULL|IFENCHANTED|FOR|FOREACH|DO|UNSAFE"
+        self.openings = "if|elseif|else|for|do|unsafe"
         self.lintlines = []
 
         if config("extra_indent"):
-            self.blocks['$${'] = ['}\$\$']
+            self.blocks["$${"] = ["}\$\$"]
             self.openings += "|\\$\\${"
 
     def related_command(line, pattern):
-        match = re.match(r'^({})(\b|$).*'.format(pattern), line, re.IGNORECASE)
+        # match = re.match(r"^({})(\b|$).*".format(pattern), line, re.IGNORECASE)
+        match = re.match(r"^({}\w*?)".format(pattern), line, re.IGNORECASE)
+        if match:
+            print(line)
+            print(pattern)
+            print(match.groups()[0])
         return None if not match else match.groups()[0]
 
     def indent_line(self, line):
@@ -150,13 +144,13 @@ class Indenter:
                 self.indent_line(l)
                 closed = True
             elif Indenter.related_command(l, self.openings) is None:
-                teststring = re.match("ELSEIF|ELSEIFMATCHES|ELSEIFCONTAINS|ELSEIFBEGINSWITH|ELSEIFENDSWITH|ELSE|ENDIF|NEXT|UNTIL|WHILE|LOOP|ENDUNSAFE", line, re.IGNORECASE)
+                teststring = re.match("elseif|else|endif|next|until|while|loop|endunsafe", line, re.IGNORECASE)
                 if teststring is not None and debug:
                     print(" Error found on line "+str(count)+": "+line)
                     errorbool = True
             command = Indenter.related_command(l, self.openings) # Get tries to extract a block opening word
             if command is not None:
-                self.stack.append('|'.join(self.blocks[command.upper()]))
+                self.stack.append("|".join(self.blocks[command]))
                 if not closed: # If the block was already closed, there's no reason to repeat the line
                     self.indent_line(l)
                 self.level += 1 # Backwards the indentation
@@ -220,13 +214,13 @@ class mkbvariables(sublime_plugin.TextCommand):
     
     def on_done(self, index):
         if index != -1:
-            sublime.active_window().run_command('insert', {'characters': var[index]})
+            sublime.active_window().run_command("insert", {"characters": var[index]})
 
 class mkbhint(sublime_plugin.TextCommand):
     def run(self, edit, event=None):
         if self.view.match_selector(0, "source.mkb"):
             if event:
-                pos = self.view.window_to_text((event['x'],event['y']))
+                pos = self.view.window_to_text((event["x"],event["y"]))
             word = self.view.substr(self.view.word(pos))
             data = load(word)
             if data:
@@ -247,14 +241,14 @@ class mkbhint(sublime_plugin.TextCommand):
             while True:
                 match = re.search("\`([^\`]*?)\`",data["extendedName"])
                 if match:
-                    data["extendedName"] = re.sub("\`([^\`]*?)\`",'<u>{}</u>'.format(match.groups(1)[0]),data["extendedName"],1)
+                    data["extendedName"] = re.sub("\`([^\`]*?)\`","<u>{}</u>".format(match.groups(1)[0]),data["extendedName"],1)
                 else:
                     break
 
             while True:
                 match = re.search("\`([^\`]*?)\`",data["description"])
                 if match:
-                    data["description"] = re.sub("\`([^\`]*?)\`",'<u>{}</u>'.format(match.groups(1)[0]),data["description"],1)
+                    data["description"] = re.sub("\`([^\`]*?)\`","<u>{}</u>".format(match.groups(1)[0]),data["description"],1)
                 else:
                     break
 
@@ -408,7 +402,7 @@ class mkbcase1(sublime_plugin.TextCommand):
                 if matches != []:
                     text[count] = text[count].replace(matches[0][1], matches[0][1].upper())
                 count += 1
-            self.view.replace(edit, sublime.Region(0, len(self.view)), '\n'.join(text[:-1]));
+            self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(text[:-1]));
             mkbindent.openfile(self, True)
 
 
@@ -422,7 +416,7 @@ class mkbcase2(sublime_plugin.TextCommand):
                 if matches != []:
                     text[count] = text[count].replace(matches[0][1], matches[0][1].lower())
                 count += 1
-            self.view.replace(edit, sublime.Region(0, len(self.view)), '\n'.join(text[:-1]));
+            self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(text[:-1]));
             mkbindent.openfile(self, True)
 
 
@@ -436,7 +430,7 @@ class mkbcase3(sublime_plugin.TextCommand):
                 if matches != []:
                     text[count] = text[count].replace(matches[0][1], matches[0][1].capitalize())
                 count += 1
-            self.view.replace(edit, sublime.Region(0, len(self.view)), '\n'.join(text[:-1]));
+            self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(text[:-1]));
             mkbindent.openfile(self, True)
 
 
@@ -457,7 +451,7 @@ class mkbdeco(sublime_plugin.TextCommand):
                 if text[count] != "" and text[count] != "$${" and text[count] != "}$$":
                     text[count] += ";"
                 count += 1
-            self.view.replace(edit, sublime.Region(0, len(self.view)), '\n'.join(text[:-1]));
+            self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(text[:-1]));
 
 
             regions = []
@@ -469,7 +463,7 @@ class mkbdeco(sublime_plugin.TextCommand):
                 else:
                     string += l + ";"
             count = 0
-            for match in re.finditer("\$\$\{|;+|(<|>|==|!=|>=|<=|&&|\|\||\+|\-|\*|\/|=|:=')", string):
+            for match in re.finditer("\$\$\{|;+|(<|>|==|!=|>=|<=|&&|\|\||\+|\-|\*|\/|=|:=)", string):
                 if match.group() == "$${":
                     count -= 1
                 elif match.group().startswith(";"):
@@ -489,26 +483,11 @@ class mkbcompletions(sublime_plugin.EventListener):
             return ([],sublime.INHIBIT_EXPLICIT_COMPLETIONS)
         elif view.match_selector(0, "source.mkb") and config("autocomplete_caps"):
             return ([
-                ["IF\t…ENDIF", "IF(${1:<condition>});\n    $2\nENDIF;\n$3"],
-                ["IF\t…ELSEIF…ENDIF", "IF(${1:<condition>});\n    $2\nELSEIF(${3:<condition>});\n    $4\nENDIF;\n$5"],
-                ["IF\t…ELSE…ENDIF", "IF(${1:<condition>});\n    $2\nELSE;\n    $3\nENDIF;\n$4"],
-                ["IF\t…ELSEIF…ELSE…ENDIF", "IF(${1:<condition>});\n    $2\nELSEIF(${3:<condition>});\n    $4\nELSE;\n    $5\nENDIF;\n$6"],
-                ["IFBEGINSWITH\t…ENDIF", "IFBEGINSWITH(${1:<haystack>},${2:<needle>});\n    $3\nENDIF;\n$4"],
-                ["IFBEGINSWITH\t…ELSEIF…ENDIF", "IFBEGINSWITH(${1:<haystack>},${2:<needle>});\n    $3\nELSEIF(${4:<condition>});\n    $5\nENDIF;\n$6"],
-                ["IFBEGINSWITH\t…ELSE…ENDIF", "IFBEGINSWITH(${1:<haystack>},${2:<needle>});\n    $3\nELSE;\n    $4\nENDIF;\n$5"],
-                ["IFBEGINSWITH\t…ELSEIF…ELSE…ENDIF", "IFBEGINSWITH(${1:<haystack>},${2:<needle>});\n    $3\nELSEIF(${4:<condition>});\n    $5\nELSE;\n    $6\nENDIF;\n$7"],
-                ["IFCONTAINS\t…ENDIF", "IFCONTAINS(${1:<haystack>},${2:<needle>});\n    $3\nENDIF;\n$4"],
-                ["IFCONTAINS\t…ELSEIF…ENDIF", "IFCONTAINS(${1:<haystack>},${2:<needle>});\n    $3\nELSEIF(${4:<condition>});\n    $5\nENDIF;\n$6"],
-                ["IFCONTAINS\t…ELSE…ENDIF", "IFCONTAINS(${1:<haystack>},${2:<needle>});\n    $3\nELSE;\n    $4\nENDIF;\n$5"],
-                ["IFCONTAINS\t…ELSEIF…ELSE…ENDIF", "IFCONTAINS(${1:<haystack>},${2:<needle>});\n    $3\nELSEIF(${4:<condition>});\n    $5\nELSE;\n    $6\nENDIF;\n$7"],
-                ["IFENDSWITH\t…ENDIF", "IFENDSWITH(${1:<haystack>},${2:<needle>});\n    $3\nENDIF;\n$4"],
-                ["IFENDSWITH\t…ELSEIF…ENDIF", "IFENDSWITH(${1:<haystack>},${2:<needle>});\n    $3\nELSEIF(${4:<condition>});\n    $5\nENDIF;\n$6"],
-                ["IFENDSWITH\t…ELSE…ENDIF", "IFENDSWITH(${1:<haystack>},${2:<needle>});\n    $3\nELSE;\n    $4\nENDIF;\n$5"],
-                ["IFENDSWITH\t…ELSEIF…ELSE…ENDIF", "IFENDSWITH(${1:<haystack>},${2:<needle>});\n    $3\nELSEIF(${4:<condition>});\n    $5\nELSE;\n    $6\nENDIF;\n$7"],
-                ["IFMATCHES\t…ENDIF", "IFMATCHES(${1:<subject>},${2:<pattern>},${3:&[target]},${4:[group]});\n    $5\nENDIF;\n$6"],
-                ["IFMATCHES\t…ELSEIF…ENDIF", "IFMATCHES(${1:<subject>},${2:<pattern>},${3:&[target]},${4:[group]});\n    $5\nELSEIF(${6:<condition>});\n    $7\nENDIF;\n$8"],
-                ["IFMATCHES\t…ELSE…ENDIF", "IFMATCHES(${1:<subject>},${2:<pattern>},${3:&[target]},${4:[group]});\n    $5\nELSE;\n    $6\nENDIF;\n$7"],
-                ["IFMATCHES\t…ELSEIF…ELSE…ENDIF", "IFMATCHES(${1:<subject>},${2:<pattern>},${3:&[target]},${4:[group]});\n    $5\nELSEIF(${6:<condition>});\n    $7\nELSE;\n    $8\nENDIF;\n$9"],
+                ["IF\tExecuted when the <condition> evaluates to true", "IF(${1:<condition>});\n    $2\nendif;\n$3"],
+                ["IFBEGINSWITH\tExecutes when the <haystack> contains the <pattern>", "IFBEGINSWITH(${1:<haystack>},${2:<needle>});\n    $3\nendif;\n$4"],
+                ["IFCONTAINS\tExecutes when the <haystack> contains the <pattern>", "IFCONTAINS(${1:<haystack>},${2:<needle>});\n    $3\nendif;\n$4"],
+                ["IFENDSWITH\tExecutes when the <haystack> contains the <pattern>", "IFENDSWITH(${1:<haystack>},${2:<needle>});\n    $3\nendif;\n$4"],
+                ["IFMATCHES\tExecutes when the <subject> matches the <pattern>", "IFMATCHES(${1:<subject>},${2:<pattern>},${3:&[target]},${4:[group]});\n    $5\nendif;\n$6"],
 
                 ["FOR\tfor(var,start,end)", "FOR(#${1:<var>},${2:<start>},${3:<end>});\n    $4\nNEXT;\n$5"],
                 ["FOR\tfor(var = start to end)", "FOR(#${1:<var>} = ${2:<start>} to ${3:<end>});\n    $4\nNEXT;\n$5"],
@@ -518,20 +497,41 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["FOREACH\tforeach(array as content)", "FOREACH(${1:<&array>}[] as &${2:<content>});\n    $3\nNEXT;\n$4"],
                 ["FOREACH\tforeach(array as index => content)", "FOREACH(${1:<&array>}[] as #${2:<index>} => ${3:<&content>});\n    $4\nNEXT;\n$5"],
                 ["DO\t…loop", "DO(${1:[count]});\n    $2\nLOOP;$3"],
-                ["DO\t…while", "DO(${1:[count]});\n    $2\nWHILE;$3"],
-                ["DO\t…until", "DO(${1:[count]});\n    $2\nUNTIL;$3"],
+                ["DO\t…while", "DO(${1:[count]});\n    $2\nWHILE(${3:<condition>});$4"],
+                ["DO\t…until", "DO(${1:[count]});\n    $2\nUNTIL(${3:<condition>});$4"],
 
                 ["ELSE\tExecutes if no if-clause before evaluated to true", "ELSE;\n    $1"],
-                ["ELSEIF\tExecutes when the condition evaluates to true", "ELSEIF(${1:<condition>});\n    $2"],
-                ["ELSEIFMATCHES\tExecutes when the <subject> matches the <pattern>", "ELSEIFMATCHES(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n    $5"],
-                ["ELSEIFCONTAINS\tExecutes when the <haystack> contains the <pattern>", "ELSEIFCONTAINS(${1:<haystack>},${2:<needle>});\n    $3"],
-                ["ELSEIFBEGINSWITH\tExecutes when the <haystack> begins with <pattern>", "ELSEIFBEGINSWITH(${1:<haystack>},${2:<needle>});\n    $3"],
-                ["ELSEIFENDSWITH\tExecutes when the <haystack> ends with <pattern>", "ELSEIFENDSWITH(${1:<haystack>},${2:<needle>});\n    $3"],
-                ["ENDIF\tEnds an if-clause", "ENDIF;\n$1"],
-
+                ["ELSEIF", "ELSEIF(${1:<condition>});\n    $2"],
                 ["LOOP\tCloses a do loop", "LOOP;\n$1"],
                 ["WHILE\tExits do loop if condition is not met", "WHILE(${1:<condition>});\n$2"],
                 ["UNTIL\tExits do loop if condition is met", "UNTIL(${1:<condition>});\n$2"],
+
+                ["ELSEIFBEGINSWITH", "ELSEIFBEGINSWITH(${1:<haystack>},${2:<needle>});\n    $3"],
+                ["ELSEIFCONTAINS", "ELSEIFCONTAINS(${1:<haystack>},${2:<needle>});\n    $3"],
+                ["ELSEIFENCHANTED", "ELSEIFENCHANTED(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n    $6"],
+                ["ELSEIFENDSWITH", "ELSEIFENDSWITH(${1:<haystack>},${2:<needle>});\n    $3"],
+                ["ELSEIFFILEEXIST", "ELSEIFFILEEXISTS(${1:<path>},${2:[expression if file should be created if missing]});\n    $3"],
+                ["ELSEIFININV", "ELSEIFININV(${1:[mode]},${2:<items>});\n    $3"],
+                ["ELSEIFINVISFULL", "ELSEIFINVISFULL(${1:[item]});\n    $2"],
+                ["ELSEIFMATCHES>", "ELSEIFMATCHES(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n    $5"],
+
+                ["WHILEBEGINSWITH", "WHILEBEGINSWITH(${1:<haystack>},${2:<needle>});\n    $3"],
+                ["WHILECONTAINS", "WHILECONTAINS(${1:<haystack>},${2:<needle>});\n    $3"],
+                ["WHILEENCHANTED", "WHILEENCHANTED(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n    $6"],
+                ["WHILEENDSWITH", "WHILEENDSWITH(${1:<haystack>},${2:<needle>});\n    $3"],
+                ["WHILEFILEEXIST", "WHILEFILEEXISTS(${1:<path>},${2:[expression if file should be created if missing]});\n    $3"],
+                ["WHILEININV", "WHILEININV(${1:[mode]},${2:<items>});\n    $3"],
+                ["WHILEINVISFULL", "WHILEINVISFULL(${1:[item]});\n    $2"],
+                ["WHILEMATCHES>", "WHILEMATCHES(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n    $5"],
+
+                ["UNTILBEGINSWITH", "UNTILBEGINSWITH(${1:<haystack>},${2:<needle>});\n    $3"],
+                ["UNTILCONTAINS", "UNTILCONTAINS(${1:<haystack>},${2:<needle>});\n    $3"],
+                ["UNTILENCHANTED", "UNTILENCHANTED(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n    $6"],
+                ["UNTILENDSWITH", "UNTILENDSWITH(${1:<haystack>},${2:<needle>});\n    $3"],
+                ["UNTILFILEEXIST", "UNTILFILEEXISTS(${1:<path>},${2:[expression if file should be created if missing]});\n    $3"],
+                ["UNTILININV", "UNTILININV(${1:[mode]},${2:<items>});\n    $3"],
+                ["UNTILINVISFULL", "UNTILINVISFULL(${1:[item]});\n    $2"],
+                ["UNTILMATCHES>", "UNTILMATCHES(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n    $5"],
 
                 ["UNSAFE\t…endunsafe", "UNSAFE(${1:<executions>});\n    $2\nENDUNSAFE;\n$3"],
                 ["ENDUNSAFE\tEnds an active unsafe block", "ENDUNSAFE;\n$1"],
@@ -550,7 +550,7 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["CALCYAWTO\t+ y argument for pitch", "CALCYAWTO(${1:<xpos>},${2:<ypos>},${3:<zpos>},#${4:[yaw]},#${5:[dist]},#${6:[pitch]});"],
                 ["GETSLOTITEM\t+ nbt argument", "GETSLOTITEM(${1:<slotid>},&${2:<itemid>},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});"],
                 ["HTTP\tcreates a http request", "&${1:response} = HTTP(${2:[get|post|put|delete]},${3:<url>},${4:[output stream]},${5:[headers]});"],
-                ["IFFILEEXISTS\tchecks if a file exists", "IFFILEEXISTS(${1:<path>},${2:[expression if file should be created if missing]});"],
+                ["IFFILEEXISTS\tchecks if a file exists", "IFFILEEXISTS(${1:<path>},${2:[expression]});\n    $3\nendif;\n$4"],
                 ["MKDIR\tcreates directory", "MKDIR(${1:<path>});"],
                 ["WRITEFILE\twrites array to file", "WRITEFILE(${1:<path>},&${2:<writefile>}[],${3:[append]});"],
                 ["GETJSONASARRAY\treturns json as key:value array", "&${1:array}[] = GETJSONASARRAY(${2:<json>},${3:[format]});"],
@@ -569,8 +569,9 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["GETMOUSEITEM\tgets info about the held item", "${2:&${1:[id]} = }GETMOUSEITEM(&${1:[id]},#${3:[stacksizevar]},#${4:[datavar]},&${5:[nbt]});"],
                 ["GETSLOTITEMINV\tgets information about the item in the specified slot", "${2:[&${1:<id>}] = }GETSLOTITEMINV(${3:<slotid>},&${1:<id>},#${4:[stacksizevar]},#${5:[datavar]},&${6:[nbt]});"],
                 ["GETSLOTINV\tgets slot containing item in inventory", "#${1:[slot]} = GETSLOTINV(${2:<item>}:${3:[damage]},#${4:<idvar>},${5:[startfromslotid]});"],
-                ["IFINVISFULL\tchecks if inventory is full", "IFINVISFULL(${1:[item]});"],
-                ["IFENCHANTED\tchecks if the item is enchanted", "IFENCHANTED(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});"],
+                ["IFINVISFULL\tChecks if inventory is full", "IFINVISFULL(${1:[item]});\n    $2\nendif;\n$3"],
+                ["IFININV\tChecks whether itemtypes are in the inventory", "IFININV(${1:[mode]},${2:<items>});\n    $3\nendif;\n$4"],
+                ["IFENCHANTED\tChecks if the item is enchanted", "IFENCHANTED(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n    $6\nendif;\n$7"],
                 ["SETSLOTITEM\tset the contents of a hotbar slot", "SETSLOTITEM(${1:<item>}:${2:[damage]}${3:,<slot>},${4:[amount]},${5:[nbt]});"],
                 ["GETFISHHOOK\tget the x, y and z (3dp) of the bobber", "${2:#${1:[ytotal]} = }GETFISHHOOK(#${3:[x]},#${4:[xprecision]},#${5:[y]},#${6:[yprecision]},#${7:[z]},#${8:[zprecision]});"],
                 ["MAP", "#${1:result} = MAP(${2:<x>},${3:<minfrom>},${4:<maxfrom>},${5:<minto>},${6:<maxto>})"],
@@ -580,6 +581,7 @@ class mkbcompletions(sublime_plugin.EventListener):
                 ["CREATECONTROL\tCreates a control on the specified screen at row and column position", "${2:[&${1:controlname}] = }CREATECONTROL(${3:<screenname|layouts|types>},${4:[element type]},${5:[row]},${6:[column]});"],
                 ["TIMESTAMPTODATE\tFormat a timestamp in seconds", "&${1:date} = TIMESTAMPTODATE(${2:<timestamp>},${3:[in milliseconds|date format]},${4:[in milliseconds]});"],
                 ["STOP\tStops macro matching regex or array", "STOP(${1:[array|regex]});"],
+                ["KLACAIBAVERSION\tReturns the version of klacaiba (major * 100000 + minor * 1000 + patch)", "%KLACAIBAVERSION%"],
 
                 ["DELETECONTROL\tDeletes a control by name from any gui", "DELETECONTROL(${1:<controlname>});"],
                 ["NOTIFY\tcreates a system tray", "NOTIFY(${1:[title]},${2:[message]});"],
