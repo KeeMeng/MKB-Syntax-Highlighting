@@ -66,6 +66,10 @@ class mkbindent(sublime_plugin.ViewEventListener):
         else:
             self.view.run_command("lineindenter", {"args": [args[0],-1]})
 
+    def on_selection_modified(self):
+        if config("auto_linting"):
+            self.view.run_command("mkbdebug2")
+
 class lineindenter(sublime_plugin.TextCommand):
     def run(self, edit, args):
         if self.view.match_selector(0, "source.mkb"):
@@ -108,7 +112,7 @@ class Indenter:
             "do":       ["until", "while", "loop"],
             "unsafe":   ["endunsafe"]
         }
-        self.openings = "if|elseif|else|for|do|unsafe"
+        self.openings = "IF|ELSEIF|ELSE|FOR|DO|UNSAFE"
         self.lintlines = []
 
         if config("extra_indent"):
@@ -118,10 +122,6 @@ class Indenter:
     def related_command(line, pattern):
         # match = re.match(r"^({})(\b|$).*".format(pattern), line, re.IGNORECASE)
         match = re.match(r"^({}\w*?)".format(pattern), line, re.IGNORECASE)
-        if match:
-            print(line)
-            print(pattern)
-            print(match.groups()[0])
         return None if not match else match.groups()[0]
 
     def indent_line(self, line):
@@ -150,7 +150,7 @@ class Indenter:
                     errorbool = True
             command = Indenter.related_command(l, self.openings) # Get tries to extract a block opening word
             if command is not None:
-                self.stack.append("|".join(self.blocks[command]))
+                self.stack.append("|".join(self.blocks[command.lower()]))
                 if not closed: # If the block was already closed, there's no reason to repeat the line
                     self.indent_line(l)
                 self.level += 1 # Backwards the indentation
@@ -389,6 +389,60 @@ class mkbdebug(sublime_plugin.TextCommand):
             if config("message_after_linting"):
                 sublime.message_dialog("Check console for linting results")
             sublime.active_window().run_command("show_panel", {"panel": "console", "toggle": True})
+
+
+
+class mkbdebug2(sublime_plugin.TextCommand):
+    def run(self, edit):
+        if self.view.match_selector(0, "source.mkb"):
+            self.view.erase_regions("mkblinter")
+            regions = self.view.split_by_newlines(sublime.Region(0, len(self.view)))
+            lines = []
+            [lines.append(self.view.substr(r)) for r in regions]
+            count = 0
+            regionlist = self.view.get_regions("mkblinter")
+
+            for line in lines:
+                count += 1
+                bracketerror = False
+                bracketerror2 = False
+                varerror = False
+                quotserror = False
+
+                opened = 0
+                opened2 = 0
+                var = False
+                quots = False
+                escaped = False
+
+                for char in line:
+                    if escaped:
+                        escaped = False
+                    elif char == "\\":
+                        escaped = True
+                    elif char == "(" and not quots:
+                        opened += 1
+                    elif char == ")" and not quots:
+                        opened -= 1
+                    elif char == "[" and not quots:
+                        opened2 += 1
+                    elif char == "]" and not quots:
+                        opened2 -= 1
+                    elif char == "%":
+                        if var:
+                            var = False
+                        else:
+                            var = True
+                    elif char == "\"":
+                        if quots:
+                            quots = False
+                        else:
+                            quots = True
+
+                if opened != 0 or opened2 != 0 or var or quots:
+                    regionlist.append(self.view.line(self.view.text_point(count-1,0)))
+
+            self.view.add_regions("mkblinter", regionlist, "invalid.mkb", "dot", sublime.DRAW_NO_FILL)        
 
 
 

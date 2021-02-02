@@ -75,13 +75,13 @@ contexts:
         2: constant.numeric.mkb
         5: constant.language.true.mkb
         6: constant.language.false.mkb
-        7: keyword.operator.mkb
+        # 7: keyword.operator.mkb
         8: variable.parameter.mkb
         11: keyword.other.mkb
         13: variable.mkb
         43: punctuation.definition.keyword.mkb
         44: keyword.other.mkb
-    - match: '(\]%)'
+    - match: '\]%'
       scope: keyword.other.mkb
     - match: '\b\"|'
       pop: true

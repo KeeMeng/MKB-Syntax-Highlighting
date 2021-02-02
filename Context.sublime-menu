@@ -1,39 +1,77 @@
 [
-	{"caption": "MKB",
-		"children": [
-			{ "caption": "Package Settings",
-	            "command": "edit_settings",
-	            "args": {
-	              "base_file": "${packages}/MKB/MKB.sublime-settings",
-	              "default": "{\n\t// Change MKB settings here: \n\t\"autocomplete_caps\": ${1:false},\n\t\"indent_character\": \"${2:\\t}\",\n\t\"semicolon_end\": ${3:true},\n\t\"extra_indent\": ${4:false},\n\t\"enable_indent\": ${5:false},\n\t\"ask_before_indent\": ${6:false},\n\t\"fancy_indent\": ${7:null},\n\t\"message_after_indenting\": ${8:false},\n\t\"show_hints\": ${9:true},\n\t\"popup_line_height\": ${10:3},\n\t\"indent_after_linting\": ${11:false},\n\t\"message_after_linting\": ${12:false},\n\t\"message_after_minifying\": ${13:false},\n\t\"browser\": \"${14:chrome}\",\n}"
-	            }
-	          },
-			{ "caption": "Indentation",
-				"command": "mkbindentation" },
-			{ "caption": "Hint",
-				"command": "mkbhint",
-				"args": {"event": "None"} },
-			{ "caption": "Linter",
-				"command": "mkbdebug" },
-			{ "caption": "Minifier",
-				"command": "mkbmini" },
-			{ "caption": "Variables",
-				"command": "mkbvariables" },
-			{ "caption": "Debug",
-            	"command": "mkbdeco",},
-			{ "caption": "Change Case",
-	            "children": [
-	            	{ "caption": "UPPERCASE",
-	            		"command": "mkbcase1",
-	            	},
-	            	{ "caption": "lowercase",
-	            		"command": "mkbcase2",
-	            	},
-	            	{ "caption": "Titlecase",
-	            		"command": "mkbcase3",
-	            	},
-	            ],
-          },
+	{
+		"caption":"MKB",
+		"children":[
+			{
+				"caption":"MKB Language",
+				"command":"set_file_type",
+				"args":{
+					"syntax":"MKB.sublime-syntax"
+				}
+			},
+			{
+				"caption":"Edit Color Scheme",
+				"command":"packagedev_edit_scheme"
+			},
+			{
+				"caption":"README",
+				"command":"open_file",
+				"args":{
+					"file":"${packages}/MKB/README.md"
+				}
+			},
+			{
+				"caption":"Package Settings",
+				"command":"edit_settings",
+				"args":{
+					"base_file":"${packages}/MKB/MKB.sublime-settings",
+					"default":"{\n\t// Change MKB settings here: \n\t\"autocomplete_caps\": ${1:false},\n\t\"indent_character\": \"${2:\\t}\",\n\t\"semicolon_end\": ${3:true},\n\t\"extra_indent\": ${4:false},\n\t\"enable_indent\": ${5:false},\n\t\"ask_before_indent\": ${6:false},\n\t\"fancy_indent\": ${7:null},\n\t\"message_after_indenting\": ${8:false},\n\t\"show_hints\": ${9:true},\n\t\"popup_line_height\": ${10:3},\n\t\"indent_after_linting\": ${11:false},\n\t\"message_after_linting\": ${12:false},\n\t\"auto_linting\": ${13:false},\n\t\"message_after_minifying\": ${14:false},\n\t\"browser\": \"${15:chrome}\",\n}"
+				}
+			},
+			{
+				"caption":"Indentation",
+				"command":"mkbindentation"
+			},
+			{
+				"caption":"Hint",
+				"command":"mkbhint",
+				"args":{
+					"event":"None"
+				}
+			},
+			{
+				"caption":"Linter",
+				"command":"mkbdebug"
+			},
+			{
+				"caption":"Minifier",
+				"command":"mkbmini"
+			},
+			{
+				"caption":"Variables",
+				"command":"mkbvariables"
+			},
+			{
+				"caption":"Check",
+				"command":"mkbdeco"
+			},
+			{
+				"caption":"Change Case",
+				"children":[
+					{
+						"caption":"UPPERCASE",
+						"command":"mkbcase1"
+					},
+					{
+						"caption":"lowercase",
+						"command":"mkbcase2"
+					},
+					{
+						"caption":"Titlecase",
+						"command":"mkbcase3"
+					}
+				]
+			}
 		]
 	}
 ]

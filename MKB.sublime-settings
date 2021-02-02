@@ -35,6 +35,9 @@
 	// Whether or not to show a message after linting code
 	"message_after_linting": false,
 
+	// Whether or not to auto lint after editing code
+	"auto_linting": false,
+
 	// Whether or not to show a message after minifying code
 	"message_after_minifying": false,
 
