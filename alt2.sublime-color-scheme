@@ -24,6 +24,12 @@
         "background": "#000000",
         "foreground": "#FFFFFF",
         "line_highlight": "#333333",
+        "caret": "#FFFFFF",
+        "block_caret": "#FFFFFF",
+        "selection": "#363636",
+        "selection_border": "#222222",
+        "invisibles": "#222222",
+        "misspelling": "#AA0000",
     },
 	"rules": 
 	[
