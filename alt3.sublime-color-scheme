@@ -1,8 +1,10 @@
 {
-	// By Iceshades
+	// Color scheme created by: Iceshades
+	// GitHub: https://github.com/Iceshades/ST3-MKB-color-scheme
+	// Discord Tag: Iceshades#2451 
 	"variables": 
 	{
-		"mc0": "#000000",
+	"mc0": "#000000",
         "mc1": "#ab882c",
         "mc2": "#00bb2d",
         "mc3": "#de6d21",
@@ -19,6 +21,20 @@
         "mce": "#ffff55",
         "mcf": "#FFFFFF",
 	},
+	
+	// The globals can be removed in case you don't like the background being entirely black.
+	// To remove them, delete the following lines:
+	// EXAMPLE WHAT HAS TO BE REMOVED:
+	
+	// START OF EXAMPLE
+	// "globals":
+    //{
+        //"background": "#000000",
+        //"foreground": "#FFFFFF",
+        //"line_highlight": "#333333",
+    //},
+	// END OF EXAMPLE
+
 	"globals":
     {
         "background": "#000000",

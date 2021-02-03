@@ -1,4 +1,8 @@
 {
+	// What color scheme to use:
+	"color_scheme": "MKB.sublime-color-scheme",
+	// Avaliable: alt1, alt2, alt3
+
 	// Whether or not for the auto complete to be in uppercase
 	"autocomplete_caps": false,
 
@@ -56,7 +60,4 @@
 
 	//DO NOT EDIT UNLESS YOU ARE SURE:
 	"word_wrap": true,
-	
-	// "color_scheme": "MKB.sublime-color-scheme",
-
 }

@@ -9,7 +9,7 @@ https://packagecontrol.io/packages/MKB
 
 ## Introduction:
 
-This package was made to help coding for Macro Keybind Mod easier. To help you, I made auto complete to suggest possible actions and variable to you, and if you hover over the keywords, you can see a description and example of the command, which was taken from https://beta.mkb.gorlem.ml/api/docs. (Thanks Gorlem!) It also has an indenter made by Federal, with a fancy indent function too! After making your code, you can also use a linter to find possible bugs, such as missing brackets. To personalize this package, go to the Edit > MKB menu at the top of Sublime Text 3, and modify `Package Settings`. 
+This package was made to help coding for Macro Keybind Mod easier. To help you, I made auto complete to suggest possible actions and variable to you, and if you hover over the keywords, you can see a description and example of the command, which was taken from https://beta.mkb.gorlem.ml/api/docs. (Thanks Gorlem!) It also has an indenter made by Federal, with a fancy indent function too! After making your code, you can also use a linter to find possible bugs, such as missing brackets. To personalize this package, go to the Context Menu or `Edit` > `MKB` menu at the top of Sublime Text 3, and modify `Package Settings`. 
 
 Brief description of the files in the package include: 
 ```
@@ -32,21 +32,15 @@ template.sublime-color-scheme | Template to make your own color scheme (You can 
 
 ## Installing using Package Control
 
-**Automatic download:** 
-
 **1)** If you haven't, install [Package Control](http://www.sublimelinter.com/en/stable/installation.html). 
 
 **2)** Open Package Control: Install Package in the command palette, and search for MKB. Install it, and you might need to restart sublime. 
 
-**3)** Add the custom colors from **MKB.sublime-color-scheme**, into `Tools > Packages > Package Development > Edit Current Color Scheme...` Paste the entire json contents into the **Right Side** of the color scheme, the top of the file should say "THEME.sublime-color-scheme — USER". 
+**3)** Change the language from `Plain Text` to `MKB` as your language. You can do this by selecting it at the bottom right corner menu. Sometimes you need to show your status bar (`View/Show Status Bar`). Alternative, you can right click the screen, click `MKB` > `MKB Language`
 
-**4)** Change the language from `Plain Text` to `MKB` as your language. You can do this by selecting it at the bottom right corner menu. Sometimes you need to show your status bar (`View/Show Status Bar`)
+**4)** You can also click `MKB/Package Settings`, and personalize the package eg color scheme, indentation and many other
 
-**5)** Go to the top menu, and click `MKB/Package Settings`, and personalize the package!
-
-**6)** Select MKB as you language by clicking the bottom right box (If it doesn't show go `view > show status bar`)
-
-**7)** Enjoy! If there's anything wrong ask in #•help
+**5)** Enjoy! If there's anything wrong ask in #•help
 
 ---
 
@@ -58,7 +52,7 @@ template.sublime-color-scheme | Template to make your own color scheme (You can 
 
 **3)** Download/clone the repository from https://github.com/KeeMeng/MKB-Syntax-Highlighting
 
-**4)** Add the custom colors from **MKB.sublime-color-scheme**, into `Tools > Packages > Package Development > Edit Current Color Scheme...` Paste the entire json contents into the **Right Side** of the color scheme, the top of the file should say "THEME.sublime-color-scheme — USER". 
+**4)** Add the custom colors from **MKB.sublime-color-scheme**, into `Tools > Packages > Package Development > Edit Current Color Scheme...` Paste the entire json contents into the **Right Side** of the color scheme, the top of the file should say "THEME.sublime-color-scheme — USER". Read [this website](https://github.com/Iceshades/ST3-MKB-color-scheme) for more details.
 
 **5)** Put all the files from the repository into a MKB folder
 Path for Mac: ```/Users/NAME/Library/Application Support/Sublime Text 3/Packages/MKB```
@@ -100,6 +94,7 @@ You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to d
 
 ## Settings: 
 
+- Which color scheme to use
 - Whether or not for the auto complete to be in uppercase
 - What character to use as the whitespace for the buffer
 - Whether or not to end lines with semicolon ;

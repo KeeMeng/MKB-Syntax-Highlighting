@@ -180,6 +180,7 @@ except:
     import urllib.request
     with urllib.request.urlopen("https://beta.mkb.gorlem.ml/api/docs") as url:
         mkbjson = json.loads(url.read().decode())
+        print("MKBdocs loaded")
 
 
 def load(words):
