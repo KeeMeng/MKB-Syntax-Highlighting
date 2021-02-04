@@ -1,92 +1,96 @@
 {
 	// Template if you want to make a color scheme
-	"variables": 
-	{
-		"mc0": "#000000", //None
-        "mc1": "#0000AA", //keybinds
-        "mc2": "#00AA00", //True
-        "mc3": "#00AAAA", //Iterators
-        "mc4": "#AA0000", //False
-        "mc5": "#AA00AA", //MKB Actions
-        "mc6": "#FFAA00", //Paramstring in prompt
-        "mc7": "#AAAAAA", //Comments
-        "mc8": "#555555", //None
-        "mc9": "#5555FF", //Numbers
-        "mca": "#55FF55", //Strings
-        "mcb": "#55FFFF", //Default Variables
-        "mcc": "#FF5555", //Variables
-        "mcd": "#FF55FF", //Symbols eg %% , ; ( ) [ ]
-        "mce": "#FFFF55", //Operators eg = < > && ||
-        "mcf": "#FFFFFF", //White for default
-	},
 	"globals":
-    {
-        "background": "#000000",
-        "foreground": "#FFFFFF",
-        "line_highlight": "#333333",
-    },
+	// Suggest not to change
+	{
+		"background": "#000000",
+		"foreground": "#FFFFFF",
+		"line_highlight": "#333333",
+		"caret": "#FFFFFF",
+		"block_caret": "#FFFFFF",
+		"selection": "#363636",
+		"selection_border": "#222222",
+		"invisibles": "#222222",
+		"misspelling": "#FF0000",
+	},
 	"rules": 
 	[
-		//Minecraft Macro/Keybind Mod
 		{
+			// Default color (Don't change)
 			"scope": "source.mkb",
-			"foreground": "var(mcf)",
+			"foreground": "#FFFFFF",
 		},
 		{
+			// Comments
 			"scope": "comment.mkb",
-			"foreground": "var(mc7)",
+			"foreground": "#AAAAAA",
+			"font_style": "italic",
 		},
 		{
+			// Parameters eg $$?
 			"scope": "variable.parameter.mkb",
-			"foreground": "var(mc6)",
+			"foreground": "#FFAA00",
 		},
 		{
+			// Strings
 			"scope": "string.mkb",
-			"foreground": "var(mca)",
+			"foreground": "#55FF55",
 		},
 		{
+			 // Symbols eg %% , ; ( ) [ ]
 			"scope": "keyword.other.mkb",
-			"foreground": "var(mcd)",
+			"foreground": "#FF55FF",
 		},
 		{
+			// Numbers
 			"scope": "constant.numeric.mkb",
-			"foreground": "var(mc9)",
+			"foreground": "#5555FF",
 		},
 		{
+			// Actions
 			"scope": "keyword.control.mkb",
-			"foreground": "var(mc5)",
+			"foreground": "#AA00AA",
 		},
 		{
+			// Built in variables
 			"scope": "variable.mkb",
-			"foreground": "var(mcc)",
+			"foreground": "#55FFFF",
 		},
 		{
+			// Iterators
 			"scope": "keyword.operator.word.mkb",
-			"foreground": "var(mc3)",
+			"foreground": "#00AAAA",
 		},
 		{
+			// User defined variables
 			"scope": "punctuation.definition.keyword.mkb",
-			"foreground": "var(mcf)",
+			"foreground": "#FF5555",
 		},
 		{
+			// Operators eg = < > && ||
 			"scope": "keyword.operator.mkb",
-			"foreground": "var(mcf)",
+			"foreground": "#FFFF55",
 		},
 		{
+			// False
 			"scope": "constant.language.false.mkb",
-			"foreground": "var(mc4)",
+			"foreground": "#AA0000",
 		},
 		{
+			// True
 			"scope": "constant.language.true.mkb",
-			"foreground": "var(mc2)",
+			"foreground": "#00AA00",
 		},
 		{
+			// Keybinds
 			"scope": "keyword.control.import.mkb",
-			"foreground": "var(mc1)",
+			"foreground": "#0000AA",
 		},
 		{
+			// Invalid stuff
 			"scope": "invalid.mkb",
 			"foreground": "#FFFFFF",
+			"background": "#AA0000",
 		},
 	],
 }

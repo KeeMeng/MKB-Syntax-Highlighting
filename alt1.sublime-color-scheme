@@ -1,98 +1,79 @@
 {
-	// By Discord
-	"variables": 
-	{
-		"mc0": "#000000",
-		"mc1": "#0000AA",
-		"mc2": "#00AA00",
-		"mc3": "#00AAAA",
-		"mc4": "#AA0000",
-		"mc5": "#AA00AA",
-		"mc6": "#FFAA00",
-		"mc7": "#AAAAAA",
-		"mc8": "#555555",
-		"mc9": "#5555FF",
-		"mca": "#55FF55",
-		"mcb": "#55FFFF",
-		"mcc": "#FF5555",
-		"mcd": "#FF55FF",
-		"mce": "#FFFF55",
-		"mcf": "#FFFFFF",
-	},
 	"globals":
-    {
-        "background": "#000000",
-        "foreground": "#FFFFFF",
-        "line_highlight": "#333333",
-        "caret": "#FFFFFF",
-        "block_caret": "#FFFFFF",
-        "selection": "#363636",
-        "selection_border": "#222222",
-        "invisibles": "#222222",
-        "misspelling": "#AA0000",
-    },
+	{
+		"background": "#000000",
+		"foreground": "#FFFFFF",
+		"line_highlight": "#333333",
+		"caret": "#FFFFFF",
+		"block_caret": "#FFFFFF",
+		"selection": "#363636",
+		"selection_border": "#222222",
+		"invisibles": "#222222",
+		"misspelling": "#FF0000",
+	},
 	"rules": 
 	[
-		//Minecraft Macro/Keybind Mod
 		{
 			"scope": "source.mkb",
-			"foreground": "var(mcf)",
+			"foreground": "#FFFFFF",
 		},
 		{
 			"scope": "comment.mkb",
-			"foreground": "var(mc7)",
+			"foreground": "#AAAAAA",
+			"font_style": "italic",
 		},
 		{
 			"scope": "variable.parameter.mkb",
-			"foreground": "var(mc6)",
+			"foreground": "#FFAA00",
 		},
 		{
 			"scope": "string.mkb",
-			"foreground": "#ffae1a",
+			"foreground": "#FFAE1A",
 		},
 		{
 			"scope": "keyword.other.mkb",
-			"foreground": "var(mcd)",
+			"foreground": "#FF55FF",
 		},
 		{
 			"scope": "constant.numeric.mkb",
-			"foreground": "var(mc9)",
+			"foreground": "#5555FF",
 		},
 		{
 			"scope": "keyword.control.mkb",
-			"foreground": "var(mc5)",
+			"foreground": "#AA00AA",
 		},
 		{
 			"scope": "variable.mkb",
-			"foreground": "var(mcc)",
+			"foreground": "#55FFFF",
 		},
 		{
 			"scope": "keyword.operator.word.mkb",
-			"foreground": "var(mc3)",
+			"foreground": "#00AAAA",
 		},
 		{
 			"scope": "punctuation.definition.keyword.mkb",
-			"foreground": "var(mcf)",
+			"foreground": "#FFFFFF",
 		},
 		{
 			"scope": "keyword.operator.mkb",
-			"foreground": "var(mcf)",
+			"foreground": "#FFFFFF",
 		},
 		{
 			"scope": "constant.language.false.mkb",
-			"foreground": "var(mc4)",
+			"foreground": "#AA0000",
 		},
 		{
 			"scope": "constant.language.true.mkb",
-			"foreground": "var(mc2)",
+			"foreground": "#00AA00",
 		},
 		{
 			"scope": "keyword.control.import.mkb",
-			"foreground": "var(mc1)",
+			"foreground": "#0000AA",
 		},
 		{
 			"scope": "invalid.mkb",
 			"foreground": "#FFFFFF",
+			"background": "#AA0000",
 		},
 	],
 }

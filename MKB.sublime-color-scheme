@@ -29,11 +29,10 @@
         "selection": "#363636",
         "selection_border": "#222222",
         "invisibles": "#222222",
-        "misspelling": "#AA0000",
+        "misspelling": "#FF0000",
     },
 	"rules": 
 	[
-		//Minecraft Macro/Keybind Mod
 		{
 			"scope": "source.mkb",
 			"foreground": "var(mcf)",
@@ -41,6 +40,7 @@
 		{
 			"scope": "comment.mkb",
 			"foreground": "var(mc7)",
+			"font_style": "italic",
 		},
 		{
 			"scope": "variable.parameter.mkb",
@@ -92,7 +92,8 @@
 		},
 		{
 			"scope": "invalid.mkb",
-			"foreground": "#FFFFFF",
+			"foreground": "var(mcf)",
+			"background": "var(mc4)"
 		},
 	],
 }
