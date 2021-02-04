@@ -96,10 +96,14 @@ class Indenter:
 
     def __init__(self, code): # Pass the code its self instead of lines
         splitted = code.split(";")
-        if splitted[-2] != "":
-            self.lines = code.split(";")
-        else:
-            self.lines = code.split(";")[:-1]
+        emptycount = 0
+        for s in splitted[::-1]:
+            if s == "":
+                emptycount += 1
+            else:
+                break
+        self.lines = code.split(";")[:-emptycount]
+        self.lines.append("")
         self.stack = [] # It stores the searching endings
         self.indented = []
         self.level = 0

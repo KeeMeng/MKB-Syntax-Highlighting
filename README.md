@@ -38,7 +38,7 @@ template.sublime-color-scheme | Template to make your own color scheme (You can 
 
 **3)** Change the language from `Plain Text` to `MKB` as your language. You can do this by selecting it at the bottom right corner menu. Sometimes you need to show your status bar (`View/Show Status Bar`). Alternative, you can right click the screen, click `MKB` > `MKB Language`
 
-**4)** You can also click `MKB/Package Settings`, and personalize the package eg color scheme, indentation and many other
+**4)** You can also click `MKB` > `Package Settings`, and personalize the package eg color scheme, indentation and many other
 
 **5)** Enjoy! If there's anything wrong ask in #•help
 
@@ -106,6 +106,7 @@ You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to d
 - Whether or not to show hints automatically
 - Number of lines to show in the pop up, put a big number to show everything
 - Whether or not to show a message after linting code
+- Whether or not to auto lint code after editing
 - Whether or not to show a message after minifying code
 - Which browser to use to open the wiki
 
