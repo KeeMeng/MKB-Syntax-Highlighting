@@ -27,7 +27,7 @@
 			"font_style": "italic",
 		},
 		{
-			// Parameters eg $$?
+			// Parameters
 			"scope": "variable.parameter.mkb",
 			"foreground": "#FFAA00",
 		},

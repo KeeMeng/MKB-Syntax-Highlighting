@@ -24,22 +24,37 @@
                         "caption":"Color Schemes",
                         "children":[
                             {
-                                "caption":"Make Color Scheme",
+                                "caption":"Follow the steps below to make your color scheme",
+                                "command":""
+                            },
+                            { 
+                                "caption": "-" 
+                            },
+                            {
+                                "caption":"1) Create file",
+                                "command":"new_file"
+                            },
+                            {
+                                "caption":"2) Insert color scheme template",
                                 "command":"insert_snippet",
                                 "args":{
                                     "contents":"{\n\t// Template if you want to make a color scheme\n\t\"globals\":\n\t// Suggest not to change\n\t{\n\t\t\"background\": \"#000000\",\n\t\t\"foreground\": \"#FFFFFF\",\n\t\t\"line_highlight\": \"#333333\",\n\t\t\"caret\": \"#FFFFFF\",\n\t\t\"block_caret\": \"#FFFFFF\",\n\t\t\"selection\": \"#363636\",\n\t\t\"selection_border\": \"#222222\",\n\t\t\"invisibles\": \"#222222\",\n\t\t\"misspelling\": \"#FF0000\",\n\t},\n\t\"rules\": \n\t[\n\t\t{\n\t\t\t// Default color (Don't change)\n\t\t\t\"scope\": \"source.mkb\",\n\t\t\t\"foreground\": \"#FFFFFF\",\n\t\t},\n\t\t{\n\t\t\t// Comments\n\t\t\t\"scope\": \"comment.mkb\",\n\t\t\t\"foreground\": \"${1:#AAAAAA}\",\n\t\t\t\"font_style\": \"italic\",\n\t\t},\n\t\t{\n\t\t\t// Parameters\n\t\t\t\"scope\": \"variable.parameter.mkb\",\n\t\t\t\"foreground\": \"${2:#FFAA00}\",\n\t\t},\n\t\t{\n\t\t\t// Strings\n\t\t\t\"scope\": \"string.mkb\",\n\t\t\t\"foreground\": \"${3:#55FF55}\",\n\t\t},\n\t\t{\n\t\t\t // Symbols eg %% , ; ( ) [ ]\n\t\t\t\"scope\": \"keyword.other.mkb\",\n\t\t\t\"foreground\": \"${4:#FF55FF}\",\n\t\t},\n\t\t{\n\t\t\t// Numbers\n\t\t\t\"scope\": \"constant.numeric.mkb\",\n\t\t\t\"foreground\": \"${5:#5555FF}\",\n\t\t},\n\t\t{\n\t\t\t// Actions\n\t\t\t\"scope\": \"keyword.control.mkb\",\n\t\t\t\"foreground\": \"${6:#AA00AA}\",\n\t\t},\n\t\t{\n\t\t\t// Built in variables\n\t\t\t\"scope\": \"variable.mkb\",\n\t\t\t\"foreground\": \"${7:#55FFFF}\",\n\t\t},\n\t\t{\n\t\t\t// Iterators\n\t\t\t\"scope\": \"keyword.operator.word.mkb\",\n\t\t\t\"foreground\": \"${8:#00AAAA}\",\n\t\t},\n\t\t{\n\t\t\t// User defined variables\n\t\t\t\"scope\": \"punctuation.definition.keyword.mkb\",\n\t\t\t\"foreground\": \"${9:#FF5555}\",\n\t\t},\n\t\t{\n\t\t\t// Operators eg = < > && ||\n\t\t\t\"scope\": \"keyword.operator.mkb\",\n\t\t\t\"foreground\": \"${10:#FFFF55}\",\n\t\t},\n\t\t{\n\t\t\t// False\n\t\t\t\"scope\": \"constant.language.false.mkb\",\n\t\t\t\"foreground\": \"${11:#AA0000}\",\n\t\t},\n\t\t{\n\t\t\t// True\n\t\t\t\"scope\": \"constant.language.true.mkb\",\n\t\t\t\"foreground\": \"${12:#00AA00}\",\n\t\t},\n\t\t{\n\t\t\t// Keybinds\n\t\t\t\"scope\": \"keyword.control.import.mkb\",\n\t\t\t\"foreground\": \"${13:#0000AA}\",\n\t\t},\n\t\t{\n\t\t\t// Invalid stuff\n\t\t\t\"scope\": \"invalid.mkb\",\n\t\t\t\"foreground\": \"${14:#FFFFFF}\",\n\t\t\t\"background\": \"${15:#AA0000}\",\n\t\t},\n\t],\n}"
                                 }
                             },
                             {
-                                "caption":"JSON Syntax Highlighting",
+                                "caption":"3) Set JSON syntax highlighting",
                                 "command":"set_file_type",
                                 "args":{
                                     "syntax":"Sublime Text Color Scheme.sublime-syntax"
                                 }
                             },
                             {
-                                "caption":"Edit Color Scheme",
+                                "caption":"4) Set color scheme (Paste into this file)",
                                 "command":"packagedev_edit_scheme"
+                            },
+                            {
+                                "caption":"5) Send this file to TKM to add into package",
+                                "command":""
                             }
                         ]
                     },

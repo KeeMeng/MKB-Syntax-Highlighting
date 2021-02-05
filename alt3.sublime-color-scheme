@@ -1,114 +1,105 @@
+
 {
 	// Color scheme created by: Iceshades
 	// GitHub: https://github.com/Iceshades/ST3-MKB-color-scheme
 	// Discord Tag: Iceshades#2451 
-	"variables": 
-	{
-		"mc0": "#000000",
-        "mc1": "#ab882c",
-        "mc2": "#00bb2d",
-        "mc3": "#de6d21",
-        "mc4": "#880000",
-        "mc5": "#436EEE",
-        "mc6": "#ffb347",
-        "mc7": "#aaaaaa",
-        "mc8": "#555555",
-        "mc9": "#5fc957",
-        "mca": "#c4bb97",
-        "mcb": "#d1331f",
-        "mcc": "#00d4d4",
-        "mcd": "#db2ad5",
-        "mce": "#ffff55",
-        "mcf": "#FFFFFF",
-	},
-	
-	// The globals can be removed in case you don't like the background being entirely black.
-	// To remove them, delete the following lines:
-	// EXAMPLE WHAT HAS TO BE REMOVED:
-	
-	// START OF EXAMPLE
-	// "globals":
-    //{
-        //"background": "#000000",
-        //"foreground": "#FFFFFF",
-        //"line_highlight": "#333333",
-    //},
-	// END OF EXAMPLE
+	// Discord ID: 713342608042360923
 
 	"globals":
-    {
-        "background": "#000000",
-        "foreground": "#FFFFFF",
-        "line_highlight": "#333333",
-        "caret": "#FFFFFF",
-        "block_caret": "#FFFFFF",
-        "selection": "#363636",
-        "selection_border": "#222222",
-        "invisibles": "#222222",
-        "misspelling": "#AA0000",
-    },
+	// Suggest not to change
+	{
+		// For Black background, use this background-setting
+		//"background": "#000000",
+
+		//For default Sublime Text 3 background, use this background-setting.
+		"background": "#282923",
+		"foreground": "#FFFFFF",
+		"line_highlight": "#333333",
+		"caret": "#FFFFFF",
+		"block_caret": "#FFFFFF",
+		"selection": "#363636",
+		"selection_border": "#222222",
+		"invisibles": "#222222",
+		"misspelling": "#FF0000",
+	},
 	"rules": 
 	[
-		//Minecraft Macro/Keybind Mod
 		{
+			// Default color (Don't change)
 			"scope": "source.mkb",
-			"foreground": "var(mcf)",
+			"foreground": "#FFFFFF",
 		},
 		{
+			// Comments
 			"scope": "comment.mkb",
-			"foreground": "var(mc7)",
+			"foreground": "#AAAAAA",
+			"font_style": "",
 		},
 		{
+			// Parameters
 			"scope": "variable.parameter.mkb",
-			"foreground": "var(mc6)",
+			"foreground": "#FFB347",
 		},
 		{
+			// Strings
 			"scope": "string.mkb",
-			"foreground": "var(mca)",
+			"foreground": "#C4BB97",
 		},
 		{
+			 // Symbols eg %% , ; ( ) [ ]
 			"scope": "keyword.other.mkb",
-			"foreground": "var(mcd)",
+			"foreground": "#DB2AD5",
 		},
 		{
+			// Numbers
 			"scope": "constant.numeric.mkb",
-			"foreground": "var(mc9)",
+			"foreground": "#5FC957",
 		},
 		{
+			// Actions
 			"scope": "keyword.control.mkb",
-			"foreground": "var(mc5)",
+			"foreground": "#436EEE",
 		},
 		{
+			// Built in variables
 			"scope": "variable.mkb",
-			"foreground": "var(mcc)",
+			"foreground": "#D1331F",
 		},
 		{
+			// Iterators
 			"scope": "keyword.operator.word.mkb",
-			"foreground": "var(mc3)",
+			"foreground": "#DE6D21",
 		},
 		{
+			// User defined variables
 			"scope": "punctuation.definition.keyword.mkb",
-			"foreground": "var(mcf)",
+			"foreground": "#00D4D4",
 		},
 		{
+			// Operators eg = < > && ||
 			"scope": "keyword.operator.mkb",
-			"foreground": "var(mcf)",
+			"foreground": "#FFFF55",
 		},
 		{
+			// False
 			"scope": "constant.language.false.mkb",
-			"foreground": "var(mc4)",
+			"foreground": "#880000",
 		},
 		{
+			// True
 			"scope": "constant.language.true.mkb",
-			"foreground": "var(mc2)",
+			"foreground": "#00BB2D",
 		},
 		{
+			// Keybinds
 			"scope": "keyword.control.import.mkb",
-			"foreground": "var(mc1)",
+			"foreground": "#AB882C",
 		},
 		{
+			// Invalid stuff
 			"scope": "invalid.mkb",
 			"foreground": "#FFFFFF",
+			"background": "#AA0000",
 		},
 	],
 }
