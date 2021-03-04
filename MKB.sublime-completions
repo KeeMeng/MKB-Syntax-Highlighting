@@ -204,7 +204,7 @@
 		{ "trigger": "MODULEJSON\tReturns true if the module is installed", "contents": "%MODULEJSON%"},
 		{ "trigger": "MODULESIGNTEXT\tReturns true if the module is installed", "contents": "%MODULESIGNTEXT%"},
 		{ "trigger": "MODULECLIPBOARD\tReturns true if the module is installed", "contents": "%MODULECLIPBOARD%"},
-		{ "trigger": "MOUDLEAEI\tReturns true if the module is installed", "contents": "%MOUDLEAEI%"},
+		{ "trigger": "MODULEAEI\tReturns true if the module is installed", "contents": "%MODULEAEI%"},
 		{ "trigger": "ACTIONNAME\t(actions iterator) Action name", "contents": "%ACTIONNAME%"},
 		{ "trigger": "ACTIONUSAGE\t(actions iterator) Action usage", "contents": "%ACTIONUSAGE%"},
 		{ "trigger": "ACTIONRETURN\t(actions iterator) Action return", "contents": "%ACTIONRETURN%"},

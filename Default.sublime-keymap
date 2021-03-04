@@ -53,5 +53,13 @@
 	{
 		"keys":["super+shift+`"],
 		"command":"mkbvariables"
+	},
+	{
+		"keys":["alt+up"],
+		"command":"jump_up"
+	},
+	{
+		"keys":["alt+down"],
+		"command":"jump_down"
 	}
 ]

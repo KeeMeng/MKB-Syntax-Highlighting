@@ -7,6 +7,20 @@ import json
 import copy
 import webbrowser
 
+global mkbjson
+try:
+    path = os.path.join(os.path.dirname(os.path.realpath(__file__)),"MKBdocs.json")
+    with open(path, "r", encoding="utf-8") as jsondocs:
+        mkbjson = json.load(jsondocs)
+
+except:
+    print("MKBdocs being weird, falling back to web api")
+    import urllib.request
+    with urllib.request.urlopen("https://beta.mkb.gorlem.ml/api/docs") as url:
+        mkbjson = json.loads(url.read().decode())
+        print("MKBdocs loaded")
+
+
 def plugin_loaded():
     global settings
     settings = sublime.load_settings("MKB.sublime-settings")
@@ -28,6 +42,13 @@ def viewlines():
         else:
             string += l + ";"
     return string
+
+def load(words):
+    if words.isalpha():
+        for i in mkbjson:
+            if words.lower() == i["name"].lower():
+                return i
+
 
 class mkbindentation(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -172,26 +193,6 @@ class Indenter:
             print(" No stack errors")
         return (self.indented, self.lintlines)
         # return '\n'.join(self.indented).replace("$${;", "$${").replace("}$$;", "}$$") # List to text + some adjustments
-
-global mkbjson
-try:
-    path = os.path.join(os.path.dirname(os.path.realpath(__file__)),"MKBdocs.json")
-    with open(path, "r", encoding="utf-8") as jsondocs:
-        mkbjson = json.load(jsondocs)
-
-except:
-    print("MKBdocs being weird, falling back to web api")
-    import urllib.request
-    with urllib.request.urlopen("https://beta.mkb.gorlem.ml/api/docs") as url:
-        mkbjson = json.loads(url.read().decode())
-        print("MKBdocs loaded")
-
-
-def load(words):
-    if words.isalpha():
-        for i in mkbjson:
-            if words.lower() == i["name"].lower():
-                return i
 
 class hoverinfo(sublime_plugin.ViewEventListener):
     def on_hover(self, point, hover_zone):
@@ -395,8 +396,6 @@ class mkbdebug(sublime_plugin.TextCommand):
                 sublime.message_dialog("Check console for linting results")
             sublime.active_window().run_command("show_panel", {"panel": "console", "toggle": True})
 
-
-
 class mkbdebug2(sublime_plugin.TextCommand):
     def run(self, edit):
         if self.view.match_selector(0, "source.mkb"):
@@ -449,8 +448,6 @@ class mkbdebug2(sublime_plugin.TextCommand):
 
             self.view.add_regions("mkblinter", regionlist, "invalid.mkb", "dot", sublime.DRAW_NO_FILL)        
 
-
-
 class mkbcase1(sublime_plugin.TextCommand):
     def run(self, edit):
         if self.view.match_selector(0, "source.mkb"):
@@ -463,7 +460,6 @@ class mkbcase1(sublime_plugin.TextCommand):
                 count += 1
             self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(text[:-1]));
             mkbindent.openfile(self, True)
-
 
 class mkbcase2(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -478,7 +474,6 @@ class mkbcase2(sublime_plugin.TextCommand):
             self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(text[:-1]));
             mkbindent.openfile(self, True)
 
-
 class mkbcase3(sublime_plugin.TextCommand):
     def run(self, edit):
         if self.view.match_selector(0, "source.mkb"):
@@ -491,7 +486,6 @@ class mkbcase3(sublime_plugin.TextCommand):
                 count += 1
             self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(text[:-1]));
             mkbindent.openfile(self, True)
-
 
 class mkbdeco(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -534,6 +528,35 @@ class mkbdeco(sublime_plugin.TextCommand):
 
             # mkbindent.openfile(self, True)
 
+class jump_up(sublime_plugin.WindowCommand):
+    def run(self):
+        file = self.window.active_view().substr(sublime.Region(0, len(sublime.active_window().active_view()))).split("\n")
+        point = self.window.active_view().sel()[-1].b
+        line = self.window.active_view().substr(self.window.active_view().full_line(point))
+        line_num = self.window.active_view().rowcol(point)[0]
+        tabs = re.search("^\s*", line).group()
+        reg = self.window.active_view().split_by_newlines(sublime.Region(0, len(sublime.active_window().active_view())))
+        count = line_num - 1
+        while count >= 0:
+            if re.match("^{}[^\s]".format(tabs), file[count]):
+                self.window.active_view().run_command('_sublime_linter_move_cursor', {'point': reg[count].a+len(tabs)})
+                break
+            count -= 1
+
+class jump_down(sublime_plugin.WindowCommand):
+    def run(self):
+        file = self.window.active_view().substr(sublime.Region(0, len(sublime.active_window().active_view()))).split("\n")
+        point = self.window.active_view().sel()[-1].b
+        line = self.window.active_view().substr(self.window.active_view().full_line(point))
+        line_num = self.window.active_view().rowcol(point)[0]
+        tabs = re.search("^\s*", line).group()
+        reg = self.window.active_view().split_by_newlines(sublime.Region(0, len(sublime.active_window().active_view())))
+        count = line_num
+        while count <= len(file) - 2:
+            if re.match("^{}[^\s]".format(tabs), file[count+1]):
+                self.window.active_view().run_command('_sublime_linter_move_cursor', {'point': reg[count].b+1+len(tabs)})
+                break
+            count += 1
 
 # 1000+ Lines of auto complete below!!
 class mkbcompletions(sublime_plugin.EventListener):
