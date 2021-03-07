@@ -34,14 +34,17 @@ def config(key):
 
 def viewlines():
     filelines = sublime.active_window().active_view().substr(sublime.Region(0, len(sublime.active_window().active_view()))).split("\n")
-    string = ""
-    for l in filelines:
-        l = l.strip()
-        if l.endswith(";"):
-            string += l
-        else:
-            string += l + ";"
-    return string
+    if config("indent_expand"):
+        string = ""
+        for l in filelines:
+            l = l.strip()
+            if l.endswith(";"):
+                string += l
+            else:
+                string += l + ";"
+        return string
+    else:
+        return "".join(filelines)
 
 def load(words):
     if words.isalpha():
@@ -116,14 +119,29 @@ class lineindenter(sublime_plugin.TextCommand):
 class Indenter:
 
     def __init__(self, code): # Pass the code its self instead of lines
-        splitted = code.split(";")
+        filelines = sublime.active_window().active_view().substr(sublime.Region(0, len(sublime.active_window().active_view()))).split("\n")
+        if config("indent_expand"):
+            string = ""
+            for l in filelines:
+                l = l.strip()
+                if l.endswith(";"):
+                    string += l
+                else:
+                    string += l + ";"
+            splitted = string.split(";")
+        else:
+            splitted = filelines
+
         emptycount = 0
         for s in splitted[::-1]:
             if s == "":
                 emptycount += 1
             else:
                 break
-        self.lines = code.split(";")[:-emptycount]
+        if emptycount == 0:
+            self.lines = splitted[:]
+        else:
+            self.lines = splitted[:-emptycount]
         self.lines.append("")
         self.stack = [] # It stores the searching endings
         self.indented = []
@@ -153,7 +171,7 @@ class Indenter:
         if line and config("semicolon_end") and line != "$${" and line != "}$$":
             self.indented.append(config("indent_character") * self.level + line + ";")
         else:
-            self.indented.append(config("indent_character") * self.level + line) # Inserts a line into  the indented output list lines
+            self.indented.append(config("indent_character") * self.level + line) # Inserts a line into the indented output list lines
 
     def indent(self, debug):
         count = 0
