@@ -49,10 +49,10 @@
 						"caption":"4) Set color scheme (Paste into this file)",
 						"command":"packagedev_edit_scheme"
 					},
-                    {
-                        "caption":"5) Send this file to TKM to add into package",
-                        "command":""
-                    }
+					{
+						"caption":"5) Send this file to TKM to add into package",
+						"command":""
+					}
 				]
 			},
 			{

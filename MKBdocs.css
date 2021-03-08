@@ -1,32 +1,32 @@
 html {
-    font-family: "DejaVu Sans Mono";
-    font-weight: bold;
+	font-family: "DejaVu Sans Mono";
+	font-weight: bold;
 }
 main {
-    font-family: "DejaVu Sans Mono";
+	font-family: "DejaVu Sans Mono";
 }
 code {
-    font-family: "DejaVu Sans Mono";
+	font-family: "DejaVu Sans Mono";
 }
 small {
-    font-size: 1em;
-    font-weight: bold;
+	font-size: 1em;
+	font-weight: bold;
 }
 body {
-    font-family: "DejaVu Sans Mono";
-    background: #000000;
-    color: #fff;
+	font-family: "DejaVu Sans Mono";
+	background: #000000;
+	color: #fff;
 }
 select {
-    color: #fff;
+	color: #fff;
 }
 input::placeholder {
-    color: #969696;
+	color: #969696;
 }
 a:not([class]),
 input[type=button],
 input[type=submit] {
-    color: #0d80e6;
+	color: #0d80e6;
 }
 input[type="submit"]:hover,
 input[type="submit"]:focus,
@@ -37,75 +37,75 @@ a:not([class]):hover,
 input[type=button]:active,
 input[type=button]:focus,
 input[type=button]:hover {
-    color: #5ac8fa;
+	color: #5ac8fa;
 }
 .table .row:not(.row--head):hover,
 .table tbody tr:hover {
-    animation: fadein 0.25s linear 1;
-    background: #484848;
+	animation: fadein 0.25s linear 1;
+	background: #484848;
 }
 @keyframes fadein {
-    0% {
-        background: #000000
-    }
-    100% {
-        background: #484848;
-    }
+	0% {
+		background: #000000
+	}
+	100% {
+		background: #484848;
+	}
 }
 .table .row:not(.row--head),
 .table tbody tr {
-    animation: fadeout 0.25s linear 1;
-    background: #000000;
+	animation: fadeout 0.25s linear 1;
+	background: #000000;
 }
 @keyframes fadeout {
-    0% {
-        background: #484848;
-    }
-    100% {
-        background: #000000;
-    }
+	0% {
+		background: #484848;
+	}
+	100% {
+		background: #000000;
+	}
 }
 a:not([class]):hover,
 input[type=button]:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover {
-    animation: underlinein 0.25s linear 1;
-    font-family: "DejaVu Sans Mono";
-    font-weight: bold;
+	animation: underlinein 0.25s linear 1;
+	font-family: "DejaVu Sans Mono";
+	font-weight: bold;
 }
 @keyframes underlinein {
-    0% {
-        color: #0d80e6;
-        border-bottom: 3px solid #000000;
-    }
-    100% {
-        color: #5ac8fa;
-        border-bottom: 3px solid #5ac8fa;
-    }
+	0% {
+		color: #0d80e6;
+		border-bottom: 3px solid #000000;
+	}
+	100% {
+		color: #5ac8fa;
+		border-bottom: 3px solid #5ac8fa;
+	}
 }
 a:not([class]),
 input[type=button],
 input[type="submit"],
 input[type="button"] {
-    animation: underlineout 0.25s linear 1;
-    font-family: "DejaVu Sans Mono";
-    font-weight: bold;
+	animation: underlineout 0.25s linear 1;
+	font-family: "DejaVu Sans Mono";
+	font-weight: bold;
 }
 @keyframes underlineout {
-    0% {
-        color: #5ac8fa;
-        border-bottom: 3px solid #5ac8fa;
-    }
-    100% {
-        color: #0d80e6;
-        border-bottom: 3px solid #000000;
-    }
+	0% {
+		color: #5ac8fa;
+		border-bottom: 3px solid #5ac8fa;
+	}
+	100% {
+		color: #0d80e6;
+		border-bottom: 3px solid #000000;
+	}
 }
 input[type="search"]::placeholder {
-    color: #ffffff;
+	color: #ffffff;
 }
 input[type="search"] {
-    color: #ffffff;
+	color: #ffffff;
 }
 input[type="search"]:hover,
 input[type="search"]:focus,
@@ -113,47 +113,47 @@ input[type="search"]:active,
 input[type="text"]:hover,
 input[type="text"]:focus,
 input[type="text"]:active {
-    animation: underlinein2 0.25s linear 1;
-    border-bottom: 3px solid #fff;
-    font-family: "DejaVu Sans Mono";
-    font-weight: bold;
+	animation: underlinein2 0.25s linear 1;
+	border-bottom: 3px solid #fff;
+	font-family: "DejaVu Sans Mono";
+	font-weight: bold;
 }
 input[type="search"],
 input[type="text"] {
-    animation: underlineout2 0.25s linear 1;
-    font-family: "DejaVu Sans Mono";
-    font-weight: bold;
+	animation: underlineout2 0.25s linear 1;
+	font-family: "DejaVu Sans Mono";
+	font-weight: bold;
 }
 select:hover {
-    border-bottom: 3px solid #fff;
-    animation: underlinein2 0.25s linear 1;
-    font-family: "DejaVu Sans Mono";
-    font-weight: bold;
-    outline:0px;
+	border-bottom: 3px solid #fff;
+	animation: underlinein2 0.25s linear 1;
+	font-family: "DejaVu Sans Mono";
+	font-weight: bold;
+	outline:0px;
 }
 select {
-    animation: underlineout2 0.25s linear 1;
-    font-family: "DejaVu Sans Mono";
-    font-weight: bold;
+	animation: underlineout2 0.25s linear 1;
+	font-family: "DejaVu Sans Mono";
+	font-weight: bold;
 }
 @keyframes underlinein2 {
-    0% {
-        border-bottom: 3px solid #000000;
-    }
-    100% {
-        border-bottom: 3px solid #fff;
-    }
+	0% {
+		border-bottom: 3px solid #000000;
+	}
+	100% {
+		border-bottom: 3px solid #fff;
+	}
 }
 @keyframes underlineout2 {
-    0% {
-        border-bottom: 3px solid #fff;
-    }
-    100% {
-        border-bottom: 3px solid #000000;
-    }
+	0% {
+		border-bottom: 3px solid #fff;
+	}
+	100% {
+		border-bottom: 3px solid #000000;
+	}
 }
 input[type="search"] {
-    width: 25
+	width: 25
 }
 
 
@@ -168,73 +168,73 @@ input[type="search"] {
 
 
 .ace-chrome .ace_gutter {
-    background: #222;
-    color: #fff;
-    overflow: hidden;
+	background: #222;
+	color: #fff;
+	overflow: hidden;
 }
 
 .ace-chrome .ace_print-margin {
-    width: 1px;
-    background: #e8e8e8;
+	width: 1px;
+	background: #e8e8e8;
 }
 
 .ace-chrome {
-    background-color: #111;
-    color: #f5f;
-    font: 16px DejaVu Sans Mono, sans-serif;
+	background-color: #111;
+	color: #f5f;
+	font: 16px DejaVu Sans Mono, sans-serif;
 }
 
 .ace-chrome .ace_cursor {
-    color: #fff;
+	color: #fff;
 }
 
 .ace-chrome .ace_keyword.ace_operator {
-    color: #FFFF55
+	color: #FFFF55
 }
 
 .ace-chrome .ace_comment {
-    color: #AAAAAA;
+	color: #AAAAAA;
 }
 
 .ace-chrome .ace_comment.ace_doc {
-    color: #AAAAAA;
+	color: #AAAAAA;
 }
 
 .ace-chrome .ace_comment.ace_doc.ace_tag {
-    color: #AAAAAA;
+	color: #AAAAAA;
 }
 
 .ace-chrome .ace_constant.ace_numeric {
-    color: #5555FF;
+	color: #5555FF;
 }
 
 .ace-chrome .ace_variable {
-    color: #FF5555
+	color: #FF5555
 }
 
 .ace-chrome .ace_marker-layer .ace_selection {
-    background: #555
+	background: #555
 }
 
 .ace-chrome .ace_marker-layer .ace_active-line {
-    background: rgba(0, 0, 0, 0.07);
+	background: rgba(0, 0, 0, 0.07);
 }
 
 .ace-chrome .ace_gutter-active-line {
-    background-color: #555;
+	background-color: #555;
 }
 
 .ace-chrome .ace_marker-layer .ace_selected-word {
-    background: #333;
-    border: 2px solid #555;
+	background: #333;
+	border: 2px solid #555;
 }
 
 .ace-chrome .ace_storage,
 .ace-chrome .ace_keyword,
 .ace-chrome .ace_meta.ace_tag {
-    color: #AA00AA;
+	color: #AA00AA;
 }
 
 .ace-chrome .ace_string {
-    color: #55FF55;
+	color: #55FF55;
 }
