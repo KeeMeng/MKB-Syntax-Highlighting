@@ -66,6 +66,10 @@
 						}
 					},
 					{
+						"caption":"Wiki",
+						"command": "mkbwiki",
+					},
+					{
 						"caption":"Indent Code",
 						"command":"mkbindentation"
 					},

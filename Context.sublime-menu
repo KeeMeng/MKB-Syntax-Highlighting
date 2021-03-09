@@ -63,6 +63,10 @@
 				}
 			},
 			{
+				"caption":"Wiki",
+				"command": "mkbwiki",
+			},
+			{
 				"caption":"Indentation",
 				"command":"mkbindentation"
 			},

@@ -7,7 +7,6 @@ import json
 import copy
 import webbrowser
 
-global mkbjson
 try:
 	path = os.path.join(os.path.dirname(os.path.realpath(__file__)),"MKBdocs.json")
 	with open(path, "r", encoding="utf-8") as jsondocs:
@@ -296,7 +295,8 @@ class mkbhint(sublime_plugin.TextCommand):
 				<small>{}{}</small>
 				""".format(data["extendedName"],data["type"],data["category"],data["description"],example,data["example"],)
 			if data != None:
-				linkstring = "https://beta.mkb.gorlem.ml{}".format(data["resource"].replace("api", ""))
+				page = data["resource"].replace("api", "")
+				linkstring = "https://beta.mkb.gorlem.ml{}".format(str(page)[1:])
 				self.view.show_popup(html, sublime.COOPERATE_WITH_AUTO_COMPLETE|sublime.HIDE_ON_MOUSE_MOVE_AWAY, pos, self.view.viewport_extent()[0], self.view.line_height()*config("popup_line_height")+4, lambda link: webbrowser.get(using=config("browser")).open(linkstring, new=2), "")
 
 			else:
@@ -575,6 +575,31 @@ class jump_down(sublime_plugin.WindowCommand):
 				self.window.active_view().run_command('_sublime_linter_move_cursor', {'point': reg[count].b+1+len(tabs)})
 				break
 			count += 1
+
+class mkbwiki(sublime_plugin.TextCommand):
+	def run(self, edit):
+		array = [i["name"] for i in mkbjson]
+		sublime.Window.show_quick_panel(sublime.active_window(), array, self.on_done, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
+
+	def on_done(self, index):
+		if index != -1:
+			array = ["Open Wiki for {}".format(mkbjson[index]["name"])]
+			for key, value in mkbjson[index].items():
+				if value != None:
+					array.append("{}: {}".format(str(key).title(),value))
+
+			sublime.Window.show_quick_panel(sublime.active_window(), array, self.on_done2, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
+		wikiindex = index
+		global wikiindex
+
+	def on_done2(self, index):
+		if index == -1:
+			sublime.active_window().run_command("mkbwiki")
+		if index == 0:
+			page = mkbjson[wikiindex]["resource"].replace("api", "")
+			linkstring = "https://beta.mkb.gorlem.ml{}".format(str(page)[1:])
+			webbrowser.get(using=config("browser")).open(linkstring, new=2)
+
 
 # 1000+ Lines of auto complete below!!
 class mkbcompletions(sublime_plugin.EventListener):
