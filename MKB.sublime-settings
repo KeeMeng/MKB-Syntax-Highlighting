@@ -9,7 +9,7 @@
 	// What character to use as the whitespace for the buffer
 	"indent_character": "\t",
 
-	// Wheter or not indentation should expand all lines
+	// Whether or not indentation should expand compressed lines
 	"indent_expand": true,
 
 	// Whether or not to end lines with semicolon ;

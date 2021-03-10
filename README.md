@@ -46,28 +46,37 @@ template.sublime-color-scheme | Template to make your own color scheme (You can 
 ---
 
 ## Manual installation
-
-**1)** Install Sublime Text
-
-**2)** Install Package Dev
-
-**3)** Download/clone the repository from https://github.com/KeeMeng/MKB-Syntax-Highlighting
-
-**4)** Add the custom colors from **MKB.sublime-color-scheme**, into `Tools > Packages > Package Development > Edit Current Color Scheme...` Paste the entire json contents into the **Right Side** of the color scheme, the top of the file should say "THEME.sublime-color-scheme — USER". Read [this website](https://github.com/Iceshades/ST3-MKB-color-scheme) for more details.
-
-**5)** Put all the files from the repository into a MKB folder
-Path for Mac: ```/Users/NAME/Library/Application Support/Sublime Text 3/Packages/MKB```
-Path for windows: ```C:\Users\%USERNAME%\AppData\Roaming\Sublime Text 3\Packages\[MKB Folder here]```
-
-**6)** Change the language from `Plain Text` to `MKB` as your language. You can do this by selecting it at the bottom right corner menu. Sometimes you need to show your status bar (`View/Show Status Bar`)
-
-**7)** Go to the top menu, and click `MKB/Package Settings`, and personalize the package!
-
-**8)** Select MKB as you language by clicking the bottom right box (If it doesn't show go `view > show status bar`)
-
-**9)** Enjoy! If there's anything wrong ask in #•help
-
-You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to do this if you have any problems. 
+<details>
+	<p>
+		1) Install Sublime Text
+	</p>
+	<p>
+		2) Install Package Dev
+	</p>
+	<p>
+		3) Download/clone the repository from https://github.com/KeeMeng/MKB-Syntax-Highlighting
+	</p>
+	<p>
+		4) Add the custom colors from **MKB.sublime-color-scheme**, into `Tools > Packages > Package Development > Edit Current Color Scheme...` Paste the entire json contents into the **Right Side** of the color scheme, the top of the file should say "THEME.sublime-color-scheme — USER". Read [this website](https://github.com/Iceshades/ST3-MKB-color-scheme) for more details.
+	</p>
+	<p>
+		5) Put all the files from the repository into a MKB folder
+		Path for Mac: ```/Users/NAME/Library/Application Support/Sublime Text 3/Packages/MKB```
+		Path for windows: ```C:\Users\%USERNAME%\AppData\Roaming\Sublime Text 3\Packages\[MKB Folder here]```
+	</p>
+	<p>
+		6) Change the language from `Plain Text` to `MKB` as your language. You can do this by selecting it at the bottom right corner menu. Sometimes you need to show your status bar (`View/Show Status Bar`)
+	</p>
+	<p>
+		7) Go to the top menu, and click `MKB/Package Settings`, and personalize the package!
+	</p>
+	<p>
+		8) Select MKB as you language by clicking the bottom right box (If it doesn't show go `view > show status bar`)
+	</p>
+	<p>
+		9) Enjoy! If there's anything wrong ask in #•help
+	</p>
+</details>
 
 ---
 
@@ -76,9 +85,12 @@ You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to d
 - When opening a .txt file (can be configured), and the first line is `$${`, it will automatically change to `MKB` syntax. But if it doesnt work, then you can go to the bottom right corner, and change `Plain Text` to `MKB` syntax. After that, the colors should appear automatically, along with the auto complete functions. 
 - To auto complete a statement, the auto complete menu should automatically appear. Press arrow key up or down to scroll through, press enter to auto complete. Then, press tab and jump to the next parameters. 
 - Or press CMD/CTRL + Space to see a list of the possible auto completions. 
+- You can also press CTRL + SHIFT + Space to open the inbuilt wiki.
 - To indent your code, you can mess with the settings (Indent when you save, or prompt before it indents). Or, if you want to manually indent, right click the screen and press `MKB indent`.
 - By default, when you hover over a keyword, you will see a popup with information. To manually show the hint, you can press `MKB Hint` when you right click. Scroll down for examples, or click "Open Wiki" to open the wiki page on your browser (Can be specified).
-- Right click anywhere for some actions
+- Right click anywhere for some actions, or go to to `Edit > MKB` in the top main menu.
+- You can also change the color scheme in `MKB > Package Settings`, as well as other cool settings
+- If you want to make your own color scheme, follow the steps in `MKB > Color Scheme`
 
 ---
 
@@ -95,21 +107,59 @@ You can join my [discord server](https://discord.gg/m9yfJtb) and ask me how to d
 
 ## Settings: 
 
-- Which color scheme to use
-- Whether or not for the auto complete to be in uppercase
-- What character to use as the whitespace for the buffer
-- Whether or not to end lines with semicolon ;
-- Whether or not to indent script between `$${` and `}$$`
-- Whether or not to automatically indent after saving the file
-- Whether or not to prompt a message before indenting, only if enable_indent is on
-- Whether or not to use fancy indenting. Put "null" for normal indenting, or put a number representing the delay in ms
-- Whether or not to show a message telling you indenting finished
-- Whether or not to show hints automatically
-- Number of lines to show in the pop up, put a big number to show everything
-- Whether or not to show a message after linting code
-- Whether or not to auto lint code after editing
-- Whether or not to show a message after minifying code
-- Which browser to use to open the wiki
+<details>
+	<p>
+		- Which color scheme to use
+	</p>
+	<p>
+		- Whether or not for the auto complete to be in uppercase
+	</p>
+	<p>
+		- What character to use as the whitespace for the buffer
+	</p>
+	<p>
+		- Whether or not indentation should expand compressed lines
+	</p>
+	<p>
+		- Whether or not to end lines with semicolon ;
+	</p>
+	<p>
+		- Whether or not to indent script between `$${` and `}$$`
+	</p>
+	<p>
+		- Whether or not to automatically indent after saving the file
+	</p>
+	<p>
+		- Whether or not to prompt a message before indenting, only if enable_indent is on
+	</p>
+	<p>
+		- Whether or not to use fancy indenting. Put "null" for normal indenting, or put a number representing the delay in ms
+	</p>
+	<p>
+		- Whether or not to show a message telling you indenting finished
+	</p>
+	<p>
+		- Whether or not to show hints automatically
+	</p>
+	<p>
+		- Number of lines to show in the pop up, put a big number to show everything
+	</p>
+	<p>
+		- Whether or not to indent code after linting code
+	</p>
+	<p>
+		- Whether or not to show a message after linting code
+	</p>
+	<p>
+		- Whether or not to auto lint code after editing
+	</p>
+	<p>
+		- Whether or not to show a message after minifying code
+	</p>
+	<p>
+		- Which browser to use to open the wiki
+	</p>
+</details>
 
 ---
 
