@@ -55,6 +55,10 @@
 		"command":"mkbvariables"
 	},
 	{
+		"keys":["ctrl+shift+space"],
+		"command":"mkbwiki"
+	},
+	{
 		"keys":["alt+up"],
 		"command":"jump_up"
 	},

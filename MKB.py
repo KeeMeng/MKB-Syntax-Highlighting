@@ -1,23 +1,23 @@
 import sublime
 import sublime_plugin
-import os.path
 import re
-import time
 import json
-import copy
+import os.path
 import webbrowser
+from copy import deepcopy
 
 try:
 	path = os.path.join(os.path.dirname(os.path.realpath(__file__)),"MKBdocs.json")
 	with open(path, "r", encoding="utf-8") as jsondocs:
 		mkbjson = json.load(jsondocs)
+		print("MKBdocs loaded")
 
 except:
 	print("MKBdocs being weird, falling back to web api")
 	import urllib.request
 	with urllib.request.urlopen("https://beta.mkb.gorlem.ml/api/docs") as url:
 		mkbjson = json.loads(url.read().decode())
-		print("MKBdocs loaded")
+		print("MKBdocs (Online) loaded")
 
 
 def plugin_loaded():
@@ -253,7 +253,7 @@ class mkbhint(sublime_plugin.TextCommand):
 		return True
 
 	def showpopup(self, originaldata, pos, override):
-		data = copy.deepcopy(originaldata)
+		data = deepcopy(originaldata)
 		if data and (config("show_hints") or override):
 			data["extendedName"] = data["extendedName"].replace("&", "&amp;")
 			data["extendedName"] = data["extendedName"].replace("<", "&lt;").replace(">", "&gt;").replace("\\\"", "&quot;")
@@ -578,7 +578,7 @@ class jump_down(sublime_plugin.WindowCommand):
 
 class mkbwiki(sublime_plugin.TextCommand):
 	def run(self, edit):
-		array = [i["name"] for i in mkbjson]
+		array = ["{} ({})".format(i["name"], i["type"]) for i in mkbjson]
 		sublime.Window.show_quick_panel(sublime.active_window(), array, self.on_done, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
 
 	def on_done(self, index):
@@ -589,16 +589,37 @@ class mkbwiki(sublime_plugin.TextCommand):
 					array.append("{}: {}".format(str(key).title(),value))
 
 			sublime.Window.show_quick_panel(sublime.active_window(), array, self.on_done2, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
-		wikiindex = index
 		global wikiindex
+		wikiindex = index
 
 	def on_done2(self, index):
 		if index == -1:
 			sublime.active_window().run_command("mkbwiki")
-		if index == 0:
+		elif index == 0:
 			page = mkbjson[wikiindex]["resource"].replace("api", "")
 			linkstring = "https://beta.mkb.gorlem.ml{}".format(str(page)[1:])
 			webbrowser.get(using=config("browser")).open(linkstring, new=2)
+		else:
+			# print(list(mkbjson[wikiindex].keys())[index])
+			# key = list(mkbjson[wikiindex].keys())[index]
+
+			array = []
+			for key, value in mkbjson[wikiindex].items():
+				if value != None:
+					array.append([key, value])
+
+			print("{}: {}".format(array[index-1][0].title(), array[index-1][1]))
+			sublime.active_window().run_command("show_panel", {"panel": "console", "toggle": True})
+
+			# array = ["{} ({})".format(i["name"], i["type"]) for i in mkbjson]
+			# sublime.Window.show_quick_panel(sublime.active_window(), array, self.on_done, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
+
+			array = ["Open Wiki for {}".format(mkbjson[wikiindex]["name"])]
+			for key, value in mkbjson[wikiindex].items():
+				if value != None:
+					array.append("{}: {}".format(str(key).title(),value))
+
+			sublime.Window.show_quick_panel(sublime.active_window(), array, self.on_done2, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
 
 
 # 1000+ Lines of auto complete below!!
