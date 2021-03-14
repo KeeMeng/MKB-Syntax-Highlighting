@@ -70,7 +70,7 @@ contexts:
 
   strings2:
     - meta_scope: string.mkb
-    - match: '[^\"\[\]%]*?((-?[\d.]+(ms|t)?)|(({{booleans_true}})|({{booleans_false}}))|(<|>|==|!=|!|>=|<=|\+|\-(?!\d)|\*|\/|=|:=|:|\(|\))|({{parameters}})|((%)(({{variables}})|([^%\[\]"]*?))(\[|%)))'
+    - match: '((-?[\d.]+(ms|t)?)|(({{booleans_true}})|({{booleans_false}}))|(<|>|==|!=|!|>=|<=|\+|\-(?!\d)|\*|\/|=|:=|:|\(|\))|({{parameters}})|((%)(({{variables}})|([^%\[\]"]*?))(\[|%)))'
       captures:
         2: constant.numeric.mkb
         5: constant.language.true.mkb
