@@ -474,7 +474,7 @@ class mkbcase1(sublime_plugin.TextCommand):
 			while count < len(text):
 				matches = re.findall("^[\t ]*(\/\/)?([a-zA-Z]+)(\(|;|$)", text[count])
 				if matches != []:
-					text[count] = text[count].replace(matches[0][1], matches[0][1].upper())
+					text[count] = text[count].replace(matches[0][1], matches[0][1].upper(), 1)
 				count += 1
 			self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(text[:-1]));
 			mkbindent.openfile(self, True)
@@ -487,7 +487,7 @@ class mkbcase2(sublime_plugin.TextCommand):
 			while count < len(text):
 				matches = re.findall("^[\t ]*(\/\/)?([a-zA-Z]+)(\(|;|$)", text[count])
 				if matches != []:
-					text[count] = text[count].replace(matches[0][1], matches[0][1].lower())
+					text[count] = text[count].replace(matches[0][1], matches[0][1].lower(), 1)
 				count += 1
 			self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(text[:-1]));
 			mkbindent.openfile(self, True)
@@ -500,7 +500,7 @@ class mkbcase3(sublime_plugin.TextCommand):
 			while count < len(text):
 				matches = re.findall("^[\t ]*(\/\/)?([a-zA-Z]+)(\(|;|$)", text[count])
 				if matches != []:
-					text[count] = text[count].replace(matches[0][1], matches[0][1].capitalize())
+					text[count] = text[count].replace(matches[0][1], matches[0][1].capitalize(), 1)
 				count += 1
 			self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(text[:-1]));
 			mkbindent.openfile(self, True)
