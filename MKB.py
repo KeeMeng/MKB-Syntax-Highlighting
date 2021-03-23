@@ -13,11 +13,14 @@ try:
 		print("MKBdocs loaded")
 
 except:
-	print("MKBdocs being weird, falling back to web api")
-	import urllib.request
-	with urllib.request.urlopen("https://beta.mkb.gorlem.ml/api/docs") as url:
-		mkbjson = json.loads(url.read().decode())
-		print("MKBdocs (Online) loaded")
+	try:
+		print("MKBdocs being weird, falling back to web api")
+		from urllib import request
+		with request.urlopen("https://beta.mkb.gorlem.ml/api/docs") as url:
+			mkbjson = json.loads(url.read().decode())
+			print("MKBdocs (Online) loaded")
+	except:
+		print("MKBdocs offline and online both being weird")
 
 
 def plugin_loaded():

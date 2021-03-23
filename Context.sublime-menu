@@ -90,10 +90,6 @@
 				"command":"mkbvariables"
 			},
 			{
-				"caption":"Check",
-				"command":"mkbdeco"
-			},
-			{
 				"caption":"Change Case",
 				"children":[
 					{

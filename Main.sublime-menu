@@ -86,10 +86,6 @@
 						"command":"mkbvariables"
 					},
 					{
-						"caption":"Check",
-						"command":"mkbdeco"
-					},
-					{
 						"caption":"Change Colors",
 						"command":"packagedev_edit_scheme"
 					},

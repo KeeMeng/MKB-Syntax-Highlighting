@@ -1,0 +1,60 @@
+[
+	{
+		"caption":"MKB: Set syntax to MKB Language",
+		"command":"set_file_type",
+		"args":{
+			"syntax":"MKB.sublime-syntax"
+		}
+	},
+	{
+		"caption":"MKB: Package Settings",
+		"command":"edit_settings",
+		"args":{
+			"base_file":"${packages}/MKB/MKB.sublime-settings",
+			"default":"{\n\t// Change MKB settings here: \n\t\"color_scheme\": \"${1:MKB}.sublime-color-scheme\",\n\t\"autocomplete_caps\": ${2:false},\n\t\"indent_character\": \"${3:\\t}\", \n\t\"indent_expand\": ${4:true}, \n\t\"semicolon_end\": ${5:true},\n\t\"extra_indent\": ${6:false},\n\t\"enable_indent\": ${7:false},\n\t\"ask_before_indent\": ${8:false},\n\t\"fancy_indent\": ${9:null},\n\t\"message_after_indenting\": ${10:false},\n\t\"show_hints\": ${11:true},\n\t\"popup_line_height\": ${12:3},\n\t\"indent_after_linting\": ${13:false},\n\t\"message_after_linting\": ${14:false},\n\t\"auto_linting\": ${15:false},\n\t\"message_after_minifying\": ${16:false},\n\t\"browser\": \"${17:chrome}\",\n}"
+		}
+	},
+	{
+		"caption":"MKB: README",
+		"command":"open_file",
+		"args":{
+			"file":"${packages}/MKB/README.md"
+		}
+	},
+	{
+		"caption":"MKB: Wiki",
+		"command": "mkbwiki",
+	},
+	{
+		"caption":"MKB: Indentation",
+		"command":"mkbindentation"
+	},
+	{
+		"caption":"MKB: Linter",
+		"command":"mkbdebug"
+	},
+	{
+		"caption":"MKB: Minifier",
+		"command":"mkbmini"
+	},
+	{
+		"caption":"MKB: Variables",
+		"command":"mkbvariables"
+	},
+	{
+		"caption":"MKB: Check",
+		"command":"mkbdeco"
+	},
+	{
+		"caption":"MKB: Change case to UPPERCASE",
+		"command":"mkbcase1"
+	},
+	{
+		"caption":"MKB: Change case to lowercase",
+		"command":"mkbcase2"
+	},
+	{
+		"caption":"MKB: Change case to Titlecase",
+		"command":"mkbcase3"
+	}
+]
