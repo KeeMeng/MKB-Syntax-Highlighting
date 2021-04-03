@@ -101,7 +101,7 @@ class lineindenter(sublime_plugin.TextCommand):
 		if self.view.match_selector(0, "source.mkb"):
 			count = args[1]
 			if count == -1:
-				self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(args[0]));
+				self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(args[0]))
 				if config("message_after_indenting"):
 					sublime.message_dialog("Finished Indenting!")
 			else:
