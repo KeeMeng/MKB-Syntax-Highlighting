@@ -155,9 +155,10 @@ class Indenter:
 			"for":		["next"],
 			"foreach":	["next"],
 			"do":		["until", "while", "loop"],
-			"unsafe":	["endunsafe"]
+			"unsafe":	["endunsafe"],
+			"pollevent":["next"]
 		}
-		self.openings = "IF|ELSEIF|ELSE|FOR|DO|UNSAFE"
+		self.openings = "IF|ELSEIF|ELSE|FOR|DO|UNSAFE|POLLEVENT"
 		self.lintlines = []
 
 		if config("extra_indent"):
@@ -632,11 +633,11 @@ class mkbcompletions(sublime_plugin.EventListener):
 			return ([],sublime.INHIBIT_EXPLICIT_COMPLETIONS)
 		elif view.match_selector(0, "source.mkb") and config("autocomplete_caps"):
 			return ([
-				["IF\tExecuted when the <condition> evaluates to true", "IF(${1:<condition>});\n	$2\nendif;\n$3"],
-				["IFBEGINSWITH\tExecutes when the <haystack> contains the <pattern>", "IFBEGINSWITH(${1:<haystack>},${2:<needle>});\n	$3\nendif;\n$4"],
-				["IFCONTAINS\tExecutes when the <haystack> contains the <pattern>", "IFCONTAINS(${1:<haystack>},${2:<needle>});\n	$3\nendif;\n$4"],
-				["IFENDSWITH\tExecutes when the <haystack> contains the <pattern>", "IFENDSWITH(${1:<haystack>},${2:<needle>});\n	$3\nendif;\n$4"],
-				["IFMATCHES\tExecutes when the <subject> matches the <pattern>", "IFMATCHES(${1:<subject>},${2:<pattern>},${3:&[target]},${4:[group]});\n	$5\nendif;\n$6"],
+				["IF\tExecuted when the <condition> evaluates to true", "IF(${1:<condition>});\n	$2\nENDIF;\n$3"],
+				["IFBEGINSWITH\tExecutes when the <haystack> contains the <pattern>", "IFBEGINSWITH(${1:<haystack>},${2:<needle>});\n	$3\nENDIF;\n$4"],
+				["IFCONTAINS\tExecutes when the <haystack> contains the <pattern>", "IFCONTAINS(${1:<haystack>},${2:<needle>});\n	$3\nENDIF;\n$4"],
+				["IFENDSWITH\tExecutes when the <haystack> contains the <pattern>", "IFENDSWITH(${1:<haystack>},${2:<needle>});\n	$3\nENDIF;\n$4"],
+				["IFMATCHES\tExecutes when the <subject> matches the <pattern>", "IFMATCHES(${1:<subject>},${2:<pattern>},${3:&[target]},${4:[group]});\n	$5\nENDIF;\n$6"],
 
 				["FOR\tfor(var,start,end)", "FOR(#${1:<var>},${2:<start>},${3:<end>});\n	$4\nNEXT;\n$5"],
 				["FOR\tfor(var = start to end)", "FOR(#${1:<var>} = ${2:<start>} to ${3:<end>});\n	$4\nNEXT;\n$5"],
@@ -662,25 +663,28 @@ class mkbcompletions(sublime_plugin.EventListener):
 				["ELSEIFFILEEXIST", "ELSEIFFILEEXISTS(${1:<path>},${2:[expression if file should be created if missing]});\n	$3"],
 				["ELSEIFININV", "ELSEIFININV(${1:[mode]},${2:<items>});\n	$3"],
 				["ELSEIFINVISFULL", "ELSEIFINVISFULL(${1:[item]});\n	$2"],
-				["ELSEIFMATCHES>", "ELSEIFMATCHES(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5"],
+				["ELSEIFMATCHES", "ELSEIFMATCHES(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5"],
+				["ELSEIFCANHARVESTBLOCK", "ELSEIFCANHARVESTBLOCK(${1:<blockid>});\n	$2"],
 
-				["WHILEBEGINSWITH", "WHILEBEGINSWITH(${1:<haystack>},${2:<needle>});\n	$3"],
-				["WHILECONTAINS", "WHILECONTAINS(${1:<haystack>},${2:<needle>});\n	$3"],
-				["WHILEENCHANTED", "WHILEENCHANTED(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n	$6"],
-				["WHILEENDSWITH", "WHILEENDSWITH(${1:<haystack>},${2:<needle>});\n	$3"],
-				["WHILEFILEEXIST", "WHILEFILEEXISTS(${1:<path>},${2:[expression if file should be created if missing]});\n	$3"],
-				["WHILEININV", "WHILEININV(${1:[mode]},${2:<items>});\n	$3"],
-				["WHILEINVISFULL", "WHILEINVISFULL(${1:[item]});\n	$2"],
-				["WHILEMATCHES>", "WHILEMATCHES(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5"],
+				["WHILEBEGINSWITH", "WHILEBEGINSWITH(${1:<haystack>},${2:<needle>});\n$3"],
+				["WHILECONTAINS", "WHILECONTAINS(${1:<haystack>},${2:<needle>});\n$3"],
+				["WHILEENCHANTED", "WHILEENCHANTED(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n$6"],
+				["WHILEENDSWITH", "WHILEENDSWITH(${1:<haystack>},${2:<needle>});\n$3"],
+				["WHILEFILEEXIST", "WHILEFILEEXISTS(${1:<path>},${2:[expression if file should be created if missing]});\n$3"],
+				["WHILEININV", "WHILEININV(${1:[mode]},${2:<items>});\n$3"],
+				["WHILEINVISFULL", "WHILEINVISFULL(${1:[item]});\n$2"],
+				["WHILEMATCHES", "WHILEMATCHES(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n$5"],
+				["WHILECANHARVESTBLOCK", "WHILECANHARVESTBLOCK(${1:<blockid>});\n$2"],
 
-				["UNTILBEGINSWITH", "UNTILBEGINSWITH(${1:<haystack>},${2:<needle>});\n	$3"],
-				["UNTILCONTAINS", "UNTILCONTAINS(${1:<haystack>},${2:<needle>});\n	$3"],
-				["UNTILENCHANTED", "UNTILENCHANTED(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n	$6"],
-				["UNTILENDSWITH", "UNTILENDSWITH(${1:<haystack>},${2:<needle>});\n	$3"],
-				["UNTILFILEEXIST", "UNTILFILEEXISTS(${1:<path>},${2:[expression if file should be created if missing]});\n	$3"],
-				["UNTILININV", "UNTILININV(${1:[mode]},${2:<items>});\n	$3"],
-				["UNTILINVISFULL", "UNTILINVISFULL(${1:[item]});\n	$2"],
-				["UNTILMATCHES>", "UNTILMATCHES(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5"],
+				["UNTILBEGINSWITH", "UNTILBEGINSWITH(${1:<haystack>},${2:<needle>});\n$3"],
+				["UNTILCONTAINS", "UNTILCONTAINS(${1:<haystack>},${2:<needle>});\n$3"],
+				["UNTILENCHANTED", "UNTILENCHANTED(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n$6"],
+				["UNTILENDSWITH", "UNTILENDSWITH(${1:<haystack>},${2:<needle>});\n$3"],
+				["UNTILFILEEXIST", "UNTILFILEEXISTS(${1:<path>},${2:[expression if file should be created if missing]});\n$3"],
+				["UNTILININV", "UNTILININV(${1:[mode]},${2:<items>});\n$3"],
+				["UNTILINVISFULL", "UNTILINVISFULL(${1:[item]});\n$2"],
+				["UNTILMATCHES", "UNTILMATCHES(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n$5"],
+				["UNTILCANHARVESTBLOCK", "UNTILCANHARVESTBLOCK(${1:<blockid>});\n$2"],
 
 				["UNSAFE\t…endunsafe", "UNSAFE(${1:<executions>});\n	$2\nENDUNSAFE;\n$3"],
 				["ENDUNSAFE\tEnds an active unsafe block", "ENDUNSAFE;\n$1"],
@@ -699,7 +703,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				["CALCYAWTO\t+ y argument for pitch", "CALCYAWTO(${1:<xpos>},${2:<ypos>},${3:<zpos>},#${4:[yaw]},#${5:[dist]},#${6:[pitch]});"],
 				["GETSLOTITEM\t+ nbt argument", "GETSLOTITEM(${1:<slotid>},&${2:<itemid>},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});"],
 				["HTTP\tcreates a http request", "&${1:response} = HTTP(${2:[get|post|put|delete]},${3:<url>},${4:[output stream]},${5:[headers]});"],
-				["IFFILEEXISTS\tchecks if a file exists", "IFFILEEXISTS(${1:<path>},${2:[expression]});\n	$3\nendif;\n$4"],
+				["IFFILEEXISTS\tchecks if a file exists", "IFFILEEXISTS(${1:<path>},${2:[expression]});\n	$3\nENDIF;\n$4"],
 				["MKDIR\tcreates directory", "MKDIR(${1:<path>});"],
 				["WRITEFILE\twrites array to file", "WRITEFILE(${1:<path>},&${2:<writefile>}[],${3:[append]});"],
 				["GETJSONASARRAY\treturns json as key:value array", "&${1:array}[] = GETJSONASARRAY(${2:<json>},${3:[format]});"],
@@ -718,9 +722,9 @@ class mkbcompletions(sublime_plugin.EventListener):
 				["GETMOUSEITEM\tgets info about the held item", "${2:&${1:[id]} = }GETMOUSEITEM(&${1:[id]},#${3:[stacksizevar]},#${4:[datavar]},&${5:[nbt]});"],
 				["GETSLOTITEMINV\tgets information about the item in the specified slot", "${2:[&${1:<id>}] = }GETSLOTITEMINV(${3:<slotid>},&${1:<id>},#${4:[stacksizevar]},#${5:[datavar]},&${6:[nbt]});"],
 				["GETSLOTINV\tgets slot containing item in inventory", "#${1:[slot]} = GETSLOTINV(${2:<item>}:${3:[damage]},#${4:<idvar>},${5:[startfromslotid]});"],
-				["IFINVISFULL\tChecks if inventory is full", "IFINVISFULL(${1:[item]});\n	$2\nendif;\n$3"],
-				["IFININV\tChecks whether itemtypes are in the inventory", "IFININV(${1:[mode]},${2:<items>});\n	$3\nendif;\n$4"],
-				["IFENCHANTED\tChecks if the item is enchanted", "IFENCHANTED(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n	$6\nendif;\n$7"],
+				["IFINVISFULL\tChecks if inventory is full", "IFINVISFULL(${1:[item]});\n	$2\nENDIF;\n$3"],
+				["IFININV\tChecks whether itemtypes are in the inventory", "IFININV(${1:[mode]},${2:<items>});\n	$3\nENDIF;\n$4"],
+				["IFENCHANTED\tChecks if the item is enchanted", "IFENCHANTED(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n	$6\nENDIF;\n$7"],
 				["SETSLOTITEM\tset the contents of a hotbar slot", "SETSLOTITEM(${1:<item>}:${2:[damage]}${3:,<slot>},${4:[amount]},${5:[nbt]});"],
 				["GETFISHHOOK\tget the x, y and z (3dp) of the bobber", "${2:#${1:[ytotal]} = }GETFISHHOOK(#${3:[x]},#${4:[xprecision]},#${5:[y]},#${6:[yprecision]},#${7:[z]},#${8:[zprecision]});"],
 				["MAP", "#${1:result} = MAP(${2:<x>},${3:<minfrom>},${4:<maxfrom>},${5:<minto>},${6:<maxto>})"],
@@ -731,6 +735,12 @@ class mkbcompletions(sublime_plugin.EventListener):
 				["TIMESTAMPTODATE\tFormat a timestamp in seconds", "&${1:date} = TIMESTAMPTODATE(${2:<timestamp>},${3:[in milliseconds|date format]},${4:[in milliseconds]});"],
 				["STOP\tStops macro matching regex or array", "STOP(${1:[array|regex]});"],
 				["KLACAIBAVERSION\tReturns the version of klacaiba (major * 100000 + minor * 1000 + patch)", "%KLACAIBAVERSION%"],
+				["STRLEN\tReturns the length of the string or 0 if none is present", "#${1:length} = STRLEN(${2:<string>});"],
+				["GETBREAKSPEED\tReturns the amount of time required to break a block or 0 if infinite of none specified", "#${1:ticks} = GETBREAKSPEED(${2:<blockid>});"],
+				["IFCANHARVESTBLOCK\tChecks if the block of &blockid can currently be harvested", "IFCANHARVESTBLOCK(${1:<blockid>});\n	$2\nENDIF;\n$3"],
+				["POLLEVENT\tOpens a stack with an infinite iterator for a specific event", "POLLEVENT(${1:[event]});\n	$3\n	AWAIT;\nNEXT;\n$4"],
+				["POLLALL\tList all variables of the event", "%POLLALL%"],
+				["AWAIT\tShould be placed above the closing next of a pollevent", "AWAIT;"],
 
 				["DELETECONTROL\tDeletes a control by name from any gui", "DELETECONTROL(${1:<controlname>});"],
 				["NOTIFY\tcreates a system tray", "NOTIFY(${1:[title]},${2:[message]});"],
