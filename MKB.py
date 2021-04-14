@@ -1022,6 +1022,9 @@ class mkbcompletions(sublime_plugin.EventListener):
 				["FREELOOK\t(baritone module)", "%FREELOOK%"],
 				["REPLANTCROPS\t(baritone module)", "%REPLANTCROPS%"],
 
+				["MODULEANVIL\t(baritone module)", "%MODULEANVIL%"],
+				["SETANVILTEXT\tset name to string", "SETANVILTEXT(${1:<string>});"],
+
 				["ALT\t(Pressed at start)", "%~ALT%"],
 				["CTRL\t(Pressed at start)", "%~CTRL%"],
 				["KEY_0\t(Pressed at start)", "%~KEY_0%"],

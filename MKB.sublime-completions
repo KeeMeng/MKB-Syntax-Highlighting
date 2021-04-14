@@ -408,6 +408,9 @@
 		{ "trigger": "FREELOOK\t(baritone module)", "contents": "%FREELOOK%"},
 		{ "trigger": "REPLANTCROPS\t(baritone module)", "contents": "%REPLANTCROPS%"},
 
+		{ "trigger": "MODULEANVIL\t(anvil rename module)", "contents": "%MODULEANVIL%"},
+		{ "trigger": "setanviltext\tset name to string", "contents": "setanviltext(${1:<string>});"},
+
 		{ "trigger": "ALT\t(Pressed at start)", "contents": "%~ALT%"},
 		{ "trigger": "CTRL\t(Pressed at start)", "contents": "%~CTRL%"},
 		{ "trigger": "KEY_0\t(Pressed at start)", "contents": "%~KEY_0%"},
