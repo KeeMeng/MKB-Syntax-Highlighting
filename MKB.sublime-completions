@@ -19,10 +19,10 @@
 		// { "trigger": "ifendswith\t…elseif…endif", "contents": "ifendswith(${1:<haystack>},${2:<needle>});\n	$3\nelseif(${4:<condition>});\n	$5\nendif;\n$6"},
 		// { "trigger": "ifendswith\t…else…endif", "contents": "ifendswith(${1:<haystack>},${2:<needle>});\n	$3\nelse;\n	$4\nendif;\n$5"},
 		// { "trigger": "ifendswith\t…elseif…else…endif", "contents": "ifendswith(${1:<haystack>},${2:<needle>});\n	$3\nelseif(${4:<condition>});\n	$5\nelse;\n	$6\nendif;\n$7"},
-		{ "trigger": "ifmatches\tExecutes when the <subject> matches the <pattern>", "contents": "ifmatches(${1:<subject>},${2:<pattern>},${3:&[target]},${4:[group]});\n	$5\nendif;\n$6"},
-		// { "trigger": "ifmatches\t…elseif…endif", "contents": "ifmatches(${1:<subject>},${2:<pattern>},${3:&[target]},${4:[group]});\n	$5\nelseif(${6:<condition>});\n	$7\nendif;\n$8"},
-		// { "trigger": "ifmatches\t…else…endif", "contents": "ifmatches(${1:<subject>},${2:<pattern>},${3:&[target]},${4:[group]});\n	$5\nelse;\n	$6\nendif;\n$7"},
-		// { "trigger": "ifmatches\t…elseif…else…endif", "contents": "ifmatches(${1:<subject>},${2:<pattern>},${3:&[target]},${4:[group]});\n	$5\nelseif(${6:<condition>});\n	$7\nelse;\n	$8\nendif;\n$9"},
+		{ "trigger": "ifmatches\tExecutes when the <subject> matches the <pattern>", "contents": "ifmatches(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5\nendif;\n$6"},
+		// { "trigger": "ifmatches\t…elseif…endif", "contents": "ifmatches(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5\nelseif(${6:<condition>});\n	$7\nendif;\n$8"},
+		// { "trigger": "ifmatches\t…else…endif", "contents": "ifmatches(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5\nelse;\n	$6\nendif;\n$7"},
+		// { "trigger": "ifmatches\t…elseif…else…endif", "contents": "ifmatches(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5\nelseif(${6:<condition>});\n	$7\nelse;\n	$8\nendif;\n$9"},
 		{ "trigger": "endif\tEnds an if-clause", "contents": "endif;\n$1"},
 
 		{ "trigger": "for\tfor(var,start,end)", "contents": "for(#${1:<var>},${2:<start>},${3:<end>});\n	$4\nnext;\n$5"},
@@ -75,6 +75,7 @@
 		{ "trigger": "unsafe\t…endunsafe", "contents": "unsafe(${1:<executions>});\n	$2\nendunsafe;\n$3"},
 		{ "trigger": "endunsafe\tEnds an active unsafe block", "contents": "endunsafe;\n$1"},
 
+		// Klacaiba
 		{ "trigger": "trim\tRemoves whitespace", "contents": "&${1:result} = trim(&${2:string});"},
 		{ "trigger": "shuffle\tShuffles an array", "contents": "shuffle(${1:array[]});"},
 		{ "trigger": "eval\tEvaluates an expression", "contents": "${2:&${1:[result]} = }eval(&${1:[result]},${3:<expression string>});"},
@@ -129,6 +130,7 @@
 		{ "trigger": "POLLALL\tList all variables of the event", "contents": "%POLLALL%"},
 		{ "trigger": "await\tShould be placed above the closing next of a pollevent", "contents": "await;"},
 
+		// Other modules from elspeth's website
 		{ "trigger": "notify\tCreates a system tray", "contents": "notify(${1:[title]},${2:[message]});"},
 		{ "trigger": "getslotitemext\t+ Argument for the itemname of item", "contents": "${2:&${1:[itemid]} = }getslotitemext(#${3:<slotid>},&${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[itemname]});"},
 		{ "trigger": "getslotitemnbt\t+ Argument for the nbt of item", "contents": "${2:&${1:[itemid]} = }getslotitemnbt(#${3:<slotid>},${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[nbt]});"},
@@ -162,6 +164,7 @@
 		{ "trigger": "getsigntext\tReturns signtext at coordinates", "contents": "${2:&${1:[outarray]} = }getsigntext(${3:<x>},${4:<y>},${5:<z>},&${1:[outarray]});"},
 		{ "trigger": "setsigntext\tSet text of sign in SP", "contents": "setsigntext(${1:<x>},${2:<y>}${3:,<z>},${4:<line1>},${5:<line2>},${6:<line3>},${7:<line4>});"},
 
+		// Klacaiba iterators
 		{ "trigger": "teams\tIterates over all teams", "contents": "teams"},
 		{ "trigger": "objectives\tIterates over all objectives", "contents": "objectives"},
 		{ "trigger": "score\tIterates over all scores", "contents": "score"},
@@ -170,18 +173,21 @@
 		{ "trigger": "iterators\tIterates over all iterators", "contents": "iterators"},
 		{ "trigger": "inventory\tIterates over your inventory", "contents": "inventory"},
 
+		// Klacaiba inventory iterator
 		{ "trigger": "SLOTINDEX\t(inventory iterator)", "contents": "%SLOTINDEX%"},
 		{ "trigger": "SLOTID\t(inventory iterator)", "contents": "%SLOTID%"},
 		{ "trigger": "SLOTSTACKSIZE\t(inventory iterator)", "contents": "%SLOTSTACKSIZE%"},
 		{ "trigger": "SLOTDATAVAR\t(inventory iterator)", "contents": "%SLOTDATAVAR%"},
 		{ "trigger": "SLOTTAG\t(inventory iterator)", "contents": "%SLOTTAG%"},
 
+		// Klacaiba players iterator
 		{ "trigger": "PLAYERUUID\t(players iterator) UUID of the player with dashes", "contents": "%PLAYERUUID%"},
 		{ "trigger": "PLAYERDISPLAYNAME\t(players iterator) Displayname of the player", "contents": "%PLAYERDISPLAYNAME%"},
 		{ "trigger": "PLAYERTEAM\t(players iterator) Scoreboard team of the player as JSON", "contents": "%PLAYERTEAM%"},
 		{ "trigger": "PLAYERPING\t(players iterator) Ping of the player", "contents": "%PLAYERPING%"},
 		{ "trigger": "PLAYERISLEGACY\t(players iterator) Whether the player uses a legacy account", "contents": "%PLAYERISLEGACY%"},
 
+		// Klacaiba teams iterator
 		{ "trigger": "TEAMALLOWFRIENDLYFIRE\t(teams iterator) If the team allows friendly fire", "contents": "%TEAMALLOWFRIENDLYFIRE%"},
 		{ "trigger": "TEAMCOLLISIONRULE\t(teams iterator) Collisionrule of the team", "contents": "%TEAMCOLLISIONRULE%"},
 		{ "trigger": "TEAMCOLOR\t(teams iterator) Color of the team", "contents": "%TEAMCOLOR%"},
@@ -194,15 +200,18 @@
 		{ "trigger": "TEAMSUFFIX\t(teams iterator) Suffix of the team", "contents": "%TEAMSUFFIX%"},
 		{ "trigger": "TEAMMEMBERS\t(teams iterator) Membernames of the team", "contents": "%TEAMMEMBERS%"},
 
+		// Klacaiba objective iterator
 		{ "trigger": "OBJECTIVECRITERIA\t(objectives iterator) Criteria of the objective", "contents": "%OBJECTIVECRITERIA%"},
 		{ "trigger": "OBJECTIVEDISPLAYNAME\t(objectives iterator) Displayname of the objective", "contents": "%OBJECTIVEDISPLAYNAME%"},
 		{ "trigger": "OBJECTIVENAME\t(objectives iterator) Name of the objective", "contents": "%OBJECTIVENAME%"},
 		{ "trigger": "OBJECTIVERENDERTYPE\t(objectives iterator) Rendertype of the objective", "contents": "%OBJECTIVERENDERTYPE%"},
 
+		// Klacaiba score iterator
 		{ "trigger": "SCOREOBJECTIVENAME\t(scores iterator) Name of the associated objective", "contents": "%SCOREOBJECTIVENAME%"},
 		{ "trigger": "SCOREPLAYERNAME\t(scores iterator) Name of the owning player", "contents": "%SCOREPLAYERNAME%"},
 		{ "trigger": "SCOREVALUE\t(scores iterator) Value of the score", "contents": "%SCOREVALUE%"},
 
+		// Klacaiba variables and some other stuff
 		{ "trigger": "LATENCY\tPing of the player to the server", "contents": "%LATENCY%"},
 		{ "trigger": "HACKED\tWhether all the functions of the module have been applied to the client", "contents": "%HACKED%"},
 		{ "trigger": "MINECRAFTDIR\tFilepath of the current minecraft directory", "contents": "%MINECRAFTDIR%"},
@@ -232,6 +241,7 @@
 		{ "trigger": "ACTIONRETURN\t(actions iterator) Action return", "contents": "%ACTIONRETURN%"},
 		{ "trigger": "ACTIONDESCRIPTION\t(actions iterator) Action description", "contents": "%ACTIONDESCRIPTION%"},
 
+		// Klacaiba trades iterator
 		{ "trigger": "trades\tIterates over all trades", "contents": "trades"},
 		{ "trigger": "TRADEBUYITEM\t(trades iterator)", "contents": "%TRADEBUYITEM%"},
 		{ "trigger": "TRADEBUYITEMAMOUNT\t(trades iterator)", "contents": "%TRADEBUYITEMAMOUNT%"},
@@ -242,6 +252,7 @@
 		{ "trigger": "TRADEUSES\t(trades iterator)", "contents": "%TRADEUSES%"},
 		{ "trigger": "TRADEMAXUSES\t(trades iterator)", "contents": "%TRADEMAXUSES%"},
 
+		// Farhit
 		{ "trigger": "FARHIT\tExtended reach %HIT%", "contents": "%FARHIT%"},
 		{ "trigger": "FARHITID\tExtended reach %HITID%", "contents": "%FARHITID%"},
 		{ "trigger": "FARHITDATA\tExtended reach %HITDATA%", "contents": "%FARHITDATA%"},
@@ -254,6 +265,7 @@
 		{ "trigger": "FARHITDIST\tExtended reach %HITDIST%", "contents": "%FARHITDIST%"},
 		{ "trigger": "MODULEFARHIT\tReturns true if the module is installed", "contents": "%MODULEFARHIT%"},
 
+		// Klacaiba sound event
 		{ "trigger": "SOUNDXPOSF\t(onSound) XPOS of sound as float", "contents": "%SOUNDXPOSF%"},
 		{ "trigger": "SOUNDYPOSF\t(onSound) YPOS of sound as float", "contents": "%SOUNDYPOSF%"},
 		{ "trigger": "SOUNDZPOSF\t(onSound) ZPOS of sound as float", "contents": "%SOUNDZPOSF%"},
@@ -267,6 +279,7 @@
 		{ "trigger": "SOUNDVOLUME\t(onSound) Volume of the sound as float", "contents": "%SOUNDVOLUME%"},
 		{ "trigger": "SOUNDRESOURCE\t(onSound) Resourcepath of the sound", "contents": "%SOUNDRESOURCE%"},
 
+		// Entities iterator
 		{ "trigger": "ENTITYTYPE\t(entities iterator) Type of the entity", "contents": "%ENTITYTYPE%"},
 		{ "trigger": "ENTITYNAME\t(entities iterator) Name of the entity", "contents": "%ENTITYNAME%"},
 		{ "trigger": "ENTITYUUID\t(entities iterator) UUID of the entity", "contents": "%ENTITYUUID%"},
@@ -344,13 +357,13 @@
 		{ "trigger": "EHITY\tY value of entity your're looking at or 0 if not looking at an entity", "contents": "%EHITY%"},
 		{ "trigger": "EHITZ\tZ value of entity your're looking at or 0 if not looking at an entity", "contents": "%EHITZ%"},
 
+		// scaneUtils Noria
 		{ "trigger": "getdensity\tSearches for sugarcane in the given direction", "contents": "getdensity(${1:[N/E/S/W]},#${2:<limit_search>},&${3:<initial_position>},#${4:<blocks_searched>},#${5:<sugarcane_found>});"},
 		{ "trigger": "getitemstacksize\tSearches the inventory, returns the stacksize", "contents": "#${1:stacksize} = getitemstacksize(&${2:<item_name>},#${3:[limit_search]});"},
 		{ "trigger": "getpercentage\tDoes first divided by second times 100", "contents": "getpercentage(#${1:[percentage]},#${2:<first>},#${3:<second>});"},
 		{ "trigger": "getslotpositions\tSearches the inventory, returns the position", "contents": "getslotpositions(&${1:<item_name>},#${2:<result_position>},#${3:[result_stacksize]});"},
 
-		{ "trigger": "pressbutton\t", "contents": "pressbutton(${1:<index>});"},
-
+		// Yaku
 		{ "trigger": "mod\tModulus function (Yaku)", "contents": "mod(${1:<#divident>},${2:<#divisor>});"},
 		{ "trigger": "trunc\tReturns the integer part of the number", "contents": "trunc(${1:<#float>});"},
 		{ "trigger": "ackermann\tAckermann function implementation", "contents": "ackermann(${1:<#m>},${2:<#n>});"},
@@ -358,18 +371,20 @@
 		{ "trigger": "pickmod\tImproved original pick action", "contents": "pickmod(${1:[namespace]}:${2:<itemid>}:${3:[damage]},${4:[addInCreative]});"},
 		{ "trigger": "antighost\tResolve ghost blocks issue", "contents": "antighost;"},
 
+		// Cloudscript
 		{ "trigger": "run\tRuns the specified script from cloudscript", "contents": "run(${1:<cloudscript>});"},
 		{ "trigger": "addanim\tAdd animation", "contents": "addanim(&${1:<array>}[]);"},
 		{ "trigger": "event\tUsed by cloudscript to run an event", "contents": "event(${1:<projectId>});"},
 		{ "trigger": "chat\tOpen cloudchat", "contents": "chat;"},
-		{ "trigger": "getKeybind\tGet the macro on that key", "contents": "getKeybind(${1:<key>}, &${2:<outvar>});"},
-		{ "trigger": "setKeybind\tSet a macro on that key", "contents": "setKeybind(${1:<key>}, ${2:<some code>});"},
+		{ "trigger": "getKeybind\tGet the macro on that key", "contents": "getKeybind(${1:<key>},&${2:<outvar>});"},
+		{ "trigger": "setKeybind\tSet a macro on that key", "contents": "setKeybind(${1:<key>},${2:<some code>});"},
 		{ "trigger": "return\tEnd a macro and return a value", "contents": "return(${1:<anything>});"},
 		{ "trigger": "sendMessage\tSend a message on a websocket channel", "contents": "sendMessage(${1:<channel>},${2:<message>});"},
 		{ "trigger": "encrypt\tEncrypt the variable content", "contents": "encrypt(&${1:<var>},${2:<16charskey>});"},
 		{ "trigger": "decrypt\tDecrypt the variable content", "contents": "decrypt(&${1:<var>},${2:<16charskey>});"},
 		{ "trigger": "remove\tRemove something from array", "contents": "remove(&${1:<array>}[],&${2:<outvar>},${3:[pos]});"},
 
+		// Baritone
 		{ "trigger": "baritone\tRuns any baritone command", "contents": "baritone(${1:<command>});"},
 		{ "trigger": "goto\tPathfinds to specified coordinates", "contents": "goto(${1:<x>},${2:<y>},${3:<z>});"},
 		{ "trigger": "setting\tChanges baritone setting", "contents": "setting(${1:<settingname>},${2:<value>});"},
@@ -382,11 +397,6 @@
 		{ "trigger": "selend\tSets pos2 of selection", "contents": "selend(${1:<x>},${2:<y>},${3:<z>});"},
 		{ "trigger": "selclear\tClears selections", "contents": "selclear();"},
 		{ "trigger": "selreplace\tReplace specified block with replacement block", "contents": "selreplace(${1:<blocktoreplace>},${2:<replacementblock>});"},
-
-		{ "trigger": "getiteminfo\tGets information about the specified slot", "contents": "getiteminfo(${1:[slot]},&${2:<idvar>},#${3:<stacksize>},#${4:<datavar>},&${5:<display>},&${6:<lore>});"},
-		{ "trigger": "getguiname\tGets the display name of the current GUI", "contents": "getguiname(&${1:[name]});"},
-		{ "trigger": "invfull\tReturns empty or full in the string defined", "contents": "invfull(&${1:[string}]);"},
-
 		{ "trigger": "MODULEBARITONE\t(baritone module)", "contents": "%MODULEBARITONE%"},
 		{ "trigger": "BARITONE\t(baritone module)", "contents": "%BARITONE%"},
 		{ "trigger": "PATHFINDING\t(baritone module)", "contents": "%PATHFINDING%"},
@@ -408,9 +418,22 @@
 		{ "trigger": "FREELOOK\t(baritone module)", "contents": "%FREELOOK%"},
 		{ "trigger": "REPLANTCROPS\t(baritone module)", "contents": "%REPLANTCROPS%"},
 
+		// AEI
+		{ "trigger": "getiteminfo\tGets information about the specified slot", "contents": "getiteminfo(${1:<slot>},&${2:[idvar]},#${3:[stacksize]},#${4:[datavar]},&${5:[display]},&${6:[lore]});"},
+		{ "trigger": "getguiname\tGets the display name of the current GUI", "contents": "getguiname(&${1:<name>});"},
+		{ "trigger": "invfull\tReturns empty or full in the string defined", "contents": "invfull(&${1:<string>});"},
+
+		// anvilRename
 		{ "trigger": "MODULEANVIL\t(anvil rename module)", "contents": "%MODULEANVIL%"},
 		{ "trigger": "setanviltext\tset name to string", "contents": "setanviltext(${1:<string>});"},
 
+		// Macro Modules Essential
+		{ "trigger": "getslotnbt\tGet nbt of item in slot", "contents": "getslotnbt(${1:<slotid>},${2:<path>},&${3:[itemId]},#${4:[stackSize]},#${5:[damage]});"},
+		{ "trigger": "pressbutton\tPress button", "contents": "pressbutton(${1:<buttonid>},${2:[button]});"},
+		{ "trigger": "getprop\tgets property of block at coordinates", "contents": "getprop(${1:<x>},${2:<y>},${3:<z>},${4:<propname>},#${5:[propvar]});"},
+		{ "trigger": "slotmiddleclick\tmiddle click inventory slot", "contents": "slotmiddleclick(${1:<slotid>});"},
+
+		// Default MKB
 		{ "trigger": "ALT\t(Pressed at start)", "contents": "%~ALT%"},
 		{ "trigger": "CTRL\t(Pressed at start)", "contents": "%~CTRL%"},
 		{ "trigger": "KEY_0\t(Pressed at start)", "contents": "%~KEY_0%"},

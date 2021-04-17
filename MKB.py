@@ -963,7 +963,10 @@ class mkbcompletions(sublime_plugin.EventListener):
 				["GETPERCENTAGE\tDoes first divided by second times 100", "GETPERCENTAGE(#${1:[percentage]},#${2:<first>},#${3:<second>});"],
 				["GETSLOTPOSITIONS\tSearches the inventory, returns the position", "GETSLOTPOSITIONS(&${1:<item_name>},#${2:<result_position>},#${3:[result_stacksize]});"],
 
-				["PRESSBUTTON\t", "PRESSBUTTON(${1:<index>});"],
+				["GETSLOTNBT\tGet nbt of item in slot", "GETSLOTNBT(${1:<slotid>},${2:<path>},&${3:[itemId]},#${4:[stackSize]},#${5:[damage]});"],
+				["PRESSBUTTON\tPress button", "PRESSBUTTON(${1:<buttonid>},${2:[button]});"],
+				["GETPROP\tgets property of block at coordinates", "GETPROP(${1:<x>},${2:<y>},${3:<z>},${4:<propname>},#${5:[propvar]});"],
+				["SLOTMIDDLECLICK\tmiddle click inventory slot", "SLOTMIDDLECLICK(${1:<slotid>});"],
 
 				["MOD\tModulus function (Yaku)", "MOD(${1:<#divident>},${2:<#divisor>});"],
 				["TRUNC\tReturns the integer part of the number", "TRUNC(${1:<#float>});"],
@@ -996,11 +999,6 @@ class mkbcompletions(sublime_plugin.EventListener):
 				["SELEND\tSets pos2 of selection", "SELEND(${1:<x>},${2:<y>},${3:<z>});"],
 				["SELCLEAR\tClears selections", "SELCLEAR();"],
 				["SELREPLACE\tReplace specified block with replacement block", "SELREPLACE(${1:<blocktoreplace>},${2:<replacementblock>});"],
-
-				["getiteminfo\tGets information about the specified slot", "GETITEMINFO(${1:[slot]},&${2:<idvar>},#${3:<stacksize>},#${4:<datavar>},&${5:<display>},&${6:<lore>});"],
-				["getguiname\tGets the display name of the current GUI", "GETGUINAME(&${1:[name]});"],
-				["invfull\tReturns empty or full in the string defined", "INVFULL(&${1:[string}]);"],
-
 				["MODULEBARITONE\t(baritone module)", "%MODULEBARITONE%"],
 				["BARITONE\t(baritone module)", "%BARITONE%"],
 				["PATHFINDING\t(baritone module)", "%PATHFINDING%"],
@@ -1021,6 +1019,10 @@ class mkbcompletions(sublime_plugin.EventListener):
 				["MAXFALLHEIGHTNOWATER\t(baritone module)", "%MAXFALLHEIGHTNOWATER%"],
 				["FREELOOK\t(baritone module)", "%FREELOOK%"],
 				["REPLANTCROPS\t(baritone module)", "%REPLANTCROPS%"],
+
+				["getiteminfo\tGets information about the specified slot", "GETITEMINFO(${1:[slot]},&${2:<idvar>},#${3:<stacksize>},#${4:<datavar>},&${5:<display>},&${6:<lore>});"],
+				["getguiname\tGets the display name of the current GUI", "GETGUINAME(&${1:[name]});"],
+				["invfull\tReturns empty or full in the string defined", "INVFULL(&${1:[string}]);"],
 
 				["MODULEANVIL\t(baritone module)", "%MODULEANVIL%"],
 				["SETANVILTEXT\tset name to string", "SETANVILTEXT(${1:<string>});"],
