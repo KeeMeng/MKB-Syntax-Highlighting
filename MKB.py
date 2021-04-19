@@ -161,7 +161,7 @@ class Indenter:
 			"case":		["case", "default", "endswitch"],
 			"default" :	["endswitch"]
 		}
-		self.openings = "IF|ELSEIF|ELSE|FOR|DO|UNSAFE|POLLEVENT"
+		self.openings = "IF|ELSEIF|ELSE|FOR|DO|UNSAFE|POLLEVENT|SWITCH|CASE|DEFAULT"
 		self.lintlines = []
 
 		if config("extra_indent"):
@@ -186,9 +186,10 @@ class Indenter:
 			count += 1
 			l = line.strip()
 			closed = False
-
 			if self.level and Indenter.related_command(l, self.stack[-1]): # Checks if the line corresponds to an ending
-				self.stack.pop() 
+				if Indenter.related_command(l, self.stack[-1]) == "endswitch":
+					self.level -= 1
+				self.stack.pop()
 				self.level -= 1 # Forwards the indentation
 				self.indent_line(l)
 				closed = True
