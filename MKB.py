@@ -156,7 +156,10 @@ class Indenter:
 			"foreach":	["next"],
 			"do":		["until", "while", "loop"],
 			"unsafe":	["endunsafe"],
-			"pollevent":["next"]
+			"pollevent":["next"],
+			"switch":	["endswitch"],
+			"case":		["case", "default", "endswitch"],
+			"default" :	["endswitch"]
 		}
 		self.openings = "IF|ELSEIF|ELSE|FOR|DO|UNSAFE|POLLEVENT"
 		self.lintlines = []
@@ -190,7 +193,7 @@ class Indenter:
 				self.indent_line(l)
 				closed = True
 			elif Indenter.related_command(l, self.openings) is None:
-				teststring = re.match("elseif|else|endif|next|until|while|loop|endunsafe", line, re.IGNORECASE)
+				teststring = re.match("elseif|else|endif|next|until|while|loop|endunsafe|endswitch|case|default", line, re.IGNORECASE)
 				if teststring is not None and debug:
 					print(" Error found on line "+str(count)+": "+line)
 					errorbool = True
@@ -688,6 +691,9 @@ class mkbcompletions(sublime_plugin.EventListener):
 
 				["UNSAFE\t…endunsafe", "UNSAFE(${1:<executions>});\n	$2\nENDUNSAFE;\n$3"],
 				["ENDUNSAFE\tEnds an active unsafe block", "ENDUNSAFE;\n$1"],
+
+				["SWITCH\tSwitch…Case…Default…Endcase", "SWITCH(${1:<expression>});\n	CASE(${2:<value>});\n		$3\n	DEFAULT;\n		$4\nENDSWITCH;\n$5"],
+				["CASE\tcase statement", "CASE(${1:<value>});\n	$2"],
 
 				["TRIM\tremoves whitespace", "&${1:result} = TRIM(&${2:string});"],
 				["SHUFFLE\tshuffles an array", "SHUFFLE(${1:array[]});"],
