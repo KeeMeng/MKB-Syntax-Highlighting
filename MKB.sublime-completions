@@ -3,6 +3,7 @@
 
 	"completions": 
 	[
+		// { "trigger": "\t", "contents": ""},
 		{ "trigger": "if\tExecuted when the <condition> evaluates to true", "contents": "if(${1:<condition>});\n	$2\nendif;\n$3"},
 		// { "trigger": "if\t…elseif…endif", "contents": "if(${1:<condition>});\n	$2\nelseif(${3:<condition>});\n	$4\nendif;\n$5"},
 		// { "trigger": "if\t…else…endif", "contents": "if(${1:<condition>});\n	$2\nelse;\n	$3\nendif;\n$4"},
@@ -29,9 +30,9 @@
 		{ "trigger": "for\tfor(var = start to end)", "contents": "for(#${1:<var>} = ${2:<start>} to ${3:<end>});\n	$4\nnext;\n$5"},
 		{ "trigger": "for\tfor(var = start to end step)", "contents": "for(#${1:<var>} = ${2:<start>} to ${3:<end>} step ${4:<step>});\n	$5\nnext;\n$6"},
 		{ "trigger": "foreach\tforeach(iterator)", "contents": "foreach(${1:<iterator>});\n	$2\nnext;\n$3"},
-		{ "trigger": "foreach\tforeach(array,content,index)", "contents": "foreach(${1:<&array>}[],${2:<&content>},#${3:[index]});\n	$4\nnext;\n$5"},
-		{ "trigger": "foreach\tforeach(array as content)", "contents": "foreach(${1:<&array>}[] as &${2:<content>});\n	$3\nnext;\n$4"},
-		{ "trigger": "foreach\tforeach(array as index => content)", "contents": "foreach(${1:<&array>}[] as #${2:<index>} => ${3:<&content>});\n	$4\nnext;\n$5"},
+		{ "trigger": "foreach\tforeach(array,content,index)", "contents": "foreach(${1:<array>}[],${2:<content>},#${3:[index]});\n	$4\nnext;\n$5"},
+		{ "trigger": "foreach\tforeach(array as content)", "contents": "foreach(${1:<array>}[] as &${2:<content>});\n	$3\nnext;\n$4"},
+		{ "trigger": "foreach\tforeach(array as index => content)", "contents": "foreach(${1:<array>}[] as #${2:<index>} => ${3:<content>});\n	$4\nnext;\n$5"},
 		{ "trigger": "do\t…loop", "contents": "do(${1:[count]});\n	$2\nloop;$3"},
 		{ "trigger": "do\t…while", "contents": "do(${1:[count]});\n	$2\nwhile(${3:<condition>});$4"},
 		{ "trigger": "do\t…until", "contents": "do(${1:[count]});\n	$2\nuntil(${3:<condition>});$4"},
@@ -82,7 +83,7 @@
 		{ "trigger": "trim\tRemoves whitespace", "contents": "&${1:result} = trim(&${2:string});"},
 		{ "trigger": "shuffle\tShuffles an array", "contents": "shuffle(${1:array[]});"},
 		{ "trigger": "eval\tEvaluates an expression", "contents": "${2:&${1:[result]} = }eval(&${1:[result]},${3:<expression string>});"},
-		{ "trigger": "char\tPuts set unicode value into &char", "contents": "char(${1:<&char>},${2:<decimal unicode value>});"},
+		{ "trigger": "char\tPuts set unicode value into &char", "contents": "char(&${1:<char>},${2:<decimal unicode value>});"},
 		{ "trigger": "mod\tEvaluates num1 modulo num2", "contents": "mod(#${1:<result>},${2:<num1>},${3:<num2>});"},
 		{ "trigger": "oldname\tGets the past names of a user", "contents": "oldname(&${1:<names>}[],${2:<username>});"},
 		{ "trigger": "readfile\tGets the content of a file", "contents": "readfile(&${1:<content>}[],${2:<filename>});"},
@@ -157,10 +158,10 @@
 		{ "trigger": "jsonarraysize\tReturns the size of the jsonarray", "contents": "${2:#${1:[size]} = }jsonarraysize(${3:<jsonarray>},#${1:[size]});"},
 		{ "trigger": "getclipboard\tReturns content of clipboard", "contents": "getclipboard(&${1:[text]});"},
 		{ "trigger": "setclipboard\tSets the clipboard text", "contents": "setclipboard(${1:<text>});"},
-		{ "trigger": "httpget\tHttpget request to url", "contents": "${2:&${1:[response]}[] = }httpget(${3:<url>},${4:<query>},${5:<#status>},&${1:[response]});"},
-		{ "trigger": "httppost\tHttppost request to url with data", "contents": "${2:&${1:[response]}[] = }httppost(${3:<url>},${4:<data>},${5:<#status>},&${1:[response]});"},
-		{ "trigger": "httpput\tHttpput request to url with data", "contents": "${2:&${1:[response]}[] = }httpput(${3:<url>},${4:<data>},${5:<#status>},&${1:[response]});"},
-		{ "trigger": "httpdelete\tRequest to specified url", "contents": "${2:&${1:[response]}[] = }httpdelete(${3:<url>},${4:<query>},${5:<#status>},&${1:[response]});"},
+		{ "trigger": "httpget\tHttpget request to url", "contents": "${2:&${1:[response]}[] = }httpget(${3:<url>},${4:<query>},#${5:<status>},&${1:[response]});"},
+		{ "trigger": "httppost\tHttppost request to url with data", "contents": "${2:&${1:[response]}[] = }httppost(${3:<url>},${4:<data>},#${5:<status>},&${1:[response]});"},
+		{ "trigger": "httpput\tHttpput request to url with data", "contents": "${2:&${1:[response]}[] = }httpput(${3:<url>},${4:<data>},#${5:<status>},&${1:[response]});"},
+		{ "trigger": "httpdelete\tRequest to specified url", "contents": "${2:&${1:[response]}[] = }httpdelete(${3:<url>},${4:<query>},#${5:<status>},&${1:[response]});"},
 		{ "trigger": "urlencode\tUrl encodes the string", "contents": "${2:&${1:[output]} = }urlencode(${3:<string>},&${1:[output]});"},
 		{ "trigger": "setrequestheader\tSets header for next request", "contents": "setrequestheader(&${1:<field>},&${2:<value>});"},
 		{ "trigger": "gethitsigntext\tReturns signtext of hit sign", "contents": "${2:&${1:[outarray]}[] = }gethitsigntext(&${1:[outarray]}[]);"},
@@ -367,9 +368,9 @@
 		{ "trigger": "getslotpositions\tSearches the inventory, returns the position", "contents": "getslotpositions(&${1:<item_name>},#${2:<result_position>},#${3:[result_stacksize]});"},
 
 		// Yaku
-		{ "trigger": "mod\tModulus function (Yaku)", "contents": "mod(${1:<#divident>},${2:<#divisor>});"},
-		{ "trigger": "trunc\tReturns the integer part of the number", "contents": "trunc(${1:<#float>});"},
-		{ "trigger": "ackermann\tAckermann function implementation", "contents": "ackermann(${1:<#m>},${2:<#n>});"},
+		{ "trigger": "mod\tModulus function (Yaku)", "contents": "mod(#${1:<divident>},#${2:<divisor>});"},
+		{ "trigger": "trunc\tReturns the integer part of the number", "contents": "trunc(#${1:<float>});"},
+		{ "trigger": "ackermann\tAckermann function implementation", "contents": "ackermann(#${1:<m>},#${2:<n>});"},
 		{ "trigger": "calcstacks\tCalculates stacks", "contents": "calcstacks(#${1:<items>},#${2:[stacks]},#${3:[leftovers]});"},
 		{ "trigger": "pickmod\tImproved original pick action", "contents": "pickmod(${1:[namespace]}:${2:<itemid>}:${3:[damage]},${4:[addInCreative]});"},
 		{ "trigger": "antighost\tResolve ghost blocks issue", "contents": "antighost;"},
@@ -427,8 +428,15 @@
 		{ "trigger": "invfull\tReturns empty or full in the string defined", "contents": "invfull(&${1:<string>});"},
 
 		// anvilRename
-		{ "trigger": "MODULEANVIL\t(anvil rename module)", "contents": "%MODULEANVIL%"},
+		{ "trigger": "MODULEANVIL\tReturns true if the module is installed", "contents": "%MODULEANVIL%"},
 		{ "trigger": "setanviltext\tset name to string", "contents": "setanviltext(${1:<string>});"},
+
+		// charModule
+		{ "trigger": "char", "contents": "&${1:<char>} = char(${2:<decimal unicode value>});"},
+		{ "trigger": "MODULECHARICE\tReturns true if the module is installed", "contents": "%MODULECHARICE%"},
+		{ "trigger": "P\tReturns paragraph character", "contents": "%P%"},
+		{ "trigger": "DOLLAR\tReturns one dollar character", "contents": "%DOLLAR%"},
+		{ "trigger": "DOLLARS\tReturns two dollar character", "contents": "%DOLLARS%"},
 
 		// Macro Modules Essential
 		{ "trigger": "getslotnbt\tGet nbt of item in slot", "contents": "getslotnbt(${1:<slotid>},${2:<path>},&${3:[itemId]},#${4:[stackSize]},#${5:[damage]});"},

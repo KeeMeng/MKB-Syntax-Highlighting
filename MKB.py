@@ -1034,6 +1034,12 @@ class mkbcompletions(sublime_plugin.EventListener):
 				["MODULEANVIL\t(baritone module)", "%MODULEANVIL%"],
 				["SETANVILTEXT\tset name to string", "SETANVILTEXT(${1:<string>});"],
 
+				["CHAR", "&${1:<char>} = CHAR(${2:<decimal unicode value>});"],
+				["MODULECHARICE\tReturns true if the module is installed", "%MODULECHARICE%"],
+				["P\tReturns paragraph character", "%P%"],
+				["DOLLAR\tReturns one dollar character", "%DOLLAR%"],
+				["DOLLARS\tReturns two dollar character", "%DOLLARS%"],
+
 				["ALT\t(Pressed at start)", "%~ALT%"],
 				["CTRL\t(Pressed at start)", "%~CTRL%"],
 				["KEY_0\t(Pressed at start)", "%~KEY_0%"],
