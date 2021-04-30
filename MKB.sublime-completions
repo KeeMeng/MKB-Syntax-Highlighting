@@ -118,10 +118,10 @@
 		{ "trigger": "ifenchanted\tChecks if the item is enchanted", "contents": "ifenchanted(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n	$6\nendif;\n$7"},
 		{ "trigger": "setslotitem\tSet the contents of a hotbar slot", "contents": "setslotitem(${1:<item>}:${2:[damage]}${3:,<slot>},${4:[amount]},${5:[nbt]});"},
 		{ "trigger": "getfishhook\tGet the x, y and z (3dp) of the bobber", "contents": "${2:#${1:[ytotal]} = }getfishhook(#${3:[x]},#${4:[xprecision]},#${5:[y]},#${6:[yprecision]},#${7:[z]},#${8:[zprecision]});"},
-		{ "trigger": "map", "contents": "#${1:result} = map(${2:<x>},${3:<minfrom>},${4:<maxfrom>},${5:<minto>},${6:<maxto>})"},
-		{ "trigger": "particle\tSpawns particles similar to the vanilla command", "contents": "${2:&${1:errors}[] = }particle(${3:<particlename>},${4:<x>},${5:<y>},${6:<z>},${7:<dx>},${8:<dy>},${9:<dz>},${10:[count]},${11:[mode]})"},
-		{ "trigger": "countitem\tAmount of items in your current inventory", "contents": "#${1:count} = countitem(${2:<item>}:${3:[damage]})"},
-		{ "trigger": "countiteminv\tAmount of items in your survival inventory", "contents": "#${1:count} = countiteminv(${2:<item>}:${3:[damage]})"},
+		{ "trigger": "map", "contents": "#${1:result} = map(${2:<x>},${3:<minfrom>},${4:<maxfrom>},${5:<minto>},${6:<maxto>});"},
+		{ "trigger": "particle\tSpawns particles similar to the vanilla command", "contents": "${2:&${1:errors}[] = }particle(${3:<particlename>},${4:<x>},${5:<y>},${6:<z>},${7:<dx>},${8:<dy>},${9:<dz>},${10:[count]},${11:[mode]});"},
+		{ "trigger": "countitem\tAmount of items in your current inventory", "contents": "#${1:count} = countitem(${2:<item>}:${3:[damage]});"},
+		{ "trigger": "countiteminv\tAmount of items in your survival inventory", "contents": "#${1:count} = countiteminv(${2:<item>}:${3:[damage]});"},
 		{ "trigger": "createcontrol\tCreates a control on the specified screen at row and column position", "contents": "${2:[&${1:controlname}] = }createcontrol(${3:<screenname|layouts|types>},${4:[element type]},${5:[row]},${6:[column]});"},
 		{ "trigger": "deletecontrol\tDeletes a control by name from any gui", "contents": "deletecontrol(${1:<controlname>});"},
 		{ "trigger": "timestamptodate\tFormat a timestamp in seconds", "contents": "&${1:date} = timestamptodate(${2:<timestamp>},${3:[in milliseconds|date format]},${4:[in milliseconds]});"},
@@ -443,6 +443,10 @@
 		{ "trigger": "pressbutton\tPress button", "contents": "pressbutton(${1:<buttonid>},${2:[button]});"},
 		{ "trigger": "getprop\tgets property of block at coordinates", "contents": "getprop(${1:<x>},${2:<y>},${3:<z>},${4:<propname>},#${5:[propvar]});"},
 		{ "trigger": "slotmiddleclick\tmiddle click inventory slot", "contents": "slotmiddleclick(${1:<slotid>});"},
+
+		// autoreconnect
+		{ "trigger": "reconnect\tAuto reconnects to a server", "contents": "reconnect(${1:<on|off|10-300>});"},
+		{ "trigger": "RECONNECT\tWhether or not auto reconnect is enabled", "contents": "%RECONNECT%"},
 
 		// Default MKB
 		{ "trigger": "ALT\t(Pressed at start)", "contents": "%~ALT%"},
