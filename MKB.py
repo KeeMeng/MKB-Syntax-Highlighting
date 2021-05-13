@@ -22,6 +22,7 @@ except:
 	except:
 		print("MKBdocs offline and online both being weird")
 
+functions = []
 
 def plugin_loaded():
 	global settings
@@ -95,6 +96,7 @@ class mkbindent(sublime_plugin.ViewEventListener):
 	def on_selection_modified(self):
 		if config("auto_linting"):
 			self.view.run_command("mkbdebug2")
+		self.view.run_command("functions_syntax")
 
 class lineindenter(sublime_plugin.TextCommand):
 	def run(self, edit, args):
@@ -159,9 +161,10 @@ class Indenter:
 			"pollevent":["next"],
 			"switch":	["endswitch"],
 			"case":		["case", "default", "endswitch"],
-			"default" :	["endswitch"]
+			"default" :	["endswitch"],
+			"function": ["endfunction"]
 		}
-		self.openings = "IF|ELSEIF|ELSE|FOR|DO|UNSAFE|POLLEVENT|SWITCH|CASE|DEFAULT"
+		self.openings = "IF|ELSEIF|ELSE|FOR|DO|UNSAFE|POLLEVENT|SWITCH|CASE|DEFAULT|FUNCTION"
 		self.lintlines = []
 
 		if config("extra_indent"):
@@ -194,7 +197,7 @@ class Indenter:
 				self.indent_line(l)
 				closed = True
 			elif Indenter.related_command(l, self.openings) is None:
-				teststring = re.match("elseif|else|endif|next|until|while|loop|endunsafe|endswitch|case|default", line, re.IGNORECASE)
+				teststring = re.match("elseif|else|endif|next|until|while|loop|endunsafe|endswitch|case|default|function", line, re.IGNORECASE)
 				if teststring is not None and debug:
 					print(" Error found on line "+str(count)+": "+line)
 					errorbool = True
@@ -472,7 +475,7 @@ class mkbdebug2(sublime_plugin.TextCommand):
 				if opened != 0 or opened2 != 0 or var or quots:
 					regionlist.append(self.view.line(self.view.text_point(count-1,0)))
 
-			self.view.add_regions("mkblinter", regionlist, "invalid.mkb", "dot", sublime.DRAW_NO_FILL)		
+			self.view.add_regions("mkblinter", regionlist, "invalid.mkb", "dot", sublime.DRAW_NO_FILL)
 
 class mkbcase1(sublime_plugin.TextCommand):
 	def run(self, edit):
@@ -628,6 +631,39 @@ class mkbwiki(sublime_plugin.TextCommand):
 					array.append("{}: {}".format(str(key).title(),value))
 
 			sublime.Window.show_quick_panel(sublime.active_window(), array, self.on_done2, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
+
+class functions_syntax(sublime_plugin.TextCommand):
+	def run(self, edit):
+		if self.view.match_selector(0, "source.mkb"):
+			global functions
+			functions = []
+			self.view.erase_regions("mkbfunctions")
+			regions = self.view.split_by_newlines(sublime.Region(0, len(self.view)))
+			lines = []
+			[lines.append(self.view.substr(r)) for r in regions]
+			count = 0
+			regionlist = self.view.get_regions("mkbfunctions")
+
+			for line in lines:
+				count += 1
+				function_name = re.match("^\s*?function (\w*?)\(", line)
+				if function_name != None:
+					functions.append(function_name.group(1))
+
+				string = "|".join(functions)
+				string = "^\s*?(call\()?(function )?{}( |,|\(|\))".format(string)
+				function_call = re.match(string, line)
+				if function_call != None:
+					# print(function_call.group(1))
+					if function_call.group(1) != None:
+						regionlist.append(self.view.word(self.view.text_point(count-1,5+line.count("\t"))))
+					elif function_call.group(2) != None:
+						regionlist.append(self.view.word(self.view.text_point(count-1,9+line.count("\t"))))
+					else:
+						regionlist.append(self.view.word(self.view.text_point(count-1,0+line.count("\t"))))
+
+
+			self.view.add_regions("mkbfunctions", regionlist, "meta.function.mkb", "", sublime.DRAW_NO_FILL|sublime.DRAW_NO_OUTLINE|sublime.DRAW_SOLID_UNDERLINE)
 
 
 # 1000+ Lines of auto complete below!!
@@ -1040,8 +1076,12 @@ class mkbcompletions(sublime_plugin.EventListener):
 				["DOLLAR\tReturns one dollar character", "%DOLLAR%"],
 				["DOLLARS\tReturns two dollar character", "%DOLLARS%"],
 
-				{ "trigger": "RECONNECT\tAuto reconnects to a server", "contents": "RECONNECT(${1:<on|off|10-300>});"},
-				{ "trigger": "RECONNECT\tWhether or not auto reconnect is enabled", "contents": "%RECONNECT%"},
+				["RECONNECT\tAuto reconnects to a server", "RECONNECT(${1:<on|off|10-300>});"],
+				["RECONNECT\tWhether or not auto reconnect is enabled", "%RECONNECT%"],
+
+				["FUNCTION", "FUNCTION${1:<name>}(${2:[parameter], ...});\n\t$3\nENDFUNCTION;$4"],
+				["RETURN", "RETURN ${1:<value>};"],
+				["CALL", "CALL(${1:<name>},${2:[parameter], ...});"],
 
 				["ALT\t(Pressed at start)", "%~ALT%"],
 				["CTRL\t(Pressed at start)", "%~CTRL%"],

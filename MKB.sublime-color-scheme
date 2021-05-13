@@ -95,5 +95,9 @@
 			"foreground": "var(mcf)",
 			"background": "var(mc4)"
 		},
+		{
+			"scope": "meta.function.mkb",
+			"foreground": "#B9F2FF",
+		},
 	],
 }

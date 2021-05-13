@@ -448,6 +448,14 @@
 		{ "trigger": "reconnect\tAuto reconnects to a server", "contents": "reconnect(${1:<on|off|10-300>});"},
 		{ "trigger": "RECONNECT\tWhether or not auto reconnect is enabled", "contents": "%RECONNECT%"},
 
+		// functions module
+		{ "trigger": "function", "contents": "function ${1:<name>}(${2:[parameter], ...});\n\t$3\nendfunction;$4"},
+		{ "trigger": "return", "contents": "return(${1:<value>});"},
+		{ "trigger": "return", "contents": "return ${1:<value>};"},
+		{ "trigger": "call", "contents": "call(${1:<name>},${2:[parameter], ...});"},
+
+
+
 		// Default MKB
 		{ "trigger": "ALT\t(Pressed at start)", "contents": "%~ALT%"},
 		{ "trigger": "CTRL\t(Pressed at start)", "contents": "%~CTRL%"},
