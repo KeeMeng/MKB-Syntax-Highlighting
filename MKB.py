@@ -96,7 +96,8 @@ class mkbindent(sublime_plugin.ViewEventListener):
 	def on_selection_modified(self):
 		if config("auto_linting"):
 			self.view.run_command("mkbdebug2")
-		self.view.run_command("functions_syntax")
+		if config("functions_underline"):
+			self.view.run_command("functions_syntax")
 
 class lineindenter(sublime_plugin.TextCommand):
 	def run(self, edit, args):

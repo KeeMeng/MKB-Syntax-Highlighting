@@ -64,4 +64,5 @@
 
 	//DO NOT EDIT UNLESS YOU ARE SURE:
 	"word_wrap": true,
+	"functions_underline": true,
 }
