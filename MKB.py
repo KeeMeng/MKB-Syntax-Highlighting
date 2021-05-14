@@ -640,8 +640,7 @@ class functions_syntax(sublime_plugin.TextCommand):
 			functions = []
 			self.view.erase_regions("mkbfunctions")
 			regions = self.view.split_by_newlines(sublime.Region(0, len(self.view)))
-			lines = []
-			[lines.append(self.view.substr(r)) for r in regions]
+			lines = [self.view.substr(r) for r in regions]
 			count = 0
 			regionlist = self.view.get_regions("mkbfunctions")
 
@@ -675,20 +674,19 @@ class mkb_goto_definition(sublime_plugin.TextCommand):
 		if self.view.match_selector(0, "source.mkb"):
 			if event:
 				pos = self.view.window_to_text((event["x"],event["y"]))
-			word = self.view.substr(self.view.word(pos))
-			global functions
-			lines = []
-			regions = self.view.split_by_newlines(sublime.Region(0, len(self.view)))
-			[lines.append(self.view.substr(r)) for r in regions]
-			count = 0
-
-			for line in lines:
-				function_name = re.match("^\s*?function {}\(".format(word), line)
-				if function_name != None:
+				word = self.view.substr(self.view.word(pos))
+				if word != "":
+					regions = self.view.split_by_newlines(sublime.Region(0, len(self.view)))
+					lines = [self.view.substr(r) for r in regions]
 					reg = self.view.split_by_newlines(sublime.Region(0, len(sublime.active_window().active_view())))
-					self.view.run_command('_sublime_linter_move_cursor', {'point': reg[count].a+9})
-					break
-				count += 1
+					count = 0
+
+					for line in lines:
+						function_name = re.match("^\s*?function {}\(".format(word), line)
+						if function_name != None:
+							self.view.run_command('_sublime_linter_move_cursor', {'point': reg[count].a+9})
+							break
+						count += 1
 				
 
 
