@@ -79,6 +79,10 @@
 		{ "trigger": "switch\tSwitch…Case…Default…Endcase", "contents": "switch(${1:<expression>});\n	case(${2:<value>});\n		$3\n	default;\n		$4\nendswitch;\n$5"},
 		{ "trigger": "case\tcase statement", "contents": "case(${1:<value>});\n	$2"},
 
+		// My custom completions
+		{ "trigger": "function: print", "contents": "function print(&text);\n\tlog(\"%&text%\");\nendfunction;\n\nprint(${1:<text>});\n"},
+		{ "trigger": "print", "contents": "print(${1:<text>});"},
+
 		// Klacaiba
 		{ "trigger": "trim\tRemoves whitespace", "contents": "&${1:result} = trim(&${2:string});"},
 		{ "trigger": "shuffle\tShuffles an array", "contents": "shuffle(${1:array[]});"},
