@@ -3,6 +3,13 @@
 		"caption":"MKB",
 		"children":[
 			{
+				"caption":"Goto Function Definition",
+				"command":"mkb_goto_definition",
+				"args":{
+					"event":"None"
+				}
+			},
+			{
 				"caption":"MKB Language",
 				"command":"set_file_type",
 				"args":{

@@ -666,6 +666,31 @@ class functions_syntax(sublime_plugin.TextCommand):
 
 			self.view.add_regions("mkbfunctions", regionlist, "meta.function.mkb", "", sublime.DRAW_NO_FILL|sublime.DRAW_NO_OUTLINE|sublime.DRAW_SOLID_UNDERLINE)
 
+class mkb_goto_definition(sublime_plugin.TextCommand):
+
+	def want_event(self):
+		return True
+
+	def run(self, edit, event=None):
+		if self.view.match_selector(0, "source.mkb"):
+			if event:
+				pos = self.view.window_to_text((event["x"],event["y"]))
+			word = self.view.substr(self.view.word(pos))
+			global functions
+			lines = []
+			regions = self.view.split_by_newlines(sublime.Region(0, len(self.view)))
+			[lines.append(self.view.substr(r)) for r in regions]
+			count = 0
+
+			for line in lines:
+				function_name = re.match("^\s*?function {}\(".format(word), line)
+				if function_name != None:
+					reg = self.view.split_by_newlines(sublime.Region(0, len(sublime.active_window().active_view())))
+					self.view.run_command('_sublime_linter_move_cursor', {'point': reg[count].a+9})
+					break
+				count += 1
+				
+
 
 # 1000+ Lines of auto complete below!!
 class mkbcompletions(sublime_plugin.EventListener):
