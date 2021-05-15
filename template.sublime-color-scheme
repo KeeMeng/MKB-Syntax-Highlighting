@@ -92,5 +92,10 @@
 			"foreground": "#FFFFFF",
 			"background": "#AA0000",
 		},
+		{
+			// Functions
+			"scope": "meta.function.mkb",
+			"foreground": "#86B28D"
+		},
 	],
 }
