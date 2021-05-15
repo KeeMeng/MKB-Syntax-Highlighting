@@ -1,0 +1,104 @@
+{
+	// Color scheme created by: lomexicano
+	// Discord Tag: lomexicano#0001
+	// Discord ID: 277301646050983936
+
+	"globals":
+	// Suggest not to change
+	{
+		"background": "#1f1e1f",
+		"foreground": "#FFFFFF",
+		"line_highlight": "#333333",
+		"caret": "#FFFFFF",
+		"block_caret": "#FFFFFF",
+		"selection": "#363636",
+		"selection_border": "#222222",
+		"invisibles": "#222222",
+		"misspelling": "#FF0000",
+	},
+	"rules": 
+	[
+		{
+			// Default color (Don't change)
+			"scope": "source.mkb",
+			"foreground": "#FFFFFF",
+		},
+		{
+			// Comments
+			"scope": "comment.mkb",
+			"foreground": "#e9ffeb",
+			//"font_style": "italic",
+		},
+		{
+			// Parameters
+			"scope": "variable.parameter.mkb",
+			"foreground": "#c9712c",
+		},
+		{
+			// Strings
+			"scope": "string.mkb",
+			"foreground": "#ffed9e",
+		},
+		{
+			 // Symbols eg %% , ; ( ) [ ]
+			"scope": "keyword.other.mkb",
+			"foreground": "#B1EDD1",
+		},
+		{
+			// Numbers
+			"scope": "constant.numeric.mkb",
+			"foreground": "#ff8c49",
+		},
+		{
+			// Actions
+			"scope": "keyword.control.mkb",
+			"foreground": "#88ff61",
+		},
+		{
+			// Built in variables
+			"scope": "variable.mkb",
+			"foreground": "#ff8aff",
+		},
+		{
+			// Iterators
+			"scope": "keyword.operator.word.mkb",
+			"foreground": "#9ada89",
+		},
+		{
+			// User defined variables
+			"scope": "punctuation.definition.keyword.mkb",
+			"foreground": "#9dc2ff",
+		},
+		{
+			// Operators eg = < > && ||
+			"scope": "keyword.operator.mkb",
+			"foreground": "#d7edc4",
+		},
+		{
+			// False
+			"scope": "constant.language.false.mkb",
+			"foreground": "#ff1f00",
+		},
+		{
+			// True
+			"scope": "constant.language.true.mkb",
+			"foreground": "#00ff00",
+		},
+		{
+			// Keybinds
+			"scope": "keyword.control.import.mkb",
+			"foreground": "#ddff43",
+		},
+		{
+			// Invalid stuff
+			"scope": "invalid.mkb",
+			"foreground": "#ff35a4",
+			"background": "#AA0000",
+		},
+		{
+			// Functions
+			"scope": "meta.function.mkb",
+			"foreground": "#86B28D"
+		},
+	],
+}
