@@ -1,5 +1,5 @@
 # MKB-Syntax-Highlighting
-## Macro/Keybind Mod Syntax Highlighting for Sublime Text 3 with Auto Complete and hints
+## Macro/Keybind Mod Syntax Highlighting for Sublime Text 3/4 with Auto Complete and hints
 
 **Syntax highlighting & auto complete supports modules from https://spthiel.github.io/Modules/**
 
@@ -13,7 +13,7 @@ Join [my discord](https://discord.gg/m9yfJtb) for support/suggestions/bugs.
 
 ## Introduction:
 
-This package was made to help coding for Macro Keybind Mod easier. To help you, I made auto complete to suggest possible actions and variable to you, and if you hover over the keywords, you can see a description and example of the command, which was taken from [MKB docs](https://beta.mkb.gorlem.ml/api/docs). (Thanks Gorlem!) It also has an indenter made by Federal, with a fancy indent function too! After making your code, you can also use a linter to find possible bugs, such as missing brackets. To personalize this package, go to the Context Menu or `Edit` > `MKB` menu at the top of Sublime Text 3, and modify `Package Settings`. 
+This package was made to help coding for Macro Keybind Mod easier. To help you, I made auto complete to suggest possible actions and variable to you, and if you hover over the keywords, you can see a description and example of the command, which was taken from [MKB docs](https://beta.mkb.gorlem.ml/api/docs). (Thanks Gorlem!) It also has an indenter made by Federal, with a fancy indent function too! After making your code, you can also use a linter to find possible bugs, such as missing brackets. To personalize this package, go to the Context Menu or `Edit` > `MKB` menu at the top of Sublime Text 3/4, and modify `Package Settings`. 
 
 Brief description of the files in the package include: 
 ```
