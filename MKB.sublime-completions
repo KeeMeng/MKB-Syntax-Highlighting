@@ -3,7 +3,7 @@
 	// Tip: Command k + 2 to collapse all completitions!
 	"completions": 
 	[
-		// { "trigger": "", "kind": "keyword", "details": "", "contents": ""},
+		// { "trigger": "", "kind": "", "annotation": "", "details": "", "contents": ""},
 
 	// Control Flow
 		{ "trigger": "if", "kind": "snippet", "annotation": "…endif", "details": "Executes if the &#60;condition&#62; evaluates to true", "contents": "if(${1:<condition>});\n	$2\nendif;\n$3"},
