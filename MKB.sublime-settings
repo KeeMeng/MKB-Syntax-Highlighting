@@ -6,6 +6,9 @@
 	// Whether or not for the auto complete to be in uppercase
 	"autocomplete_caps": false,
 
+	// Whether or not for the auto complete variables to contain %%
+	"var_wrap": false,
+
 	// What character to use as the whitespace for the buffer
 	"indent_character": "\t",
 
