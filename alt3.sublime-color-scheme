@@ -12,7 +12,7 @@
 		//"background": "#000000",
 
 		//For default Sublime Text 3 background, use this background-setting.
-		"background": "#282923",
+		"background": "#1F1E1F",
 		"foreground": "#FFFFFF",
 		"line_highlight": "#333333",
 		"caret": "#FFFFFF",
