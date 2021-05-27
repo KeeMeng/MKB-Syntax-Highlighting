@@ -24,6814 +24,6903 @@ class mkbcompletions(sublime_plugin.EventListener):
 
 			return sublime.CompletionList([
 
-				sublime.CompletionItem(
+			# Control Flow
+				sublime.CompletionItem( #if
 					trigger=case("if"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="…"+case("endif")+"", 
 					details="Executes if the &#60;condition&#62; evaluates to true", 
 					completion=""+case("if")+"(${1:<condition>});\n	$2\n"+case("endif")+";\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ifbeginswith
 					trigger=case("ifbeginswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET,  
 					annotation="…"+case("endif")+"", 
 					details="Executes if the &#60;haystack&#62; starts with the &#60;needle&#62;",
 					completion=""+case("ifbeginswith")+"(${1:<haystack>},${2:<needle>});\n	$3\n"+case("endif")+";\n$4"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ifendswith
 					trigger=case("ifendswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="…"+case("endif")+"", 
 					details="Executes if the &#60;haystack&#62; ends with the &#60;needle&#62;", 
 					completion=""+case("ifendswith")+"(${1:<haystack>},${2:<needle>});\n	$3\n"+case("endif")+";\n$4"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ifcontains
 					trigger=case("ifcontains"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="…"+case("endif")+"", 
 					details="Executes if the &#60;haystack&#62; contains the &#60;needle&#62;", 
 					completion=""+case("ifcontains")+"(${1:<haystack>},${2:<needle>});\n	$3\n"+case("endif")+";\n$4"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ifmatches
 					trigger=case("ifmatches"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="…"+case("endif")+"", 
 					details="Executes if the &#60;subject&#62; matches the &#60;pattern&#62;", 
 					completion=""+case("ifmatches")+"(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5\n"+case("endif")+";\n$6"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #endif
 					trigger=case("endif"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="…endif", 
 					details="Ends an if-clause", 
 					completion=""+case("endif")+";\n$1"),
-				sublime.CompletionItem(
+
+				sublime.CompletionItem( #for
 					trigger=case("for"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="for(var,start,end)…"+case("next")+"", 
 					details="Begins a for loop", 
 					completion=""+case("for")+"(#${1:<var>},${2:<start>},${3:<end>});\n	$4\n"+case("next")+";\n$5"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #for
 					trigger=case("for"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="for(var = start to end)…"+case("next")+"", 
 					details="Begins a for loop", 
 					completion=""+case("for")+"(#${1:<var>} = ${2:<start>} to ${3:<end>});\n	$4\n"+case("next")+";\n$5"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #for
 					trigger=case("for"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="for(var = start to end step)…"+case("next")+"", 
 					details="Begins a for loop", 
 					completion=""+case("for")+"(#${1:<var>} = ${2:<start>} to ${3:<end>} step ${4:<step>});\n	$5\n"+case("next")+";\n$6"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #foreach
 					trigger=case("foreach"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="foreach(iterator)…"+case("next")+"", 
 					details="Begins a loop over the specified iterator", 
 					completion=""+case("foreach")+"(${1:<iterator>});\n	$2\n"+case("next")+";\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #foreach
 					trigger=case("foreach"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="foreach(array,content,index)…"+case("next")+"", 
 					details="Begins a loop over the specified iterator", 
 					completion=""+case("foreach")+"(${1:<array>}[],${2:<content>},#${3:[index]});\n	$4\nnext;\n$5"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #foreach
 					trigger=case("foreach"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="foreach(array as content)…"+case("next")+"", 
 					details="Begins a loop over the specified iterator", 
 					completion=""+case("foreach")+"(${1:<array>}[] as &${2:<content>});\n	$3\n"+case("next")+";\n$4"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #foreach
 					trigger=case("foreach"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="foreach(array as index =&#62; content)…"+case("next")+"", 
 					details="Begins a loop over the specified iterator", 
 					completion=""+case("foreach")+"(${1:<array>}[] as #${2:<index>} => ${3:<content>});\n	$4\n"+case("next")+";\n$5"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #do
 					trigger=case("do"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="…"+case("loop")+"", 
 					details="Begins a loop", 
 					completion=""+case("do")+"(${1:[count]});\n	$2\n"+case("loop")+";$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #do
 					trigger=case("do"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="…"+case("while")+"", 
 					details="Begins a loop", 
 					completion=""+case("do")+"(${1:[count]});\n	$2\n"+case("while")+"(${3:<condition>});$4"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #do
 					trigger=case("do"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="…"+case("until")+"1", 
 					details="Begins a loop", 
 					completion=""+case("do")+"(${1:[count]});\n	$2\n"+case("until")+"(${3:<condition>});$4"),
-				sublime.CompletionItem(
+
+				sublime.CompletionItem( #else
 					trigger=case("else"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Executes if no if-clause before evaluated to true", 
 					completion=""+case("else")+";\n	$1"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #elseif
 					trigger=case("elseif"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Executes if the evaluates to true and no if-clause before evaluated to true", 
 					completion=""+case("elseif")+"(${1:<condition>});\n	$2"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #loop
 					trigger=case("loop"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Closes a do loop", 
 					completion=""+case("loop")+";\n$1"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #while
 					trigger=case("while"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the &#60;condition&#62; is not met", 
 					completion=""+case("while")+"(${1:<condition>});\n$2"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #until
 					trigger=case("until"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the &#60;condition&#62; is met", 
 					completion=""+case("until")+"(${1:<condition>});\n$2"),
-				sublime.CompletionItem(
+
+				sublime.CompletionItem( #elseifbeginswith
 					trigger=case("elseifbeginswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Executes if the &#60;haystack&#62; starts with the &#60;needle&#62; and no if-clause before evaluated to true", 
 					completion=""+case("elseifbeginswith")+"(${1:<haystack>},${2:<needle>});\n	$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #elseifcanharvestblock
 					trigger=case("elseifcanharvestblock"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Executes if the &#60;blockid&#62; can currently be harvested and no if-clause before evaluated to true", 
 					completion=""+case("elseifcanharvestblock")+"(${1:<blockid>});\n	$2"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #elseifcontains
 					trigger=case("elseifcontains"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Executes if the &#60;haystack&#62; contains the &#60;needle&#62; and no if-clause before evaluated to true", 
 					completion=""+case("elseifcontains")+"(${1:<haystack>},${2:<needle>});\n	$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #elseifenchanted
 					trigger=case("elseifenchanted"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Executes if the item at &#60;slot&#62; is enchanted and no if-clause before evaluated to true", 
 					completion=""+case("elseifenchanted")+"(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n	$6"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #elseifendswith
 					trigger=case("elseifendswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Executes if the &#60;haystack&#62; ends with the &#60;needle&#62; and no if-clause before evaluated to true", 
 					completion=""+case("elseifendswith")+"(${1:<haystack>},${2:<needle>});\n	$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #elseiffileexist
 					trigger=case("elseiffileexist"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Executes if the file exists at &#60;path&#62; and no if-clause before evaluated to true", 
 					completion=""+case("elseiffileexists")+"(${1:<path>},${2:[expression if file should be created if missing]});\n	$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #elseifininv
 					trigger=case("elseifininv"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Executes if the &#60;items&#62; are in the inventory and no if-clause before evaluated to true", 
 					completion=""+case("elseifininv")+"(${1:[mode]},${2:<items>});\n	$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #elseifinvisfull
 					trigger=case("elseifinvisfull"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Executes if the inventory is full and no if-clause before evaluated to true", 
 					completion=""+case("elseifinvisfull")+"(${1:[item]});\n	$2"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #elseifmatches
 					trigger=case("elseifmatches"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Executes if the &#60;subject&#62; matches the &#60;pattern&#62; and no if-clause before evaluated to true", 
 					completion=""+case("elseifmatches")+"(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5"),
-				sublime.CompletionItem(
+
+				sublime.CompletionItem( #whilebeginswith
 					trigger=case("whilebeginswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if &#60;haystack&#62; does not start with the &#60;needle&#62;", 
 					completion=""+case("whilebeginswith")+"(${1:<haystack>},${2:<needle>});\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #whilecanharvestblock
 					trigger=case("whilecanharvestblock"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the &#60;blockid&#62; cannot currently be harvested", 
 					completion=""+case("whilecanharvestblock")+"(${1:<blockid>});\n$2"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #whilecontains
 					trigger=case("whilecontains"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if &#60;haystack&#62; does not contain the &#60;needle&#62;", 
 					completion=""+case("whilecontains")+"(${1:<haystack>},${2:<needle>});\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #whileenchanted
 					trigger=case("whileenchanted"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the item at &#60;slot&#62; is not enchanted", 
 					completion=""+case("whileenchanted")+"(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n$6"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #whileendswith
 					trigger=case("whileendswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if &#60;haystack&#62; does not end with the &#60;needle&#62;", 
 					completion=""+case("whileendswith")+"(${1:<haystack>},${2:<needle>});\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #whilefileexist
 					trigger=case("whilefileexist"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the file does not exist at &#60;path&#62;", 
 					completion=""+case("whilefileexists")+"(${1:<path>},${2:[expression if file should be created if missing]});\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #whileininv
 					trigger=case("whileininv"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the &#60;items&#62; are not in the inventory", 
 					completion=""+case("whileininv")+"(${1:[mode]},${2:<items>});\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #whileinvisfull
 					trigger=case("whileinvisfull"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the inventory is not full", 
 					completion=""+case("whileinvisfull")+"(${1:[item]});\n$2"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #whilematches
 					trigger=case("whilematches"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the &#60;subject&#62; does not match the &#60;pattern&#62;", 
 					completion=""+case("whilematches")+"(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n$5"),
-				sublime.CompletionItem(
+
+				sublime.CompletionItem( #untilbeginswith
 					trigger=case("untilbeginswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if &#60;haystack&#62; starts with the &#60;needle&#62;", 
 					completion=""+case("untilbeginswith")+"(${1:<haystack>},${2:<needle>});\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #untilcanharvestblock
 					trigger=case("untilcanharvestblock"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the &#60;blockid&#62; can currently be harvested", 
 					completion=""+case("untilcanharvestblock")+"(${1:<blockid>});\n$2"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #untilcontains
 					trigger=case("untilcontains"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if &#60;haystack&#62; contains the &#60;needle&#62;", 
 					completion=""+case("untilcontains")+"(${1:<haystack>},${2:<needle>});\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #untilenchanted
 					trigger=case("untilenchanted"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the item at &#60;slot&#62; is enchanted", 
 					completion=""+case("untilenchanted")+"(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n$6"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #untilendswith
 					trigger=case("untilendswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if &#60;haystack&#62; ends with the &#60;needle&#62;", 
 					completion=""+case("untilendswith")+"(${1:<haystack>},${2:<needle>});\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #untilfileexist
 					trigger=case("untilfileexist"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the file exists at &#60;path&#62;", 
 					completion=""+case("untilfileexists")+"(${1:<path>},${2:[expression if file should be created if missing]});\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #untilininv
 					trigger=case("untilininv"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the &#60;items&#62; are in the inventory", 
 					completion=""+case("untilininv")+"(${1:[mode]},${2:<items>});\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #untilinvisfull
 					trigger=case("untilinvisfull"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the inventory is full", 
 					completion=""+case("untilinvisfull")+"(${1:[item]});\n$2"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #untilmatches
 					trigger=case("untilmatches"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the &#60;subject&#62; matches the &#60;pattern&#62;", 
 					completion=""+case("untilmatches")+"(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n$5"),
-				sublime.CompletionItem(
+
+				sublime.CompletionItem( #unsafe
 					trigger=case("unsafe"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="…"+case("endunsafe")+"", 
 					details="Begins an unsafe block with maximum executions set to &#60;executions&#62;", 
 					completion=""+case("unsafe")+"(${1:<executions>});\n	$2\n"+case("endunsafe;")+"\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #endunsafe
 					trigger=case("endunsafe"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Ends an active unsafe block", 
 					completion=""+case("endunsafe")+";\n$1"),
-				sublime.CompletionItem(
+
+			# My custom completions
+				sublime.CompletionItem( #function
 					trigger=case("function: print"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					details="custom function definition to print &#60;text&#62;", 
 					completion=""+case("function")+" "+case("print")+"(&text);\n\t"+case("log")+"(\"%&text%\");\n"+case("endfunction")+";\n\n"+case("print")+"(${1:<text>});\n"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #print
 					trigger=case("print"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					details="custom function call to print &#60;text&#62;", 
 					completion=""+case("print")+"(${1:<text>});"),
-				sublime.CompletionItem(
+
+			# AEI Module
+				sublime.CompletionItem( #getiteminfo
 					trigger=case("getiteminfo"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(AEI Module)", 
 					details="Gets information about the specified slot", 
 					completion=""+case("getiteminfo")+"(${1:<slot>},&${2:[idvar]},#${3:[stacksize]},#${4:[datavar]},&${5:[display]},&${6:[lore]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getguiname
 					trigger=case("getguiname"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(AEI Module)", 
 					details="Gets the display name of the current GUI", 
 					completion=""+case("getguiname")+"(&${1:<name>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #invfull
 					trigger=case("invfull"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(AEI Module)", 
 					details="Returns empty or full in the string defined", 
 					completion=""+case("invfull")+"(&${1:<string>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MODULEAEI
 					trigger="MODULEAEI", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(AEI Module)", 
 					details="Returns true if the module is installed", 
 					completion=var_wrap+"MODULEAEI"+var_wrap),
-				sublime.CompletionItem(
+
+			# anvilRename Module
+				sublime.CompletionItem( #setanviltext
 					trigger=case("setanviltext"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(anvilRename Module)", 
 					details="set name to string", 
 					completion=""+case("setanviltext")+"(${1:<string>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MODULEANVIL
 					trigger="MODULEANVIL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(anvilRename Module)", 
 					details="Returns true if the module is installed", 
 					completion=var_wrap+"MODULEANVIL"+var_wrap),
-				sublime.CompletionItem(
+
+			# BaritoneAddon Module
+				sublime.CompletionItem( #baritone
 					trigger=case("baritone"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Runs any baritone command", 
 					completion=""+case("baritone")+"(${1:<command>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #goto
 					trigger=case("goto"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Pathfinds to specified coordinates", 
 					completion=""+case("goto")+"(${1:<x>},${2:<y>},${3:<z>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #setting
 					trigger=case("setting"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Changes baritone setting", 
 					completion=""+case("setting")+"(${1:<settingname>},${2:<value>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #cancel
 					trigger=case("cancel"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Cancels current process", 
 					completion=""+case("cancel")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #pause
 					trigger=case("pause"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Pauses current process", 
 					completion=""+case("pause")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #resume
 					trigger=case("resume"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Resumes current process", 
 					completion=""+case("resume")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #mine
 					trigger=case("mine"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Searchs and mines provied block", 
 					completion=""+case("mine")+"(${1:<blockname>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #farm
 					trigger=case("farm"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Farms near by crops toggle replant", 
 					completion=""+case("farm")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #selstart
 					trigger=case("selstart"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Sets pos1 of selection", 
 					completion=""+case("selstart")+"(${1:<x>},${2:<y>},${3:<z>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #selend
 					trigger=case("selend"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Sets pos2 of selection", 
 					completion=""+case("selend")+"(${1:<x>},${2:<y>},${3:<z>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #selclear
 					trigger=case("selclear"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Clears selections", 
 					completion=""+case("selclear")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #selreplace
 					trigger=case("selreplace"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Replace specified block with replacement block", 
 					completion=""+case("selreplace")+"(${1:<blocktoreplace>},${2:<replacementblock>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #BARITONE
 					trigger="BARITONE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="True if baritone is running any process", 
 					completion=var_wrap+"BARITONE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PATHFINDING
 					trigger="PATHFINDING", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="True if baritone is pathfinding to position", 
 					completion=var_wrap+"PATHFINDING"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FARMING
 					trigger="FARMING", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="True if baritone is running the process #farm", 
 					completion=var_wrap+"FARMING"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MINING
 					trigger="MINING", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="True if baritone is running the process #mine", 
 					completion=var_wrap+"MINING"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FOLLOWING
 					trigger="FOLLOWING", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="True if baritone is running the process #follow", 
 					completion=var_wrap+"FOLLOWING"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #BUILDING
 					trigger="BUILDING", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="True if baritone is running a build process", 
 					completion=var_wrap+"BUILDING"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ALLOWBREAK
 					trigger="ALLOWBREAK", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="Allow Baritone to break blocks", 
 					completion=var_wrap+"ALLOWBREAK"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ALLOWPLACE
 					trigger="ALLOWPLACE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="Allow Baritone to place blocks", 
 					completion=var_wrap+"ALLOWPLACE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ALLOWSPRINT
 					trigger="ALLOWSPRINT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="Allow Baritone to sprint", 
 					completion=var_wrap+"ALLOWSPRINT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ALLOWPARKOUR
 					trigger="ALLOWPARKOUR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="Allow Baritone to parkour", 
 					completion=var_wrap+"ALLOWPARKOUR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ALLOWINVENTORY
 					trigger="ALLOWINVENTORY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="Allow Baritone to move items in your inventory to your hotbar", 
 					completion=var_wrap+"ALLOWINVENTORY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ALLOWWALKONBOTTOMSLAB
 					trigger="ALLOWWALKONBOTTOMSLAB", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="Slab behavior is complicated, disable this for higher path reliability", 
 					completion=var_wrap+"ALLOWWALKONBOTTOMSLAB"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ALLOWWATERBUCKETFALL
 					trigger="ALLOWWATERBUCKETFALL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="Allow Baritone to fall arbitrary distances and place a water bucket beneath it", 
 					completion=var_wrap+"ALLOWWATERBUCKETFALL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #BLOCKBREAKADDITIONALMENTPENALTY
 					trigger="BLOCKBREAKADDITIONALMENTPENALTY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="This is just a tiebreaker to make it less likely to break blocks if it can avoid it", 
 					completion=var_wrap+"BLOCKBREAKADDITIONALMENTPENALTY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #BLOCKPLACEMENTPENALTY
 					trigger="BLOCKPLACEMENTPENALTY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="It doesn't actually take twenty ticks to place a block, this cost is so high because we want to generally conserve blocks which might be limited", 
 					completion=var_wrap+"BLOCKPLACEMENTPENALTY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #BLOCKREACHDISTANCE
 					trigger="BLOCKREACHDISTANCE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="Block reach distance", 
 					completion=var_wrap+"BLOCKREACHDISTANCE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MAXFALLHEIGHTNOWATER
 					trigger="MAXFALLHEIGHTNOWATER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="How far are you allowed to fall onto solid ground (without a water bucket)? 3 won't deal any damage", 
 					completion=var_wrap+"MAXFALLHEIGHTNOWATER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FREELOOK
 					trigger="FREELOOK", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="Move without having to force the client-sided rotations", 
 					completion=var_wrap+"FREELOOK"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #REPLANTCROPS
 					trigger="REPLANTCROPS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="Replant normal Crops while farming and leave cactus and sugarcane to regrow", 
 					completion=var_wrap+"REPLANTCROPS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MODULEBARITONE
 					trigger="MODULEBARITONE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
 					details="Returns true if the module is installed", 
 					completion=var_wrap+"MODULEBARITONE"+var_wrap),
-				sublime.CompletionItem(
+
+			# charModule
+				sublime.CompletionItem( #char
 					trigger=case("char"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(charModule)", 
 					details="Returns character with unicode value", 
 					completion="&${1:<char>} = "+case("char")+"(${2:<decimal unicode value>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #P
 					trigger="P", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(charModule)", 
 					details="Returns paragraph character", 
 					completion=var_wrap+"P"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DOLLAR
 					trigger="DOLLAR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(charModule)", 
 					details="Returns one dollar character", 
 					completion=var_wrap+"DOLLAR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DOLLARS
 					trigger="DOLLARS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(charModule)", 
 					details="Returns two dollar character", 
 					completion=var_wrap+"DOLLARS"+var_wrap),
-				sublime.CompletionItem(
+
+			# Clipboard Module
+				sublime.CompletionItem( #MODULECHARICE
 					trigger="MODULECHARICE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(charModule)", 
 					details="Returns true if the module is installed", 
 					completion=var_wrap+"MODULECHARICE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getclipboard
 					trigger=case("getclipboard"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Clipboard Module)", 
 					details="Returns content of clipboard", 
 					completion=""+case("getclipboard")+"(&${1:[text]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #setclipboard
 					trigger=case("setclipboard"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Clipboard Module)", 
 					details="Sets the clipboard text", 
 					completion=""+case("setclipboard")+"(${1:<text>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MODULECLIPBOARD
 					trigger="MODULECLIPBOARD", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Clipboard Module)", 
 					details="Returns true if the module is installed", 
 					completion=var_wrap+"MODULECLIPBOARD"+var_wrap),
-				sublime.CompletionItem(
+
+			# Cloudscript Module
+				sublime.CompletionItem( #run
 					trigger=case("run"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Cloudscript Module)", 
 					details="Runs the specified script from cloudscript", 
 					completion=""+case("run")+"(${1:<cloudscript>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #addanim
 					trigger=case("addanim"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Cloudscript Module)", 
 					details="Add animation", 
 					completion=""+case("addanim")+"(&${1:<array>}[]);"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #event
 					trigger=case("event"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Cloudscript Module)", 
 					details="Used by cloudscript to run an event", 
 					completion=""+case("event")+"(${1:<projectId>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #chat
 					trigger=case("chat"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Cloudscript Module)", 
 					details="Open cloudchat", 
 					completion=""+case("chat")+";"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getkeybind
 					trigger=case("getkeybind"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Cloudscript Module)", 
 					details="Get the macro on that key", 
 					completion=""+case("getkeybind")+"(${1:<key>},&${2:<outvar>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #setkeybind
 					trigger=case("setkeybind"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Cloudscript Module)", 
 					details="Set a macro on that key", 
 					completion=""+case("setkeybind")+"(${1:<key>},${2:<some code>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #return
 					trigger=case("return"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Cloudscript Module)", 
 					details="End a macro and return a value", 
 					completion=""+case("return")+"(${1:<anything>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #sendmessage
 					trigger=case("sendmessage"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Cloudscript Module)", 
 					details="Send a message on a websocket channel", 
 					completion=""+case("sendmessage")+"(${1:<channel>},${2:<message>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #encrypt
 					trigger=case("encrypt"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Cloudscript Module)", 
 					details="Encrypt the variable content", 
 					completion=""+case("encrypt")+"(&${1:<var>},${2:<16charskey>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #decrypt
 					trigger=case("decrypt"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Cloudscript Module)", 
 					details="Decrypt the variable content", 
 					completion=""+case("decrypt")+"(&${1:<var>},${2:<16charskey>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #remove
 					trigger=case("remove"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Cloudscript Module)", 
 					details="Remove something from array", 
 					completion=""+case("remove")+"(&${1:<array>}[],&${2:<outvar>},${3:[pos]});"),
-				sublime.CompletionItem(
+
+			# Documentor Module
+				sublime.CompletionItem( #adddocs
 					trigger=case("adddocs"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Documentor Module)", 
 					details="Adds documentation for action", 
 					completion=""+case("adddocs")+"(${1:<name of entry>},${2:[usage]},${3:[description]},${4:[return type]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #listdocs
 					trigger=case("listdocs"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Documentor Module)", 
 					details="Returns documentation of action", 
 					completion="&${1:docs}[] = "+case("listdocs")+"(${2:[name]});"),
-				sublime.CompletionItem(
+
+			# Entities iterator Module
+				sublime.CompletionItem( #ENTITYTYPE
 					trigger="ENTITYTYPE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Type of the entity", 
 					completion=var_wrap+"ENTITYTYPE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYNAME
 					trigger="ENTITYNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Name of the entity", 
 					completion=var_wrap+"ENTITYNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYUUID
 					trigger="ENTITYUUID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="UUID of the entity", 
 					completion=var_wrap+"ENTITYUUID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYXPOSF
 					trigger="ENTITYXPOSF", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="X coordinates of the entity as float", 
 					completion=var_wrap+"ENTITYXPOSF"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYYPOSF
 					trigger="ENTITYYPOSF", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Y coordinates of the entity as float", 
 					completion=var_wrap+"ENTITYYPOSF"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYZPOSF
 					trigger="ENTITYZPOSF", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Z coordinates of the entity as float", 
 					completion=var_wrap+"ENTITYZPOSF"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYXPOS
 					trigger="ENTITYXPOS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="X coordinates of the entity as integer", 
 					completion=var_wrap+"ENTITYXPOS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYYPOS
 					trigger="ENTITYYPOS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Y coordinates of the entity as integer", 
 					completion=var_wrap+"ENTITYYPOS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYZPOS
 					trigger="ENTITYZPOS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Z coordinates of the entity as integer", 
 					completion=var_wrap+"ENTITYZPOS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYTAG
 					trigger="ENTITYTAG", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Tag of the entity", 
 					completion=var_wrap+"ENTITYTAG"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYDX
 					trigger="ENTITYDX", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="X difference between the player and the entity", 
 					completion=var_wrap+"ENTITYDX"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYDY
 					trigger="ENTITYDY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Y difference between the player and the entity", 
 					completion=var_wrap+"ENTITYDY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYDZ
 					trigger="ENTITYDZ", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Z difference between the player and the entity", 
 					completion=var_wrap+"ENTITYDZ"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYDISTANCE
 					trigger="ENTITYDISTANCE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Distance between the player and the entity", 
 					completion=var_wrap+"ENTITYDISTANCE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYPITCHFROMPLAYER
 					trigger="ENTITYPITCHFROMPLAYER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Pitch from the player to entity", 
 					completion=var_wrap+"ENTITYPITCHFROMPLAYER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYYAWFROMPLAYER
 					trigger="ENTITYYAWFROMPLAYER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Yaw from the player to entity", 
 					completion=var_wrap+"ENTITYYAWFROMPLAYER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYNBT
 					trigger="ENTITYNBT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="NBT of the entity", 
 					completion=var_wrap+"ENTITYNBT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYNBTKEYS
 					trigger="ENTITYNBTKEYS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Array of the keys of the NBT of the entity", 
 					completion=var_wrap+"ENTITYNBTKEYS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYNBT
 					trigger="ENTITYNBT&#60;KEY&#62;", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Quick way to access value of a specififc key", 
 					completion=var_wrap+"ENTITYNBT${1:<key>}"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYDIR
 					trigger="ENTITYDIR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Fuzzy direction in which the entity is", 
 					completion=var_wrap+"ENTITYDIR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYPITCH
 					trigger="ENTITYPITCH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Pitch where the entity is looking at", 
 					completion=var_wrap+"ENTITYPITCH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYYAW
 					trigger="ENTITYYAW", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Yaw where the entity is looking at", 
 					completion=var_wrap+"ENTITYYAW"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYHEALTH
 					trigger="ENTITYHEALTH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Health of the entity", 
 					completion=var_wrap+"ENTITYHEALTH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYMAXHEALTH
 					trigger="ENTITYMAXHEALTH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Max health of the entity", 
 					completion=var_wrap+"ENTITYMAXHEALTH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYISITEM
 					trigger="ENTITYISITEM", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="True if it's an dropped item", 
 					completion=var_wrap+"ENTITYISITEM"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYITEMAGE
 					trigger="ENTITYITEMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Age of the dropped item", 
 					completion=var_wrap+"ENTITYITEMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYITEMOWNER
 					trigger="ENTITYITEMOWNER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Owner of the dropped item", 
 					completion=var_wrap+"ENTITYITEMOWNER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYITEMTHROWER
 					trigger="ENTITYITEMTHROWER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Thrower of the dropped item", 
 					completion=var_wrap+"ENTITYITEMTHROWER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYITEMNAME
 					trigger="ENTITYITEMNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Localized name of the dropped item", 
 					completion=var_wrap+"ENTITYITEMTHROWER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYITEMUNLOCALIZEDNAME
 					trigger="ENTITYITEMUNLOCALIZEDNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Unlocalized name of the dropped item", 
 					completion=var_wrap+"ENTITYITEMUNLOCALIZEDNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYITEMCOUNT
 					trigger="ENTITYITEMCOUNT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Amount of the dropped item", 
 					completion=var_wrap+"ENTITYITEMCOUNT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYITEMDISPLAYNAME
 					trigger="ENTITYITEMDISPLAYNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Displayname of the dropped item", 
 					completion=var_wrap+"ENTITYITEMDISPLAYNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYITEMDAMAGE
 					trigger="ENTITYITEMDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Damage of the dropped item", 
 					completion=var_wrap+"ENTITYITEMDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYITEMMAXDAMAGE
 					trigger="ENTITYITEMMAXDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Max damage of the dropped item", 
 					completion=var_wrap+"ENTITYITEMMAXDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYITEMMETADATA
 					trigger="ENTITYITEMMETADATA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Metadata of the dropped item", 
 					completion=var_wrap+"ENTITYITEMMETADATA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYITEMENCHANTED
 					trigger="ENTITYITEMENCHANTED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="True if the dropped item is enchanted", 
 					completion=var_wrap+"ENTITYITEMENCHANTED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYITEMSTACKABLE
 					trigger="ENTITYITEMSTACKABLE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="True if the dropped item is stackable", 
 					completion=var_wrap+"ENTITYITEMSTACKABLE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYMAINHANDNAME
 					trigger="ENTITYMAINHANDNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Name of the mainhand item", 
 					completion=var_wrap+"ENTITYMAINHANDNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYMAINHANDID
 					trigger="ENTITYMAINHANDID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="ID of the mainhand item", 
 					completion=var_wrap+"ENTITYMAINHANDID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYMAINHANDNID
 					trigger="ENTITYMAINHANDNID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Numerical ID of the mainhand item", 
 					completion=var_wrap+"ENTITYMAINHANDNID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYMAINHANDDAMAGE
 					trigger="ENTITYMAINHANDDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Damage of the mainhand item", 
 					completion=var_wrap+"ENTITYMAINHANDDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYMAINHANDCOUNT
 					trigger="ENTITYMAINHANDCOUNT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Amount of the mainhand item", 
 					completion=var_wrap+"ENTITYMAINHANDCOUNT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYMAINHANDENCHANTMENTS
 					trigger="ENTITYMAINHANDENCHANTMENTS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Enchantments of the mainhand item", 
 					completion=var_wrap+"ENTITYMAINHANDENCHANTMENTS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYOFFHANDNAME
 					trigger="ENTITYOFFHANDNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Name of the offhand item", 
 					completion=var_wrap+"ENTITYOFFHANDNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYOFFHANDID
 					trigger="ENTITYOFFHANDID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="ID of the offhand item", 
 					completion=var_wrap+"ENTITYOFFHANDID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYOFFHANDNID
 					trigger="ENTITYOFFHANDNID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Numerical ID of the offhand item", 
 					completion=var_wrap+"ENTITYOFFHANDNID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYOFFHANDDAMAGE
 					trigger="ENTITYOFFHANDDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Damage of the offhand item", 
 					completion=var_wrap+"ENTITYOFFHANDDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYOFFHANDCOUNT
 					trigger="ENTITYOFFHANDCOUNT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Amount of the offhand item", 
 					completion=var_wrap+"ENTITYOFFHANDCOUNT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYOFFHANDENCHANTMENTS
 					trigger="ENTITYOFFHANDENCHANTMENTS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Enchantments of the offhand item", 
 					completion=var_wrap+"ENTITYOFFHANDENCHANTMENTS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYBOOTSNAME
 					trigger="ENTITYBOOTSNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Name of the boots item", 
 					completion=var_wrap+"ENTITYBOOTSNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYBOOTSID
 					trigger="ENTITYBOOTSID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="ID of the boots item", 
 					completion=var_wrap+"ENTITYBOOTSID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYBOOTSNID
 					trigger="ENTITYBOOTSNID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Numerical ID of the boots item", 
 					completion=var_wrap+"ENTITYBOOTSNID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYBOOTSDAMAGE
 					trigger="ENTITYBOOTSDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Damage of the boots item", 
 					completion=var_wrap+"ENTITYBOOTSDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYBOOTSCOUNT
 					trigger="ENTITYBOOTSCOUNT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Amount of the boots item", 
 					completion=var_wrap+"ENTITYBOOTSCOUNT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYBOOTSENCHANTMENTS
 					trigger="ENTITYBOOTSENCHANTMENTS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Enchantments of the boots item", 
 					completion=var_wrap+"ENTITYBOOTSENCHANTMENTS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYLEGGINGSNAME
 					trigger="ENTITYLEGGINGSNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Name of the leggings item", 
 					completion=var_wrap+"ENTITYLEGGINGSNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYLEGGINGSID
 					trigger="ENTITYLEGGINGSID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="ID of the leggings item", 
 					completion=var_wrap+"ENTITYLEGGINGSID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYLEGGINGSNID
 					trigger="ENTITYLEGGINGSNID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Numerical ID of the leggings item", 
 					completion=var_wrap+"ENTITYLEGGINGSNID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYLEGGINGSDAMAGE
 					trigger="ENTITYLEGGINGSDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Damage of the leggings item", 
 					completion=var_wrap+"ENTITYLEGGINGSDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYLEGGINGSCOUNT
 					trigger="ENTITYLEGGINGSCOUNT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Amount of the leggings item", 
 					completion=var_wrap+"ENTITYLEGGINGSCOUNT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYLEGGINGSENCHANTMENTS
 					trigger="ENTITYLEGGINGSENCHANTMENTS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Enchantments of the leggings item", 
 					completion=var_wrap+"ENTITYLEGGINGSENCHANTMENTS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYCHESTPLATENAME
 					trigger="ENTITYCHESTPLATENAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Name of the chestplate item", 
 					completion=var_wrap+"ENTITYCHESTPLATENAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYCHESTPLATEID
 					trigger="ENTITYCHESTPLATEID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="ID of the chestplate item", 
 					completion=var_wrap+"ENTITYCHESTPLATEID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYCHESTPLATENID
 					trigger="ENTITYCHESTPLATENID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Numerical ID of the chestplate item", 
 					completion=var_wrap+"ENTITYCHESTPLATENID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYCHESTPLATEDAMAGE
 					trigger="ENTITYCHESTPLATEDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Damage of the chestplate item", 
 					completion=var_wrap+"ENTITYCHESTPLATEDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYCHESTPLATECOUNT
 					trigger="ENTITYCHESTPLATECOUNT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Amount of the chestplate item", 
 					completion=var_wrap+"ENTITYCHESTPLATECOUNT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYCHESTPLATEENCHANTMENTS
 					trigger="ENTITYCHESTPLATEENCHANTMENTS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Enchantments of the chestplate item", 
 					completion=var_wrap+"ENTITYCHESTPLATEENCHANTMENTS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYHELMETNAME
 					trigger="ENTITYHELMETNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Name of the helmet item", 
 					completion=var_wrap+"ENTITYHELMETNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYHELMETID
 					trigger="ENTITYHELMETID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="ID of the helmet item", 
 					completion=var_wrap+"ENTITYHELMETID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYHELMETNID
 					trigger="ENTITYHELMETNID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Numerical ID of the helmet item", 
 					completion=var_wrap+"ENTITYHELMETNID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYHELMETDAMAGE
 					trigger="ENTITYHELMETDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Damage of the helmet item", 
 					completion=var_wrap+"ENTITYHELMETDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYHELMETCOUNT
 					trigger="ENTITYHELMETCOUNT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Amount of the helmet item", 
 					completion=var_wrap+"ENTITYHELMETCOUNT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENTITYHELMETENCHANTMENTS
 					trigger="ENTITYHELMETENCHANTMENTS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Enchantments of the helmet item", 
 					completion=var_wrap+"ENTITYHELMETENCHANTMENTS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #EHITX
 					trigger="EHITX", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="X value of entity your're looking at or 0 if not looking at an entity", 
 					completion=var_wrap+"EHITX"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #EHITY
 					trigger="EHITY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Y value of entity your're looking at or 0 if not looking at an entity", 
 					completion=var_wrap+"EHITY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #EHITZ
 					trigger="EHITZ", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Z value of entity your're looking at or 0 if not looking at an entity", 
 					completion=var_wrap+"EHITZ"+var_wrap),
-				sublime.CompletionItem(
+
+			# FarHit Module
+				sublime.CompletionItem( #FARHIT
 					trigger="FARHIT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(FarHit Module)", 
 					details="Extended reach %HIT%", 
 					completion=var_wrap+"FARHIT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FARHITID
 					trigger="FARHITID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(FarHit Module)", 
 					details="Extended reach %HITID%", 
 					completion=var_wrap+"FARHITID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FARHITDATA
 					trigger="FARHITDATA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(FarHit Module)", 
 					details="Extended reach %HITDATA%", 
 					completion=var_wrap+"FARHITDATA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FARHITNAME
 					trigger="FARHITNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(FarHit Module)", 
 					details="Extended reach %HITNAME%", 
 					completion=var_wrap+"FARHITNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FARHITSIDE
 					trigger="FARHITSIDE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(FarHit Module)", 
 					details="Extended reach %HITSIDE%", 
 					completion=var_wrap+"FARHITSIDE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FARHITX
 					trigger="FARHITX", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(FarHit Module)", 
 					details="Extended reach %HITX%", 
 					completion=var_wrap+"FARHITX"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FARHITY
 					trigger="FARHITY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(FarHit Module)", 
 					details="Extended reach %HITY%", 
 					completion=var_wrap+"FARHITY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FARHITZ
 					trigger="FARHITZ", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(FarHit Module)", 
 					details="Extended reach %HITZ%", 
 					completion=var_wrap+"FARHITZ"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FARHITUUID
 					trigger="FARHITUUID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(FarHit Module)", 
 					details="Extended reach %HITUUID%", 
 					completion=var_wrap+"FARHITUUID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FARHITDIST
 					trigger="FARHITDIST", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(FarHit Module)", 
 					details="Extended reach %HITDIST%", 
 					completion=var_wrap+"FARHITDIST"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MODULEFARHIT
 					trigger="MODULEFARHIT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(FarHit Module)", 
 					details="Returns true if the module is installed", 
 					completion=var_wrap+"MODULEFARHIT"+var_wrap),
-				sublime.CompletionItem(
+
+			# Functions Module
+				sublime.CompletionItem( #function
 					trigger=case("function"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="(Functions Module)", 
 					details="Define a function", 
 					completion=""+case("function")+" ${1:<name>}(${2:[parameter], ...});\n\t$3\n"+case("endfunction")+";$4"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #return
 					trigger=case("return"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Functions Module)", 
 					details="Returns a value inside of a function", 
 					completion=""+case("return")+"(${1:<value>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #return
 					trigger=case("return"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Functions Module)", 
 					details="Returns a value inside of a function", 
 					completion=""+case("return")+" ${1:<value>};"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #call
 					trigger=case("call"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Functions Module)", 
 					details="Alternative way of calling functions", 
 					completion=""+case("call")+"(${1:<name>},${2:[parameter], ...});"),
-				sublime.CompletionItem(
+
+			# GetSlotItemExtended Module
+				sublime.CompletionItem( #getslotitemext
 					trigger=case("getslotitemext"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(GetSlotItemExtended Module)", 
 					details="+ Argument for the itemname of item", 
 					completion="${2:&${1:[itemid]} = }"+case("getslotitemext")+"(#${3:<slotid>},&${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[itemname]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getslotitemnbt
 					trigger=case("getslotitemnbt"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(GetSlotItemExtended Module)", 
 					details="+ Argument for the nbt of item", 
 					completion="${2:&${1:[itemid]} = }"+case("getslotitemnbt")+"(#${3:<slotid>},${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[nbt]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getslotitemenchants
 					trigger=case("getslotitemenchants"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(GetSlotItemExtended Module)", 
 					details="+ Argument for enchantments", 
 					completion="${2:&${1:[itemid]} = }"+case("getslotitemenchants")+"(#${3:<slotid>},${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[enchants]});"),
-				sublime.CompletionItem(
+
+			# HTTP Module
+				sublime.CompletionItem( #httpget
 					trigger=case("httpget"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(HTTP Module)", 
 					details="Httpget request to url", 
 					completion="${2:&${1:[response]}[] = }"+case("httpget")+"(${3:<url>},${4:<query>},#${5:<status>},&${1:[response]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #httppost
 					trigger=case("httppost"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(HTTP Module)", 
 					details="Httppost request to url with data", 
 					completion="${2:&${1:[response]}[] = }"+case("httppost")+"(${3:<url>},${4:<data>},#${5:<status>},&${1:[response]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #httpput
 					trigger=case("httpput"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(HTTP Module)", 
 					details="Httpput request to url with data", 
 					completion="${2:&${1:[response]}[] = }"+case("httpput")+"(${3:<url>},${4:<data>},#${5:<status>},&${1:[response]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #httpdelete
 					trigger=case("httpdelete"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(HTTP Module)", 
 					details="Request to specified url", 
 					completion="${2:&${1:[response]}[] = }"+case("httpdelete")+"(${3:<url>},${4:<query>},#${5:<status>},&${1:[response]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #urlencode
 					trigger=case("urlencode"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(HTTP Module)", 
 					details="Url encodes the string", 
 					completion="${2:&${1:[output]} = }"+case("urlencode")+"(${3:<string>},&${1:[output]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #setrequestheader
 					trigger=case("setrequestheader"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(HTTP Module)", 
 					details="Sets header for next request", 
 					completion=""+case("setrequestheader")+"(&${1:<field>},&${2:<value>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MODULEHTTP
 					trigger="MODULEHTTP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(HTTP Module)", 
 					details="Returns true if the module is installed", 
 					completion=var_wrap+"MODULEHTTP"+var_wrap),
-				sublime.CompletionItem(
+
+			# JSON Module
+				sublime.CompletionItem( #isboolean
 					trigger=case("isboolean"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Checks if the value is a boolean", 
 					completion="${2:[${1:bool}] = }"+case("isboolean")+"(${3:<string>},${1:[bool]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #isfloat
 					trigger=case("isfloat"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Checks if the value is a float", 
 					completion="${2:${1:[bool]} = }"+case("isfloat")+"(${3:<string>},${1:[bool]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #isinteger
 					trigger=case("isinteger"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Checks if the value is an integer", 
 					completion="${2:${1:[bool]} = }"+case("isinteger")+"(${3:<string>},${1:[bool]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #isjsonarray
 					trigger=case("isjsonarray"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Checks if the value is a json array", 
 					completion="${2:${1:[bool]} = }"+case("isjsonarray")+"(${3:<string>},${1:[bool]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #isjsonobject
 					trigger=case("isjsonobject"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Checks if the value is a json object", 
 					completion="${2:${1:[bool]} = }"+case("isjsonobject")+"(${3:<string>},${1:[bool]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #isjsonprimitive
 					trigger=case("isjsonprimitive"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Checks if value isjson primitive", 
 					completion="${2:${1:[bool]} = }"+case("isjsonprimitive")+"(${3:<string>}${1:,[bool}]);"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #isnumber
 					trigger=case("isnumber"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Checks if the value is a number", 
 					completion="${2:${1:[bool]} = }"+case("isnumber")+"(${3:<string>},${1:[bool]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #isstring
 					trigger=case("isstring"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Checks if the value is a string", 
 					completion="${2:${1:[bool]} = }"+case("isstring")+"(${3:<string>},${1:[bool]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #jsonadd
 					trigger=case("jsonadd"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Adds key and value to the json", 
 					completion="${2:&${1:[output]} = }"+case("jsonadd")+"(${3:<json>},${4:<key>},${5:<value>},&${1:[output]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #jsonget
 					trigger=case("jsonget"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Gets value of a key", 
 					completion="${2:&${1:[output]} = }"+case("jsonget")+"(${3:<json>},${4:<key>},&${1:[output]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #jsonhas
 					trigger=case("jsonhas"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Returns if the json contains the key", 
 					completion="${2:${1:[bool]} = }"+case("jsonhas")+"(${3:<json>},${4:<key>},${1:[bool]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #jsonremove
 					trigger=case("jsonremove"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Removes a key-value-pair from the json", 
 					completion="${2:&${1:[output]} = }"+case("jsonremove")+"(${3:<json>},${4:<key>},&${1:[output]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getjsonkeys
 					trigger=case("getjsonkeys"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Returns list of all keys of the json", 
 					completion="${2:&${1:[keys]} = }"+case("getjsonkeys")+"(${3:<json>},&${1:[keys]}[]);"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getjsonarray
 					trigger=case("getjsonarray"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Returns json as key:value array", 
 					completion="${2:&${1:[array]} = }"+case("getjsonasarray")+"(${3:<json>},${1:[array]}[]));"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #jsonarrayadd
 					trigger=case("jsonarrayadd"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Adds an element to the json array", 
 					completion="${2:&${1:[jsonarray]} = }"+case("jsonarrayadd")+"(${3:<jsonarray>},${4:<element>},&${1:[jsonarray]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #jsonarrayget
 					trigger=case("jsonarrayget"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Returns the element of the jsonarray", 
 					completion="${2:&${1:[output]} = }"+case("jsonarrayget")+"(${3:<jsonarray>},${4:<index>},&${1:[output]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #jsonarraysize
 					trigger=case("jsonarraysize"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Returns the size of the jsonarray", 
 					completion="${2:#${1:[size]} = }"+case("jsonarraysize")+"(${3:<jsonarray>},#${1:[size]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MODULEJSON
 					trigger="MODULEJSON", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(JSON Module)", 
 					details="Returns true if the module is installed", 
 					completion=var_wrap+"MODULEJSON"+var_wrap),
-				sublime.CompletionItem(
+
+			# Klacaiba Module
+				sublime.CompletionItem( #calcyawto
 					trigger=case("calcyawto"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="+ Y argument for pitch", 
 					completion=""+case("calcyawto")+"(${1:<xpos>},${2:<ypos>},${3:<zpos>},#${4:[yaw]},#${5:[dist]},#${6:[pitch]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getslotitem
 					trigger=case("getslotitem"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="+ Nbt argument", 
 					completion=""+case("getslotitem")+"(${1:<slotid>},&${2:<itemid>},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #http
 					trigger=case("http"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Creates a http request", 
 					completion="&${1:response} = "+case("http")+"(${2:[get|post|put|delete]},${3:<url>},${4:[output stream]},${5:[headers]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #iffileexists
 					trigger=case("iffileexists"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the file exists at &#60;path&#62;", 
 					completion=""+case("iffileexists")+"(${1:<path>},${2:[expression]});\n	$3\n"+case("endif")+";\n$4"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #mkdir
 					trigger=case("mkdir"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Creates directory", 
 					completion=""+case("mkdir")+"(${1:<path>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #writefile
 					trigger=case("writefile"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Writes array to file", 
 					completion=""+case("writefile")+"(${1:<path>},&${2:<writefile>}[],${3:[append]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getjsonasarray
 					trigger=case("getjsonasarray"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Returns json as key:value array", 
 					completion="&${1:array}[] = "+case("getjsonasarray")+"(${2:<json>},${3:[format]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getjsonkeys
 					trigger=case("getjsonkeys"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Retuns list of the keys of json", 
 					completion="&${1:keys}[] = "+case("getjsonkeys")+"(${2:<json>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #jsonget
 					trigger=case("jsonget"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Retuns object of key of specified json", 
 					completion="&${1:object} = "+case("jsonget")+"(${2:<json>},${3:<key>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #sort
 					trigger=case("sort"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Sorts the arrays synchronously", 
 					completion=""+case("sort")+"(${1:[asc,dsc]},${2:<array>}[],${3:[array]}[]);"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #teammembers
 					trigger=case("teammembers"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Lists scoreboard team members", 
 					completion="&${1:<members/teams>}[] = "+case("teammembers")+"(${2:[team]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #score
 					trigger=case("score"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Returns score of player in objective", 
 					completion="<${1:&score|&scores[]|&obectives[]}> = "+case("score")+"(${2:[objectivename]},${3:[playername]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #countdownto
 					trigger=case("countdownto"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Countdown to the specified datetime", 
 					completion=""+case("countdownto")+"(${1:<until>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #countdownfrom
 					trigger=case("countdownfrom"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Countdown from the specified time", 
 					completion=""+case("countdownfrom")+"(${1:<start>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #countup
 					trigger=case("countup"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Creates a countup from the current time", 
 					completion=""+case("countup")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #counter
 					trigger=case("counter"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Current value of the countdown or countup", 
 					completion=""+case("counter")+"(${1:<id>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #sectotime
 					trigger=case("sectotime"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Formats the amount of seconds to time", 
 					completion="&${1:time} = "+case("sectotime")+"(${2:<seconds>},${3:[format]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getchestname
 					trigger=case("getchestname"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Returns the name of the open chest", 
 					completion="&${1:name} = "+case("getchestname")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getemptyslots
 					trigger=case("getemptyslots"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Returns empty slots in inventory", 
 					completion="#${1:slots} = "+case("getemptyslots")+"(${2:[include non full slots]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getmouseitem
 					trigger=case("getmouseitem"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Gets info about the held item", 
 					completion="${2:&${1:[id]} = }"+case("getmouseitem")+"(&${1:[id]},#${3:[stacksizevar]},#${4:[datavar]},&${5:[nbt]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getslotiteminv
 					trigger=case("getslotiteminv"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Gets information about the item in the specified slot", 
 					completion="${2:[&${1:<id>}] = }"+case("getslotiteminv")+"(${3:<slotid>},&${1:<id>},#${4:[stacksizevar]},#${5:[datavar]},&${6:[nbt]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getslotinv
 					trigger=case("getslotinv"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Gets slot containing item in inventory", 
 					completion="#${1:[slot]} = "+case("getslotinv")+"(${2:<item>}:${3:[damage]},#${4:<idvar>},${5:[startfromslotid]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ifinvisfull
 					trigger=case("ifinvisfull"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the inventory is full", 
 					completion=""+case("ifinvisfull")+"(${1:[item]});\n	$2\n"+case("endif")+";\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ifininv
 					trigger=case("ifininv"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;items&#62; are in the inventory, mode can be 'any', 'all' or number", 
 					completion=""+case("ifininv")+"(${1:[mode]},${2:<items>});\n	$3\n"+case("endif")+";\n$4"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ifenchanted
 					trigger=case("ifenchanted"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the item at &#60;slot&#62; is enchanted", 
 					completion=""+case("ifenchanted")+"(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n	$6\n"+case("endif")+";\n$7"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #setslotitem
 					trigger=case("setslotitem"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Set the contents of a hotbar slot", 
 					completion=""+case("setslotitem")+"(${1:<item>}:${2:[damage]}${3:,<slot>},${4:[amount]},${5:[nbt]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getfishhook
 					trigger=case("getfishhook"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Get the x, y and z (3dp) of the bobber", 
 					completion="${2:#${1:[ytotal]} = }"+case("getfishhook")+"(#${3:[x]},#${4:[xprecision]},#${5:[y]},#${6:[yprecision]},#${7:[z]},#${8:[zprecision]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #map
 					trigger=case("map"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Maps the value x from minfrom-maxfrom to minto-maxto", 
 					completion="#${1:result} = "+case("map")+"(${2:<x>},${3:<minfrom>},${4:<maxfrom>},${5:<minto>},${6:<maxto>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #particle
 					trigger=case("particle"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Spawns particles similar to the vanilla command", 
 					completion="${2:&${1:errors}[] = }"+case("particle")+"(${3:<particlename>},${4:<x>},${5:<y>},${6:<z>},${7:<dx>},${8:<dy>},${9:<dz>},${10:[count]},${11:[mode]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #countitem
 					trigger=case("countitem"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Amount of items in your current inventory", 
 					completion="#${1:count} = "+case("countitem")+"(${2:<item>}:${3:[damage]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #countiteminv
 					trigger=case("countiteminv"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Amount of items in your survival inventory", 
 					completion="#${1:count} = "+case("countiteminv")+"(${2:<item>}:${3:[damage]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #createcontrol
 					trigger=case("createcontrol"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Creates a control on the specified screen at row and column position", 
 					completion="${2:[&${1:controlname}] = }"+case("createcontrol")+"(${3:<screenname|layouts|types>},${4:[element type]},${5:[row]},${6:[column]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #deletecontrol
 					trigger=case("deletecontrol"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Deletes a control by name from any gui", 
 					completion=""+case("deletecontrol")+"(${1:<controlname>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #timestamptodate
 					trigger=case("timestamptodate"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Format a timestamp in seconds", 
 					completion="&${1:date} = "+case("timestamptodate")+"(${2:<timestamp>},${3:[in milliseconds|date format]},${4:[in milliseconds]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #stop
 					trigger=case("stop"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Stops macro matching regex or array", 
 					completion=""+case("stop")+"(${1:[array|regex]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #strlen
 					trigger=case("strlen"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Returns the length of the string or 0 if none is present", 
 					completion="#${1:length} = "+case("strlen")+"(${2:<string>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getbreakspeed
 					trigger=case("getbreakspeed"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Returns the amount of time required to break a block or 0 if infinite of none specified", 
 					completion="#${1:ticks} = "+case("getbreakspeed")+"(${2:<blockid>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ifcanharvestblock
 					trigger=case("ifcanharvestblock"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;blockid&#62; can currently be harvested", 
 					completion=""+case("ifcanharvestblock")+"(${1:<blockid>});\n	$2\n"+case("endif")+";\n$3"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #pollevent
 					trigger=case("pollevent"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="(Klacaiba Module)", 
 					details="Opens a stack with an infinite iterator for a specific event", 
 					completion=""+case("pollevent")+"(${1:[event]});\n	$3\n	"+case("await")+";\n"+case("next")+";\n$4"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #POLLALL
 					trigger="POLLALL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module)", 
 					details="List all variables of the event", 
 					completion=var_wrap+"POLLALL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #await
 					trigger=case("await"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Should be placed above the closing next of a pollevent", 
 					completion=""+case("await")+";"),
-				sublime.CompletionItem(
+
+			# Klacaiba variables
+				sublime.CompletionItem( #LATENCY
 					trigger="LATENCY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module)", 
 					details="Ping of the player to the server", 
 					completion=var_wrap+"LATENCY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HACKED
 					trigger="HACKED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module)", 
 					details="Whether all the functions of the module have been applied to the client", 
 					completion=var_wrap+"HACKED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MINECRAFTDIR
 					trigger="MINECRAFTDIR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module)", 
 					details="Filepath of the current minecraft directory", 
 					completion=var_wrap+"MINECRAFTDIR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MACROSCONFIGDIR
 					trigger="MACROSCONFIGDIR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module)", 
 					details="%MINECRAFTDIR%/.liteconfig/common/macros", 
 					completion=var_wrap+"MACROSCONFIGDIR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FILESEPERATOR
 					trigger="FILESEPERATOR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module)", 
 					details="Default path seperator used by the system", 
 					completion=var_wrap+"FILESEPERATOR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KLACAIBAVERSION
 					trigger="KLACAIBAVERSION", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module)", 
 					details="Returns the version of klacaiba", 
 					completion=var_wrap+"KLACAIBAVERSION"+var_wrap),
-				sublime.CompletionItem(
+
+			# Klacaiba iterators
+				sublime.CompletionItem( #teams
 					trigger=case("teams"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="(Klacaiba Module)", 
+					annotation="(Klacaiba Module - teams iterator)", 
 					details="Iterates over all teams", 
 					completion=""+case("teams")+""),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #objectives
 					trigger=case("objectives"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="(Klacaiba Module)", 
+					annotation="(Klacaiba Module - objectives iterator)", 
 					details="Iterates over all objectives", 
 					completion=""+case("objectives")+""),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #score
 					trigger=case("score"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="(Klacaiba Module)", 
+					annotation="(Klacaiba Module - score iterator)", 
 					details="Iterates over all scores", 
 					completion=""+case("score")+""),
-				sublime.CompletionItem(
-					trigger=case("actions"), 
+				sublime.CompletionItem( #trades
+					trigger=case("trades"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="(Klacaiba Module)", 
-					details="Iterates over all actions", 
-					completion=""+case("actions")+""),
-				sublime.CompletionItem(
-					trigger=case("events"), 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_KEYWORD, 
-					annotation="(Klacaiba Module)", 
-					details="Iterates over all events", 
-					completion=""+case("events")+""),
-				sublime.CompletionItem(
+					annotation="(Klacaiba Module - trades iterator)", 
+					details="Iterates over all trades", 
+					completion=""+case("trades")+""),
+				sublime.CompletionItem( #inventory
 					trigger=case("inventory"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="(Klacaiba Module)", 
+					annotation="(Klacaiba Module - inventory iterator)", 
 					details="Iterates over your inventory", 
 					completion=""+case("inventory")+""),
-				sublime.CompletionItem(
+
+			# Klacaiba players iterator
+				sublime.CompletionItem( #PLAYERUUID
 					trigger="PLAYERUUID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - players iterator)", 
 					details="UUID of the player with dashes", 
 					completion=var_wrap+"PLAYERUUID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PLAYERDISPLAYNAME
 					trigger="PLAYERDISPLAYNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - players iterator)", 
 					details="Displayname of the player", 
 					completion=var_wrap+"PLAYERDISPLAYNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PLAYERTEAM
 					trigger="PLAYERTEAM", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - players iterator)", 
 					details="Scoreboard team of the player as JSON", 
 					completion=var_wrap+"PLAYERTEAM"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PLAYERPING
 					trigger="PLAYERPING", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - players iterator)", 
 					details="Ping of the player", 
 					completion=var_wrap+"PLAYERPING"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PLAYERISLEGACY
 					trigger="PLAYERISLEGACY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - players iterator)", 
 					details="Whether the player uses a legacy account", 
 					completion=var_wrap+"PLAYERISLEGACY"+var_wrap),
-				sublime.CompletionItem(
+
+			# Klacaiba teams iterator
+				sublime.CompletionItem( #TEAMALLOWFRIENDLYFIRE
 					trigger="TEAMALLOWFRIENDLYFIRE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - teams iterator)", 
 					details="If the team allows friendly fire", 
 					completion=var_wrap+"TEAMALLOWFRIENDLYFIRE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TEAMCOLLISIONRULE
 					trigger="TEAMCOLLISIONRULE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - teams iterator)", 
 					details="Collisionrule of the team", 
 					completion=var_wrap+"TEAMCOLLISIONRULE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TEAMCOLOR
 					trigger="TEAMCOLOR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - teams iterator)", 
 					details="Color of the team", 
 					completion=var_wrap+"TEAMCOLOR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TEAMDEATHMESSAGEVISIBILITY
 					trigger="TEAMDEATHMESSAGEVISIBILITY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - teams iterator)", 
 					details="Deathmessage visibility ruleing of the team", 
 					completion=var_wrap+"TEAMDEATHMESSAGEVISIBILITY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TEAMDISPLAYNAME
 					trigger="TEAMDISPLAYNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - teams iterator)", 
 					details="Displayname of the team", 
 					completion=var_wrap+"TEAMDISPLAYNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TEAMNAME
 					trigger="TEAMNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - teams iterator)", 
 					details="Name of the team", 
 					completion=var_wrap+"TEAMNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TEAMNAMETAGVISIBILITY
 					trigger="TEAMNAMETAGVISIBILITY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - teams iterator)", 
 					details="Nametag visibility of the team", 
 					completion=var_wrap+"TEAMNAMETAGVISIBILITY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TEAMSEEFRIENDLYINVISIBLES
 					trigger="TEAMSEEFRIENDLYINVISIBLES", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - teams iterator)", 
 					details="Whether the team can see friendly invisibles", 
 					completion=var_wrap+"TEAMSEEFRIENDLYINVISIBLES"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TEAMPREFIX
 					trigger="TEAMPREFIX", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - teams iterator)", 
 					details="Prefix of the team", 
 					completion=var_wrap+"TEAMPREFIX"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TEAMSUFFIX
 					trigger="TEAMSUFFIX", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - teams iterator)", 
 					details="Suffix of the team", 
 					completion=var_wrap+"TEAMSUFFIX"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TEAMMEMBERS
 					trigger="TEAMMEMBERS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - teams iterator)", 
 					details="Membernames of the team", 
 					completion=var_wrap+"TEAMMEMBERS"+var_wrap),
-				sublime.CompletionItem(
+
+			# Klacaiba objective iterator
+				sublime.CompletionItem( #OBJECTIVECRITERIA
 					trigger="OBJECTIVECRITERIA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - objectives iterator)", 
 					details="Criteria of the objective", 
 					completion=var_wrap+"OBJECTIVECRITERIA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #OBJECTIVEDISPLAYNAME
 					trigger="OBJECTIVEDISPLAYNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - objectives iterator)", 
 					details="Displayname of the objective", 
 					completion=var_wrap+"OBJECTIVEDISPLAYNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #OBJECTIVENAME
 					trigger="OBJECTIVENAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - objectives iterator)", 
 					details="Name of the objective", 
 					completion=var_wrap+"OBJECTIVENAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #OBJECTIVERENDERTYPE
 					trigger="OBJECTIVERENDERTYPE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - objectives iterator)", 
 					details="Rendertype of the objective", 
 					completion=var_wrap+"OBJECTIVERENDERTYPE"+var_wrap),
-				sublime.CompletionItem(
+
+			# Klacaiba score iterator
+				sublime.CompletionItem( #SCOREOBJECTIVENAME
 					trigger="SCOREOBJECTIVENAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - scores iterator)", 
 					details="Name of the associated objective", 
 					completion=var_wrap+"SCOREOBJECTIVENAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SCOREPLAYERNAME
 					trigger="SCOREPLAYERNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - scores iterator)", 
 					details="Name of the owning player", 
 					completion=var_wrap+"SCOREPLAYERNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SCOREVALUE
 					trigger="SCOREVALUE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - scores iterator)", 
 					details="Value of the score", 
 					completion=var_wrap+"SCOREVALUE"+var_wrap),
-				sublime.CompletionItem(
-					trigger=case("trades"), 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_KEYWORD, 
-					annotation="(Klacaiba Module)", 
-					details="Iterates over all trades", 
-					completion=""+case("trades")+""),
-				sublime.CompletionItem(
+
+			# Klacaiba trades iterator
+				sublime.CompletionItem( #TRADEBUYITEM
 					trigger="TRADEBUYITEM", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - trades iterator)", 
 					details="", 
 					completion=var_wrap+"TRADEBUYITEM"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRADEBUYITEMAMOUNT
 					trigger="TRADEBUYITEMAMOUNT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - trades iterator)", 
 					details="", 
 					completion=var_wrap+"TRADEBUYITEMAMOUNT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRADEBUYITEM2
 					trigger="TRADEBUYITEM2", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - trades iterator)", 
 					details="", 
 					completion=var_wrap+"TRADEBUYITEM2"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRADEBUYITEM2AMOUNT
 					trigger="TRADEBUYITEM2AMOUNT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - trades iterator)", 
 					details="", 
 					completion=var_wrap+"TRADEBUYITEM2AMOUNT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRADESELLITEM
 					trigger="TRADESELLITEM", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - trades iterator)", 
 					details="", 
 					completion=var_wrap+"TRADESELLITEM"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRADESELLITEMAMOUNT
 					trigger="TRADESELLITEMAMOUNT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - trades iterator)", 
 					details="", 
 					completion=var_wrap+"TRADESELLITEMAMOUNT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRADEUSES
 					trigger="TRADEUSES", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - trades iterator)", 
 					details="", 
 					completion=var_wrap+"TRADEUSES"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRADEMAXUSES
 					trigger="TRADEMAXUSES", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - trades iterator)", 
 					details="", 
 					completion=var_wrap+"TRADEMAXUSES"+var_wrap),
-				sublime.CompletionItem(
+
+			# Klacaiba inventory iterator
+				sublime.CompletionItem( #SLOTINDEX
 					trigger="SLOTINDEX", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - inventory iterator)", 
 					details="current index of slot", 
 					completion=var_wrap+"SLOTINDEX"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SLOTID
 					trigger="SLOTID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - inventory iterator)", 
 					details="current id of slot", 
 					completion=var_wrap+"SLOTID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SLOTSTACKSIZE
 					trigger="SLOTSTACKSIZE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - inventory iterator)", 
 					details="current stacksize of slot", 
 					completion=var_wrap+"SLOTSTACKSIZE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SLOTDATAVAR
 					trigger="SLOTDATAVAR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - inventory iterator)", 
 					details="current datavar of slot", 
 					completion=var_wrap+"SLOTDATAVAR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SLOTTAG
 					trigger="SLOTTAG", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - inventory iterator)", 
 					details="current tag of slot", 
 					completion=var_wrap+"SLOTTAG"+var_wrap),
-				sublime.CompletionItem(
+
+			# Klacaiba onSound event
+				sublime.CompletionItem( #SOUNDXPOSF
 					trigger="SOUNDXPOSF", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - onSound event)", 
 					details="XPOS of sound as float", 
 					completion=var_wrap+"SOUNDXPOSF"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SOUNDYPOSF
 					trigger="SOUNDYPOSF", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - onSound event)", 
 					details="YPOS of sound as float", 
 					completion=var_wrap+"SOUNDYPOSF"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SOUNDZPOSF
 					trigger="SOUNDZPOSF", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - onSound event)", 
 					details="ZPOS of sound as float", 
 					completion=var_wrap+"SOUNDZPOSF"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SOUNDXPOS
 					trigger="SOUNDXPOS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - onSound event)", 
 					details="XPOS of sound as int", 
 					completion=var_wrap+"SOUNDXPOS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SOUNDYPOS
 					trigger="SOUNDYPOS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - onSound event)", 
 					details="YPOS of sound as int", 
 					completion=var_wrap+"SOUNDYPOS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SOUNDZPOS
 					trigger="SOUNDZPOS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - onSound event)", 
 					details="ZPOS of sound as int", 
 					completion=var_wrap+"SOUNDZPOS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SOUNDCANREPEAT
 					trigger="SOUNDCANREPEAT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - onSound event)", 
 					details="Whether the sound is able to repeat", 
 					completion=var_wrap+"SOUNDCANREPEAT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SOUNDATTENUATIONTYPE
 					trigger="SOUNDATTENUATIONTYPE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - onSound event)", 
 					details="Type of attenuation", 
 					completion=var_wrap+"SOUNDATTENUATIONTYPE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SOUNDCATEGORY
 					trigger="SOUNDCATEGORY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - onSound event)", 
 					details="Category of sound", 
 					completion=var_wrap+"SOUNDCATEGORY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SOUNDPITCH
 					trigger="SOUNDPITCH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - onSound event)", 
 					details="Pitch of the sound as float", 
 					completion=var_wrap+"SOUNDPITCH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SOUNDVOLUME
 					trigger="SOUNDVOLUME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - onSound event)", 
 					details="Volume of the sound as float", 
 					completion=var_wrap+"SOUNDVOLUME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SOUNDRESOURCE
 					trigger="SOUNDRESOURCE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module - onSound event)", 
 					details="Resourcepath of the sound", 
 					completion=var_wrap+"SOUNDRESOURCE"+var_wrap),
-				sublime.CompletionItem(
+
+			# Macro Modules Essential
+				sublime.CompletionItem( #getslotnbt
 					trigger=case("getslotnbt"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Macro Modules Essential)", 
 					details="Get nbt of item in slot", 
 					completion=""+case("getslotnbt")+"(${1:<slotid>},${2:<path>},&${3:[itemId]},#${4:[stackSize]},#${5:[damage]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #pressbutton
 					trigger=case("pressbutton"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Macro Modules Essential)", 
 					details="Press button", 
 					completion=""+case("pressbutton")+"(${1:<buttonid>},${2:[button]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getprop
 					trigger=case("getprop"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Macro Modules Essential)", 
 					details="gets property of block at coordinates", 
 					completion=""+case("getprop")+"(${1:<x>},${2:<y>},${3:<z>},${4:<propname>},#${5:[propvar]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #slotmiddleclick
 					trigger=case("slotmiddleclick"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Macro Modules Essential)", 
 					details="middle click inventory slot", 
 					completion=""+case("slotmiddleclick")+"(${1:<slotid>});"),
-				sublime.CompletionItem(
+
+			# Reconnect Module
+				sublime.CompletionItem( #reconnect
 					trigger=case("reconnect"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Reconnect Module)", 
 					details="Auto reconnects to a server", 
 					completion=""+case("reconnect")+"(${1:<on|off|10-300>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #RECONNECT
 					trigger="RECONNECT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Reconnect Module)", 
 					details="Whether or not auto reconnect is enabled", 
 					completion=var_wrap+"RECONNECT"+var_wrap),
-				sublime.CompletionItem(
+
+			# scaneUtils Module
+				sublime.CompletionItem( #getdensity
 					trigger=case("getdensity"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(scaneUtils Module)", 
 					details="Searches for sugarcane in the given direction", 
 					completion=""+case("getdensity")+"(${1:[N/E/S/W]},#${2:<limit_search>},&${3:<initial_position>},#${4:<blocks_searched>},#${5:<sugarcane_found>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getitemstacksize
 					trigger=case("getitemstacksize"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(scaneUtils Module)", 
 					details="Searches the inventory, returns the stacksize", 
 					completion="#${1:stacksize} = "+case("getitemstacksize")+"(&${2:<item_name>},#${3:[limit_search]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getpercentage
 					trigger=case("getpercentage"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(scaneUtils Module)", 
 					details="Does first divided by second times 100", 
 					completion=""+case("getpercentage")+"(#${1:[percentage]},#${2:<first>},#${3:<second>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getslotpositions
 					trigger=case("getslotpositions"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(scaneUtils Module)", 
 					details="Searches the inventory, returns the position", 
 					completion=""+case("getslotpositions")+"(&${1:<item_name>},#${2:<result_position>},#${3:[result_stacksize]});"),
-				sublime.CompletionItem(
+
+			# SignText Module
+				sublime.CompletionItem( #gethitsigntext
 					trigger=case("gethitsigntext"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(SignText Module)", 
 					details="Returns signtext of hit sign", 
 					completion="${2:&${1:[outarray]}[] = }"+case("gethitsigntext")+"(&${1:[outarray]}[]);"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getsigntext
 					trigger=case("getsigntext"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(SignText Module)", 
 					details="Returns signtext at coordinates", 
 					completion="${2:&${1:[outarray]} = }"+case("getsigntext")+"(${3:<x>},${4:<y>},${5:<z>},&${1:[outarray]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #setsigntext
 					trigger=case("setsigntext"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(SignText Module)", 
 					details="Set text of sign in SP", 
 					completion=""+case("setsigntext")+"(${1:<x>},${2:<y>}${3:,<z>},${4:<line1>},${5:<line2>},${6:<line3>},${7:<line4>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MODULESIGNTEXT
 					trigger="MODULESIGNTEXT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(SignText Module)", 
 					details="Returns true if the module is installed", 
 					completion=var_wrap+"MODULESIGNTEXT"+var_wrap),
-				sublime.CompletionItem(
+
+			# Switch Module
+				sublime.CompletionItem( #switch
 					trigger=case("switch"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation=""+case("switch")+"…"+case("case")+"…"+case("default")+"…"+case("endcase")+" (Switch Case Module)", 
 					details="Switch case statement", 
 					completion=""+case("switch")+"(${1:<expression>});\n	"+case("case")+"(${2:<value>});\n		$3\n	"+case("default")+";\n		$4\n"+case("endswitch")+";\n$5"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #case
 					trigger=case("case"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Switch Case Module)", 
 					details="case statement", 
 					completion=""+case("case")+"(${1:<value>});\n	$2"),
-				sublime.CompletionItem(
+
+			# Utilities Module
+				sublime.CompletionItem( #eval
 					trigger=case("eval"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Utilities Module)", 
 					details="Evaluates an expression", 
 					completion="${2:&${1:[result]} = }"+case("eval")+"(&${1:[result]},${3:<expression string>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #char
 					trigger=case("char"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Utilities Module)", 
 					details="Puts set unicode value into &char", 
 					completion=""+case("char")+"(&${1:<char>},${2:<decimal unicode value>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #mod
 					trigger=case("mod"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Utilities Module)", 
 					details="Evaluates num1 modulo num2", 
 					completion=""+case("mod")+"(#${1:<result>},${2:<num1>},${3:<num2>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #oldname
 					trigger=case("oldname"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Utilities Module)", 
 					details="Gets the past names of a user", 
 					completion=""+case("oldname")+"(&${1:<names>}[],${2:<username>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #readfile
 					trigger=case("readfile"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Utilities Module)", 
 					details="Gets the content of a file", 
 					completion=""+case("readfile")+"(&${1:<content>}[],${2:<filename>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #readfile
 					trigger=case("readfile"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Utilities Module)", 
 					details="Reads file from path", 
 					completion="${2:&${1:<content>}[] = }"+case("readfile")+"(&${1:[content]}[],${3:<path>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #unix
 					trigger=case("unix"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Utilities Module)", 
 					details="Gets the s/ms of current timestamp", 
 					completion="${2:#${1:[seconds]} = }"+case("unix")+"(#${1:[seconds]},#${3:[milliseconds]});"),
-				sublime.CompletionItem(
+
+			# Utils Module
+				sublime.CompletionItem( #trim
 					trigger=case("trim"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Utils Module)", 
 					details="Removes whitespace", 
 					completion="&${1:result} = "+case("trim")+"(&${2:string});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #shuffle
 					trigger=case("shuffle"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Utils Module)", 
 					details="Shuffles an array", 
 					completion=""+case("shuffle")+"(${1:array[]});"),
-				sublime.CompletionItem(
+
+			# Utils actions iterator
+				sublime.CompletionItem( #actions
+					trigger=case("actions"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Utils Module - actions iterator)", 
+					details="Iterates over all actions", 
+					completion=""+case("actions")+""),
+				sublime.CompletionItem( #ACTIONNAME
 					trigger="ACTIONNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Utils Module - actions iterator)", 
 					details="Action name", 
 					completion=var_wrap+"ACTIONNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ACTIONUSAGE
 					trigger="ACTIONUSAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Utils Module - actions iterator)", 
 					details="Action usage", 
 					completion=var_wrap+"ACTIONUSAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ACTIONRETURN
 					trigger="ACTIONRETURN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Utils Module - actions iterator)", 
 					details="Action return", 
 					completion=var_wrap+"ACTIONRETURN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ACTIONDESCRIPTION
 					trigger="ACTIONDESCRIPTION", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Utils Module - actions iterator)", 
 					details="Action description", 
 					completion=var_wrap+"ACTIONDESCRIPTION"+var_wrap),
-				sublime.CompletionItem(
+
+			# Utils events iterator
+				sublime.CompletionItem( #events
+					trigger=case("events"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Utils Module - events iterator)", 
+					details="Iterates over all events", 
+					completion=""+case("events")+""),
+				sublime.CompletionItem( #EVENTNAME
 					trigger="EVENTNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Utils Module - events iterator)", 
 					details="Event name", 
 					completion=var_wrap+"EVENTNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #EVENTID
 					trigger="EVENTID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Utils Module - events iterator)", 
 					details="Event id", 
 					completion=var_wrap+"EVENTID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #EVENTHELP
 					trigger="EVENTHELP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Utils Module - events iterator)", 
 					details="Event help", 
 					completion=var_wrap+"EVENTHELP"+var_wrap),
-				sublime.CompletionItem(
+
+			# Utils iterators iterator
+				sublime.CompletionItem( #iterators
 					trigger=case("iterators"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Utils Module - iterators iterator)", 
 					details="Iterates over all iterators", 
 					completion=""+case("iterators")+""),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ITERATORNAME
 					trigger="ITERATORNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Utils Module - iterators iterator)", 
 					details="Iterator name", 
 					completion=var_wrap+"ITERATORNAME"+var_wrap),
-				sublime.CompletionItem(
+
+			# Utils onPotionEffect event
+				sublime.CompletionItem( #NEWEFFECT
 					trigger="NEWEFFECT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Utils Module - onPotionEffect event)", 
 					details="New potion effect", 
 					completion=var_wrap+"NEWEFFECT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #NEWEFFECTID
 					trigger="NEWEFFECTID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Utils Module - onPotionEffect event)", 
 					details="New potion effect id", 
 					completion=var_wrap+"NEWEFFECTID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #NEWEFFECTNAME
 					trigger="NEWEFFECTNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Utils Module - onPotionEffect event)", 
 					details="New potion effect name", 
 					completion=var_wrap+"NEWEFFECTNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #NEWEFFECTPOWER
 					trigger="NEWEFFECTPOWER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Utils Module - onPotionEffect event)", 
 					details="New potion effect power", 
 					completion=var_wrap+"NEWEFFECTPOWER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #NEWEFFECTTIME
 					trigger="NEWEFFECTTIME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Utils Module - onPotionEffect event)", 
 					details="New potion effect time", 
 					completion=var_wrap+"NEWEFFECTTIME"+var_wrap),
-				sublime.CompletionItem(
+
+			# WindowsNotifications Module
+				sublime.CompletionItem( #notify
 					trigger=case("notify"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(WindowsNotification Module)", 
 					details="Creates a system tray", 
 					completion=""+case("notify")+"(${1:[title]},${2:[message]});"),
-				sublime.CompletionItem(
+
+			# Yaku Module
+				sublime.CompletionItem( #mod
 					trigger=case("mod"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Yaku's Module)", 
 					details="Modulus function", 
 					completion=""+case("mod")+"(#${1:<divident>},#${2:<divisor>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #trunc
 					trigger=case("trunc"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Yaku's Module)", 
 					details="Returns the integer part of the number", 
 					completion=""+case("trunc")+"(#${1:<float>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ackermann
 					trigger=case("ackermann"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Yaku's Module)", 
 					details="Ackermann function implementation", 
 					completion=""+case("ackermann")+"(#${1:<m>},#${2:<n>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #calcstacks
 					trigger=case("calcstacks"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Yaku's Module)", 
 					details="Calculates stacks", 
 					completion=""+case("calcstacks")+"(#${1:<items>},#${2:[stacks]},#${3:[leftovers]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #pickmod
 					trigger=case("pickmod"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Yaku's Module)", 
 					details="Improved original pick action", 
 					completion=""+case("pickmod")+"(${1:[namespace]}:${2:<itemid>}:${3:[damage]},${4:[addInCreative]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #antighost
 					trigger=case("antighost"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Yaku's Module)", 
 					details="Resolve ghost blocks issue", 
 					completion=""+case("antighost")+";"),
-				sublime.CompletionItem(
+
+			# MKB Key variables
+				sublime.CompletionItem( #ALT
 					trigger="ALT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"ALT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ALT
 					trigger="ALT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~ALT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CTRL
 					trigger="CTRL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"CTRL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CTRL
 					trigger="CTRL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~CTRL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_0
 					trigger="KEY_0", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_0"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_0
 					trigger="KEY_0", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_0"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_1
 					trigger="KEY_1", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_1"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_1
 					trigger="KEY_1", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_1"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_2
 					trigger="KEY_2", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_2"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_2
 					trigger="KEY_2", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_2"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_3
 					trigger="KEY_3", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_3"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_3
 					trigger="KEY_3", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_3"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_4
 					trigger="KEY_4", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_4"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_4
 					trigger="KEY_4", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_4"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_5
 					trigger="KEY_5", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_5"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_5
 					trigger="KEY_5", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_5"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_6
 					trigger="KEY_6", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_6"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_6
 					trigger="KEY_6", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_6"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_7
 					trigger="KEY_7", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_7"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_7
 					trigger="KEY_7", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_7"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_8
 					trigger="KEY_8", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_8"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_8
 					trigger="KEY_8", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_8"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_9
 					trigger="KEY_9", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_9"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_9
 					trigger="KEY_9", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_9"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_A
 					trigger="KEY_A", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_A"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_A
 					trigger="KEY_A", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_A"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_ADD
 					trigger="KEY_ADD", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_ADD"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_ADD
 					trigger="KEY_ADD", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_ADD"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_APOSTROPHE
 					trigger="KEY_APOSTROPHE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_APOSTROPHE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_APOSTROPHE
 					trigger="KEY_APOSTROPHE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_APOSTROPHE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_APPS
 					trigger="KEY_APPS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_APPS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_APPS
 					trigger="KEY_APPS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_APPS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_AT
 					trigger="KEY_AT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_AT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_AT
 					trigger="KEY_AT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_AT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_AX
 					trigger="KEY_AX", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_AX"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_AX
 					trigger="KEY_AX", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_AX"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_B
 					trigger="KEY_B", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_B"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_B
 					trigger="KEY_B", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_B"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_BACK
 					trigger="KEY_BACK", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_BACK"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_BACK
 					trigger="KEY_BACK", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_BACK"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_BACKSLASH
 					trigger="KEY_BACKSLASH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_BACKSLASH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_BACKSLASH
 					trigger="KEY_BACKSLASH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_BACKSLASH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_C
 					trigger="KEY_C", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_C"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_C
 					trigger="KEY_C", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_C"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_CAPITAL
 					trigger="KEY_CAPITAL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_CAPITAL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_CAPITAL
 					trigger="KEY_CAPITAL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_CAPITAL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_CIRCUMFLEX
 					trigger="KEY_CIRCUMFLEX", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_CIRCUMFLEX"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_CIRCUMFLEX
 					trigger="KEY_CIRCUMFLEX", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_CIRCUMFLEX"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_CLEAR
 					trigger="KEY_CLEAR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_CLEAR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_CLEAR
 					trigger="KEY_CLEAR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_CLEAR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_COLON
 					trigger="KEY_COLON", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_COLON"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_COLON
 					trigger="KEY_COLON", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_COLON"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_COMMA
 					trigger="KEY_COMMA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_COMMA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_COMMA
 					trigger="KEY_COMMA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_COMMA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_CONVERT
 					trigger="KEY_CONVERT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_CONVERT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_CONVERT
 					trigger="KEY_CONVERT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_CONVERT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_D
 					trigger="KEY_D", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_D"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_D
 					trigger="KEY_D", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_D"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_DECIMAL
 					trigger="KEY_DECIMAL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_DECIMAL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_DECIMAL
 					trigger="KEY_DECIMAL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_DECIMAL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_DELETE
 					trigger="KEY_DELETE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_DELETE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_DELETE
 					trigger="KEY_DELETE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_DELETE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_DIVIDE
 					trigger="KEY_DIVIDE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_DIVIDE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_DIVIDE
 					trigger="KEY_DIVIDE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_DIVIDE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_DOWN
 					trigger="KEY_DOWN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_DOWN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_DOWN
 					trigger="KEY_DOWN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_DOWN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_E
 					trigger="KEY_E", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_E"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_E
 					trigger="KEY_E", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_E"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_END
 					trigger="KEY_END", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_END"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_END
 					trigger="KEY_END", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_END"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_EQUALS
 					trigger="KEY_EQUALS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_EQUALS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_EQUALS
 					trigger="KEY_EQUALS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_EQUALS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_ESCAPE
 					trigger="KEY_ESCAPE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_ESCAPE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_ESCAPE
 					trigger="KEY_ESCAPE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_ESCAPE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F
 					trigger="KEY_F", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F
 					trigger="KEY_F", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F1
 					trigger="KEY_F1", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F1"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F1
 					trigger="KEY_F1", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F1"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F10
 					trigger="KEY_F10", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F10"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F10
 					trigger="KEY_F10", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F10"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F11
 					trigger="KEY_F11", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F11"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F11
 					trigger="KEY_F11", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F11"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F12
 					trigger="KEY_F12", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F12"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F12
 					trigger="KEY_F12", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F12"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F13
 					trigger="KEY_F13", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F13"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F13
 					trigger="KEY_F13", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F13"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F14
 					trigger="KEY_F14", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F14"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F14
 					trigger="KEY_F14", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F14"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F15
 					trigger="KEY_F15", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F15"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F15
 					trigger="KEY_F15", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F15"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F16
 					trigger="KEY_F16", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F16"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F16
 					trigger="KEY_F16", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F16"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F17
 					trigger="KEY_F17", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F17"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F17
 					trigger="KEY_F17", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F17"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F18
 					trigger="KEY_F18", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F18"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F18
 					trigger="KEY_F18", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F18"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F19
 					trigger="KEY_F19", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F19"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F19
 					trigger="KEY_F19", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F19"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F2
 					trigger="KEY_F2", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F2"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F2
 					trigger="KEY_F2", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F2"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F3
 					trigger="KEY_F3", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F3"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F3
 					trigger="KEY_F3", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F3"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F4
 					trigger="KEY_F4", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F4"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F4
 					trigger="KEY_F4", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F4"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F5
 					trigger="KEY_F5", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F5"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F5
 					trigger="KEY_F5", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F5"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F6
 					trigger="KEY_F6", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F6"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F6
 					trigger="KEY_F6", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F6"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F7
 					trigger="KEY_F7", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F7"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F7
 					trigger="KEY_F7", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F7"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F8
 					trigger="KEY_F8", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F8"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F8
 					trigger="KEY_F8", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F8"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F9
 					trigger="KEY_F9", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_F9"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_F9
 					trigger="KEY_F9", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_F9"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_FUNCTION
 					trigger="KEY_FUNCTION", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_FUNCTION"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_FUNCTION
 					trigger="KEY_FUNCTION", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_FUNCTION"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_G
 					trigger="KEY_G", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_G"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_G
 					trigger="KEY_G", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_G"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_GRAVE
 					trigger="KEY_GRAVE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_GRAVE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_GRAVE
 					trigger="KEY_GRAVE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_GRAVE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_H
 					trigger="KEY_H", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_H"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_H
 					trigger="KEY_H", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_H"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_HOME
 					trigger="KEY_HOME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_HOME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_HOME
 					trigger="KEY_HOME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_HOME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_I
 					trigger="KEY_I", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_I"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_I
 					trigger="KEY_I", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_I"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_INSERT
 					trigger="KEY_INSERT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_INSERT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_INSERT
 					trigger="KEY_INSERT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_INSERT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_J
 					trigger="KEY_J", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_J"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_J
 					trigger="KEY_J", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_J"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_K
 					trigger="KEY_K", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_K"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_K
 					trigger="KEY_K", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_K"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_KANA
 					trigger="KEY_KANA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_KANA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_KANA
 					trigger="KEY_KANA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_KANA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_KANJI
 					trigger="KEY_KANJI", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_KANJI"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_KANJI
 					trigger="KEY_KANJI", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_KANJI"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_L
 					trigger="KEY_L", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_L"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_L
 					trigger="KEY_L", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_L"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_LBRACKET
 					trigger="KEY_LBRACKET", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_LBRACKET"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_LBRACKET
 					trigger="KEY_LBRACKET", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_LBRACKET"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_LCONTROL
 					trigger="KEY_LCONTROL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_LCONTROL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_LCONTROL
 					trigger="KEY_LCONTROL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_LCONTROL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_LEFT
 					trigger="KEY_LEFT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_LEFT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_LEFT
 					trigger="KEY_LEFT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_LEFT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_LMENU
 					trigger="KEY_LMENU", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_LMENU"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_LMENU
 					trigger="KEY_LMENU", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_LMENU"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_LMETA
 					trigger="KEY_LMETA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_LMETA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_LMETA
 					trigger="KEY_LMETA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_LMETA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_LSHIFT
 					trigger="KEY_LSHIFT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_LSHIFT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_LSHIFT
 					trigger="KEY_LSHIFT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_LSHIFT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_M
 					trigger="KEY_M", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_M"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_M
 					trigger="KEY_M", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_M"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_MINUS
 					trigger="KEY_MINUS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_MINUS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_MINUS
 					trigger="KEY_MINUS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_MINUS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_MOUSE3
 					trigger="KEY_MOUSE3", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_MOUSE3"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_MOUSE3
 					trigger="KEY_MOUSE3", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_MOUSE3"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_MOUSE4
 					trigger="KEY_MOUSE4", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_MOUSE4"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_MOUSE4
 					trigger="KEY_MOUSE4", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_MOUSE4"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_MULTIPLY
 					trigger="KEY_MULTIPLY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_MULTIPLY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_MULTIPLY
 					trigger="KEY_MULTIPLY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_MULTIPLY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_N
 					trigger="KEY_N", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_N"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_N
 					trigger="KEY_N", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_N"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NEXT
 					trigger="KEY_NEXT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NEXT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NEXT
 					trigger="KEY_NEXT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NEXT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NOCONVERT
 					trigger="KEY_NOCONVERT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NOCONVERT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NOCONVERT
 					trigger="KEY_NOCONVERT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NOCONVERT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NONE
 					trigger="KEY_NONE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NONE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NONE
 					trigger="KEY_NONE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NONE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMLOCK
 					trigger="KEY_NUMLOCK", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMLOCK"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMLOCK
 					trigger="KEY_NUMLOCK", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMLOCK"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD0
 					trigger="KEY_NUMPAD0", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMPAD0"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD0
 					trigger="KEY_NUMPAD0", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMPAD0"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD1
 					trigger="KEY_NUMPAD1", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMPAD1"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD1
 					trigger="KEY_NUMPAD1", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMPAD1"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD2
 					trigger="KEY_NUMPAD2", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMPAD2"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD2
 					trigger="KEY_NUMPAD2", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMPAD2"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD3
 					trigger="KEY_NUMPAD3", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMPAD3"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD3
 					trigger="KEY_NUMPAD3", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMPAD3"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD4
 					trigger="KEY_NUMPAD4", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMPAD4"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD4
 					trigger="KEY_NUMPAD4", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMPAD4"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD5
 					trigger="KEY_NUMPAD5", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMPAD5"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD5
 					trigger="KEY_NUMPAD5", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMPAD5"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD6
 					trigger="KEY_NUMPAD6", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMPAD6"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD6
 					trigger="KEY_NUMPAD6", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMPAD6"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD7
 					trigger="KEY_NUMPAD7", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMPAD7"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD7
 					trigger="KEY_NUMPAD7", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMPAD7"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD8
 					trigger="KEY_NUMPAD8", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMPAD8"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD8
 					trigger="KEY_NUMPAD8", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMPAD8"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD9
 					trigger="KEY_NUMPAD9", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMPAD9"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPAD9
 					trigger="KEY_NUMPAD9", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMPAD9"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPADCOMMA
 					trigger="KEY_NUMPADCOMMA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMPADCOMMA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPADCOMMA
 					trigger="KEY_NUMPADCOMMA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMPADCOMMA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPADENTER
 					trigger="KEY_NUMPADENTER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMPADENTER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPADENTER
 					trigger="KEY_NUMPADENTER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMPADENTER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPADEQUALS
 					trigger="KEY_NUMPADEQUALS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_NUMPADEQUALS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_NUMPADEQUALS
 					trigger="KEY_NUMPADEQUALS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_NUMPADEQUALS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_O
 					trigger="KEY_O", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_O"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_O
 					trigger="KEY_O", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_O"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_P
 					trigger="KEY_P", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_P"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_P
 					trigger="KEY_P", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_P"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_PAUSE
 					trigger="KEY_PAUSE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_PAUSE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_PAUSE
 					trigger="KEY_PAUSE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_PAUSE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_PERIOD
 					trigger="KEY_PERIOD", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_PERIOD"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_PERIOD
 					trigger="KEY_PERIOD", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_PERIOD"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_POWER
 					trigger="KEY_POWER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_POWER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_POWER
 					trigger="KEY_POWER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_POWER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_PRIOR
 					trigger="KEY_PRIOR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_PRIOR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_PRIOR
 					trigger="KEY_PRIOR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_PRIOR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_Q
 					trigger="KEY_Q", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_Q"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_Q
 					trigger="KEY_Q", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_Q"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_R
 					trigger="KEY_R", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_R"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_R
 					trigger="KEY_R", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_R"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RBRACKET
 					trigger="KEY_RBRACKET", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_RBRACKET"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RBRACKET
 					trigger="KEY_RBRACKET", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_RBRACKET"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RCONTROL
 					trigger="KEY_RCONTROL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_RCONTROL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RCONTROL
 					trigger="KEY_RCONTROL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_RCONTROL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RETURN
 					trigger="KEY_RETURN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_RETURN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RETURN
 					trigger="KEY_RETURN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_RETURN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RIGHT
 					trigger="KEY_RIGHT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_RIGHT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RIGHT
 					trigger="KEY_RIGHT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_RIGHT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RMENU
 					trigger="KEY_RMENU", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_RMENU"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RMENU
 					trigger="KEY_RMENU", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_RMENU"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RMETA
 					trigger="KEY_RMETA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_RMETA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RMETA
 					trigger="KEY_RMETA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_RMETA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RSHIFT
 					trigger="KEY_RSHIFT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_RSHIFT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_RSHIFT
 					trigger="KEY_RSHIFT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_RSHIFT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_S
 					trigger="KEY_S", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_S"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_S
 					trigger="KEY_S", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_S"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SCROLL
 					trigger="KEY_SCROLL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_SCROLL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SCROLL
 					trigger="KEY_SCROLL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_SCROLL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SECTION
 					trigger="KEY_SECTION", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_SECTION"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SECTION
 					trigger="KEY_SECTION", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_SECTION"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SEMICOLON
 					trigger="KEY_SEMICOLON", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_SEMICOLON"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SEMICOLON
 					trigger="KEY_SEMICOLON", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_SEMICOLON"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SLASH
 					trigger="KEY_SLASH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_SLASH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SLASH
 					trigger="KEY_SLASH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_SLASH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SLEEP
 					trigger="KEY_SLEEP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_SLEEP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SLEEP
 					trigger="KEY_SLEEP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_SLEEP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SPACE
 					trigger="KEY_SPACE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_SPACE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SPACE
 					trigger="KEY_SPACE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_SPACE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_STOP
 					trigger="KEY_STOP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_STOP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_STOP
 					trigger="KEY_STOP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_STOP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SUBTRACT
 					trigger="KEY_SUBTRACT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_SUBTRACT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SUBTRACT
 					trigger="KEY_SUBTRACT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_SUBTRACT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SYSRQ
 					trigger="KEY_SYSRQ", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_SYSRQ"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_SYSRQ
 					trigger="KEY_SYSRQ", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_SYSRQ"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_T
 					trigger="KEY_T", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_T"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_T
 					trigger="KEY_T", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_T"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_TAB
 					trigger="KEY_TAB", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_TAB"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_TAB
 					trigger="KEY_TAB", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_TAB"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_U
 					trigger="KEY_U", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_U"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_U
 					trigger="KEY_U", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_U"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_UNDERLINE
 					trigger="KEY_UNDERLINE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_UNDERLINE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_UNDERLINE
 					trigger="KEY_UNDERLINE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_UNDERLINE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_UNLABELED
 					trigger="KEY_UNLABELED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_UNLABELED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_UNLABELED
 					trigger="KEY_UNLABELED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_UNLABELED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_UP
 					trigger="KEY_UP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_UP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_UP
 					trigger="KEY_UP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_UP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_V
 					trigger="KEY_V", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_V"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_V
 					trigger="KEY_V", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_V"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_W
 					trigger="KEY_W", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_W"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_W
 					trigger="KEY_W", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_W"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_X
 					trigger="KEY_X", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_X"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_X
 					trigger="KEY_X", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_X"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_Y
 					trigger="KEY_Y", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_Y"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_Y
 					trigger="KEY_Y", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_Y"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_YEN
 					trigger="KEY_YEN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_YEN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_YEN
 					trigger="KEY_YEN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_YEN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_Z
 					trigger="KEY_Z", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"KEY_Z"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEY_Z
 					trigger="KEY_Z", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~KEY_Z"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #LMOUSE
 					trigger="LMOUSE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"LMOUSE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #LMOUSE
 					trigger="LMOUSE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~LMOUSE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MIDDLEMOUSE
 					trigger="MIDDLEMOUSE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"MIDDLEMOUSE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MIDDLEMOUSE
 					trigger="MIDDLEMOUSE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~MIDDLEMOUSE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #RMOUSE
 					trigger="RMOUSE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"RMOUSE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #RMOUSE
 					trigger="RMOUSE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~RMOUSE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SHIFT
 					trigger="SHIFT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"SHIFT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SHIFT
 					trigger="SHIFT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Pressed at start)", 
 					details="", 
 					completion=var_wrap+"~SHIFT"+var_wrap),
-				sublime.CompletionItem(
+
+			# Hit variable
+				sublime.CompletionItem( #HIT
 					trigger="HIT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Type of the thing the Player is looking at", 
 					completion=var_wrap+"HIT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_AGE
 					trigger="HIT_AGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_AGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_ATTACHED
 					trigger="HIT_ATTACHED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_ATTACHED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_AXIS
 					trigger="HIT_AXIS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_AXIS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_BITES
 					trigger="HIT_BITES", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_BITES"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_CHECK_DECAY
 					trigger="HIT_CHECK_DECAY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_CHECK_DECAY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_COLOR
 					trigger="HIT_COLOR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_COLOR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_CONDITIONAL
 					trigger="HIT_CONDITIONAL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_CONDITIONAL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_CONTENTS
 					trigger="HIT_CONTENTS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_CONTENTS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_DAMAGE
 					trigger="HIT_DAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_DAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_DECAYABLE
 					trigger="HIT_DECAYABLE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_DECAYABLE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_DELAY
 					trigger="HIT_DELAY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_DELAY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_DISARMED
 					trigger="HIT_DISARMED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_DISARMED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_DOWN
 					trigger="HIT_DOWN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_DOWN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_EAST
 					trigger="HIT_EAST", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_EAST"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_ENABLED
 					trigger="HIT_ENABLED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_ENABLED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_EXPLODE
 					trigger="HIT_EXPLODE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_EXPLODE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_EXTENDED
 					trigger="HIT_EXTENDED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_EXTENDED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_EYE
 					trigger="HIT_EYE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_EYE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_FACING
 					trigger="HIT_FACING", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_FACING"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_HALF
 					trigger="HIT_HALF", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_HALF"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_HAS_BOTTLE_0
 					trigger="HIT_HAS_BOTTLE_0", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_HAS_BOTTLE_0"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_HAS_BOTTLE_1
 					trigger="HIT_HAS_BOTTLE_1", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_HAS_BOTTLE_1"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_HAS_BOTTLE_2
 					trigger="HIT_HAS_BOTTLE_2", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_HAS_BOTTLE_2"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_HAS_RECORD
 					trigger="HIT_HAS_RECORD", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_HAS_RECORD"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_HINGE
 					trigger="HIT_HINGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_HINGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_IN_WALL
 					trigger="HIT_IN_WALL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_IN_WALL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_LAYERS
 					trigger="HIT_LAYERS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_LAYERS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_LEGACY_DATA
 					trigger="HIT_LEGACY_DATA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_LEGACY_DATA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_LEVEL
 					trigger="HIT_LEVEL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_LEVEL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_LOCKED
 					trigger="HIT_LOCKED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_LOCKED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_MODE
 					trigger="HIT_MODE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_MODE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_MOISTURE
 					trigger="HIT_MOISTURE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_MOISTURE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_NODROP
 					trigger="HIT_NODROP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_NODROP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_NORTH
 					trigger="HIT_NORTH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_NORTH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_OCCUPIED
 					trigger="HIT_OCCUPIED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_OCCUPIED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_OPEN
 					trigger="HIT_OPEN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_OPEN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_PART
 					trigger="HIT_PART", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_PART"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_POWER
 					trigger="HIT_POWER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_POWER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_POWERED
 					trigger="HIT_POWERED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_POWERED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_ROTATION
 					trigger="HIT_ROTATION", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_ROTATION"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_SEAMLESS
 					trigger="HIT_SEAMLESS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_SEAMLESS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_SHAPE
 					trigger="HIT_SHAPE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_SHAPE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_SHORT
 					trigger="HIT_SHORT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_SHORT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_SNOWY
 					trigger="HIT_SNOWY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_SNOWY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_SOUTH
 					trigger="HIT_SOUTH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_SOUTH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_STAGE
 					trigger="HIT_STAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_STAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_TRIGGERED
 					trigger="HIT_TRIGGERED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_TRIGGERED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_TYPE
 					trigger="HIT_TYPE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_TYPE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_UP
 					trigger="HIT_UP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_UP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_VARIANT
 					trigger="HIT_VARIANT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_VARIANT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_WEST
 					trigger="HIT_WEST", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_WEST"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HIT_WET
 					trigger="HIT_WET", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"HIT_WET"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HITDATA
 					trigger="HITDATA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Metadata of the thing the Player is looking at", 
 					completion=var_wrap+"HITDATA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HITID
 					trigger="HITID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="ID of the thing the Player is looking at", 
 					completion=var_wrap+"HITID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HITNAME
 					trigger="HITNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Displayname of the thing the Player is looking at", 
 					completion=var_wrap+"HITNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HITPROGRESS
 					trigger="HITPROGRESS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Block breaking progress of the block the Player is looking at", 
 					completion=var_wrap+"HITPROGRESS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HITSIDE
 					trigger="HITSIDE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Block side of the block the Player is looking at", 
 					completion=var_wrap+"HITSIDE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HITUUID
 					trigger="HITUUID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="UUID of the looked at entity or player", 
 					completion=var_wrap+"HITUUID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HITX
 					trigger="HITX", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="X position of the block the Player is looking at", 
 					completion=var_wrap+"HITX"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HITY
 					trigger="HITY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Y position of the block the Player is looking at", 
 					completion=var_wrap+"HITY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HITZ
 					trigger="HITZ", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Z position of the block the Player is looking at", 
 					completion=var_wrap+"HITZ"+var_wrap),
-				sublime.CompletionItem(
+
+			# Trace variable
+				sublime.CompletionItem( #trace
 					trigger=case("trace"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Performs a ray trace operation which sets the raytrace variables in the local scope", 
 					completion=""+case("trace")+"(${1:<distance>},${2:[entities]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_AGE
 					trigger="TRACE_AGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_AGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_ATTACHED
 					trigger="TRACE_ATTACHED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_ATTACHED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_AXIS
 					trigger="TRACE_AXIS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_AXIS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_BITES
 					trigger="TRACE_BITES", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_BITES"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_CHECK_DECAY
 					trigger="TRACE_CHECK_DECAY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_CHECK_DECAY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_COLOR
 					trigger="TRACE_COLOR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_COLOR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_CONDITIONAL
 					trigger="TRACE_CONDITIONAL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_CONDITIONAL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_CONTENTS
 					trigger="TRACE_CONTENTS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_CONTENTS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_DAMAGE
 					trigger="TRACE_DAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_DAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_DECAYABLE
 					trigger="TRACE_DECAYABLE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_DECAYABLE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_DELAY
 					trigger="TRACE_DELAY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_DELAY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_DISARMED
 					trigger="TRACE_DISARMED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_DISARMED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_DOWN
 					trigger="TRACE_DOWN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_DOWN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_EAST
 					trigger="TRACE_EAST", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_EAST"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_ENABLED
 					trigger="TRACE_ENABLED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_ENABLED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_EXPLODE
 					trigger="TRACE_EXPLODE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_EXPLODE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_EXTENDED
 					trigger="TRACE_EXTENDED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_EXTENDED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_EYE
 					trigger="TRACE_EYE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_EYE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_FACING
 					trigger="TRACE_FACING", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_FACING"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_HALF
 					trigger="TRACE_HALF", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_HALF"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_HAS_BOTTLE_0
 					trigger="TRACE_HAS_BOTTLE_0", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_HAS_BOTTLE_0"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_HAS_BOTTLE_1
 					trigger="TRACE_HAS_BOTTLE_1", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_HAS_BOTTLE_1"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_HAS_BOTTLE_2
 					trigger="TRACE_HAS_BOTTLE_2", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_HAS_BOTTLE_2"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_HAS_RECORD
 					trigger="TRACE_HAS_RECORD", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_HAS_RECORD"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_HINGE
 					trigger="TRACE_HINGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_HINGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_IN_WALL
 					trigger="TRACE_IN_WALL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_IN_WALL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_LAYERS
 					trigger="TRACE_LAYERS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_LAYERS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_LEGACY_DATA
 					trigger="TRACE_LEGACY_DATA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_LEGACY_DATA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_LEVEL
 					trigger="TRACE_LEVEL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_LEVEL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_LOCKED
 					trigger="TRACE_LOCKED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_LOCKED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_MODE
 					trigger="TRACE_MODE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_MODE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_MOISTURE
 					trigger="TRACE_MOISTURE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_MOISTURE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_NODROP
 					trigger="TRACE_NODROP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_NODROP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_NORTH
 					trigger="TRACE_NORTH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_NORTH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_OCCUPIED
 					trigger="TRACE_OCCUPIED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_OCCUPIED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_OPEN
 					trigger="TRACE_OPEN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_OPEN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_PART
 					trigger="TRACE_PART", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_PART"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_POWER
 					trigger="TRACE_POWER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_POWER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_POWERED
 					trigger="TRACE_POWERED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_POWERED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_ROTATION
 					trigger="TRACE_ROTATION", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_ROTATION"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_SEAMLESS
 					trigger="TRACE_SEAMLESS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_SEAMLESS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_SHAPE
 					trigger="TRACE_SHAPE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_SHAPE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_SHORT
 					trigger="TRACE_SHORT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_SHORT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_SNOWY
 					trigger="TRACE_SNOWY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_SNOWY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_SOUTH
 					trigger="TRACE_SOUTH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_SOUTH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_STAGE
 					trigger="TRACE_STAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_STAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_TRIGGERED
 					trigger="TRACE_TRIGGERED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_TRIGGERED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_TYPE
 					trigger="TRACE_TYPE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_TYPE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_UP
 					trigger="TRACE_UP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_UP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_VARIANT
 					trigger="TRACE_VARIANT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_VARIANT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_WEST
 					trigger="TRACE_WEST", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_WEST"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACE_WET
 					trigger="TRACE_WET", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="", 
 					completion=var_wrap+"TRACE_WET"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACEDATA
 					trigger="TRACEDATA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Metadata of the block", 
 					completion=var_wrap+"TRACEDATA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACEID
 					trigger="TRACEID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="The id", 
 					completion=var_wrap+"TRACEID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACENAME
 					trigger="TRACENAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="The name", 
 					completion=var_wrap+"TRACENAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACESIDE
 					trigger="TRACESIDE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Side of the block", 
 					completion=var_wrap+"TRACESIDE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACETYPE
 					trigger="TRACETYPE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="The type of the result", 
 					completion=var_wrap+"TRACETYPE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACEUUID
 					trigger="TRACEUUID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Returns the UUID of other players", 
 					completion=var_wrap+"TRACEUUID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACEX
 					trigger="TRACEX", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="X position", 
 					completion=var_wrap+"TRACEX"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACEY
 					trigger="TRACEY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Y position", 
 					completion=var_wrap+"TRACEY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TRACEZ
 					trigger="TRACEZ", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Z position", 
 					completion=var_wrap+"TRACEZ"+var_wrap),
-				sublime.CompletionItem(
+
+			# MKB Default
+				sublime.CompletionItem( #achievementget
 					trigger=case("achievementget"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Displays a popup you get when completing an advancement with a custom message and optionally a custom item", 
 					completion=""+case("achievementget")+"(${1:<text>},${2:[itemid]}:${3:[damage]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #AMBIENTVOLUME
 					trigger="AMBIENTVOLUME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Volume level for Ambient/Environment", 
 					completion=var_wrap+"AMBIENTVOLUME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ARMOUR
 					trigger="ARMOUR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Armour points (each icon equals 2 points)", 
 					completion=var_wrap+"ARMOUR"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #arraysize
 					trigger=case("arraysize"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Stores the size of the specified array in #outvar", 
 					completion=""+case("arraysize")+"(${1:<array>}[],#${2:[outvar]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #assign
 					trigger=case("assign"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Internal function", 
 					completion="<var> = "+case("<value")+">;"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ATTACKPOWER
 					trigger="ATTACKPOWER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Attack power", 
 					completion=var_wrap+"ATTACKPOWER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ATTACKSPEED
 					trigger="ATTACKSPEED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Attack speed", 
 					completion=var_wrap+"ATTACKSPEED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #bind
 					trigger=case("bind"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Set the specified key binding to the specified key code", 
 					completion=""+case("bind")+"(${1:<bind>},${2:<keycode>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #bindgui
 					trigger=case("bindgui"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Binds the specified custom screen to the slot specified", 
 					completion=""+case("bindgui")+"(${1:<slot>},${2:<screen>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #BIOME
 					trigger="BIOME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Biome the Player is currently in", 
 					completion=var_wrap+"BIOME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #BLOCKVOLUME
 					trigger="BLOCKVOLUME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Volume level for Blocks", 
 					completion=var_wrap+"BLOCKVOLUME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #BOOTSDAMAGE
 					trigger="BOOTSDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Maximum uses of the Players boots", 
 					completion=var_wrap+"BOOTSDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #BOOTSDURABILITY
 					trigger="BOOTSDURABILITY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Durability of the Players boots", 
 					completion=var_wrap+"BOOTSDURABILITY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #BOOTSID
 					trigger="BOOTSID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="ID of the Players boots", 
 					completion=var_wrap+"BOOTSID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #BOOTSNAME
 					trigger="BOOTSNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Displayname of the Players boots", 
 					completion=var_wrap+"BOOTSNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #BOWCHARGE
 					trigger="BOWCHARGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Charge of bow", 
 					completion=var_wrap+"BOWCHARGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #break
 					trigger=case("break"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Interrupts exection of the innermost loop", 
 					completion=""+case("break")+";"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #calcyawto
 					trigger=case("calcyawto"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Calculates the absolute yaw angle", 
 					completion=""+case("calcyawto")+"(${1:<xpos>},${2:<zpos>},#${3:[yaw]},#${4:[dist}ance]);"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #camera
 					trigger=case("camera"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Set the current camera mode, call with no arguments to toggle modes", 
 					completion=""+case("camera")+"(${1:[mode]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CAMERA
 					trigger="CAMERA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Current camera mode", 
 					completion=var_wrap+"CAMERA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CANFLY
 					trigger="CANFLY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Whether the Player can fly", 
 					completion=var_wrap+"CANFLY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CARDINALYAW
 					trigger="CARDINALYAW", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Yaw of the player relative to north (YAW + 180)", 
 					completion=var_wrap+"CARDINALYAW"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CHAT
 					trigger="CHAT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="(onChat) Chat message with control codes", 
 					completion=var_wrap+"CHAT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CHATCLEAN
 					trigger="CHATCLEAN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="(onChat) Chat message without control codes", 
 					completion=var_wrap+"CHATCLEAN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #chatfilter
 					trigger=case("chatfilter"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Enable or disable the chat filter", 
 					completion=""+case("chatfilter")+"(${1:<enabled>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #chatheight
 					trigger=case("chatheight"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Set height of the Minecraft chat whilst ingame", 
 					completion=""+case("chatheight")+"(${1:<value>},${2:[time]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #chatheightfocused
 					trigger=case("chatheightfocused"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Set height of the Minecraft chat whilst in the chat GUI", 
 					completion=""+case("chatheightfocused")+"(${1:<value>},${2:[time]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CHATJSON
 					trigger="CHATJSON", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="(onBetterChat) Chat message in JSON", 
 					completion=var_wrap+"CHATMESSAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CHATMESSAGE
 					trigger="CHATMESSAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="(onChat) The message part of an incoming chat line, could be wrong", 
 					completion=var_wrap+"CHATMESSAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #chatopacity
 					trigger=case("chatopacity"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Set opacity of the Minecraft chat", 
 					completion=""+case("chatopacity")+"(${1:<value>},${2:[time]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CHATPLAYER
 					trigger="CHATPLAYER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="(onChat) The player who send a chat line, could be wrong", 
 					completion=var_wrap+"CHATPLAYER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #chatscale
 					trigger=case("chatscale"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Set scale of the Minecraft chat", 
 					completion=""+case("chatscale")+"(${1:<value>},${2:[time]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #chatvisible
 					trigger=case("chatvisible"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Set visibility of minecraft chat", 
 					completion=""+case("chatvisible")+"(${1:<value>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #chatwidth
 					trigger=case("chatwidth"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Set width of the Minecraft chat", 
 					completion=""+case("chatwidth")+"(${1:<value}>,${2:[time]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CHESTPLATEDAMAGE
 					trigger="CHESTPLATEDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Maximum uses of the Players chestplate", 
 					completion=var_wrap+"CHESTPLATEDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CHESTPLATEDURABILITY
 					trigger="CHESTPLATEDURABILITY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Durability of the Players chestplate", 
 					completion=var_wrap+"CHESTPLATEDURABILITY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CHESTPLATEID
 					trigger="CHESTPLATEID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="ID of the Players chestplate", 
 					completion=var_wrap+"CHESTPLATEID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CHESTPLATENAME
 					trigger="CHESTPLATENAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Displayname of the Players chestplate", 
 					completion=var_wrap+"CHESTPLATENAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CHUNKUPDATES
 					trigger="CHUNKUPDATES", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Amount of chunk updates", 
 					completion=var_wrap+"CHUNKUPDATES"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #clearchat
 					trigger=case("clearchat"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Clears all messages from the chat window", 
 					completion=""+case("clearchat")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #clearcrafting
 					trigger=case("clearcrafting"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Cancels any queued crafting jobs", 
 					completion=""+case("clearcrafting")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #config
 					trigger=case("config"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Switch to the specified configuration", 
 					completion=""+case("config")+"(${1:<configname>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CONFIG
 					trigger="CONFIG", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Loaded config", 
 					completion=var_wrap+"CONFIG"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CONTAINERSLOTS
 					trigger="CONTAINERSLOTS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Amount of slots in opened container", 
 					completion=var_wrap+"CONTAINERSLOTS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #controls
 					trigger=case("controls"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(controls iterator)", 
 					details="Iterates over all existing controls", 
 					completion=""+case("controls")+"([layout][:type])"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CONTROLID
 					trigger="CONTROLID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(controls iterator)" ,
 					details="Internal id of the current control", 
 					completion=var_wrap+"CONTROLID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CONTROLNAME
 					trigger="CONTROLNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(controls iterator)", 
 					details="The name set in the control under Control Name", 
 					completion=var_wrap+"CONTROLNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #CONTROLTYPE
 					trigger="CONTROLTYPE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(controls iterator)" ,
 					details="Type of the current control", 
 					completion=var_wrap+"CONTROLTYPE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #COOLDOWN
 					trigger="COOLDOWN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Cooldown", 
 					completion=var_wrap+"COOLDOWN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #craft
 					trigger=case("craft"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Queues an auto-crafting request", 
 					completion=""+case("craft")+"(${1:<item>}:${2:[damage]},${3:[amount]},${4:[throw]},${5:[verbose]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #craftandwait
 					trigger=case("craftandwait"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Queues an auto-crafting request and waits", 
 					completion=""+case("craftandwait")+"(${1:<item>}:${2:[damage]},${3:[amount]},${4:[throw]},${5:[verbose]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DATE
 					trigger="DATE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Current date in the format year-month-day", 
 					completion=var_wrap+"DATE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DATETIME
 					trigger="DATETIME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Current date and time in the format year-month-day hour:minute:second", 
 					completion=var_wrap+"DATETIME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DAY
 					trigger="DAY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Number of day", 
 					completion=var_wrap+"DAY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DAYTICKS
 					trigger="DAYTICKS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="TICKS value modulo 24000 and shifted back 6000 so that 0 aligns with midnight ", 
 					completion=var_wrap+"DAYTICKS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DAYTIME
 					trigger="DAYTIME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Ingame time in the format hh:mm", 
 					completion=var_wrap+"DAYTIME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #dec
 					trigger=case("dec"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Decrements the specified counter by 1 or by the specified amount", 
 					completion=""+case("dec")+"(#${1:<var>},${2:[amount]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #decode
 					trigger=case("decode"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Converts an string from base64 back to an normal string", 
 					completion=""+case("decode")+"(${1:<input>},${2:[&output]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DIFFICULTY
 					trigger="DIFFICULTY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Difficulty of the world", 
 					completion=var_wrap+"DIFFICULTY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DIMENSION
 					trigger="DIMENSION", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Dimension the Player is in", 
 					completion=var_wrap+"DIMENSION"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DIRECTION
 					trigger="DIRECTION", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Direction the Player is looking at, shortened to the first character", 
 					completion=var_wrap+"DIRECTION"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #disconnect
 					trigger=case("disconnect"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Disconnects from the current game or server", 
 					completion=""+case("disconnect")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DISPLAYHEIGHT
 					trigger="DISPLAYHEIGHT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Height of the minecraft window", 
 					completion=var_wrap+"DISPLAYHEIGHT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DISPLAYNAME
 					trigger="DISPLAYNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Player's displayname", 
 					completion=var_wrap+"DISPLAYNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DISPLAYWIDTH
 					trigger="DISPLAYWIDTH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Width of the minecraft window", 
 					completion=var_wrap+"DISPLAYWIDTH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #DURABILITY
 					trigger="DURABILITY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Durability of the equipped item", 
 					completion=var_wrap+"DURABILITY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #echo
 					trigger=case("echo"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sends the specified message to the server", 
 					completion=""+case("echo")+"(${1:<text>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #effects
 					trigger=case("effects"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(effects iterator)", 
 					details="Iterates over all currently applied effects", 
 					completion=""+case("effects")+""),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #EFFECT
 					trigger="EFFECT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(effects iterator)", 
 					details="Internal string id of the effect", 
 					completion=var_wrap+"EFFECT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #EFFECTID
 					trigger="EFFECTID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(effects iterator)", 
 					details="Internal numeric id of the effect", 
 					completion=var_wrap+"EFFECTID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #EFFECTNAME
 					trigger="EFFECTNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(effects iterator)", 
 					details="Display name of the effect", 
 					completion=var_wrap+"EFFECTNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #EFFECTPOWER
 					trigger="EFFECTPOWER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(effects iterator)", 
 					details="Power of the effect", 
 					completion=var_wrap+"EFFECTPOWER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #EFFECTTIME
 					trigger="EFFECTTIME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(effects iterator)", 
 					details="Remaining time of the effect in seconds", 
 					completion=var_wrap+"EFFECTTIME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #enchantments
 					trigger=case("enchantments"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(enchantments iterator)", 
 					details="Iterates over all enchantments on the equipped item", 
 					completion=""+case("enchantments")+""),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENCHANTMENT
 					trigger="ENCHANTMENT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(enchantments iterator)", 
 					details="Display name of the enchantment", 
 					completion=var_wrap+"ENCHANTMENT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENCHANTMENTNAME
 					trigger="ENCHANTMENTNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(enchantments iterator)", 
 					details="Only the name of the enchantment", 
 					completion=var_wrap+"ENCHANTMENTNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ENCHANTMENTPOWER
 					trigger="ENCHANTMENTPOWER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(enchantments iterator)", 
 					details="Power of the enchantment", 
 					completion=var_wrap+"ENCHANTMENTPOWER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #encode
 					trigger=case("encode"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Converts an string to base 64", 
 					completion=""+case("encode")+"(${1:<input>},&${2:[output]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #env
 					trigger=case("env"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(env iterator)", 
 					details="Iterates over all available variables", 
 					completion=""+case("env")+""),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #VARNAME
 					trigger="VARNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(env iterator)", 
 					details="Contains the variable name", 
 					completion=var_wrap+"VARNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #exec
 					trigger=case("exec"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Creates a task by running the specified script file", 
 					completion=""+case("exec")+"(${1:<file.txt>},${2:[taskname]},${3:[params]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #filter
 					trigger=case("filter"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Indicate that this chat meesage should be filtered and terminate", 
 					completion=""+case("filter")+";"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FLYING
 					trigger="FLYING", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Whether the Player is flying", 
 					completion=var_wrap+"FLYING"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #fog
 					trigger=case("fog"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Toggles render distance, or optionally specify render distance", 
 					completion=""+case("fog")+"(${1:[value]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #fov
 					trigger=case("fov"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the FOV angle in degrees, specifying time causes the value to change smoothly", 
 					completion=""+case("fov")+"(${1:<value>},${2:[time]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FOV
 					trigger="FOV", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Field of View", 
 					completion=var_wrap+"FOV"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #FPS
 					trigger="FPS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Frames per Second", 
 					completion=var_wrap+"FPS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #GAMEMODE
 					trigger="GAMEMODE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Gamemode of the player as a string", 
 					completion=var_wrap+"GAMEMODE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #gamma
 					trigger=case("gamma"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the brightness value (percent), specifying time causes the value to change smoothly", 
 					completion=""+case("gamma")+"(${1:<value>},${2:[time]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #GAMMA
 					trigger="GAMMA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Brightness level", 
 					completion=var_wrap+"GAMMA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getid
 					trigger=case("getid"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Gets the ID and data value of the block at the specified coordinates", 
 					completion=""+case("getid")+"(${1:<x>},${2:<y>},${3:<z>},&${4:[idvar]},#${5:[datavar]},&${6:[variants]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getidrel
 					trigger=case("getidrel"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Gets the ID and data value of the block at the specified coordinates relative to the player", 
 					completion=""+case("getidrel")+"(${1:<dx>},${2:<dy>},${3:<dz>},&${4:[idvar]},#${5:[datavar]},&${6:[variants]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getiteminfo
 					trigger=case("getiteminfo"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Gets the name and other info for the specified item id", 
 					completion=""+case("getiteminfo")+"(${1:<item>}:${2:[damage]},&${3:[namevar]},#${4:[maxstacksize]},&${5:[type]},&${6:[dropid]},#${7:[maxdurability]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getproperty
 					trigger=case("getproperty"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Returns the value of the specified property from the specified GUI control", 
 					completion=""+case("getproperty")+"(${1:<control>},${2:<property>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getslot
 					trigger=case("getslot"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Gets the id of the slot containing an item matching the specified item id", 
 					completion=""+case("getslot")+"(${1:<item>}:${2:[damage]},#${3:<slotid>},${4:[startfromslotid]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #getslotitem
 					trigger=case("getslotitem"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Gets information about the item in the specified slot", 
 					completion=""+case("getslotitem")+"(${1:<slotid>},&${2:<idvar>},#${3:[stacksizevar]},#${4:[datavar]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #gui
 					trigger=case("gui"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Opens the specified gui screen", 
 					completion=""+case("gui")+"(${1:[name]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #GUI
 					trigger="GUI", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Name of the currently open GUI", 
 					completion=var_wrap+"GUI"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HEALTH
 					trigger="HEALTH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Health points (each icon equals 2 points)", 
 					completion=var_wrap+"HEALTH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HELMDAMAGE
 					trigger="HELMDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Maximum uses of the Players helm", 
 					completion=var_wrap+"HELMDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HELMDURABILITY
 					trigger="HELMDURABILITY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Durability of the Players helm", 
 					completion=var_wrap+"HELMDURABILITY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HELMID
 					trigger="HELMID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="ID of the Players helm", 
 					completion=var_wrap+"HELMID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HELMNAME
 					trigger="HELMNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Displayname of the Players helm", 
 					completion=var_wrap+"HELMNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HOSTILEVOLUME
 					trigger="HOSTILEVOLUME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Volume level for Hostile Creatures", 
 					completion=var_wrap+"HOSTILEVOLUME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #HUNGER
 					trigger="HUNGER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Hunger points (each icon equals 2 points)", 
 					completion=var_wrap+"HUNGER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #iif
 					trigger=case("iif"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Inline IF statement", 
 					completion=""+case("iif")+"(${1:<condition>},${2:<truetext>},${3:[falsetext]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #import
 					trigger=case("import"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Overlay the specified configuration", 
 					completion=""+case("import")+"(${1:<configname>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #inc
 					trigger=case("inc"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Increments the specified counter by 1 or by the specified amount", 
 					completion=""+case("inc")+"(#${1:<var>},${2:[amount]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #indexof
 					trigger=case("indexof"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Gets the first index of a item", 
 					completion=""+case("indexof")+"(${1:<array>}[],#${2:<outvar>},${3:<searchfor>},${4:[casesensitiv]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #inventorydown
 					trigger=case("inventorydown"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Scrolls the specified number of slots down through the hotbar", 
 					completion=""+case("inventorydown")+"(${1:[amount]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #inventoryup
 					trigger=case("inventoryup"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Scrolls the specified number of slots up through the hotbar", 
 					completion=""+case("inventoryup")+"(${1:[amount]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #INVSLOT
 					trigger="INVSLOT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Selected inventory slot", 
 					completion=var_wrap+"INVSLOT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #isrunning
 					trigger=case("isrunning"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Returns whether the specified macro is currently running", 
 					completion=""+case("isrunning")+"(${1:<macro>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ITEM
 					trigger="ITEM", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="ID of the equipped item", 
 					completion=var_wrap+"ITEM"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ITEMCODE
 					trigger="ITEMCODE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Internal code for the equipped item", 
 					completion=var_wrap+"ITEMCODE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ITEMDAMAGE
 					trigger="ITEMDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Maximum uses of the equipped item", 
 					completion=var_wrap+"ITEMDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #itemid
 					trigger=case("itemid"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Gets the legacy (numeric) ID for the specified item", 
 					completion=""+case("itemid")+"(${1:<item>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ITEMIDDMG
 					trigger="ITEMIDDMG", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="ID and durability seperated by a colon of the equipped item", 
 					completion=var_wrap+"ITEMIDDMG"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ITEMNAME
 					trigger="ITEMNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Displayname for the equipped item", 
 					completion=var_wrap+"ITEMNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #itemname
 					trigger=case("itemname"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Get the item descriptor for a legacy (numeric) item ID", 
 					completion=""+case("itemname")+"(${1:<id>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ITEMUSEPCT
 					trigger="ITEMUSEPCT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Previous value as percent of total useage time", 
 					completion=var_wrap+"ITEMUSEPCT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ITEMUSETICKS
 					trigger="ITEMUSETICKS ", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="All usable items increase this value once per tick", 
 					completion=var_wrap+"ITEMUSETICKS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #join
 					trigger=case("join"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Combines values inside array with glue", 
 					completion=""+case("join")+"(${1:<glue>},${2:<array>}[],&${3:[output]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #JOINEDPLAYER
 					trigger="JOINEDPLAYER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="(onPlayerJoined) Player name of the newly joined player", 
 					completion=var_wrap+"JOINEDPLAYER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #key
 					trigger=case("key"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Activates the specified key binding for 1 tick", 
 					completion=""+case("key")+"(${1:<bind>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #keydown
 					trigger=case("keydown"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the specified key binding state to pressed, only works with pressable bindings", 
 					completion=""+case("keydown")+"(${1:<bind>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEYID
 					trigger="KEYID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Key ID of the key that started this script", 
 					completion=var_wrap+"KEYID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #KEYNAME
 					trigger="KEYNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Keyname of the key that started this script", 
 					completion=var_wrap+"KEYNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #keyup
 					trigger=case("keyup"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the specified key binding state to unpressed, only works with pressable bindings", 
 					completion=""+case("keyup")+"(${1:<bind>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #lcase
 					trigger=case("lcase"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Converts the input string to lower case and stores it in output", 
 					completion=""+case("lcase")+"(${1:<input>},&${2:[output]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #LEGGINGSDAMAGE
 					trigger="LEGGINGSDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Maximum uses of the Players leggings", 
 					completion=var_wrap+"LEGGINGSDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #LEGGINGSDURABILITY
 					trigger="LEGGINGSDURABILITY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Durability of the Players leggings", 
 					completion=var_wrap+"LEGGINGSDURABILITY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #LEGGINGSID
 					trigger="LEGGINGSID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="ID of the Players leggings", 
 					completion=var_wrap+"LEGGINGSID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #LEGGINGSNAME
 					trigger="LEGGINGSNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Displayname of the Players leggings", 
 					completion=var_wrap+"LEGGINGSNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #LEVEL
 					trigger="LEVEL", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="XP level", 
 					completion=var_wrap+"LEVEL"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #LIGHT
 					trigger="LIGHT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Light level at current location", 
 					completion=var_wrap+"LIGHT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #LOCALDIFFICULTY
 					trigger="LOCALDIFFICULTY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Local difficulty of the world", 
 					completion=var_wrap+"LOCALDIFFICULTY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #log
 					trigger=case("log"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Shows the specified text only on the client-side in the chat window", 
 					completion=""+case("log")+"(${1:<text>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #lograw
 					trigger=case("lograw"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Similar to minecraft tellraw command", 
 					completion=""+case("lograw")+"(${1:<json>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #logto
 					trigger=case("logto"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Outputs the specified text into the specified target", 
 					completion=""+case("logto")+"(${1:<target>},${2:<text>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #look
 					trigger=case("look"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Faces the player in the specified direction", 
 					completion=""+case("look")+"(${1:<yaw>},${2:[pitch]},${3:[time]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #looks
 					trigger=case("looks"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Smoothly turnes the player to the specified direction", 
 					completion=""+case("looks")+"(${1:<yaw>},${2:[pitch]},${3:[time]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #running
 					trigger=case("running"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(running iterator)", 
 					details="Iterates over all currently running macros", 
 					completion=""+case("running")+""),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MACROID
 					trigger="MACROID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(running iterator)", 
 					details="Internal id of the macro", 
 					completion=var_wrap+"MACROID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MACRONAME
 					trigger="MACRONAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(running iterator)", 
 					details="Display name of the macro", 
 					completion=var_wrap+"MACRONAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MACROTIME
 					trigger="MACROTIME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(running iterator)", 
 					details="The time the macro is already running in seconds", 
 					completion=var_wrap+"MACROTIME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MAINHANDCOOLDOWN
 					trigger="MAINHANDCOOLDOWN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="mainhand cooldown", 
 					completion=var_wrap+"MAINHANDCOOLDOWN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MAINHANDDURABILITY
 					trigger="MAINHANDDURABILITY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Durability of the mainhand item", 
 					completion=var_wrap+"MAINHANDDURABILITY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MAINHANDITEM
 					trigger="MAINHANDITEM", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="ID of the mainhand item", 
 					completion=var_wrap+"MAINHANDITEM"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MAINHANDITEMCODE
 					trigger="MAINHANDITEMCODE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Internal code for the mainhand item", 
 					completion=var_wrap+"MAINHANDITEMCODE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MAINHANDITEMDAMAGE
 					trigger="MAINHANDITEMDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Maximum uses of the mainhand item", 
 					completion=var_wrap+"MAINHANDITEMDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MAINHANDITEMIDDMG
 					trigger="MAINHANDITEMIDDMG", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="ID and durability seperated by a colon of the mainhand item", 
 					completion=var_wrap+"MAINHANDITEMIDDMG"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MAINHANDITEMNAME
 					trigger="MAINHANDITEMNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Displayname for the mainhand item", 
 					completion=var_wrap+"MAINHANDITEMNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MAINHANDSTACKSIZE
 					trigger="MAINHANDSTACKSIZE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Stacksize of the mainhand item", 
 					completion=var_wrap+"MAINHANDSTACKSIZE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #match
 					trigger=case("match"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Runs a regular expression match on the subject", 
 					completion=""+case("match")+"(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]},${5:[default]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MAXPLAYERS
 					trigger="MAXPLAYERS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Amount of players the server can hold", 
 					completion=var_wrap+"MAXPLAYERS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MODE
 					trigger="MODE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Gamemode of the player as a number", 
 					completion=var_wrap+"MODE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #modify
 					trigger=case("modify"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Set new content for this chat message", 
 					completion=""+case("modify")+"(${1:<newmessage>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #MUSIC
 					trigger="MUSIC", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Volume level for Music", 
 					completion=var_wrap+"MUSIC"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #music
 					trigger=case("music"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the music volume, specifying time causes the value to change smoothly", 
 					completion=""+case("music")+"(${1:<value>},${2:[time]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #NEUTRALVOLUME
 					trigger="NEUTRALVOLUME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Volume level for Friendly Creatures", 
 					completion=var_wrap+"NEUTRALVOLUME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #next
 					trigger=case("next"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Completes a for or foreach loop", 
 					completion=""+case("next")+";"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #OFFHANDCOOLDOWN
 					trigger="OFFHANDCOOLDOWN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Offhand cooldown", 
 					completion=var_wrap+"OFFHANDCOOLDOWN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #OFFHANDDURABILITY
 					trigger="OFFHANDDURABILITY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Durability of the offhand item", 
 					completion=var_wrap+"OFFHANDDURABILITY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #OFFHANDITEM
 					trigger="OFFHANDITEM", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="ID of the offhand item", 
 					completion=var_wrap+"OFFHANDITEM"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #OFFHANDITEMCODE
 					trigger="OFFHANDITEMCODE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Internal code for the offhand item", 
 					completion=var_wrap+"OFFHANDITEMCODE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #OFFHANDITEMDAMAGE
 					trigger="OFFHANDITEMDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Maximum uses of the offhand item", 
 					completion=var_wrap+"OFFHANDITEMDAMAGE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #OFFHANDITEMIDDMG
 					trigger="OFFHANDITEMIDDMG", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="ID and durability seperated by a colon of the offhand item", 
 					completion=var_wrap+"OFFHANDITEMIDDMG"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #OFFHANDITEMNAME
 					trigger="OFFHANDITEMNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Displayname for the offhand item", 
 					completion=var_wrap+"OFFHANDITEMNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #OFFHANDSTACKSIZE
 					trigger="OFFHANDSTACKSIZE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Stacksize of the offhand item", 
 					completion=var_wrap+"OFFHANDSTACKSIZE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #OLDINVSLOT
 					trigger="OLDINVSLOT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="(onInventorySlotChange) Selected inventory slot before it was changed", 
 					completion=var_wrap+"OLDINVSLOT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ONLINEPLAYERS
 					trigger="ONLINEPLAYERS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Amount of players currently on the server", 
 					completion=var_wrap+"ONLINEPLAYERS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #OXYGEN
 					trigger="OXYGEN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Air Level (from 0 to 300)", 
 					completion=var_wrap+"OXYGEN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #pass
 					trigger=case("pass"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Indicate that this chat message should PASS the filter and terminate", 
 					completion=""+case("pass")+";"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #pick
 					trigger=case("pick"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Selects the specified item id if it is on the hotbar", 
 					completion=""+case("pick")+"(${1:<item>}:${2:[damage]},${3:<item>}:${4:[damage]}${5:,...});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PICKUPAMOUNT
 					trigger="PICKUPAMOUNT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="(onPickupItem) Amount of items picked up", 
 					completion=var_wrap+"PICKUPAMOUNT"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PICKUPDATA
 					trigger="PICKUPDATA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="(onPickupItem) Metadata of the picked up item", 
 					completion=var_wrap+"PICKUPDATA"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PICKUPID
 					trigger="PICKUPID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="(onPickupItem) Item id of the picked up item", 
 					completion=var_wrap+"PICKUPID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PICKUPITEM
 					trigger="PICKUPITEM", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="(onPickupItem) Display name of the picked up item", 
 					completion=var_wrap+"PICKUPITEM"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PITCH
 					trigger="PITCH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Pitch of the player", 
 					completion=var_wrap+"PITCH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #placesign
 					trigger=case("placesign"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Places a sign in the world with the specified text", 
 					completion=""+case("placesign")+"(${1:[line1]},${2:[line2]},${3:[line3]},${4:[line4]},${5:[showgui]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PLAYER
 					trigger="PLAYER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Player's name", 
 					completion=var_wrap+"PLAYER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #players
 					trigger=case("players"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(players iterator)", 
 					details="Iterates over all online players", 
 					completion=""+case("players")+""),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PLAYERNAME
 					trigger="PLAYERNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(players iterator)", 
 					details="The current player", 
 					completion=var_wrap+"PLAYERNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PLAYERVOLUME
 					trigger="PLAYERVOLUME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Volume level for Players", 
 					completion=var_wrap+"PLAYERVOLUME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #playsound
 					trigger=case("playsound"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Plays the specified sound", 
 					completion=""+case("playsound")+"(${1:<sound>},${2:[volume]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #pop
 					trigger=case("pop"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Removes the last entry from the end of array and stores it in outvar", 
 					completion=""+case("pop")+"(${1:<array>}[],${2:<outvar>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #popupmessage
 					trigger=case("popupmessage"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Display a message in the area above the hotbar", 
 					completion=""+case("popupmessage")+"(${1:<message>},${2:[animate]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #press
 					trigger=case("press"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Injects the specified key event directly into the keyboard buffer for 1 tick", 
 					completion=""+case("press")+"(${1:<lwjgl_name>},${2:[deep]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #prompt
 					trigger=case("prompt"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Displays a prompt by parsing the params in paramstring", 
 					completion=""+case("prompt")+"(&${1:<target>},${2:<paramstring>},${3:[prompt]},${4:[override]},${5:[default]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #properties
 					trigger=case("properties"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(properties iterator)", 
 					details="Iterates over all properties of the block you are looking at", 
 					completion=""+case("properties")+""),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PROPNAME
 					trigger="PROPNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(properties iterator)", 
 					details="The name of the current property", 
 					completion=var_wrap+"PROPNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #PROPVALUE
 					trigger="PROPVALUE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(properties iterator)", 
 					details="The value of the current property", 
 					completion=var_wrap+"PROPVALUE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #push
 					trigger=case("push"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Appends value to the end of array[]", 
 					completion=""+case("push")+"(${1:<array>}[],${2:<value>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #put
 					trigger=case("put"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Inserts value at the first empty point in array[]", 
 					completion=""+case("put")+"(${1:<array>}[],${2:<value>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #RAIN
 					trigger="RAIN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Rain level", 
 					completion=var_wrap+"RAIN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #random
 					trigger=case("random"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Assigns a random number between min and max to target", 
 					completion=""+case("random")+"(#${1:<target>},${2:[max]},${3:[min])};"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #REASON
 					trigger="REASON", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="(onAutoCraftingComplete) The reason why the crafting was completed or aborted", 
 					completion=var_wrap+"REASON"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #RECORDVOLUME
 					trigger="RECORDVOLUME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Volume level for Jukebox/Noteblocks", 
 					completion=var_wrap+"RECORDVOLUME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #regexreplace
 					trigger=case("regexreplace"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Replace all matches of pattern with replace in &subject", 
 					completion=""+case("regexreplace")+"(&${1:<subject>},${2:<pattern>},${3:[replace]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #reloadresources
 					trigger=case("reloadresources"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Reloads resource packs, same as pressing F3 + T", 
 					completion=""+case("reloadresources")+";"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #repl
 					trigger=case("repl"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Access the REPL interface", 
 					completion=""+case("repl")+";"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #replace
 					trigger=case("replace"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Replace all occurrences of search with replace in &subject", 
 					completion=""+case("replace")+"(&${1:<subject>},${2:<search>},${3:[replace]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #resourcepacks
 					trigger=case("resourcepacks"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the resource pack stack to the order matching the specified patterns", 
 					completion=""+case("resourcepacks")+"(${1:[pattern]},${2:[pattern...]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #RESOURCEPACKS
 					trigger="RESOURCEPACKS[]", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Array of selected resource packs", 
 					completion=var_wrap+"RESOURCEPACKS[]"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #respawn
 					trigger=case("respawn"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Respawns the player if you are dead", 
 					completion=""+case("respawn")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SATURATION
 					trigger="SATURATION", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Saturation level (normally hidden from the Player)", 
 					completion=var_wrap+"SATURATION"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SCREEN
 					trigger="SCREEN", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Name of the current custom GUI", 
 					completion=var_wrap+"SCREEN"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SCREENNAME
 					trigger="SCREENNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Display name of the current custom GUI", 
 					completion=var_wrap+"SCREENNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SEED
 					trigger="SEED", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Seed of the world (only available in SP)", 
 					completion=var_wrap+"SEED"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #selectchannel
 					trigger=case("selectchannel"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Selects channel", 
 					completion=""+case("selectchannel")+"(${1:<channel>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #sendmessage
 					trigger=case("sendmessage"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sends a message", 
 					completion=""+case("sendmessage")+"(${1:[params]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SENSITIVITY
 					trigger="SENSITIVITY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Sensitivity", 
 					completion=var_wrap+"SENSITIVITY"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #sensitivity
 					trigger=case("sensitivity"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the mouse sensitivity, specifying time causes the value to change smoothly", 
 					completion=""+case("sensitivity")+"(${1:<value>},${2:[time]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SERVER
 					trigger="SERVER", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="IP of the server", 
 					completion=var_wrap+"SERVER"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SERVERMOTD
 					trigger="SERVERMOTD", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Motto of the day of the server", 
 					completion=var_wrap+"SERVERMOTD"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SERVERNAME
 					trigger="SERVERNAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Name of the server", 
 					completion=var_wrap+"SERVERNAME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #set
 					trigger=case("set"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the value of target to value", 
 					completion=""+case("set")+"(${1:<target>},${2:[value]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #setlabel
 					trigger=case("setlabel"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the text (and optionally binding) of the specified label", 
 					completion=""+case("setlabel")+"(${1:<labelname>},${2:<text>},${3:[binding]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #setproperty
 					trigger=case("setproperty"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the value of the specified property on the specified GUI control", 
 					completion=""+case("setproperty")+"(${1:<control>},${2:<property>},${3:<value>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #setres
 					trigger=case("setres"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the size of the minecraft game window", 
 					completion=""+case("setres")+"(${1:<width>},${2:<height>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #setslotitem
 					trigger=case("setslotitem"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Creative mode only, set the contents of a hot bar slot", 
 					completion=""+case("setslotitem")+"(${1:<item>}:${2:[damage]},${3:[slot]},${4:[amount]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SHADERGROUP
 					trigger="SHADERGROUP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Selected shader", 
 					completion=var_wrap+"SHADERGROUP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #shadergroup
 					trigger=case("shadergroup"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the active shader group to the shader matching path", 
 					completion=""+case("shadergroup")+"(${1:[path]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SHADERGROUPS
 					trigger="SHADERGROUPS[]", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Array of available shaders", 
 					completion=var_wrap+"SHADERGROUPS[]"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #showgui
 					trigger=case("showgui"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Show a custom gui screen, creates it if it doesn't exist", 
 					completion=""+case("showgui")+"(${1:<screen>},${2:[esc_screen]},${3:[macro_keys]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SIGNTEXT
 					trigger="SIGNTEXT[]", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Array of lines on a sign the Player is looking at", 
 					completion=var_wrap+"SIGNTEXT[]"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #slot
 					trigger=case("slot"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Selects the specified slot on the hot bar", 
 					completion=""+case("slot")+"(${1:<slot>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #slotclick
 					trigger=case("slotclick"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Simulates clicking on the specified slot in the current GUI", 
 					completion=""+case("slotclick")+"(${1:<slot>},${2:[button]},${3:[shift]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #SOUND
 					trigger="SOUND", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Master Volume level", 
 					completion=var_wrap+"SOUND"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #split
 					trigger=case("split"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Splits the supplied source string on every delimiter into output[]", 
 					completion=""+case("split")+"(${1:<delimiter>},${2:<source>},${3:[output]}[]);"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #sprint
 					trigger=case("sprint"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the player state to sprinting if sufficient stamina (food)", 
 					completion=""+case("sprint")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #sqrt
 					trigger=case("sqrt"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Calculate the rounded square root of value and store it in #outvar", 
 					completion=""+case("sqrt")+"(${1:<value>},#${2:[outvar]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #STACKSIZE
 					trigger="STACKSIZE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Stack size of the equipped item", 
 					completion=var_wrap+"STACKSIZE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #stop
 					trigger=case("stop"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Stops the current macro, or macros matching the specified ID", 
 					completion=""+case("stop")+"(${1:[id]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #store
 					trigger=case("store"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Stores a value into one of the predefined parameter lists", 
 					completion=""+case("store")+"(${1:<type>},${2:[name]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #storeover
 					trigger=case("storeover"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Stores a value into one of the predefined parameter lists", 
 					completion=""+case("storeover")+"(${1:<type>},${2:[name]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #strip
 					trigger=case("strip"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Strips all formatting codes from the specified text and assigns the result to &target", 
 					completion=""+case("strip")+"(&${1:<target>},${2:<text>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TICKS
 					trigger="TICKS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="current world time value (which will be a static number if doDayNightCycle game rule is false)", 
 					completion=var_wrap+"TICKS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #tileid
 					trigger=case("tileid"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Gets the legacy (numeric) ID for the specified tile", 
 					completion=""+case("tileid")+"(${1:<item>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #tilename
 					trigger=case("tilename"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Get the descriptor for a legacy (numeric) tile ID", 
 					completion=""+case("tilename")+"(${1:<id>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #time
 					trigger=case("time"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Stores the current time and date into &target, optionally using format specified", 
 					completion=""+case("time")+"(&${1:<target>},${2:[format]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TIME
 					trigger="TIME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Current time in the format hour:minute:second", 
 					completion=var_wrap+"TIME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TIMESTAMP
 					trigger="TIMESTAMP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="UNIX Timestamp", 
 					completion=var_wrap+"TIMESTAMP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #title
 					trigger=case("title"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Displays the specified custom title", 
 					completion=""+case("title")+"(${1:[title]},${2:[subtitle]},${3:[inticks]},${4:[showticks]},${5:[outticks]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #toast
 					trigger=case("toast"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Displays an user-defined toast", 
 					completion=""+case("toast")+"(${1:[type]},${2:[icon]},${3:[text1]},${4:[text2]},${5:[ticks]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #toggle
 					trigger=case("toggle"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Toggles the specified boolean flag value", 
 					completion=""+case("toggle")+"(${1:[flag]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #togglekey
 					trigger=case("togglekey"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Toggles the pressed state of the specified key binding, only works with pressable bindings", 
 					completion=""+case("togglekey")+"(${1:<bind>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TOTALTICKS
 					trigger="TOTALTICKS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="current total world time (which increases all the time regardless of the gamerule doDayNightCycle)", 
 					completion=var_wrap+"TOTALTICKS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #TOTALXP
 					trigger="TOTALXP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Total amount of experience points", 
 					completion=var_wrap+"TOTALXP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #type
 					trigger=case("type"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Injects the specified key sequence directly into the keyboard buffer at a rate of 1 key per tick", 
 					completion=""+case("type")+"(${1:<text>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ucase
 					trigger=case("ucase"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Converts the input string to upper case and stores it in output", 
 					completion=""+case("ucase")+"(${1:<input>},&${2:[output]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #unimport
 					trigger=case("unimport"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Remove the specified configuration overlay if active", 
 					completion=""+case("unimport")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #UNIQUEID
 					trigger="UNIQUEID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Returns a new UUID everytime it is accessed", 
 					completion=var_wrap+"UNIQUEID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #unset
 					trigger=case("unset"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Un-sets the specified flag variable", 
 					completion=""+case("unset")+"(${1:<flag>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #unsprint
 					trigger=case("unsprint"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the player state to not sprinting", 
 					completion=""+case("unsprint")+"();"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #UUID
 					trigger="UUID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="UUID of the Player", 
 					completion=var_wrap+"UUID"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #VEHICLE
 					trigger="VEHICLE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Vehicle type", 
 					completion=var_wrap+"VEHICLE"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #VEHICLEHEALTH
 					trigger="VEHICLEHEALTH", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Vehicle health", 
 					completion=var_wrap+"VEHICLEHEALTH"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #volume
 					trigger=case("volume"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Sets the sound volume for the specified category", 
 					completion=""+case("volume")+"(${1:<value>},${2:[category]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #wait
 					trigger=case("wait"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Pauses the script for the time specified", 
 					completion=""+case("wait")+"(${1:<time>});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #walkto
 					trigger=case("walkto"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					details="Was never offically in the mod", 
 					completion=""+case("walkto")+"(${1:<x>},${2:<y>},${3:<z>},${4:[speed]},${5:[radius]});"),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #WEATHERVOLUME
 					trigger="WEATHERVOLUME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Volume level for Weather", 
 					completion=var_wrap+"WEATHERVOLUME"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #XP
 					trigger="XP", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Current amount of experience points", 
 					completion=var_wrap+"XP"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #XPOS
 					trigger="XPOS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Position in X direction", 
 					completion=var_wrap+"XPOS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #XPOSF
 					trigger="XPOSF", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="The position in X direction with three decimal places after the comma as a string", 
 					completion=var_wrap+"XPOSF"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #YAW
 					trigger="YAW", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Yaw of the player", 
 					completion=var_wrap+"YAW"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #YPOS
 					trigger="YPOS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Position in Y direction", 
 					completion=var_wrap+"YPOS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #YPOSF
 					trigger="YPOSF", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="The position in Y direction with three decimal places after the comma as a string", 
 					completion=var_wrap+"YPOSF"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ZPOS
 					trigger="ZPOS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					details="Position in Z direction", 
 					completion=var_wrap+"ZPOS"+var_wrap),
-				sublime.CompletionItem(
+				sublime.CompletionItem( #ZPOSF
 					trigger="ZPOSF", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 

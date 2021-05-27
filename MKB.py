@@ -161,12 +161,13 @@ class Indenter:
 			"unsafe":	["endunsafe"],
 			"pollevent":["next"],
 			"switch":	["endswitch"],
-			"case":		["case", "default", "endswitch"],
-			"default" :	["endswitch"],
+			# "case":		["case", "default", "endswitch"],
+			# "default" :	["endswitch"],
 			"function": ["endfunction"]
 		}
-		self.openings = "IF|ELSEIF|ELSE|FOR|DO|UNSAFE|POLLEVENT|SWITCH|CASE|DEFAULT|FUNCTION"
+		self.openings = "IF|ELSEIF|ELSE|FOR|DO|UNSAFE|POLLEVENT|SWITCH|FUNCTION"
 		self.lintlines = []
+		self.extra = 0
 
 		if config("extra_indent"):
 			self.blocks["$${"] = ["}\$\$"]
@@ -178,10 +179,12 @@ class Indenter:
 		return None if not match else match.groups()[0]
 
 	def indent_line(self, line):
+		# print(self.extra)
+		# print(line)
 		if line and config("semicolon_end") and line != "$${" and line != "}$$":
-			self.indented.append(config("indent_character") * self.level + line + ";")
+			self.indented.append(config("indent_character") * (self.level+self.extra) + line + ";")
 		else:
-			self.indented.append(config("indent_character") * self.level + line) # Inserts a line into the indented output list lines
+			self.indented.append(config("indent_character") * (self.level+self.extra) + line) # Inserts a line into the indented output list lines
 
 	def indent(self, debug):
 		count = 0
@@ -192,13 +195,14 @@ class Indenter:
 			closed = False
 			if self.level and Indenter.related_command(l, self.stack[-1]): # Checks if the line corresponds to an ending
 				if Indenter.related_command(l, self.stack[-1]) == "endswitch":
-					self.level -= 1
+					# self.level -= 1s
+					self.extra -= 1
 				self.stack.pop()
 				self.level -= 1 # Forwards the indentation
 				self.indent_line(l)
 				closed = True
 			elif Indenter.related_command(l, self.openings) is None:
-				teststring = re.match("elseif|else|endif|next|until|while|loop|endunsafe|endswitch|case|default|function", line, re.IGNORECASE)
+				teststring = re.match("elseif|else|endif|next|until|while|loop|endunsafe|endswitch|function", line, re.IGNORECASE)
 				if teststring is not None and debug:
 					print(" Error found on line "+str(count)+": "+line)
 					errorbool = True
@@ -207,13 +211,22 @@ class Indenter:
 				self.stack.append("|".join(self.blocks[command.lower()]))
 				if not closed: # If the block was already closed, there's no reason to repeat the line
 					self.indent_line(l)
+					if "switch" in l:
+						self.extra += 1
+						# print(self.extra)
 				self.level += 1 # Backwards the indentation
 				errorstring = " Error found on line "+str(count)+": "+line
 				self.lintlines.append(line)
 				# print(line)
 				# print()
 			elif not closed:
-				self.indent_line(l) # Insert a standard (no-command) line
+				if "case" in l or "default" in l:
+					self.extra -= 1
+					self.indent_line(l)
+					self.extra += 1
+				else:
+					self.indent_line(l) # Insert a standard (no-command) line
+
 		# print(self.level)
 		if self.level != 0 and debug:
 			# print(self.level)
@@ -684,7 +697,7 @@ class mkb_goto_definition(sublime_plugin.TextCommand):
 					for line in lines:
 						function_name = re.match("^\s*?function {}\(".format(word), line)
 						if function_name != None:
-							self.view.run_command('_sublime_linter_move_cursor', {'point': reg[count].a+9})
+							self.view.run_command('_sublime_linter_move_cursor', {'point': reg[count].a+9+line.count("\t")})
 							break
 						count += 1
 				
