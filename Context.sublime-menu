@@ -1,115 +1,129 @@
 [
 	{
-		"caption":"MKB",
-		"children":[
+		"caption": "MKB",
+		"children":
+		[
 			{
-				"caption":"Goto Function Definition",
-				"command":"mkb_goto_definition",
-				"args":{
-					"event":"None"
+				"caption": "Goto Function Definition",
+				"command": "mkb_goto_definition",
+				"args":
+				{
+					"event": "None"
 				}
 			},
 			{
-				"caption":"MKB Language",
-				"command":"set_file_type",
-				"args":{
-					"syntax":"MKB.sublime-syntax"
+				"caption": "MKB Language",
+				"command": "set_file_type",
+				"args":
+				{
+					"syntax": "MKB.sublime-syntax"
 				}
 			},
 			{
-				"caption":"Package Settings",
-				"command":"edit_settings",
-				"args":{
-					"base_file":"${packages}/MKB/MKB.sublime-settings",
-					"default":"{\n\t// Change MKB settings here: \n\t\"color_scheme\": \"${1:MKB}.sublime-color-scheme\",\n\t\"autocomplete_caps\": ${2:false},\n\t\"var_wrap\": ${3:true},\n\t\"indent_character\": \"${4:\\t}\", \n\t\"indent_expand\": ${5:true}, \n\t\"semicolon_end\": ${6:true},\n\t\"extra_indent\": ${7:false},\n\t\"enable_indent\": ${8:false},\n\t\"ask_before_indent\": ${9:false},\n\t\"fancy_indent\": ${10:null},\n\t\"message_after_indenting\": ${11:false},\n\t\"show_hints\": ${12:true},\n\t\"popup_line_height\": ${13:3},\n\t\"indent_after_linting\": ${14:false},\n\t\"message_after_linting\": ${15:false},\n\t\"auto_linting\": ${16:false},\n\t\"message_after_minifying\": ${17:false},\n\t\"browser\": \"${18:chrome}\",\n}"
+				"caption": "Package Settings",
+				"command": "edit_settings",
+				"args":
+				{
+					"base_file": "${packages}/MKB/MKB.sublime-settings",
+					"default": "{\n\t// Change MKB settings here: \n\t\"color_scheme\": \"${1:MKB}.sublime-color-scheme\",\n\t\"autocomplete_caps\": ${2:false},\n\t\"var_wrap\": ${3:true},\n\t\"indent_character\": \"${4:\\t}\", \n\t\"indent_expand\": ${5:true}, \n\t\"semicolon_end\": ${6:true},\n\t\"extra_indent\": ${7:false},\n\t\"enable_indent\": ${8:false},\n\t\"ask_before_indent\": ${9:false},\n\t\"fancy_indent\": ${10:null},\n\t\"message_after_indenting\": ${11:false},\n\t\"show_hints\": ${12:true},\n\t\"popup_line_height\": ${13:3},\n\t\"indent_after_linting\": ${14:false},\n\t\"message_after_linting\": ${15:false},\n\t\"auto_linting\": ${16:false},\n\t\"message_after_minifying\": ${17:false},\n\t\"browser\": \"${18:chrome}\",\n}"
 				}
 			},
 			{
-				"caption":"Color Schemes",
-				"children":[
+				"caption": "Color Schemes",
+				"children":
+				[
 					{
-						"caption":"Follow the steps below to make your color scheme",
-						"command":""
+						"caption": "Follow the steps below to make your color scheme",
+						"command": ""
 					},
 					{
 						"caption": "-"
 					},
 					{
-						"caption":"1) Create file",
-						"command":"new_file"
+						"caption": "1) Create file",
+						"command": "new_file"
 					},
 					{
-						"caption":"2) Insert color scheme template",
-						"command":"insert_snippet",
-						"args":{
-							"contents":"{\n\t// Template if you want to make a color scheme\n\t\"globals\":\n\t// Suggest not to change\n\t{\n\t\t\"background\": \"#000000\",\n\t\t\"foreground\": \"#FFFFFF\",\n\t\t\"line_highlight\": \"#333333\",\n\t\t\"caret\": \"#FFFFFF\",\n\t\t\"block_caret\": \"#FFFFFF\",\n\t\t\"selection\": \"#363636\",\n\t\t\"selection_border\": \"#222222\",\n\t\t\"invisibles\": \"#222222\",\n\t\t\"misspelling\": \"#FF0000\",\n\t},\n\t\"rules\": \n\t[\n\t\t{\n\t\t\t// Default color (Don't change)\n\t\t\t\"scope\": \"source.mkb\",\n\t\t\t\"foreground\": \"#FFFFFF\",\n\t\t},\n\t\t{\n\t\t\t// Comments\n\t\t\t\"scope\": \"comment.mkb\",\n\t\t\t\"foreground\": \"${1:#AAAAAA}\",\n\t\t\t\"font_style\": \"italic\",\n\t\t},\n\t\t{\n\t\t\t// Parameters\n\t\t\t\"scope\": \"variable.parameter.mkb\",\n\t\t\t\"foreground\": \"${2:#FFAA00}\",\n\t\t},\n\t\t{\n\t\t\t// Strings\n\t\t\t\"scope\": \"string.mkb\",\n\t\t\t\"foreground\": \"${3:#55FF55}\",\n\t\t},\n\t\t{\n\t\t\t // Symbols eg %% , ; ( ) [ ]\n\t\t\t\"scope\": \"keyword.other.mkb\",\n\t\t\t\"foreground\": \"${4:#FF55FF}\",\n\t\t},\n\t\t{\n\t\t\t// Numbers\n\t\t\t\"scope\": \"constant.numeric.mkb\",\n\t\t\t\"foreground\": \"${5:#5555FF}\",\n\t\t},\n\t\t{\n\t\t\t// Actions\n\t\t\t\"scope\": \"keyword.control.mkb\",\n\t\t\t\"foreground\": \"${6:#AA00AA}\",\n\t\t},\n\t\t{\n\t\t\t// Built in variables\n\t\t\t\"scope\": \"variable.mkb\",\n\t\t\t\"foreground\": \"${7:#55FFFF}\",\n\t\t},\n\t\t{\n\t\t\t// Iterators\n\t\t\t\"scope\": \"keyword.operator.word.mkb\",\n\t\t\t\"foreground\": \"${8:#00AAAA}\",\n\t\t},\n\t\t{\n\t\t\t// User defined variables\n\t\t\t\"scope\": \"punctuation.definition.keyword.mkb\",\n\t\t\t\"foreground\": \"${9:#FF5555}\",\n\t\t},\n\t\t{\n\t\t\t// Operators eg = < > && ||\n\t\t\t\"scope\": \"keyword.operator.mkb\",\n\t\t\t\"foreground\": \"${10:#FFFF55}\",\n\t\t},\n\t\t{\n\t\t\t// False\n\t\t\t\"scope\": \"constant.language.false.mkb\",\n\t\t\t\"foreground\": \"${11:#AA0000}\",\n\t\t},\n\t\t{\n\t\t\t// True\n\t\t\t\"scope\": \"constant.language.true.mkb\",\n\t\t\t\"foreground\": \"${12:#00AA00}\",\n\t\t},\n\t\t{\n\t\t\t// Keybinds\n\t\t\t\"scope\": \"keyword.control.import.mkb\",\n\t\t\t\"foreground\": \"${13:#0000AA}\",\n\t\t},\n\t\t{\n\t\t\t// Invalid stuff\n\t\t\t\"scope\": \"invalid.mkb\",\n\t\t\t\"foreground\": \"${14:#FFFFFF}\",\n\t\t\t\"background\": \"${15:#AA0000}\",\n\t\t},\n\t\t{\n\t\t\t// Functions\n\t\t\t\"scope\": \"meta.function.mkb\",\n\t\t\t\"foreground\": \"${16:#86B28D}\",\n\t\t},\n\t],\n}"
+						"caption": "2) Insert color scheme template",
+						"command": "insert_snippet",
+						"args":
+						{
+							"contents": "{\n\t// Template if you want to make a color scheme\n\t\"globals\":\n\t// Suggest not to change\n\t{\n\t\t\"background\": \"#000000\",\n\t\t\"foreground\": \"#FFFFFF\",\n\t\t\"line_highlight\": \"#333333\",\n\t\t\"caret\": \"#FFFFFF\",\n\t\t\"block_caret\": \"#FFFFFF\",\n\t\t\"selection\": \"#363636\",\n\t\t\"selection_border\": \"#222222\",\n\t\t\"invisibles\": \"#222222\",\n\t\t\"misspelling\": \"#FF0000\",\n\t},\n\t\"rules\": \n\t[\n\t\t{\n\t\t\t// Default color (Don't change)\n\t\t\t\"scope\": \"source.mkb\",\n\t\t\t\"foreground\": \"#FFFFFF\",\n\t\t},\n\t\t{\n\t\t\t// Comments\n\t\t\t\"scope\": \"comment.mkb\",\n\t\t\t\"foreground\": \"${1:#AAAAAA}\",\n\t\t\t\"font_style\": \"italic\",\n\t\t},\n\t\t{\n\t\t\t// Parameters\n\t\t\t\"scope\": \"variable.parameter.mkb\",\n\t\t\t\"foreground\": \"${2:#FFAA00}\",\n\t\t},\n\t\t{\n\t\t\t// Strings\n\t\t\t\"scope\": \"string.mkb\",\n\t\t\t\"foreground\": \"${3:#55FF55}\",\n\t\t},\n\t\t{\n\t\t\t // Symbols eg %% , ; ( ) [ ]\n\t\t\t\"scope\": \"keyword.other.mkb\",\n\t\t\t\"foreground\": \"${4:#FF55FF}\",\n\t\t},\n\t\t{\n\t\t\t// Numbers\n\t\t\t\"scope\": \"constant.numeric.mkb\",\n\t\t\t\"foreground\": \"${5:#5555FF}\",\n\t\t},\n\t\t{\n\t\t\t// Actions\n\t\t\t\"scope\": \"keyword.control.mkb\",\n\t\t\t\"foreground\": \"${6:#AA00AA}\",\n\t\t},\n\t\t{\n\t\t\t// Built in variables\n\t\t\t\"scope\": \"variable.mkb\",\n\t\t\t\"foreground\": \"${7:#55FFFF}\",\n\t\t},\n\t\t{\n\t\t\t// Iterators\n\t\t\t\"scope\": \"keyword.operator.word.mkb\",\n\t\t\t\"foreground\": \"${8:#00AAAA}\",\n\t\t},\n\t\t{\n\t\t\t// User defined variables\n\t\t\t\"scope\": \"punctuation.definition.keyword.mkb\",\n\t\t\t\"foreground\": \"${9:#FF5555}\",\n\t\t},\n\t\t{\n\t\t\t// Operators eg = < > && ||\n\t\t\t\"scope\": \"keyword.operator.mkb\",\n\t\t\t\"foreground\": \"${10:#FFFF55}\",\n\t\t},\n\t\t{\n\t\t\t// False\n\t\t\t\"scope\": \"constant.language.false.mkb\",\n\t\t\t\"foreground\": \"${11:#AA0000}\",\n\t\t},\n\t\t{\n\t\t\t// True\n\t\t\t\"scope\": \"constant.language.true.mkb\",\n\t\t\t\"foreground\": \"${12:#00AA00}\",\n\t\t},\n\t\t{\n\t\t\t// Keybinds\n\t\t\t\"scope\": \"keyword.control.import.mkb\",\n\t\t\t\"foreground\": \"${13:#0000AA}\",\n\t\t},\n\t\t{\n\t\t\t// Invalid stuff\n\t\t\t\"scope\": \"invalid.mkb\",\n\t\t\t\"foreground\": \"${14:#FFFFFF}\",\n\t\t\t\"background\": \"${15:#AA0000}\",\n\t\t},\n\t\t{\n\t\t\t// Functions\n\t\t\t\"scope\": \"meta.function.mkb\",\n\t\t\t\"foreground\": \"${16:#86B28D}\",\n\t\t},\n\t],\n}"
 						}
 					},
 					{
-						"caption":"3) Set JSON syntax highlighting",
-						"command":"set_file_type",
-						"args":{
-							"syntax":"Sublime Text Color Scheme.sublime-syntax"
+						"caption": "3) Set JSON syntax highlighting",
+						"command": "set_file_type",
+						"args":
+						{
+							"syntax": "Sublime Text Color Scheme.sublime-syntax"
 						}
 					},
 					{
-						"caption":"4) Set color scheme (Paste into this file)",
-						"command":"packagedev_edit_scheme"
+						"caption": "4) Set color scheme (Paste into this file)",
+						"command": "packagedev_edit_scheme"
 					},
 					{
-						"caption":"5) Send this file to TKM to add into package",
-						"command":""
+						"caption": "5) Send this file to TKM to add into package",
+						"command": "open_url",
+						"args":
+						{
+							"url": "https://discord.gg/m9yfJtb"
+						}
 					}
 				]
 			},
 			{
-				"caption":"README",
-				"command":"open_file",
-				"args":{
-					"file":"${packages}/MKB/README.md"
+				"caption": "README",
+				"command": "open_file",
+				"args":
+				{
+					"file": "${packages}/MKB/README.md"
 				}
 			},
 			{
-				"caption":"Wiki",
-				"command": "mkbwiki",
+				"caption": "Wiki",
+				"command": "mkbwiki"
 			},
 			{
-				"caption":"Indentation",
-				"command":"mkbindentation"
+				"caption": "Indentation",
+				"command": "mkbindentation"
 			},
 			{
-				"caption":"Hint",
-				"command":"mkbhint",
-				"args":{
-					"event":"None"
+				"caption": "Hint",
+				"command": "mkbhint",
+				"args":
+				{
+					"event": "None"
 				}
 			},
 			{
-				"caption":"Linter",
-				"command":"mkbdebug"
+				"caption": "Linter",
+				"command": "mkbdebug"
 			},
 			{
-				"caption":"Minifier",
-				"command":"mkbmini"
+				"caption": "Minifier",
+				"command": "mkbmini"
 			},
 			{
-				"caption":"Variables",
-				"command":"mkbvariables"
+				"caption": "Variables",
+				"command": "mkbvariables"
 			},
 			{
-				"caption":"Change Case",
-				"children":[
+				"caption": "Change Case",
+				"children":
+				[
 					{
-						"caption":"UPPERCASE",
-						"command":"mkbcase1"
+						"caption": "UPPERCASE",
+						"command": "mkbcase1"
 					},
 					{
-						"caption":"lowercase",
-						"command":"mkbcase2"
+						"caption": "lowercase",
+						"command": "mkbcase2"
 					},
 					{
-						"caption":"Titlecase",
-						"command":"mkbcase3"
+						"caption": "Titlecase",
+						"command": "mkbcase3"
 					}
 				]
 			}

@@ -11,91 +11,91 @@
 		"selection": "#363636",
 		"selection_border": "#222222",
 		"invisibles": "#222222",
-		"misspelling": "#FF0000",
+		"misspelling": "#FF0000"
 	},
 	"rules": 
 	[
 		{
 			// Default color (Don't change)
 			"scope": "source.mkb",
-			"foreground": "#FFFFFF",
+			"foreground": "#FFFFFF"
 		},
 		{
 			// Comments
 			"scope": "comment.mkb",
 			"foreground": "#AAAAAA",
-			"font_style": "italic",
+			"font_style": "italic"
 		},
 		{
 			// Parameters
 			"scope": "variable.parameter.mkb",
-			"foreground": "#FFAA00",
+			"foreground": "#FFAA00"
 		},
 		{
 			// Strings
 			"scope": "string.mkb",
-			"foreground": "#55FF55",
+			"foreground": "#55FF55"
 		},
 		{
 			 // Symbols eg %% , ; ( ) [ ]
 			"scope": "keyword.other.mkb",
-			"foreground": "#FF55FF",
+			"foreground": "#FF55FF"
 		},
 		{
 			// Numbers
 			"scope": "constant.numeric.mkb",
-			"foreground": "#5555FF",
+			"foreground": "#5555FF"
 		},
 		{
 			// Actions
 			"scope": "keyword.control.mkb",
-			"foreground": "#AA00AA",
+			"foreground": "#AA00AA"
 		},
 		{
 			// Built in variables
 			"scope": "variable.mkb",
-			"foreground": "#55FFFF",
+			"foreground": "#55FFFF"
 		},
 		{
 			// Iterators
 			"scope": "keyword.operator.word.mkb",
-			"foreground": "#00AAAA",
+			"foreground": "#00AAAA"
 		},
 		{
 			// User defined variables
 			"scope": "punctuation.definition.keyword.mkb",
-			"foreground": "#FF5555",
+			"foreground": "#FF5555"
 		},
 		{
 			// Operators eg = < > && ||
 			"scope": "keyword.operator.mkb",
-			"foreground": "#FFFF55",
+			"foreground": "#FFFF55"
 		},
 		{
 			// False
 			"scope": "constant.language.false.mkb",
-			"foreground": "#AA0000",
+			"foreground": "#AA0000"
 		},
 		{
 			// True
 			"scope": "constant.language.true.mkb",
-			"foreground": "#00AA00",
+			"foreground": "#00AA00"
 		},
 		{
 			// Keybinds
 			"scope": "keyword.control.import.mkb",
-			"foreground": "#0000AA",
+			"foreground": "#0000AA"
 		},
 		{
 			// Invalid stuff
 			"scope": "invalid.mkb",
 			"foreground": "#FFFFFF",
-			"background": "#AA0000",
+			"background": "#AA0000"
 		},
 		{
 			// Functions
 			"scope": "meta.function.mkb",
 			"foreground": "#86B28D"
-		},
-	],
+		}
+	]
 }

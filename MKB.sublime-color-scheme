@@ -17,7 +17,7 @@
 		"mcc": "#FF5555",
 		"mcd": "#FF55FF",
 		"mce": "#FFFF55",
-		"mcf": "#FFFFFF",
+		"mcf": "#FFFFFF"
 	},
 	"globals":
     {
@@ -29,66 +29,66 @@
         "selection": "#363636",
         "selection_border": "#222222",
         "invisibles": "#222222",
-        "misspelling": "#FF0000",
+        "misspelling": "#FF0000"
     },
 	"rules": 
 	[
 		{
 			"scope": "source.mkb",
-			"foreground": "var(mcf)",
+			"foreground": "var(mcf)"
 		},
 		{
 			"scope": "comment.mkb",
 			"foreground": "var(mc7)",
-			"font_style": "italic",
+			"font_style": "italic"
 		},
 		{
 			"scope": "variable.parameter.mkb",
-			"foreground": "var(mc6)",
+			"foreground": "var(mc6)"
 		},
 		{
 			"scope": "string.mkb",
-			"foreground": "var(mca)",
+			"foreground": "var(mca)"
 		},
 		{
 			"scope": "keyword.other.mkb",
-			"foreground": "var(mcd)",
+			"foreground": "var(mcd)"
 		},
 		{
 			"scope": "constant.numeric.mkb",
-			"foreground": "var(mc9)",
+			"foreground": "var(mc9)"
 		},
 		{
 			"scope": "keyword.control.mkb",
-			"foreground": "var(mc5)",
+			"foreground": "var(mc5)"
 		},
 		{
 			"scope": "variable.mkb",
-			"foreground": "var(mcb)",
+			"foreground": "var(mcb)"
 		},
 		{
 			"scope": "keyword.operator.word.mkb",
-			"foreground": "var(mc3)",
+			"foreground": "var(mc3)"
 		},
 		{
 			"scope": "punctuation.definition.keyword.mkb",
-			"foreground": "var(mcc)",
+			"foreground": "var(mcc)"
 		},
 		{
 			"scope": "keyword.operator.mkb",
-			"foreground": "var(mce)",
+			"foreground": "var(mce)"
 		},
 		{
 			"scope": "constant.language.false.mkb",
-			"foreground": "var(mc4)",
+			"foreground": "var(mc4)"
 		},
 		{
 			"scope": "constant.language.true.mkb",
-			"foreground": "var(mc2)",
+			"foreground": "var(mc2)"
 		},
 		{
 			"scope": "keyword.control.import.mkb",
-			"foreground": "var(mcb)",
+			"foreground": "var(mcb)"
 		},
 		{
 			"scope": "invalid.mkb",
@@ -97,7 +97,7 @@
 		},
 		{
 			"scope": "meta.function.mkb",
-			"foreground": "#B9F2FF",
-		},
-	],
+			"foreground": "#B9F2FF"
+		}
+	]
 }
