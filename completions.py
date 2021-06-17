@@ -2717,6 +2717,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 					details="Resolve ghost blocks issue", 
 					completion=""+case("antighost")+";"),
 
+			# BetterEcho
+				sublime.CompletionItem( #betterecho
+					trigger=case("betterecho"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					details="Sends the specified message to the server and client mods like baritone", 
+					completion=""+case("betterecho")+"(${1:<text>});"),
+
 			# MKB Key variables
 				sublime.CompletionItem( #ALT
 					trigger="ALT", 
