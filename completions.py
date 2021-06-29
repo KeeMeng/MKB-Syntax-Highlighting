@@ -918,7 +918,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					details="Array of the keys of the NBT of the entity", 
 					completion=var_wrap+"ENTITYNBTKEYS"+var_wrap),
 				sublime.CompletionItem( #ENTITYNBT
-					trigger="ENTITYNBT&#60;KEY&#62;", 
+					trigger="ENTITYNBT<KEY>", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
