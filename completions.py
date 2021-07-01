@@ -32,34 +32,18 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="…"+case("endif")+"", 
 					details="Executes if the &#60;condition&#62; evaluates to true", 
 					completion=""+case("if")+"(${1:<condition>});\n	$2\n"+case("endif")+";\n$3"),
-				sublime.CompletionItem( #ifbeginswith
-					trigger=case("ifbeginswith"), 
+				sublime.CompletionItem( #else
+					trigger=case("else"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_SNIPPET,  
-					annotation="…"+case("endif")+"", 
-					details="Executes if the &#60;haystack&#62; starts with the &#60;needle&#62;",
-					completion=""+case("ifbeginswith")+"(${1:<haystack>},${2:<needle>});\n	$3\n"+case("endif")+";\n$4"),
-				sublime.CompletionItem( #ifendswith
-					trigger=case("ifendswith"), 
+					kind=sublime.KIND_KEYWORD, 
+					details="Executes if no if-clause before evaluated to true", 
+					completion=""+case("else")+";\n	$1"),
+				sublime.CompletionItem( #elseif
+					trigger=case("elseif"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_SNIPPET, 
-					annotation="…"+case("endif")+"", 
-					details="Executes if the &#60;haystack&#62; ends with the &#60;needle&#62;", 
-					completion=""+case("ifendswith")+"(${1:<haystack>},${2:<needle>});\n	$3\n"+case("endif")+";\n$4"),
-				sublime.CompletionItem( #ifcontains
-					trigger=case("ifcontains"), 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_SNIPPET, 
-					annotation="…"+case("endif")+"", 
-					details="Executes if the &#60;haystack&#62; contains the &#60;needle&#62;", 
-					completion=""+case("ifcontains")+"(${1:<haystack>},${2:<needle>});\n	$3\n"+case("endif")+";\n$4"),
-				sublime.CompletionItem( #ifmatches
-					trigger=case("ifmatches"), 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_SNIPPET, 
-					annotation="…"+case("endif")+"", 
-					details="Executes if the &#60;subject&#62; matches the &#60;pattern&#62;", 
-					completion=""+case("ifmatches")+"(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5\n"+case("endif")+";\n$6"),
+					kind=sublime.KIND_KEYWORD, 
+					details="Executes if the evaluates to true and no if-clause before evaluated to true", 
+					completion=""+case("elseif")+"(${1:<condition>});\n	$2"),
 				sublime.CompletionItem( #endif
 					trigger=case("endif"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -67,7 +51,6 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="…endif", 
 					details="Ends an if-clause", 
 					completion=""+case("endif")+";\n$1"),
-
 				sublime.CompletionItem( #for
 					trigger=case("for"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -138,19 +121,6 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="…"+case("until")+"1", 
 					details="Begins a loop", 
 					completion=""+case("do")+"(${1:[count]});\n	$2\n"+case("until")+"(${3:<condition>});$4"),
-
-				sublime.CompletionItem( #else
-					trigger=case("else"), 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_KEYWORD, 
-					details="Executes if no if-clause before evaluated to true", 
-					completion=""+case("else")+";\n	$1"),
-				sublime.CompletionItem( #elseif
-					trigger=case("elseif"), 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_KEYWORD, 
-					details="Executes if the evaluates to true and no if-clause before evaluated to true", 
-					completion=""+case("elseif")+"(${1:<condition>});\n	$2"),
 				sublime.CompletionItem( #loop
 					trigger=case("loop"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -169,6 +139,134 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					details="Exits do loop if the &#60;condition&#62; is met", 
 					completion=""+case("until")+"(${1:<condition>});\n$2"),
+
+				sublime.CompletionItem( #ifbeginswith
+					trigger=case("ifbeginswith"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET,  
+					annotation="…"+case("endif")+"", 
+					details="Executes if the &#60;haystack&#62; starts with the &#60;needle&#62;",
+					completion=""+case("ifbeginswith")+"(${1:<haystack>},${2:<needle>});\n	$3\n"+case("endif")+";\n$4"),
+				sublime.CompletionItem( #ifcanharvestblock
+					trigger=case("ifcanharvestblock"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="(Klacaiba Module)", 
+					details="Executes if the &#60;blockid&#62; can currently be harvested", 
+					completion=""+case("ifcanharvestblock")+"(${1:<blockid>});\n	$2\n"+case("endif")+";\n$3"),
+				sublime.CompletionItem( #ifcontains
+					trigger=case("ifcontains"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="…"+case("endif")+"", 
+					details="Executes if the &#60;haystack&#62; contains the &#60;needle&#62;", 
+					completion=""+case("ifcontains")+"(${1:<haystack>},${2:<needle>});\n	$3\n"+case("endif")+";\n$4"),
+				sublime.CompletionItem( #ifenchanted
+					trigger=case("ifenchanted"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="(Klacaiba Module)", 
+					details="Executes if the item at &#60;slot&#62; is enchanted", 
+					completion=""+case("ifenchanted")+"(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n	$6\n"+case("endif")+";\n$7"),
+				sublime.CompletionItem( #ifendswith
+					trigger=case("ifendswith"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="…"+case("endif")+"", 
+					details="Executes if the &#60;haystack&#62; ends with the &#60;needle&#62;", 
+					completion=""+case("ifendswith")+"(${1:<haystack>},${2:<needle>});\n	$3\n"+case("endif")+";\n$4"),
+				sublime.CompletionItem( #iffileexists
+					trigger=case("iffileexists"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="(Klacaiba Module)", 
+					details="Executes if the file exists at &#60;path&#62;", 
+					completion=""+case("iffileexists")+"(${1:<path>},${2:[expression]});\n	$3\n"+case("endif")+";\n$4"),
+				sublime.CompletionItem( #ifininv
+					trigger=case("ifininv"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="(Klacaiba Module)", 
+					details="Executes if the &#60;items&#62; are in the inventory, mode can be 'any', 'all' or number", 
+					completion=""+case("ifininv")+"(${1:[mode]},${2:<items>});\n	$3\n"+case("endif")+";\n$4"),
+				sublime.CompletionItem( #ifinvisfull
+					trigger=case("ifinvisfull"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="(Klacaiba Module)", 
+					details="Executes if the inventory is full", 
+					completion=""+case("ifinvisfull")+"(${1:[item]});\n	$2\n"+case("endif")+";\n$3"),
+				sublime.CompletionItem( #ifmatches
+					trigger=case("ifmatches"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="…"+case("endif")+"", 
+					details="Executes if the &#60;subject&#62; matches the &#60;pattern&#62;", 
+					completion=""+case("ifmatches")+"(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5\n"+case("endif")+";\n$6"),
+
+				sublime.CompletionItem( #ifnotbeginswith
+					trigger=case("ifnotbeginswith"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET,  
+					annotation="…"+case("endif")+"", 
+					details="Executes if the &#60;haystack&#62; does not start with the &#60;needle&#62;",
+					completion=""+case("ifnotbeginswith")+"(${1:<haystack>},${2:<needle>});\n	$3\n"+case("endif")+";\n$4"),
+				sublime.CompletionItem( #ifnotcanharvestblock
+					trigger=case("ifnotcanharvestblock"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="(Klacaiba Module)", 
+					details="Executes if the &#60;blockid&#62; cannot currently be harvested", 
+					completion=""+case("ifnotcanharvestblock")+"(${1:<blockid>});\n	$2\n"+case("endif")+";\n$3"),
+				sublime.CompletionItem( #ifnotcontains
+					trigger=case("ifnotcontains"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="…"+case("endif")+"", 
+					details="Executes if the &#60;haystack&#62; does not contain the &#60;needle&#62;", 
+					completion=""+case("ifnotcontains")+"(${1:<haystack>},${2:<needle>});\n	$3\n"+case("endif")+";\n$4"),
+				sublime.CompletionItem( #ifnotenchanted
+					trigger=case("ifnotenchanted"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="(Klacaiba Module)", 
+					details="Executes if the item at &#60;slot&#62; is not enchanted", 
+					completion=""+case("ifnotenchanted")+"(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n	$6\n"+case("endif")+";\n$7"),
+				sublime.CompletionItem( #ifnotendswith
+					trigger=case("ifnotendswith"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="…"+case("endif")+"", 
+					details="Executes if the &#60;haystack&#62; does not end with the &#60;needle&#62;", 
+					completion=""+case("ifnotendswith")+"(${1:<haystack>},${2:<needle>});\n	$3\n"+case("endif")+";\n$4"),
+				sublime.CompletionItem( #ifnotfileexists
+					trigger=case("ifnotfileexists"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="(Klacaiba Module)", 
+					details="Executes if the file does not exists at &#60;path&#62;", 
+					completion=""+case("ifnotfileexists")+"(${1:<path>},${2:[expression]});\n	$3\n"+case("endif")+";\n$4"),
+				sublime.CompletionItem( #ifnotininv
+					trigger=case("ifnotininv"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="(Klacaiba Module)", 
+					details="Executes if the &#60;items&#62; are not in the inventory, mode can be 'any', 'all' or number", 
+					completion=""+case("ifnotininv")+"(${1:[mode]},${2:<items>});\n	$3\n"+case("endif")+";\n$4"),
+				sublime.CompletionItem( #ifnotinvisfull
+					trigger=case("ifnotinvisfull"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="(Klacaiba Module)", 
+					details="Executes if the inventory is not full", 
+					completion=""+case("ifnotinvisfull")+"(${1:[item]});\n	$2\n"+case("endif")+";\n$3"),
+				sublime.CompletionItem( #ifnotmatches
+					trigger=case("ifnotmatches"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_SNIPPET, 
+					annotation="…"+case("endif")+"", 
+					details="Executes if the &#60;subject&#62; does not match the &#60;pattern&#62;", 
+					completion=""+case("ifnotmatches")+"(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5\n"+case("endif")+";\n$6"),
 
 				sublime.CompletionItem( #elseifbeginswith
 					trigger=case("elseifbeginswith"), 
@@ -224,6 +322,61 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					details="Executes if the &#60;subject&#62; matches the &#60;pattern&#62; and no if-clause before evaluated to true", 
 					completion=""+case("elseifmatches")+"(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5"),
+
+				sublime.CompletionItem( #elseifnotbeginswith
+					trigger=case("elseifnotbeginswith"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					details="Executes if the &#60;haystack&#62; does not start with the &#60;needle&#62; and no if-clause before evaluated to true", 
+					completion=""+case("elseifnotbeginswith")+"(${1:<haystack>},${2:<needle>});\n	$3"),
+				sublime.CompletionItem( #elseifnotcanharvestblock
+					trigger=case("elseifnotcanharvestblock"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					details="Executes if the &#60;blockid&#62; cannot currently be harvested and no if-clause before evaluated to true", 
+					completion=""+case("elseifnotcanharvestblock")+"(${1:<blockid>});\n	$2"),
+				sublime.CompletionItem( #elseifnotcontains
+					trigger=case("elseifnotcontains"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					details="Executes if the &#60;haystack&#62; does not contain the &#60;needle&#62; and no if-clause before evaluated to true", 
+					completion=""+case("elseifnotcontains")+"(${1:<haystack>},${2:<needle>});\n	$3"),
+				sublime.CompletionItem( #elseifnotenchanted
+					trigger=case("elseifnotenchanted"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					details="Executes if the item at &#60;slot&#62; is not enchanted and no if-clause before evaluated to true", 
+					completion=""+case("elseifnotenchanted")+"(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n	$6"),
+				sublime.CompletionItem( #elseifnotendswith
+					trigger=case("elseifnotendswith"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					details="Executes if the &#60;haystack&#62; does not end with the &#60;needle&#62; and no if-clause before evaluated to true", 
+					completion=""+case("elseifnotendswith")+"(${1:<haystack>},${2:<needle>});\n	$3"),
+				sublime.CompletionItem( #elseifnotfileexist
+					trigger=case("elseifnotfileexist"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					details="Executes if the file does not exist at &#60;path&#62; and no if-clause before evaluated to true", 
+					completion=""+case("elseifnotfileexists")+"(${1:<path>},${2:[expression if file should be created if missing]});\n	$3"),
+				sublime.CompletionItem( #elseifnotininv
+					trigger=case("elseifnotininv"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					details="Executes if the &#60;items&#62; are not in the inventory and no if-clause before evaluated to true", 
+					completion=""+case("elseifnotininv")+"(${1:[mode]},${2:<items>});\n	$3"),
+				sublime.CompletionItem( #elseifnotinvisfull
+					trigger=case("elseifnotinvisfull"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					details="Executes if the inventory is not full and no if-clause before evaluated to true", 
+					completion=""+case("elseifnotinvisfull")+"(${1:[item]});\n	$2"),
+				sublime.CompletionItem( #elseifnotmatches
+					trigger=case("elseifnotmatches"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					details="Executes if the &#60;subject&#62; does not match the &#60;pattern&#62; and no if-clause before evaluated to true", 
+					completion=""+case("elseifnotmatches")+"(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]});\n	$5"),
 
 				sublime.CompletionItem( #whilebeginswith
 					trigger=case("whilebeginswith"), 
@@ -1657,13 +1810,6 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(Klacaiba Module)", 
 					details="Creates a http request", 
 					completion="&${1:response} = "+case("http")+"(${2:[get|post|put|delete]},${3:<url>},${4:[output stream]},${5:[headers]});"),
-				sublime.CompletionItem( #iffileexists
-					trigger=case("iffileexists"), 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_SNIPPET, 
-					annotation="(Klacaiba Module)", 
-					details="Executes if the file exists at &#60;path&#62;", 
-					completion=""+case("iffileexists")+"(${1:<path>},${2:[expression]});\n	$3\n"+case("endif")+";\n$4"),
 				sublime.CompletionItem( #mkdir
 					trigger=case("mkdir"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -1671,6 +1817,13 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(Klacaiba Module)", 
 					details="Creates directory", 
 					completion=""+case("mkdir")+"(${1:<path>});"),
+				sublime.CompletionItem( #readfile
+					trigger=case("readfile"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module)", 
+					details="Reads file into array, files can start with ~ to be relative to minecraft directory", 
+					completion="${2:&${1:<content>}[] = }"+case("readfile")+"(&${1:[content]}[],${3:<path>});"),
 				sublime.CompletionItem( #writefile
 					trigger=case("writefile"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -1790,27 +1943,6 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(Klacaiba Module)", 
 					details="Gets slot containing item in inventory", 
 					completion="#${1:[slot]} = "+case("getslotinv")+"(${2:<item>}:${3:[damage]},#${4:<idvar>},${5:[startfromslotid]});"),
-				sublime.CompletionItem( #ifinvisfull
-					trigger=case("ifinvisfull"), 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_SNIPPET, 
-					annotation="(Klacaiba Module)", 
-					details="Executes if the inventory is full", 
-					completion=""+case("ifinvisfull")+"(${1:[item]});\n	$2\n"+case("endif")+";\n$3"),
-				sublime.CompletionItem( #ifininv
-					trigger=case("ifininv"), 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_SNIPPET, 
-					annotation="(Klacaiba Module)", 
-					details="Executes if the &#60;items&#62; are in the inventory, mode can be 'any', 'all' or number", 
-					completion=""+case("ifininv")+"(${1:[mode]},${2:<items>});\n	$3\n"+case("endif")+";\n$4"),
-				sublime.CompletionItem( #ifenchanted
-					trigger=case("ifenchanted"), 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_SNIPPET, 
-					annotation="(Klacaiba Module)", 
-					details="Executes if the item at &#60;slot&#62; is enchanted", 
-					completion=""+case("ifenchanted")+"(${1:<slot>},&${2:[item]},#${3:[stacksize]},#${4:[datavar]},&${5:[nbt]});\n	$6\n"+case("endif")+";\n$7"),
 				sublime.CompletionItem( #setslotitem
 					trigger=case("setslotitem"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -1895,13 +2027,6 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(Klacaiba Module)", 
 					details="Returns the amount of time required to break a block or 0 if infinite of none specified", 
 					completion="#${1:ticks} = "+case("getbreakspeed")+"(${2:<blockid>});"),
-				sublime.CompletionItem( #ifcanharvestblock
-					trigger=case("ifcanharvestblock"), 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_SNIPPET, 
-					annotation="(Klacaiba Module)", 
-					details="Executes if the &#60;blockid&#62; can currently be harvested", 
-					completion=""+case("ifcanharvestblock")+"(${1:<blockid>});\n	$2\n"+case("endif")+";\n$3"),
 				sublime.CompletionItem( #pollevent
 					trigger=case("pollevent"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -1923,6 +2048,35 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(Klacaiba Module)", 
 					details="Should be placed above the closing next of a pollevent", 
 					completion=""+case("await")+";"),
+				sublime.CompletionItem( #await
+					trigger=case("await"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module)", 
+					details="Should be placed above the closing next of a pollevent", 
+					completion=""+case("await")+";"),
+				sublime.CompletionItem( #char
+					trigger=case("char"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module)", 
+					details="(Char) Returns the character of the character expression", 
+					completion="${2:&${1:<result>} = }"+case("char")+"(&${1:<result>},&${3:<char expression>});"),
+				sublime.CompletionItem( #char
+					trigger=case("char"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module)", 
+					details="(Array) Returns the characters of the character expressiond", 
+					completion="${2:&${1:<result>} = }"+case("char")+"(&${1:<result>},&${3:<char expression>});"),
+				sublime.CompletionItem( #
+					trigger=case(""), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module)", 
+					details="Gets the current time with milliseconds", 
+					completion=""+case("unix")+"(#${1:[seconds]},#${2:<milliseconds>});"),
+
 
 			# Klacaiba variables
 				sublime.CompletionItem( #LATENCY
@@ -2466,7 +2620,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("switch"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
-					annotation=""+case("switch")+"…"+case("case")+"…"+case("default")+"…"+case("endcase")+" (Switch Case Module)", 
+					annotation=case("switch")+"…"+case("case")+"…"+case("default")+"…"+case("endcase")+" (Switch Case Module)", 
 					details="Switch case statement", 
 					completion=""+case("switch")+"(${1:<expression>});\n	"+case("case")+"(${2:<value>});\n		$3\n	"+case("default")+";\n		$4\n"+case("endswitch")+";\n$5"),
 				sublime.CompletionItem( #case
@@ -2513,13 +2667,6 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(Utilities Module)", 
 					details="Gets the content of a file", 
 					completion=""+case("readfile")+"(&${1:<content>}[],${2:<filename>});"),
-				sublime.CompletionItem( #readfile
-					trigger=case("readfile"), 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_KEYWORD, 
-					annotation="(Utilities Module)", 
-					details="Reads file from path", 
-					completion="${2:&${1:<content>}[] = }"+case("readfile")+"(&${1:[content]}[],${3:<path>});"),
 				sublime.CompletionItem( #unix
 					trigger=case("unix"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -2527,6 +2674,35 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(Utilities Module)", 
 					details="Gets the s/ms of current timestamp", 
 					completion="${2:#${1:[seconds]} = }"+case("unix")+"(#${1:[seconds]},#${3:[milliseconds]});"),
+				sublime.CompletionItem( #eval
+					trigger=case("eval"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module)", 
+					details="Evaluates an expression with float values", 
+					completion="${3:${2:[&#]}${1:<result>} = }"+case("eval")+"(${2:[&#]}${1:<result>},${4:<expression>});"),
+				sublime.CompletionItem( #mod
+					trigger=case("mod"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module)", 
+					details="Performs the modulo operation on the given values", 
+					completion="${2:#${1:[result]} = }"+case("mod")+"(#${1:[result]},${3:<dividend>},${4:<divisor>});"),
+				sublime.CompletionItem( #restart
+					trigger=case("restart"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module)", 
+					details="Restarts the current script from the top without invalidating any variables", 
+					completion=""+case("restart")+"();"),
+				sublime.CompletionItem( #oldname
+					trigger=case("oldname"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module)", 
+					details="Returns the previous names of the player with this name or uuid", 
+					completion="${2:&${1:result}[] = }"+case("oldname")+"(&${1:<result>}[],${3:<name|uuid>});"),
+
 
 			# Utils Module
 				sublime.CompletionItem( #trim
