@@ -153,7 +153,9 @@ class Indenter:
 		self.level = 0
 		self.blocks = {
 			"if":		["else", "endif"],
+			"ifnot":		["else", "endif"],
 			"elseif":	["else", "endif"],
+			"elseifnot":	["else", "endif"],
 			"else":		["endif"],
 			"for":		["next"],
 			"foreach":	["next"],
@@ -165,7 +167,7 @@ class Indenter:
 			# "default" :	["endswitch"],
 			"function": ["endfunction"]
 		}
-		self.openings = "IF|ELSEIF|ELSE|FOR|DO|UNSAFE|POLLEVENT|SWITCH|FUNCTION"
+		self.openings = "IF|IFNOT|ELSEIF|ELSEIFNOT|ELSE|FOR|DO|UNSAFE|POLLEVENT|SWITCH|FUNCTION"
 		self.lintlines = []
 		self.extra = 0
 
@@ -202,7 +204,7 @@ class Indenter:
 				self.indent_line(l)
 				closed = True
 			elif Indenter.related_command(l, self.openings) is None:
-				teststring = re.match("elseif|else|endif|next|until|while|loop|endunsafe|endswitch|function", line, re.IGNORECASE)
+				teststring = re.match("elseif|elseifnot|else|endif|next|until|while|loop|endunsafe|endswitch|function", line, re.IGNORECASE)
 				if teststring is not None and debug:
 					print(" Error found on line "+str(count)+": "+line)
 					errorbool = True
