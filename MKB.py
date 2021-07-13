@@ -145,22 +145,6 @@ class Indenter:
 					temp = ""
 			splitted = lines
 
-			# temp = ""
-			# lines = []
-			# for i in splitted:
-			# 	if temp != "":
-			# 		temp += ";" + i
-			# 		lines.append(temp)
-			# 		temp = ""
-			# 		continue
-
-			# 	if len(re.findall(r"[^\\]\"", i)) % 2 == 1:
-			# 		temp = i
-			# 	else:
-			# 		lines.append(i)
-			# splitted = lines
-
-
 		else:
 			splitted = filelines
 
