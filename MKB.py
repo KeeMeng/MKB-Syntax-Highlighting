@@ -134,6 +134,33 @@ class Indenter:
 				else:
 					string += l + ";"
 			splitted = string.split(";")
+
+			# Splits line properly and excludes semicolons in strings
+			temp = ""
+			lines = []
+			for i in splitted:
+				temp += ("" if temp == "" else ";") + i
+				if len(re.findall(r"[^\\]\"", temp)) % 2 == 0:
+					lines.append(temp)
+					temp = ""
+			splitted = lines
+
+			# temp = ""
+			# lines = []
+			# for i in splitted:
+			# 	if temp != "":
+			# 		temp += ";" + i
+			# 		lines.append(temp)
+			# 		temp = ""
+			# 		continue
+
+			# 	if len(re.findall(r"[^\\]\"", i)) % 2 == 1:
+			# 		temp = i
+			# 	else:
+			# 		lines.append(i)
+			# splitted = lines
+
+
 		else:
 			splitted = filelines
 
