@@ -140,7 +140,9 @@ class Indenter:
 			lines = []
 			for i in splitted:
 				temp += ("" if temp == "" else ";") + i
-				if len(re.findall(r"[^\\]\"", temp)) % 2 == 0:
+
+				if temp.replace("\\\"","").count("\"") % 2 == 0:
+					print("append", temp)
 					lines.append(temp)
 					temp = ""
 			splitted = lines
