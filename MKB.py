@@ -141,7 +141,7 @@ class Indenter:
 			for i in splitted:
 				temp += ("" if temp == "" else ";") + i
 
-				if temp.replace("\\\"","").count("\"") % 2 == 0:
+				if temp.replace("\\\\","").replace("\\\"","").count("\"") % 2 == 0:
 					print("append", temp)
 					lines.append(temp)
 					temp = ""
