@@ -382,6 +382,8 @@ class mkbdebug(sublime_plugin.TextCommand):
 			regionlist = self.view.get_regions("mkblinter")
 
 			for line in lines:
+				if len(re.findall("^\s*?//", line)) == 1:
+					continue
 				count += 1
 				bracketerror = False
 				bracketerror2 = False
