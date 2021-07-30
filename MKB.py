@@ -7,7 +7,7 @@ import webbrowser
 from copy import deepcopy
 
 try:
-	path = os.path.join(os.path.dirname(os.path.realpath(__file__)),"MKBdocs.json")
+	path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "MKBdocs.json")
 	with open(path, "r", encoding="utf-8") as jsondocs:
 		mkbjson = json.load(jsondocs)
 		print("MKBdocs loaded")
@@ -74,14 +74,14 @@ class mkbindent(sublime_plugin.ViewEventListener):
 				self.openfile(self, True)
 
 	def on_post_save(self):
-		variables = re.findall("(@(#|&)?[a-z_\-1-9]+)",viewlines())
+		variables = re.findall("(@(#|&)?[a-z_\-1-9]+)", viewlines())
 		if variables:
 			for i in variables:
 				if i[0] not in globalvars:
 					globalvars.append(i[0])
 
 	def openfile(self, indent):
-		indentedlines = Indenter(code=viewlines())
+		indentedlines = Indenter()
 		if indent:
 			mkbindent.lineindentermode(self, indentedlines.indent(debug=False))
 		else:
@@ -89,9 +89,9 @@ class mkbindent(sublime_plugin.ViewEventListener):
 
 	def lineindentermode(self, args):
 		if config("fancy_indent") != None and config("fancy_indent") != 0:
-			self.view.run_command("lineindenter", {"args": [args[0],0]})
+			self.view.run_command("lineindenter", {"args": [args[0], 0]})
 		else:
-			self.view.run_command("lineindenter", {"args": [args[0],-1]})
+			self.view.run_command("lineindenter", {"args": [args[0], -1]})
 
 	def on_selection_modified(self):
 		if config("auto_linting"):
@@ -116,15 +116,24 @@ class lineindenter(sublime_plugin.TextCommand):
 					if config("message_after_indenting"):
 						sublime.message_dialog("Finished Indenting!")
 				elif self.view.substr(regions[count]) == args[0][count]:
-					sublime.set_timeout_async(lambda: self.view.run_command("lineindenter", {"args": [args[0],count]}),0)
+					sublime.set_timeout_async(lambda: self.view.run_command("lineindenter", {"args": [args[0], count]}), 0)
 				elif count < len(args[0]) - 1:
-					sublime.set_timeout_async(lambda: self.view.run_command("lineindenter", {"args": [args[0],count]}),config("fancy_indent"))
+					sublime.set_timeout_async(lambda: self.view.run_command("lineindenter", {"args": [args[0], count]}), config("fancy_indent"))
 
 # Indenter by Federal
 class Indenter:
 
-	def __init__(self, code): # Pass the code its self instead of lines
+	def __init__(self):
 		filelines = sublime.active_window().active_view().substr(sublime.Region(0, len(sublime.active_window().active_view()))).split("\n")
+
+		sel = sublime.active_window().active_view().sel()[0]
+		if sel.a != sel.b:
+			self.top = sublime.active_window().active_view().rowcol(sel.a)[0] + 1
+			self.bottom = sublime.active_window().active_view().rowcol(sel.b)[0] + 1
+		else:
+			self.top = 0
+			self.bottom = 0
+
 		if config("indent_expand"):
 			string = ""
 			for l in filelines:
@@ -141,7 +150,7 @@ class Indenter:
 			for i in splitted:
 				temp += ("" if temp == "" else ";") + i
 
-				if temp.replace("\\\\","").replace("\\\"","").count("\"") % 2 == 0:
+				if temp.replace("\\\\", "").replace("\\\"", "").count("\"") % 2 == 0:
 					lines.append(temp)
 					temp = ""
 			splitted = lines
@@ -192,13 +201,11 @@ class Indenter:
 		match = re.match(r"^({}\w*?)".format(pattern), line, re.IGNORECASE)
 		return None if not match else match.groups()[0]
 
-	def indent_line(self, line):
-		# print(self.extra)
-		# print(line)
+	def indent_line(self, line, indent=True):
 		if line and config("semicolon_end") and line != "$${" and line != "}$$":
-			self.indented.append(config("indent_character") * (self.level+self.extra) + line + ";")
+			self.indented.append(config("indent_character") * (self.level+self.extra)*int(indent) + line + ";")
 		else:
-			self.indented.append(config("indent_character") * (self.level+self.extra) + line) # Inserts a line into the indented output list lines
+			self.indented.append(config("indent_character") * (self.level+self.extra)*int(indent) + line) # Inserts a line into the indented output list lines
 
 	def indent(self, debug):
 		count = 0
@@ -206,6 +213,9 @@ class Indenter:
 		for line in self.lines:
 			count += 1
 			l = line.strip()
+			if count < self.top or count > self.bottom:
+				self.indent_line(l, False)
+				continue
 			closed = False
 			if self.level and Indenter.related_command(l, self.stack[-1]): # Checks if the line corresponds to an ending
 				if Indenter.related_command(l, self.stack[-1]) == "endswitch":
@@ -263,7 +273,7 @@ class hoverinfo(sublime_plugin.ViewEventListener):
 class mkbvariables(sublime_plugin.TextCommand):
 	def run(self, edit):
 		if self.view.match_selector(0, "source.mkb"):
-			variables = re.findall("(set\(|SET\()?(@&|@#|&|#|@)([a-z_\-1-9]+)",viewlines())
+			variables = re.findall("(set\(|SET\()?(@&|@#|&|#|@)([a-z_\-1-9]+)", viewlines())
 			global var
 			var = []
 			for i in variables:
@@ -282,7 +292,7 @@ class mkbhint(sublime_plugin.TextCommand):
 	def run(self, edit, event=None):
 		if self.view.match_selector(0, "source.mkb"):
 			if event:
-				pos = self.view.window_to_text((event["x"],event["y"]))
+				pos = self.view.window_to_text((event["x"], event["y"]))
 			word = self.view.substr(self.view.word(pos))
 			data = load(word)
 			if data:
@@ -301,16 +311,16 @@ class mkbhint(sublime_plugin.TextCommand):
 			data["description"] = data["description"].replace("\n\n\n", "<br><br>").replace("\n", "<br>")
 
 			while True:
-				match = re.search("\`([^\`]*?)\`",data["extendedName"])
+				match = re.search("\`([^\`]*?)\`", data["extendedName"])
 				if match:
-					data["extendedName"] = re.sub("\`([^\`]*?)\`","<u>{}</u>".format(match.groups(1)[0]),data["extendedName"],1)
+					data["extendedName"] = re.sub("\`([^\`]*?)\`", "<u>{}</u>".format(match.groups(1)[0]), data["extendedName"], 1)
 				else:
 					break
 
 			while True:
-				match = re.search("\`([^\`]*?)\`",data["description"])
+				match = re.search("\`([^\`]*?)\`", data["description"])
 				if match:
-					data["description"] = re.sub("\`([^\`]*?)\`","<u>{}</u>".format(match.groups(1)[0]),data["description"],1)
+					data["description"] = re.sub("\`([^\`]*?)\`", "<u>{}</u>".format(match.groups(1)[0]), data["description"], 1)
 				else:
 					break
 
@@ -332,7 +342,7 @@ class mkbhint(sublime_plugin.TextCommand):
 				<i>{}</i>
 				<br>
 				<small>{}{}</small>
-				""".format(data["extendedName"],data["type"],data["category"],data["description"],example,data["example"],)
+				""".format(data["extendedName"], data["type"], data["category"], data["description"], example, data["example"], )
 			if data != None:
 				page = data["resource"].replace("api", "")
 				linkstring = "https://beta.mkb.gorlem.ml{}".format(str(page)[1:])
@@ -344,18 +354,35 @@ class mkbhint(sublime_plugin.TextCommand):
 class mkbmini(sublime_plugin.TextCommand):
 	def run(self, edit):
 		if self.view.match_selector(0, "source.mkb"):
-			string = re.sub("//.*?;", "",viewlines())
+			a = self.view.sel()[0].a
+			b = self.view.sel()[0].b
+			if a == b:
+				string = re.sub("//.*?;", "", viewlines())
+			else:
+				filelines = sublime.active_window().active_view().substr(sublime.Region(a, b)).split("\n")
+				if config("indent_expand"):
+					string = ""
+					for l in filelines:
+						l = l.strip()
+						if l.endswith(";"):
+							string += l
+						else:
+							string += l + ";"
+					string = re.sub("//.*?;", "", string)
+				else:
+					string = re.sub("//.*?;", "", "".join(filelines))
+
 			while True:
-				match1 = re.search("(?<!i)if\(([^;]*?)\);echo\(([^;]*?)\);endif(;)?",string)
-				match2 = re.search("(?<!i)if\(([^;]*?)\);echo\(([^;]*?)\);else;echo\(([^;]*?)\);endif(;)?",string)
+				match1 = re.search("(?<!i)if\(([^;]*?)\);echo\(([^;]*?)\);endif(;)?", string)
+				match2 = re.search("(?<!i)if\(([^;]*?)\);echo\(([^;]*?)\);else;echo\(([^;]*?)\);endif(;)?", string)
 				if match1:
 					original = match1.group(0).replace("\"", "\\\"").replace("(", "\(").replace(")", "\)")
 					iif = "iif(" + match1.group(1) + "," + match1.group(2) + ");"
-					string = re.sub(original,iif,string)
+					string = re.sub(original, iif, string)
 				elif match2:
 					original = match2.group(0).replace("\"", "\\\"").replace("(", "\(").replace(")", "\)")
 					iif = "iif(" + match2.group(1) + "," + match2.group(2) + "," + match2.group(3) + ");"
-					string = re.sub(original,iif,string)
+					string = re.sub(original, iif, string)
 				else:
 					break
 			string = string.replace("$${;", "$${").replace(";}$$;", "}$$").replace(";}$$", "}$$").replace("}$$;", "}$$")
@@ -439,7 +466,7 @@ class mkbdebug(sublime_plugin.TextCommand):
 					print(" 1 \" missing on line "+str(count))
 					quotserror = True
 				if bracketerror or bracketerror2 or varerror or quotserror:
-					regionlist.append(self.view.line(self.view.text_point(count-1,0)))
+					regionlist.append(self.view.line(self.view.text_point(count-1, 0)))
 
 			if not bracketerror and not bracketerror2:
 				print(" All brackets are closed")
@@ -503,7 +530,7 @@ class mkbdebug2(sublime_plugin.TextCommand):
 							quots = True
 
 				if opened != 0 or opened2 != 0 or var or quots:
-					regionlist.append(self.view.line(self.view.text_point(count-1,0)))
+					regionlist.append(self.view.line(self.view.text_point(count-1, 0)))
 
 			self.view.add_regions("mkblinter", regionlist, "invalid.mkb", "dot", sublime.DRAW_NO_FILL)
 
@@ -627,7 +654,7 @@ class mkbwiki(sublime_plugin.TextCommand):
 			array = ["Open Wiki for {}".format(mkbjson[index]["name"])]
 			for key, value in mkbjson[index].items():
 				if value != None:
-					array.append("{}: {}".format(str(key).title(),value))
+					array.append("{}: {}".format(str(key).title(), value))
 
 			sublime.Window.show_quick_panel(sublime.active_window(), array, self.on_done2, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
 		global wikiindex
@@ -658,7 +685,7 @@ class mkbwiki(sublime_plugin.TextCommand):
 			array = ["Open Wiki for {}".format(mkbjson[wikiindex]["name"])]
 			for key, value in mkbjson[wikiindex].items():
 				if value != None:
-					array.append("{}: {}".format(str(key).title(),value))
+					array.append("{}: {}".format(str(key).title(), value))
 
 			sublime.Window.show_quick_panel(sublime.active_window(), array, self.on_done2, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
 
@@ -685,11 +712,11 @@ class functions_syntax(sublime_plugin.TextCommand):
 				if function_call != None:
 					# print(function_call.group(1))
 					if function_call.group(1) != None:
-						regionlist.append(self.view.word(self.view.text_point(count-1,5+line.count("\t"))))
+						regionlist.append(self.view.word(self.view.text_point(count-1, 5+line.count("\t"))))
 					elif function_call.group(2) != None:
-						regionlist.append(self.view.word(self.view.text_point(count-1,9+line.count("\t"))))
+						regionlist.append(self.view.word(self.view.text_point(count-1, 9+line.count("\t"))))
 					else:
-						regionlist.append(self.view.word(self.view.text_point(count-1,0+line.count("\t"))))
+						regionlist.append(self.view.word(self.view.text_point(count-1, 0+line.count("\t"))))
 
 
 			self.view.add_regions("mkbfunctions", regionlist, "meta.function.mkb", "", sublime.DRAW_NO_FILL|sublime.DRAW_NO_OUTLINE|sublime.DRAW_SOLID_UNDERLINE)
@@ -702,7 +729,7 @@ class mkb_goto_definition(sublime_plugin.TextCommand):
 	def run(self, edit, event=None):
 		if self.view.match_selector(0, "source.mkb"):
 			if event:
-				pos = self.view.window_to_text((event["x"],event["y"]))
+				pos = self.view.window_to_text((event["x"], event["y"]))
 				word = self.view.substr(self.view.word(pos))
 				if word != "":
 					regions = self.view.split_by_newlines(sublime.Region(0, len(self.view)))
@@ -716,4 +743,3 @@ class mkb_goto_definition(sublime_plugin.TextCommand):
 							self.view.run_command('_sublime_linter_move_cursor', {'point': reg[count].a+9+line.count("\t")})
 							break
 						count += 1
-				
