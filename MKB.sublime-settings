@@ -51,6 +51,9 @@
 	// Whether or not to show a message after minifying code
 	"message_after_minifying": false,
 
+	// Whether or not to highlight color codes in strings
+	"highlight_color_codes": true,
+
 	// Which browser to use to open the wiki
 	"browser": "chrome",
 	// Open in OS default browser:
