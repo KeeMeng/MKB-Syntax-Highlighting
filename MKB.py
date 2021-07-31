@@ -755,7 +755,7 @@ class mkb_color(sublime_plugin.ViewEventListener):
 
 			text = self.view.substr(sublime.Region(0, len(self.view)))
 			matches = re.finditer("(?!\w\")[&§]([\da-fn])", text)
-			
+
 			if len(re.findall("(?!\w\")[&§]([\da-fn])", text)) != self.total:
 				for i in range(self.total+1):
 					self.view.erase_regions("mkbcolors_{}".format(i))
@@ -769,53 +769,3 @@ class mkb_color(sublime_plugin.ViewEventListener):
 					else:
 						self.view.add_regions("mkbcolors_{}".format(count + 1), [sublime.Region(pos-2, pos)], "{}.mkb".format(color_code))
 					self.total = count + 1
-
-			# lines = [self.view.substr(r) for r in regions]
-			# count = 0
-			# regionlist = self.view.get_regions("mkbcolors")
-
-			# for line in lines:
-			# 	count += 1
-			# 	function_name = re.match("^\s*?function (\w*?)\(", line)
-			# 	if function_name != None:
-			# 		functions.append(function_name.group(1))
-
-			# 	string = "|".join(functions)
-			# 	string = "^\s*?(call\()?(function )?{}( |,|\(|\))".format(string)
-			# 	function_call = re.match(string, line)
-			# 	if function_call != None:
-			# 		# print(function_call.group(1))
-			# 		if function_call.group(1) != None:
-			# 			regionlist.append(self.view.word(self.view.text_point(count-1, 5+line.count("\t"))))
-			# 		elif function_call.group(2) != None:
-			# 			regionlist.append(self.view.word(self.view.text_point(count-1, 9+line.count("\t"))))
-			# 		else:
-			# 			regionlist.append(self.view.word(self.view.text_point(count-1, 0+line.count("\t"))))
-
-
-			# self.view.add_regions("mkbcolors", regionlist, "meta.function.mkb", "", sublime.DRAW_NO_FILL)
-
-
-			# phantom_set = sublime.PhantomSet(self.view, 'mkb_color')
-
-			# ps = []
-			# # for sel in sels:
-			# region = sublime.Region(0, 1)
-			# color = "red"
-			# ps.append(sublime.Phantom(
-			# 		region,
-			# 		"<body><div style=\"width: 1em; height: 1em; border-radius: 0.5em; background-color: red;\"></div></body>",
-			# 		sublime.LAYOUT_INLINE))
-
-			# phantom_set.update(ps)
-
-			# self.view.erase_phantoms("mkb_color")
-			# self.view.add_regions(
-			# 	"mkb_color",
-			# 	[sublime.Region(5, 6)],
-			# 	"mkb_color",
-			# 	annotations=["<body><div style=\"width: 1em; height: 1em; border-radius: 0.5em; background-color: red;\"></div></body>"],
-			# 	flags=sublime.LAYOUT_INLINE
-			# )
-
-
