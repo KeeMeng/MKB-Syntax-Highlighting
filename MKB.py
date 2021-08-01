@@ -128,11 +128,11 @@ class Indenter:
 
 		sel = sublime.active_window().active_view().sel()[0]
 		if sel.a != sel.b:
-			self.top = sublime.active_window().active_view().rowcol(sel.a)[0] + 1
-			self.bottom = sublime.active_window().active_view().rowcol(sel.b)[0] + 1
+			self.top = sublime.active_window().active_view().rowcol(sel.b)[0] + 1
+			self.bottom = sublime.active_window().active_view().rowcol(sel.a)[0] + 1
 		else:
 			self.top = 0
-			self.bottom = 0
+			self.bottom = len(filelines)
 
 		if config("indent_expand"):
 			string = ""
