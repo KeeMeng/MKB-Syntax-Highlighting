@@ -763,7 +763,7 @@ class mkb_color(sublime_plugin.ViewEventListener):
 			if self.view.match_selector(pos, "string.mkb") and not self.view.match_selector(pos, "variable.parameter.mkb") and not self.view.match_selector(pos, "punctuation.definition.keyword.mkb") and not self.view.match_selector(pos, "keyword.other.mkb"):
 				color_code = match.group(1)
 				if color_code == "n":
-					self.view.add_regions("mkbcolors_{}".format(count + 1), [sublime.Region(pos-2, pos)], "{}.mkb".format(color_code), "", sublime.DRAW_NO_FILL|sublime.DRAW_NO_OUTLINE|sublime.DRAW_SOLID_UNDERLINE)
+					self.view.add_regions("mkbcolors_{}".format(count + 1), [sublime.Region(pos-2, pos)], "string.mkb", "", sublime.DRAW_NO_FILL|sublime.DRAW_NO_OUTLINE|sublime.DRAW_SOLID_UNDERLINE)
 				else:
 					self.view.add_regions("mkbcolors_{}".format(count + 1), [sublime.Region(pos-2, pos)], "{}.mkb".format(color_code))
 				self.total = count + 1

@@ -102,7 +102,7 @@
 		{
 			"scope": "0.mkb",
 			"foreground": "black",
-			"background": "white",
+			"background": "white"
 		},
 		{
 			"scope": "1.mkb",
@@ -178,10 +178,6 @@
 			"scope": "f.mkb",
 			"foreground": "black",
 			"background": "#FFFFFF"
-		},
-		{
-			"scope": "n.mkb",
-			"background": "var(mca)"
 		}
 	]
 }
