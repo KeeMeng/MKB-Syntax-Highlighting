@@ -10,19 +10,22 @@ def plugin_loaded():
 def case(text):
 	return text.upper() if settings.get("autocomplete_caps") else text.lower()
 
+def args(text1, text2):
+	return "({})".format(text1) if settings.get("autocomplete_args") else "({})".format(text2)
+
 
 class mkbcompletions(sublime_plugin.EventListener):
 	def on_query_completions(self, view, prefix, locations):
 		if view.match_selector(view.line(locations[0]).a, "comment.mkb"):
 			return ([],sublime.INHIBIT_EXPLICIT_COMPLETIONS)
 		elif view.match_selector(0, "source.mkb"):
-
-			if settings.get("var_wrap"):
+			in_string = view.match_selector(sublime.active_window().active_view().sel()[0].a, "string.mkb")
+			if settings.get("var_wrap") or in_string:
 				var_wrap = "%"
 			else:
 				var_wrap = ""
 
-			return sublime.CompletionList([
+			completions = [
 
 			# Control Flow
 				sublime.CompletionItem( #if
@@ -31,7 +34,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_SNIPPET, 
 					annotation="…"+case("endif"), 
 					details="Executes if the &#60;condition&#62; evaluates to true", 
-					completion=case("if")+"(${1:<condition>});\n	$0\n"+case("endif")+";"),
+					completion=case("if")+args("${1:<condition>}","$1")+";\n	$0\n"+case("endif")+";"),
 				sublime.CompletionItem( #else
 					trigger=case("else"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -6849,9 +6852,23 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("match"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="",
+					annotation=case("MATCH")+"(<subject>,<pattern>,[&target],[group],[default])",
 					details="Runs a regular expression match on the subject", 
 					completion=case("match")+"(${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]},${5:[default]});"),
+				sublime.CompletionItem( #match alt
+					trigger=case("match"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation=case("MATCH")+"(<subject>,<pattern>,{&target1,&target2,&target3})",
+					details="Runs a regular expression match on the subject", 
+					completion=case("match")+"(${1:<subject>},${2:<pattern>},{${3:&target1,&target2...}});"),
+				sublime.CompletionItem( #match alt 2
+					trigger=case("match"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation=case("MATCH")+"(<subject>,<pattern>,&target[])",
+					details="Runs a regular expression match on the subject", 
+					completion=case("match")+"(${1:<subject>},${2:<pattern>},&${3:[target]}[]);"),
 				sublime.CompletionItem( #MAXPLAYERS
 					trigger="MAXPLAYERS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7664,4 +7681,9 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="",
 					details="The position in Z direction with three decimal places after the comma as a string", 
 					completion=var_wrap+"ZPOS"+var_wrap)
-			], flags=sublime.INHIBIT_EXPLICIT_COMPLETIONS)
+			]
+			
+			if in_string:
+				return sublime.CompletionList([completion for completion in completions if completion.kind[0] == 7], flags=sublime.INHIBIT_EXPLICIT_COMPLETIONS)
+			else:
+				return sublime.CompletionList(completions, flags=sublime.INHIBIT_EXPLICIT_COMPLETIONS)
