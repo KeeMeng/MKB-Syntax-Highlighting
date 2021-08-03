@@ -36,63 +36,147 @@
 		//Minecraft Macro/Keybind Mod
 		{
 			"scope": "source.mkb",
-			"foreground": "var(mcf)",
+			"foreground": "var(mcf)"
 		},
 		{
 			"scope": "comment.mkb",
-			"foreground": "var(mc7)",
+			"foreground": "var(mc7)"
 		},
 		{
 			"scope": "variable.parameter.mkb",
-			"foreground": "var(mc6)",
+			"foreground": "var(mc6)"
 		},
 		{
 			"scope": "string.mkb",
-			"foreground": "var(mca)",
+			"foreground": "var(mca)"
 		},
 		{
 			"scope": "keyword.other.mkb",
-			"foreground": "var(mcd)",
+			"foreground": "var(mcd)"
 		},
 		{
 			"scope": "constant.numeric.mkb",
-			"foreground": "var(mc9)",
+			"foreground": "var(mc9)"
 		},
 		{
 			"scope": "keyword.control.mkb",
-			"foreground": "var(mc5)",
+			"foreground": "var(mc5)"
 		},
 		{
 			"scope": "variable.mkb",
-			"foreground": "var(mcc)",
+			"foreground": "var(mcc)"
 		},
 		{
 			"scope": "keyword.operator.word.mkb",
-			"foreground": "var(mc3)",
+			"foreground": "var(mc3)"
 		},
 		{
 			"scope": "punctuation.definition.keyword.mkb",
-			"foreground": "var(mcf)",
+			"foreground": "var(mcf)"
 		},
 		{
 			"scope": "keyword.operator.mkb",
-			"foreground": "var(mcf)",
+			"foreground": "var(mcf)"
 		},
 		{
 			"scope": "constant.language.false.mkb",
-			"foreground": "var(mc4)",
+			"foreground": "var(mc4)"
 		},
 		{
 			"scope": "constant.language.true.mkb",
-			"foreground": "var(mc2)",
+			"foreground": "var(mc2)"
 		},
 		{
 			"scope": "keyword.control.import.mkb",
-			"foreground": "var(mc1)",
+			"foreground": "var(mc1)"
 		},
 		{
 			"scope": "invalid.mkb",
-			"foreground": "#FFFFFF",
+			"foreground": "#FFFFFF"
 		},
-	],
+		{
+			"scope": "meta.function.mkb",
+			"foreground": "#B9F2FF"
+		},
+		{
+			"scope": "0.mkb",
+			"foreground": "black",
+			"background": "white"
+		},
+		{
+			"scope": "1.mkb",
+			"foreground": "black",
+			"background": "#0000AA"
+		},
+		{
+			"scope": "2.mkb",
+			"foreground": "black",
+			"background": "#00AA00"
+		},
+		{
+			"scope": "3.mkb",
+			"foreground": "black",
+			"background": "#00AAAA"
+		},
+		{
+			"scope": "4.mkb",
+			"foreground": "black",
+			"background": "#AA0000"
+		},
+		{
+			"scope": "5.mkb",
+			"foreground": "black",
+			"background": "#AA00AA"
+		},
+		{
+			"scope": "6.mkb",
+			"foreground": "black",
+			"background": "#FFAA00"
+		},
+		{
+			"scope": "7.mkb",
+			"foreground": "black",
+			"background": "#AAAAAA"
+		},
+		{
+			"scope": "8.mkb",
+			"foreground": "black",
+			"background": "#555555"
+		},
+		{
+			"scope": "9.mkb",
+			"foreground": "black",
+			"background": "#5555FF"
+		},
+		{
+			"scope": "a.mkb",
+			"foreground": "black",
+			"background": "#55FF55"
+		},
+		{
+			"scope": "b.mkb",
+			"foreground": "black",
+			"background": "#55FFFF"
+		},
+		{
+			"scope": "c.mkb",
+			"foreground": "black",
+			"background": "#FF5555"
+		},
+		{
+			"scope": "d.mkb",
+			"foreground": "black",
+			"background": "#FF55FF"
+		},
+		{
+			"scope": "e.mkb",
+			"foreground": "black",
+			"background": "#FFFF55"
+		},
+		{
+			"scope": "f.mkb",
+			"foreground": "black",
+			"background": "#FFFFFF"
+		}
+	]
 }

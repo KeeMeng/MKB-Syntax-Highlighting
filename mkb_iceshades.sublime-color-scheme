@@ -27,79 +27,163 @@
 		{
 			// Default color (Don't change)
 			"scope": "source.mkb",
-			"foreground": "#FFFFFF",
+			"foreground": "#FFFFFF"
 		},
 		{
 			// Comments
 			"scope": "comment.mkb",
 			"foreground": "#AAAAAA",
-			"font_style": "",
+			"font_style": ""
 		},
 		{
 			// Parameters
 			"scope": "variable.parameter.mkb",
-			"foreground": "#FFB347",
+			"foreground": "#FFB347"
 		},
 		{
 			// Strings
 			"scope": "string.mkb",
-			"foreground": "#C4BB97",
+			"foreground": "#C4BB97"
 		},
 		{
 			 // Symbols eg %% , ; ( ) [ ]
 			"scope": "keyword.other.mkb",
-			"foreground": "#DB2AD5",
+			"foreground": "#DB2AD5"
 		},
 		{
 			// Numbers
 			"scope": "constant.numeric.mkb",
-			"foreground": "#5FC957",
+			"foreground": "#5FC957"
 		},
 		{
 			// Actions
 			"scope": "keyword.control.mkb",
-			"foreground": "#436EEE",
+			"foreground": "#436EEE"
 		},
 		{
 			// Built in variables
 			"scope": "variable.mkb",
-			"foreground": "#D1331F",
+			"foreground": "#D1331F"
 		},
 		{
 			// Iterators
 			"scope": "keyword.operator.word.mkb",
-			"foreground": "#DE6D21",
+			"foreground": "#DE6D21"
 		},
 		{
 			// User defined variables
 			"scope": "punctuation.definition.keyword.mkb",
-			"foreground": "#00D4D4",
+			"foreground": "#00D4D4"
 		},
 		{
 			// Operators eg = < > && ||
 			"scope": "keyword.operator.mkb",
-			"foreground": "#FFFF55",
+			"foreground": "#FFFF55"
 		},
 		{
 			// False
 			"scope": "constant.language.false.mkb",
-			"foreground": "#880000",
+			"foreground": "#880000"
 		},
 		{
 			// True
 			"scope": "constant.language.true.mkb",
-			"foreground": "#00BB2D",
+			"foreground": "#00BB2D"
 		},
 		{
 			// Keybinds
 			"scope": "keyword.control.import.mkb",
-			"foreground": "#AB882C",
+			"foreground": "#AB882C"
 		},
 		{
 			// Invalid stuff
 			"scope": "invalid.mkb",
 			"foreground": "#FFFFFF",
-			"background": "#AA0000",
+			"background": "#AA0000"
 		},
-	],
+		{
+			"scope": "meta.function.mkb",
+			"foreground": "#B9F2FF"
+		},
+		{
+			"scope": "0.mkb",
+			"foreground": "black",
+			"background": "white"
+		},
+		{
+			"scope": "1.mkb",
+			"foreground": "black",
+			"background": "#0000AA"
+		},
+		{
+			"scope": "2.mkb",
+			"foreground": "black",
+			"background": "#00AA00"
+		},
+		{
+			"scope": "3.mkb",
+			"foreground": "black",
+			"background": "#00AAAA"
+		},
+		{
+			"scope": "4.mkb",
+			"foreground": "black",
+			"background": "#AA0000"
+		},
+		{
+			"scope": "5.mkb",
+			"foreground": "black",
+			"background": "#AA00AA"
+		},
+		{
+			"scope": "6.mkb",
+			"foreground": "black",
+			"background": "#FFAA00"
+		},
+		{
+			"scope": "7.mkb",
+			"foreground": "black",
+			"background": "#AAAAAA"
+		},
+		{
+			"scope": "8.mkb",
+			"foreground": "black",
+			"background": "#555555"
+		},
+		{
+			"scope": "9.mkb",
+			"foreground": "black",
+			"background": "#5555FF"
+		},
+		{
+			"scope": "a.mkb",
+			"foreground": "black",
+			"background": "#55FF55"
+		},
+		{
+			"scope": "b.mkb",
+			"foreground": "black",
+			"background": "#55FFFF"
+		},
+		{
+			"scope": "c.mkb",
+			"foreground": "black",
+			"background": "#FF5555"
+		},
+		{
+			"scope": "d.mkb",
+			"foreground": "black",
+			"background": "#FF55FF"
+		},
+		{
+			"scope": "e.mkb",
+			"foreground": "black",
+			"background": "#FFFF55"
+		},
+		{
+			"scope": "f.mkb",
+			"foreground": "black",
+			"background": "#FFFFFF"
+		}
+	]
 }
