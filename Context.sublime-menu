@@ -25,7 +25,7 @@
 				"args":
 				{
 					"base_file": "${packages}/MKB/MKB.sublime-settings",
-					"default": "{\n\t// Change MKB settings here: \n\t\"color_scheme\": \"${1:MKB}.sublime-color-scheme\",\n\t\"autocomplete_caps\": ${2:false},\n\t\"var_wrap\": ${3:true},\n\t\"indent_character\": \"${4:\\t}\", \n\t\"indent_expand\": ${5:true}, \n\t\"semicolon_end\": ${6:true},\n\t\"extra_indent\": ${7:false},\n\t\"enable_indent\": ${8:false},\n\t\"ask_before_indent\": ${9:false},\n\t\"fancy_indent\": ${10:null},\n\t\"message_after_indenting\": ${11:false},\n\t\"show_hints\": ${12:true},\n\t\"popup_line_height\": ${13:3},\n\t\"indent_after_linting\": ${14:false},\n\t\"message_after_linting\": ${15:false},\n\t\"auto_linting\": ${16:false},\n\t\"message_after_minifying\": ${17:false},\n\t\"browser\": \"${18:chrome}\",\n}"
+					"default": "{\n\t// Change MKB settings here: \n\t\"color_scheme\": \"${1:MKB}.sublime-color-scheme\",\n\t\"autocomplete_caps\": ${2:false},\n\t\"var_wrap\": ${3:true},\n\t\"indent_character\": \"${4:\\t}\", \n\t\"indent_expand\": ${5:true}, \n\t\"semicolon_end\": ${6:true},\n\t\"extra_indent\": ${7:false},\n\t\"enable_indent\": ${8:false},\n\t\"ask_before_indent\": ${9:false},\n\t\"fancy_indent\": ${10:null},\n\t\"message_after_indenting\": ${11:false},\n\t\"show_hints\": ${12:true},\n\t\"popup_line_height\": ${13:3},\n\t\"indent_after_linting\": ${14:false},\n\t\"message_after_linting\": ${15:false},\n\t\"auto_linting\": ${16:false},\n\t\"message_after_minifying\": ${17:false},\n\t\"highlight_color_codes\": ${18:true},\n\t\"functions_underline\": ${19:false},\n\t\"browser\": \"${20:chrome}\",\n}"
 				}
 			},
 			{

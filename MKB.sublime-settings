@@ -54,6 +54,9 @@
 	// Whether or not to highlight color codes in strings
 	"highlight_color_codes": true,
 
+	// Whether or not to underline defined functions
+	"functions_underline": false,
+
 	// Which browser to use to open the wiki
 	"browser": "chrome",
 	// Open in OS default browser:
@@ -70,5 +73,4 @@
 
 	//DO NOT EDIT UNLESS YOU ARE SURE:
 	"word_wrap": true,
-	"functions_underline": false,
 }
