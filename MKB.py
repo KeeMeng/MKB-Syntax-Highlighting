@@ -45,9 +45,20 @@ def viewlines():
 				string += l
 			else:
 				string += l + ";"
-		return string
+		splitted = string.split(";")
 	else:
-		return "".join(filelines)
+		splitted = [f[:-1] if f.endswith(";") else f for f in filelines]
+
+	# Splits line properly and excludes semicolons in strings
+	temp = ""
+	lines = []
+	for i in splitted:
+		temp += ("" if temp == "" else ";") + i
+
+		if temp.replace("\\\\", "").replace("\\\"", "").count("\"") % 2 == 0:
+			lines.append(temp)
+			temp = ""
+	return lines
 
 def load(words):
 	if words.isalpha():
@@ -74,7 +85,7 @@ class mkbindent(sublime_plugin.ViewEventListener):
 				self.openfile(self, True)
 
 	def on_post_save(self):
-		variables = re.findall("(@(#|&)?[a-z_\-1-9]+)", viewlines())
+		variables = re.findall("(@(#|&)?[a-z_\-1-9]+)", ";".join(viewlines()))
 		if variables:
 			for i in variables:
 				if i[0] not in globalvars:
@@ -128,35 +139,15 @@ class Indenter:
 
 		sel = sublime.active_window().active_view().sel()[0]
 		if sel.a != sel.b:
-			self.top = sublime.active_window().active_view().rowcol(sel.b)[0] + 1
-			self.bottom = sublime.active_window().active_view().rowcol(sel.a)[0] + 1
+			positions = [sublime.active_window().active_view().rowcol(sel.a)[0] + 1, sublime.active_window().active_view().rowcol(sel.b)[0] + 1]
+			self.top = min(positions)
+			self.bottom = max(positions)
 		else:
 			self.top = 0
 			self.bottom = len(filelines)
 
-		if config("indent_expand"):
-			string = ""
-			for l in filelines:
-				l = l.strip()
-				if l.endswith(";"):
-					string += l
-				else:
-					string += l + ";"
-			splitted = string.split(";")
+		splitted = viewlines()
 
-			# Splits line properly and excludes semicolons in strings
-			temp = ""
-			lines = []
-			for i in splitted:
-				temp += ("" if temp == "" else ";") + i
-
-				if temp.replace("\\\\", "").replace("\\\"", "").count("\"") % 2 == 0:
-					lines.append(temp)
-					temp = ""
-			splitted = lines
-
-		else:
-			splitted = filelines
 
 		emptycount = 0
 		for s in splitted[::-1]:
@@ -273,7 +264,7 @@ class hoverinfo(sublime_plugin.ViewEventListener):
 class mkbvariables(sublime_plugin.TextCommand):
 	def run(self, edit):
 		if self.view.match_selector(0, "source.mkb"):
-			variables = re.findall("(set\(|SET\()?(@&|@#|&|#|@)([a-z_\-1-9]+)", viewlines())
+			variables = re.findall("(set\(|SET\()?(@&|@#|&|#|@)([a-z_\-1-9]+)", ";".join(viewlines()))
 			global var
 			var = []
 			for i in variables:
@@ -354,23 +345,29 @@ class mkbhint(sublime_plugin.TextCommand):
 class mkbmini(sublime_plugin.TextCommand):
 	def run(self, edit):
 		if self.view.match_selector(0, "source.mkb"):
-			a = self.view.sel()[0].a
-			b = self.view.sel()[0].b
-			if a == b:
-				string = re.sub("//.*?;", "", viewlines())
+			filelines = sublime.active_window().active_view().substr(sublime.Region(0, len(sublime.active_window().active_view()))).split("\n")
+			sel = sublime.active_window().active_view().sel()[0]
+			if sel.a != sel.b:
+				positions = [sublime.active_window().active_view().rowcol(sel.a)[0], sublime.active_window().active_view().rowcol(sel.b)[0]]
+				a = min(positions)
+				b = max(positions)
 			else:
-				filelines = sublime.active_window().active_view().substr(sublime.Region(a, b)).split("\n")
-				if config("indent_expand"):
-					string = ""
-					for l in filelines:
-						l = l.strip()
-						if l.endswith(";"):
-							string += l
-						else:
-							string += l + ";"
-					string = re.sub("//.*?;", "", string)
-				else:
-					string = re.sub("//.*?;", "", "".join(filelines))
+				a = 0
+				b = len(filelines)
+
+			splitted = [f[:-1] if f.endswith(";") else f for f in filelines]
+			temp = ""
+			lines = []
+			for i in splitted:
+				temp += ("" if temp == "" else ";") + i
+
+				if temp.replace("\\\\", "").replace("\\\"", "").count("\"") % 2 == 0:
+					lines.append(temp)
+					temp = ""
+
+			string = ";".join(lines[a:b+1])
+			string = re.sub("\s*?//[^;]*?;\s*?", "", string)
+
 
 			while True:
 				match1 = re.search("(?<!i)if\(([^;]*?)\);echo\(([^;]*?)\);endif(;)?", string)
@@ -537,10 +534,10 @@ class mkbdebug2(sublime_plugin.TextCommand):
 class mkbcase1(sublime_plugin.TextCommand):
 	def run(self, edit):
 		if self.view.match_selector(0, "source.mkb"):
-			text = viewlines().split(";")
+			text = viewlines()
 			count = 0
 			while count < len(text):
-				matches = re.findall("^[\t ]*(\/\/)?([a-zA-Z]+)(\(|;|$)", text[count])
+				matches = re.findall("^[\t ]*(\/\/)?((function )?[a-zA-Z]+)(\(|;|$)", text[count], re.IGNORECASE)
 				if matches != []:
 					text[count] = text[count].replace(matches[0][1], matches[0][1].upper(), 1)
 				count += 1
@@ -550,10 +547,10 @@ class mkbcase1(sublime_plugin.TextCommand):
 class mkbcase2(sublime_plugin.TextCommand):
 	def run(self, edit):
 		if self.view.match_selector(0, "source.mkb"):
-			text = viewlines().split(";")
+			text = viewlines()
 			count = 0
 			while count < len(text):
-				matches = re.findall("^[\t ]*(\/\/)?([a-zA-Z]+)(\(|;|$)", text[count])
+				matches = re.findall("^[\t ]*(\/\/)?((function )?[a-zA-Z]+)(\(|;|$)", text[count], re.IGNORECASE)
 				if matches != []:
 					text[count] = text[count].replace(matches[0][1], matches[0][1].lower(), 1)
 				count += 1
@@ -563,12 +560,12 @@ class mkbcase2(sublime_plugin.TextCommand):
 class mkbcase3(sublime_plugin.TextCommand):
 	def run(self, edit):
 		if self.view.match_selector(0, "source.mkb"):
-			text = viewlines().split(";")
+			text = viewlines()
 			count = 0
 			while count < len(text):
-				matches = re.findall("^[\t ]*(\/\/)?([a-zA-Z]+)(\(|;|$)", text[count])
+				matches = re.findall("^[\t ]*(\/\/)?((function )?[a-zA-Z]+)(\(|;|$)", text[count], re.IGNORECASE)
 				if matches != []:
-					text[count] = text[count].replace(matches[0][1], matches[0][1].capitalize(), 1)
+					text[count] = text[count].replace(matches[0][1], matches[0][1].title(), 1)
 				count += 1
 			self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(text[:-1]));
 			mkbindent.openfile(self, True)
@@ -577,7 +574,7 @@ class mkbdeco(sublime_plugin.TextCommand):
 	def run(self, edit):
 		if self.view.match_selector(0, "source.mkb"):
 
-			text = viewlines().split(";")
+			text = viewlines()
 			count = 0
 			while count < len(text):
 				matches = re.findall("^[\t ]*(\/\/)?([a-zA-Z]+)(\(|;|$)", text[count])
