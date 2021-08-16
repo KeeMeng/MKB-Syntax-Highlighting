@@ -148,7 +148,6 @@ class Indenter:
 
 		splitted = viewlines()
 
-
 		emptycount = 0
 		for s in splitted[::-1]:
 			if s == "":
@@ -165,9 +164,9 @@ class Indenter:
 		self.level = 0
 		self.blocks = {
 			"if":		["else", "endif"],
-			"ifnot":		["else", "endif"],
+			"ifnot":	["else", "endif"],
 			"elseif":	["else", "endif"],
-			"elseifnot":	["else", "endif"],
+			"elseifnot":["else", "endif"],
 			"else":		["endif"],
 			"for":		["next"],
 			"foreach":	["next"],
@@ -175,8 +174,6 @@ class Indenter:
 			"unsafe":	["endunsafe"],
 			"pollevent":["next"],
 			"switch":	["endswitch"],
-			# "case":		["case", "default", "endswitch"],
-			# "default" :	["endswitch"],
 			"function": ["endfunction"]
 		}
 		self.openings = "IF|IFNOT|ELSEIF|ELSEIFNOT|ELSE|FOR|DO|UNSAFE|POLLEVENT|SWITCH|FUNCTION"
@@ -188,7 +185,6 @@ class Indenter:
 			self.openings += "|\\$\\${"
 
 	def related_command(line, pattern):
-		# match = re.match(r"^({})(\b|$).*".format(pattern), line, re.IGNORECASE)
 		match = re.match(r"^({}\w*?)".format(pattern), line, re.IGNORECASE)
 		return None if not match else match.groups()[0]
 
@@ -210,7 +206,6 @@ class Indenter:
 			closed = False
 			if self.level and Indenter.related_command(l, self.stack[-1]): # Checks if the line corresponds to an ending
 				if Indenter.related_command(l, self.stack[-1]) == "endswitch":
-					# self.level -= 1s
 					self.extra -= 1
 				self.stack.pop()
 				self.level -= 1 # Forwards the indentation
@@ -228,12 +223,9 @@ class Indenter:
 					self.indent_line(l)
 					if "switch" in l:
 						self.extra += 1
-						# print(self.extra)
 				self.level += 1 # Backwards the indentation
 				errorstring = " Error found on line "+str(count)+": "+line
 				self.lintlines.append(line)
-				# print(line)
-				# print()
 			elif not closed:
 				if "case" in l or "default" in l:
 					self.extra -= 1
@@ -242,14 +234,11 @@ class Indenter:
 				else:
 					self.indent_line(l) # Insert a standard (no-command) line
 
-		# print(self.level)
 		if self.level != 0 and debug:
-			# print(self.level)
 			print(errorstring)
 		elif not errorbool and debug:
 			print(" No stack errors")
 		return (self.indented, self.lintlines)
-		# return '\n'.join(self.indented).replace("$${;", "$${").replace("}$$;", "}$$") # List to text + some adjustments
 
 class hoverinfo(sublime_plugin.ViewEventListener):
 	def on_hover(self, point, hover_zone):
@@ -367,7 +356,6 @@ class mkbmini(sublime_plugin.TextCommand):
 
 			string = ";".join(lines[a:b+1])
 			string = re.sub("\s*?//[^;]*?;\s*?", "", string)
-
 
 			while True:
 				match1 = re.search("(?<!i)if\(([^;]*?)\);echo\(([^;]*?)\);endif(;)?", string)
@@ -589,7 +577,6 @@ class mkbdeco(sublime_plugin.TextCommand):
 				count += 1
 			self.view.replace(edit, sublime.Region(0, len(self.view)), "\n".join(text[:-1]));
 
-
 			regions = []
 			filelines = sublime.active_window().active_view().substr(sublime.Region(0, len(sublime.active_window().active_view()))).split("\n")
 			string = ""
@@ -605,11 +592,8 @@ class mkbdeco(sublime_plugin.TextCommand):
 				elif match.group().startswith(";"):
 					count += 1
 				else:
-					# print(match.span())
 					regions.append(sublime.Region(match.start()+count, match.end()+count))
 					self.view.add_regions("mkblinter", regions, "invalid.mkb", "dot", sublime.DRAW_NO_FILL)
-
-			# mkbindent.openfile(self, True)
 
 class jump_up(sublime_plugin.WindowCommand):
 	def run(self):
@@ -665,9 +649,6 @@ class mkbwiki(sublime_plugin.TextCommand):
 			linkstring = "https://beta.mkb.gorlem.ml{}".format(str(page)[1:])
 			webbrowser.get(using=config("browser")).open(linkstring, new=2)
 		else:
-			# print(list(mkbjson[wikiindex].keys())[index])
-			# key = list(mkbjson[wikiindex].keys())[index]
-
 			array = []
 			for key, value in mkbjson[wikiindex].items():
 				if value != None:
@@ -675,9 +656,6 @@ class mkbwiki(sublime_plugin.TextCommand):
 
 			print("{}: {}".format(array[index-1][0].title(), array[index-1][1]))
 			sublime.active_window().run_command("show_panel", {"panel": "console", "toggle": True})
-
-			# array = ["{} ({})".format(i["name"], i["type"]) for i in mkbjson]
-			# sublime.Window.show_quick_panel(sublime.active_window(), array, self.on_done, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
 
 			array = ["Open Wiki for {}".format(mkbjson[wikiindex]["name"])]
 			for key, value in mkbjson[wikiindex].items():
@@ -707,14 +685,12 @@ class functions_syntax(sublime_plugin.TextCommand):
 				string = "^\s*?(call\()?(function )?{}( |,|\(|\))".format(string)
 				function_call = re.match(string, line)
 				if function_call != None:
-					# print(function_call.group(1))
 					if function_call.group(1) != None:
 						regionlist.append(self.view.word(self.view.text_point(count-1, 5+line.count("\t"))))
 					elif function_call.group(2) != None:
 						regionlist.append(self.view.word(self.view.text_point(count-1, 9+line.count("\t"))))
 					else:
 						regionlist.append(self.view.word(self.view.text_point(count-1, 0+line.count("\t"))))
-
 
 			self.view.add_regions("mkbfunctions", regionlist, "meta.function.mkb", "", sublime.DRAW_NO_FILL|sublime.DRAW_NO_OUTLINE|sublime.DRAW_SOLID_UNDERLINE)
 
@@ -772,4 +748,3 @@ class mkb_color(sublime_plugin.ViewEventListener):
 	def on_modified_async(self):
 		if self.view.match_selector(0, "source.mkb") and config("highlight_color_codes"):
 			self.display()
-
