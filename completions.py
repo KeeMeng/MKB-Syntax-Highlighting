@@ -841,39 +841,39 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="char", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="(charModule)", 
+					annotation="(char Module)", 
 					details="Returns character with unicode value", 
 					completion="&${1:<char>} = "+case("char")+args("${2:<decimal unicode value>}")+semicolon), 
 				sublime.CompletionItem( #P
 					trigger="P", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
-					annotation="(charModule)", 
+					annotation="(char Module)", 
 					details="Returns paragraph character", 
 					completion=var_wrap+"P"+var_wrap), 
 				sublime.CompletionItem( #DOLLAR
 					trigger="DOLLAR", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
-					annotation="(charModule)", 
+					annotation="(char Module)", 
 					details="Returns one dollar character", 
 					completion=var_wrap+"DOLLAR"+var_wrap), 
 				sublime.CompletionItem( #DOLLARS
 					trigger="DOLLARS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
-					annotation="(charModule)", 
+					annotation="(char Module)", 
 					details="Returns two dollar character", 
 					completion=var_wrap+"DOLLARS"+var_wrap), 
-
-			# Clipboard Module
 				sublime.CompletionItem( #MODULECHARICE
 					trigger="MODULECHARICE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
-					annotation="(charModule)", 
+					annotation="(char Module)", 
 					details="Returns true if the module is installed", 
 					completion=var_wrap+"MODULECHARICE"+var_wrap), 
+
+			# Clipboard Module
 				sublime.CompletionItem( #getclipboard
 					trigger="getclipboard", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -1691,6 +1691,13 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(GetSlotItemExtended Module)", 
 					details="+ Argument for enchantments", 
 					completion=optional("${2:&${1:[itemid]} = }")+case("getslotitemenchants")+args("#${3:<slotid>},${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[enchants]}")+semicolon), 
+				sublime.CompletionItem( #MODULEGETSLOTITEMEXT
+					trigger="MODULEGETSLOTITEMEXT", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_VARIABLE, 
+					annotation="(GetSlotItemExtended Module)", 
+					details="Returns true if the module is installed", 
+					completion="MODULEGETSLOTITEMEXT"), 
 
 			# HTTP Module
 				sublime.CompletionItem( #httpget
@@ -2159,7 +2166,13 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(Klacaiba Module)", 
 					details="Gets the current time with milliseconds", 
 					completion=case("unix")+args("#${1:[seconds]},#${2:<milliseconds>}")+semicolon), 
-
+				sublime.CompletionItem( #MODULENEI
+					trigger="MODULENEI", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_VARIABLE, 
+					annotation="(Klacaiba Module)", 
+					details="Returns true if the module is installed", 
+					completion=var_wrap+"MODULENEI"+var_wrap), 
 
 			# Klacaiba variables
 				sublime.CompletionItem( #LATENCY
@@ -2786,7 +2799,6 @@ class mkbcompletions(sublime_plugin.EventListener):
 					details="Returns the previous names of the player with this name or uuid", 
 					completion=optional("${2:&${1:result}[] = }")+case("oldname")+args("&${1:<result>}[],${3:<name|uuid>}")+semicolon), 
 
-
 			# Utils Module
 				sublime.CompletionItem( #trim
 					trigger="trim", 
@@ -2931,6 +2943,13 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(WindowsNotification Module)", 
 					details="Creates a system tray", 
 					completion=case("notify")+args("${1:[title]},${2:[message]}")+semicolon), 
+				sublime.CompletionItem( #NOTIFICATIONMODULE
+					trigger="NOTIFICATIONMODULE", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_VARIABLE, 
+					annotation="(WindowsNotification Module)", 
+					details="Returns true if the module is installed", 
+					completion=var_wrap+"NOTIFICATIONMODULE"+var_wrap), 
 
 			# Yaku Module
 				sublime.CompletionItem( #mod
