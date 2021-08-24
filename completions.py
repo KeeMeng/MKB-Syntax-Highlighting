@@ -995,7 +995,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				sublime.CompletionItem( #entities
 					trigger="entities", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_VARIABLE, 
+					kind=sublime.KIND_KEYWORD, 
 					annotation="(Entities Iterator Module)", 
 					details="Iterates over all entities", 
 					completion=case("entities")), 
@@ -1657,7 +1657,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				sublime.CompletionItem( #functions
 					trigger="functions", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_VARIABLE, 
+					kind=sublime.KIND_KEYWORD, 
 					annotation="(Functions Module)", 
 					details="Iterates over all functions", 
 					completion=case("functions")), 
@@ -2218,44 +2218,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 					details="Returns the version of klacaiba", 
 					completion=var_wrap+"KLACAIBAVERSION"+var_wrap), 
 
-			# Klacaiba iterators
-				sublime.CompletionItem( #teams
-					trigger="teams", 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_KEYWORD, 
-					annotation="(Klacaiba Module - teams iterator)", 
-					details="Iterates over all teams", 
-					completion=case("teams")), 
-				sublime.CompletionItem( #objectives
-					trigger="objectives", 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_KEYWORD, 
-					annotation="(Klacaiba Module - objectives iterator)", 
-					details="Iterates over all objectives", 
-					completion=case("objectives")), 
-				sublime.CompletionItem( #scores
-					trigger="scores", 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_KEYWORD, 
-					annotation="(Klacaiba Module - score iterator)", 
-					details="Iterates over all scores", 
-					completion=case("scores")), 
-				sublime.CompletionItem( #trades
-					trigger="trades", 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_KEYWORD, 
-					annotation="(Klacaiba Module - trades iterator)", 
-					details="Iterates over all trades", 
-					completion=case("trades")), 
-				sublime.CompletionItem( #inventory
-					trigger="inventory", 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_KEYWORD, 
-					annotation="(Klacaiba Module - inventory iterator)", 
-					details="Iterates over your inventory", 
-					completion=case("inventory")), 
-
 			# Klacaiba players iterator
+				sublime.CompletionItem( #players
+					trigger="players", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module - players iterator)", 
+					details="Iterates over all online players", 
+					completion=case("players")), 
 				sublime.CompletionItem( #PLAYERUUID
 					trigger="PLAYERUUID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -2293,6 +2263,13 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion=var_wrap+"PLAYERISLEGACY"+var_wrap), 
 
 			# Klacaiba teams iterator
+				sublime.CompletionItem( #teams
+					trigger="teams", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module - teams iterator)", 
+					details="Iterates over all teams", 
+					completion=case("teams")), 
 				sublime.CompletionItem( #TEAMALLOWFRIENDLYFIRE
 					trigger="TEAMALLOWFRIENDLYFIRE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -2372,6 +2349,13 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion=var_wrap+"TEAMMEMBERS"+var_wrap), 
 
 			# Klacaiba objective iterator
+				sublime.CompletionItem( #objectives
+					trigger="objectives", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module - objectives iterator)", 
+					details="Iterates over all objectives", 
+					completion=case("objectives")), 
 				sublime.CompletionItem( #OBJECTIVECRITERIA
 					trigger="OBJECTIVECRITERIA", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -2402,6 +2386,13 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion=var_wrap+"OBJECTIVERENDERTYPE"+var_wrap), 
 
 			# Klacaiba score iterator
+				sublime.CompletionItem( #scores
+					trigger="scores", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module - score iterator)", 
+					details="Iterates over all scores", 
+					completion=case("scores")), 
 				sublime.CompletionItem( #SCOREOBJECTIVENAME
 					trigger="SCOREOBJECTIVENAME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -2425,6 +2416,13 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion=var_wrap+"SCOREVALUE"+var_wrap), 
 
 			# Klacaiba trades iterator
+				sublime.CompletionItem( #trades
+					trigger="trades", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module - trades iterator)", 
+					details="Iterates over all trades", 
+					completion=case("trades")), 
 				sublime.CompletionItem( #TRADEBUYITEM
 					trigger="TRADEBUYITEM", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -2483,6 +2481,13 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion=var_wrap+"TRADEMAXUSES"+var_wrap), 
 
 			# Klacaiba inventory iterator
+				sublime.CompletionItem( #inventory
+					trigger="inventory", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Klacaiba Module - inventory iterator)", 
+					details="Iterates over your inventory", 
+					completion=case("inventory")), 
 				sublime.CompletionItem( #SLOTINDEX
 					trigger="SLOTINDEX", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
