@@ -1611,7 +1611,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
 					details="Define a function", 
-					completion=case("function")+" ${1:<name>}(${2:[parameter], ...})"+semicolon+"\n\t$0\n"+case("endfunction")),
+					completion=case("function")+" ${1:<functionname>}(${2:[...parameters]})"+semicolon+"\n\t$0\n"+case("endfunction")+semicolon),
 				sublime.CompletionItem( #return
 					trigger=case("return"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -1631,8 +1631,36 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
+					details="Calling functions", 
+					completion="${1:[value]} = "+case("call")+args("${2:<functionname>},${3:[...parameters]}")+semicolon),
+				sublime.CompletionItem( #call2
+					trigger=case("call2"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="(Functions Module)", 
 					details="Alternative way of calling functions", 
-					completion=case("call")+args("${1:<name>},${2:[parameter], ...}")+semicolon),
+					completion="${1:[value]} = "+"${2:<functionname>}"+args("${3:[...parameters]}")+semicolon),
+				sublime.CompletionItem( #FUNCTIONNAME
+					trigger="FUNCTIONNAME", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_VARIABLE, 
+					annotation="(Functions Module)", 
+					details="Name of function that is being iterated", 
+					completion=var_wrap+"FUNCTIONNAME"+var_wrap),
+				sublime.CompletionItem( #functions
+					trigger=case("functions"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_VARIABLE, 
+					annotation="(Functions Module)", 
+					details="Iterates over all functions", 
+					completion="functions"),
+				sublime.CompletionItem( #MODULEFUNCTIONS
+					trigger="MODULEFUNCTIONS", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_VARIABLE, 
+					annotation="(Functions Module)", 
+					details="Returns true if the module is installed", 
+					completion=var_wrap+"MODULEFUNCTIONS"+var_wrap),
 
 			# GetSlotItemExtended Module
 				sublime.CompletionItem( #getslotitemext

@@ -682,15 +682,20 @@ class functions_syntax(sublime_plugin.TextCommand):
 					functions.append(function_name.group(1))
 
 				string = "|".join(functions)
-				string = "^\s*?(call\()?(function )?{}( |,|\(|\))".format(string)
+				string = "^\\s*?(\\w+\\s*?\\=\\s*?)?(call\()?(function )?{}( |,|\(|\))".format(string)
 				function_call = re.match(string, line)
 				if function_call != None:
-					if function_call.group(1) != None:
-						regionlist.append(self.view.word(self.view.text_point(count-1, 5+line.count("\t"))))
-					elif function_call.group(2) != None:
-						regionlist.append(self.view.word(self.view.text_point(count-1, 9+line.count("\t"))))
+					if function_call.group(1):
+						extra = len(function_call.group(1))
 					else:
-						regionlist.append(self.view.word(self.view.text_point(count-1, 0+line.count("\t"))))
+						extra = 0
+						
+					if function_call.group(2) != None:
+						regionlist.append(self.view.word(self.view.text_point(count-1, 5+line.count("\t")+extra)))
+					elif function_call.group(3) != None:
+						regionlist.append(self.view.word(self.view.text_point(count-1, 9+line.count("\t")+extra)))
+					else:
+						regionlist.append(self.view.word(self.view.text_point(count-1, 0+line.count("\t")+extra)))
 
 			self.view.add_regions("mkbfunctions", regionlist, "meta.function.mkb", "", sublime.DRAW_NO_FILL|sublime.DRAW_NO_OUTLINE|sublime.DRAW_SOLID_UNDERLINE)
 
