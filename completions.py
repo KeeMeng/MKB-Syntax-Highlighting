@@ -998,7 +998,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Entities Iterator Module)", 
 					details="Iterates over all entities", 
-					completion="entities"), 
+					completion=case("entities")), 
 				sublime.CompletionItem( #ENTITYTYPE
 					trigger="ENTITYTYPE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -1660,7 +1660,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Functions Module)", 
 					details="Iterates over all functions", 
-					completion="functions"), 
+					completion=case("functions")), 
 				sublime.CompletionItem( #MODULEFUNCTIONS
 					trigger="MODULEFUNCTIONS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
