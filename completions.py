@@ -992,6 +992,13 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion="&${1:docs}[] = "+case("listdocs")+args("${2:[name]}")+semicolon),
 
 			# Entities iterator Module
+				sublime.CompletionItem( #entities
+					trigger=case("entities"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_VARIABLE, 
+					annotation="(Entities Iterator Module)", 
+					details="Iterates over all entities", 
+					completion="entities"),
 				sublime.CompletionItem( #ENTITYTYPE
 					trigger="ENTITYTYPE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -2213,13 +2220,13 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(Klacaiba Module - objectives iterator)", 
 					details="Iterates over all objectives", 
 					completion=case("objectives")),
-				sublime.CompletionItem( #score
-					trigger=case("score"), 
+				sublime.CompletionItem( #scores
+					trigger=case("scores"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module - score iterator)", 
 					details="Iterates over all scores", 
-					completion=case("score")),
+					completion=case("scores")),
 				sublime.CompletionItem( #trades
 					trigger=case("trades"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
