@@ -554,14 +554,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="", 
-					details="custom function definition to print &#60;text&#62;", 
+					details="Create Function: print(&#60;text&#62)", 
 					completion=case("function")+" "+case("print")+"(&text)"+semicolon+"\n\t"+case("log")+"(\"%&text%\")"+semicolon+"\n"+case("endfunction")+semicolon+"\n$0"), 
 				sublime.CompletionItem( #print
 					trigger="print", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="", 
-					details="custom function call to print &#60;text&#62;", 
+					details="Add Function: call print(&#60;text&#62)", 
 					completion=case("print")+args("${1:<text>}")+semicolon), 
 
 			# AEI Module
