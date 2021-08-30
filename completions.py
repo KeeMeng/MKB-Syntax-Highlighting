@@ -35,7 +35,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_SNIPPET, 
 					annotation="…"+case("endif"), 
 					details="Executes if the &#60;condition&#62; evaluates to true", 
-					completion=case("if")+args("${1:<condition>}","$1")+semicolon+"\n	$0\n"+case("endif")+semicolon), 
+					completion=case("if")+args("${1:<condition>}")+semicolon+"\n	$0\n"+case("endif")+semicolon), 
 				sublime.CompletionItem( #else
 					trigger="else", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -638,21 +638,21 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Cancels current process", 
-					completion=case("cancel")+"()"+semicolon), 
+					completion=case("cancel")+args("")+semicolon), 
 				sublime.CompletionItem( #pause
 					trigger="pause", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Pauses current process", 
-					completion=case("pause")+"()"+semicolon), 
+					completion=case("pause")+args("")+semicolon), 
 				sublime.CompletionItem( #resume
 					trigger="resume", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Resumes current process", 
-					completion=case("resume")+"()"+semicolon), 
+					completion=case("resume")+args("")+semicolon), 
 				sublime.CompletionItem( #mine
 					trigger="mine", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -666,7 +666,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Farms near by crops toggle replant", 
-					completion=case("farm")+"()"+semicolon), 
+					completion=case("farm")+args("")+semicolon), 
 				sublime.CompletionItem( #selstart
 					trigger="selstart", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -687,7 +687,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(BaritoneAddon Module)", 
 					details="Clears selections", 
-					completion=case("selclear")+"()"+semicolon), 
+					completion=case("selclear")+args("")+semicolon), 
 				sublime.CompletionItem( #selreplace
 					trigger="selreplace", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -903,7 +903,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(CodeExporter Module)", 
 					details="Exports all currently running code into the specified directory or macros/exports by default", 
-					completion=case("codeexport")+args("(${1:[&directory]})")+semicolon), 
+					completion=case("codeexport")+args("${1:[&directory]}")+semicolon), 
 
 			# Cloudscript Module
 				sublime.CompletionItem( #run
@@ -1627,7 +1627,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_SNIPPET, 
 					annotation="(Functions Module)", 
 					details="Define a function", 
-					completion=case("function")+" ${1:<functionname>}(${2:[...parameters]})"+semicolon+"\n\t$0\n"+case("endfunction")+semicolon), 
+					completion=case("function")+" ${1:<functionname>}"+args("${2:[...parameters]}")+semicolon+"\n\t$0\n"+case("endfunction")+semicolon), 
 				sublime.CompletionItem( #return
 					trigger="return", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -1850,7 +1850,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(JSON Module)", 
 					details="Returns json as key:value array", 
-					completion="${2:&${1:[array]} = }"+case("getjsonasarray")+args("${3:<json>},${1:[array]}[])")+semicolon), 
+					completion=optional("${2:&${1:[array]} = }")+case("getjsonasarray")+args("${3:<json>},${1:[array]}[]")+semicolon), 
 				sublime.CompletionItem( #jsonarrayadd
 					trigger="jsonarrayadd", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -1901,7 +1901,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Creates a http request", 
-					completion=optional("&${1:response} = ")+case("http")+args("${2:[get|post|put|delete]},${3:<url>},${4:[output stream]},${5:[headers]}","$2")+semicolon), 
+					completion=optional("&${1:response} = ")+case("http")+args("${2:[get|post|put|delete]},${3:<url>},${4:[output stream]},${5:[headers]}")+semicolon), 
 				sublime.CompletionItem( #mkdir
 					trigger="mkdir", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -1985,7 +1985,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Creates a countup from the current time", 
-					completion=case("countup")+"()"+semicolon), 
+					completion=case("countup")+args("")+semicolon), 
 				sublime.CompletionItem( #counter
 					trigger="counter", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -2006,7 +2006,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Returns the name of the open chest", 
-					completion=optional("&${1:name} = ")+case("getchestname")+"()"+semicolon), 
+					completion=optional("&${1:name} = ")+case("getchestname")+args("")+semicolon), 
 				sublime.CompletionItem( #getemptyslots
 					trigger="getemptyslots", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -2725,7 +2725,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_SNIPPET, 
 					annotation=case("switch")+"…"+case("case")+"…"+case("default")+"…"+case("endcase")+" (Switch Case Module)", 
 					details="Switch case statement", 
-					completion=case("switch")+args("${1:<expression>}")+semicolon+"\n	"+case("case")+args("${2:<value>}","$2")+semicolon+"\n		$0\n	"+case("default")+semicolon+"\n		\n"+case("endswitch")), 
+					completion=case("switch")+args("${1:<expression>}")+semicolon+"\n	"+case("case")+args("${2:<value>}","$2")+semicolon+"\n		$3\n	"+case("default")+semicolon+"\n		$4\n"+case("endswitch")+semicolon), 
 				sublime.CompletionItem( #case
 					trigger="case", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -2797,7 +2797,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Restarts the current script from the top without invalidating any variables", 
-					completion=case("restart")+"()"+semicolon), 
+					completion=case("restart")+args("")+semicolon), 
 				sublime.CompletionItem( #oldname
 					trigger="oldname", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -6232,14 +6232,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Clears all messages from the chat window", 
-					completion=case("clearchat")+"()"+semicolon), 
+					completion=case("clearchat")+args("")+semicolon), 
 				sublime.CompletionItem( #clearcrafting
 					trigger="clearcrafting", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Cancels any queued crafting jobs", 
-					completion=case("clearcrafting")+"()"+semicolon), 
+					completion=case("clearcrafting")+args("")+semicolon), 
 				sublime.CompletionItem( #config
 					trigger="config", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -6386,7 +6386,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Disconnects from the current game or server", 
-					completion=case("disconnect")+"()"+semicolon), 
+					completion=case("disconnect")+args("")+semicolon), 
 				sublime.CompletionItem( #DISPLAYHEIGHT
 					trigger="DISPLAYHEIGHT", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7408,7 +7408,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Respawns the player if you are dead", 
-					completion=case("respawn")+"()"+semicolon), 
+					completion=case("respawn")+args("")+semicolon), 
 				sublime.CompletionItem( #SATURATION
 					trigger="SATURATION", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7590,7 +7590,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Sets the player state to sprinting if sufficient stamina (food)", 
-					completion=case("sprint")+"()"+semicolon), 
+					completion=case("sprint")+args("")+semicolon), 
 				sublime.CompletionItem( #sqrt
 					trigger="sqrt", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7737,7 +7737,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Remove the specified configuration overlay if active", 
-					completion=case("unimport")+"()"+semicolon), 
+					completion=case("unimport")+args("")+semicolon), 
 				sublime.CompletionItem( #UNIQUEID
 					trigger="UNIQUEID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7758,7 +7758,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Sets the player state to not sprinting", 
-					completion=case("unsprint")+"()"+semicolon), 
+					completion=case("unsprint")+args("")+semicolon), 
 				sublime.CompletionItem( #UUID
 					trigger="UUID", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
