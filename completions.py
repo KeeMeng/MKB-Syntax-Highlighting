@@ -555,28 +555,294 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_FUNCTION, 
 					annotation="", 
 					details="Create Function: print(&#60;text&#62)", 
-					completion=case("function")+" "+case("print")+"(&text)"+semicolon+"\n\t"+case("log")+"(\"%&text%\")"+semicolon+"\n"+case("endfunction")+semicolon+"\n"), 
+					completion=case("function")+" "+case("print")+"(&text)"+semicolon+"\n\t"
+									+case("log")+"(\"%&text%\")"+semicolon+"\n"
+									+case("endfunction")+semicolon+"\n"
+				), 
 				sublime.CompletionItem( #print
 					trigger="call: print", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="", 
 					details="Call Function: call print(&#60;text&#62)", 
-					completion=case("print")+args("${1:<text>}")+semicolon), 
+					completion=case("print")+args("${1:<text>}")+semicolon
+				), 
+
 				sublime.CompletionItem( #array
 					trigger="function: array", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="", 
 					details="Create Function: create array with the specified values in one line", 
-					completion=case("function array")+args("...&values[]")+semicolon+"\n\t"+case("return")+args("&values[]")+semicolon+"\n"+case("endfunction")+semicolon+""), 
+					completion=case("function array")+args("...&values[]")+semicolon+"\n\t"
+									+case("return")+args("&values[]")+semicolon+"\n"
+									+case("endfunction")+semicolon+"\n"
+				), 
 				sublime.CompletionItem( #array
 					trigger="call: array", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="", 
-					details="Call Function: create array with the specified values in one line", 
-					completion=case("array")+args("...&values[]")+semicolon), 
+					details="Call Function: Creates an array with the specified values in one line", 
+					completion=case("array")+args("${1:...&values[]}")+semicolon
+				), 
+
+				sublime.CompletionItem( #range
+					trigger="function: range", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Create Function: Creates an array filled with values between #start and #stop (both inclusive), where the next value is increased by #step", 
+					completion=case("function range")
+									+"(#start,#stop=-1,#step=1)"+semicolon+"\n\t"
+									+case("if")+"(#stop == -1)"+semicolon+"\n\t\t"
+									+"#stop = #start"+semicolon+"\n\t\t"
+									+"#start = 0"+semicolon+"\n\t"
+									+case("endif")+semicolon+"\n\n\t"
+									+case("for")+"(#i = %#start% to %#stop% step %#step%)"+semicolon+"\n\t\t"
+									+"&result[] = \"%#i%\""+semicolon+"\n\t"
+									+case("next")+semicolon+"\n\t"
+									+case("return")+"(&result[])"+semicolon+"\n"
+									+case("endfunction")+semicolon+"\n"
+				), 
+				sublime.CompletionItem( #range
+					trigger="call: range", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Call Function: Creates an array filled with values between #start and #stop (both inclusive), where the next value is increased by #step", 
+					completion=case("range")+args("#${1:<start>},#${2:<stop>}=-1,#${3:<step>}=1")+semicolon
+				), 
+
+				sublime.CompletionItem( #fill
+					trigger="function: fill", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Create Function: creates an array of the size #amount filled with the value of &filler", 
+					completion=case("function fill")+"(#amount,&filler)"+semicolon+"\n\t"
+									+case("for")+"(#i,1,%#amount%)"+semicolon+"\n\t\t"
+									+"&result[] = \"%&filler%\""+semicolon+"\n\t"
+									+case("next")+semicolon+"\n\n\t"
+									+case("return")+"(&result[])"+semicolon+"\n"
+									+case("endfunction")+semicolon+"\n"
+				), 
+				sublime.CompletionItem( #fill
+					trigger="call: fill", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Call Function: creates an array of the size #amount filled with the value of &filler", 
+					completion=case("fill")+args("#${1:<amount>},&${2:<filler>}")+semicolon
+				), 
+
+				sublime.CompletionItem( #each
+					trigger="function: each", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Create Function: Iterates over the &array[] and calls the &function for each entry", 
+					completion=case("function each")+"(&array[],&function)"+semicolon+"\n\t"
+									+case("foreach")+"(&array[],&entry)"+semicolon+"\n\t\t"
+									+case("call")+"(%&function%,%&entry%)"+semicolon+"\n\t"
+									+case("next")+semicolon+"\n"
+									+case("endfunction")+semicolon+"\n"
+				), 
+				sublime.CompletionItem( #each
+					trigger="call: each", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Call Function: Iterates over the &array[] and calls the &function for each entry", 
+					completion=case("each")+args("&${1:array}[],&${2:function}")+semicolon
+				), 
+
+				sublime.CompletionItem( #select
+					trigger="function: select", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Create Function: Iterates over the &array[] and assigns each entry the result of the &function", 
+					completion=case("function select")+"(&array[],&function)"+semicolon+"\n\t"
+									+case("foreach")+"(&array[],&entry,#index)"+semicolon+"\n\t\t"
+									+"&array[%#index%] = "+case("call")+"(%&function%,%&entry%)"+semicolon+"\n\t"
+									+case("next")+semicolon+"\n\n\t"
+									+case("return")+"(&array[])"+semicolon+"\n"
+									+case("endfunction")+semicolon+"\n"
+				), 
+				sublime.CompletionItem( #select
+					trigger="call: select", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Call Function: Iterates over the &array[] and assigns each entry the result of the &function", 
+					completion=case("select")+args("&${1:array}[],&${2:function}")+semicolon
+				), 
+
+				sublime.CompletionItem( #where
+					trigger="function: where", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Create Function: Iterates over the &array[] and filters out every entry where the &function returns false", 
+					completion=case("function where")+"(&array[],&function)"+semicolon+"\n\t"
+									+case("foreach")+"(&array[],&entry)"+semicolon+"\n\t\t"
+									+"result = "+case("call")+"(%&function%,%&entry%)"+semicolon+"\n\t\t"
+									+case("if")+"(result)"+semicolon+"\n\t\t\t"
+									+"&result[] = \"%&entry%\""+semicolon+"\n\t\t"
+									+case("endif")+semicolon+"\n\t"
+									+case("next")+semicolon+"\n\n\t"
+									+case("return")+"(&result[])"+semicolon+"\n"
+									+case("endfunction")+semicolon+"\n"
+				), 
+				sublime.CompletionItem( #where
+					trigger="call: where", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Call Function: Iterates over the &array[] and filters out every entry where the &function returns false", 
+					completion=case("where")+args("&${1:array}[],&${2:function}")+semicolon
+				), 
+
+				sublime.CompletionItem( #chain
+					trigger="function: chain", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Create Function: Iterates over the &instructions[] and calls a specified function with the &array[] as the first argument and whatever you set after the arrow (->) as the second argument", 
+					completion=case("function chain")+"(&array[],...&instructions[])"+semicolon+"\n\t"
+									+case("foreach")+"(&instructions[],&instruction)"+semicolon+"\n\t\t"
+									+"&out[] = "+case("split")+"(\"->\",%&instruction%)"+semicolon+"\n\t\t"
+									+"&array[] = "+case("call")+"(%&out[0]%,&array[],%&out[1]%)"+semicolon+"\n\t"
+									+case("next")+semicolon+"\n\n\t"
+									+case("return")+"(&array[])"+semicolon+"\n"
+									+case("endfunction")+semicolon+"\n"
+				), 
+				sublime.CompletionItem( #chain
+					trigger="call: chain", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Call Function: Iterates over the &instructions[] and calls a specified function with the &array[] as the first argument and whatever you set after the arrow (->) as the second argument", 
+					completion=case("chain")+args("&${1:array}[],...&${2:instructions}[]")+semicolon
+				), 
+
+				sublime.CompletionItem( #first
+					trigger="function: first", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Create Function: Returns the first non-empty entry in the &array[]", 
+					completion=case("function first")+"(&array[])"+semicolon+"\n\t"
+									+case("foreach")+"(&array[],&entry)"+semicolon+"\n\t\t"
+									+case("if")+"(&entry != \"\")"+semicolon+"\n\t\t\t"
+									+case("return")+"(%&entry%)"+semicolon+"\n\t\t"
+									+case("endif")+semicolon+"\n\t"
+									+case("next")+semicolon+"\n"
+									+case("endfunction")+semicolon+"\n"
+				), 
+				sublime.CompletionItem( #first
+					trigger="call: first", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Call Function: Returns the first non-empty entry in the &array[]", 
+					completion=case("first")+args("&${1:array}[]")+semicolon
+				), 
+
+				sublime.CompletionItem( #last
+					trigger="function: last", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Create Function: Returns the last entry in the &array[]", 
+					completion=case("function last")+"(&array[])"+semicolon+"\n\t"
+									+"#size = "+case("arraysize")+"(&array[])"+semicolon+"\n\t"
+									+"#index = #size - 1"+semicolon+"\n\t"
+									+case("return")+"(%&array[%#index%]%)"+semicolon+"\n"
+									+case("endfunction")+semicolon+"\n"
+				), 
+				sublime.CompletionItem( #last
+					trigger="call: last", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Call Function: Returns the last entry in the &array[]", 
+					completion=case("last")+args("&${1:array}[]")+semicolon
+				), 
+
+				sublime.CompletionItem( #skip
+					trigger="function: skip", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Create Function: Returns a new array based on &array[], without the first #amount entries", 
+					completion=case("function skip")+"(&array[],#amount)"+semicolon+"\n\t"
+									+case("foreach")+"(&array[],&entry,#index)"+semicolon+"\n\t\t"
+									+case("if")+"(#index >= #amount)"+semicolon+"\n\t\t\t"
+									+"&result[] = \"%&entry%\""+semicolon+"\n\t\t"
+									+case("endif")+semicolon+"\n\t"
+									+case("next")+semicolon+"\n\n\t"
+									+case("return")+"(&result[])"+semicolon+"\n"
+									+case("endfunction")+semicolon+"\n"
+				), 
+				sublime.CompletionItem( #skip
+					trigger="call: skip", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Call Function: Returns a new array based on &array[], without the first #amount entries", 
+					completion=case("skip")+args("&${1:array}[],#${2:amount}")+semicolon
+				), 
+
+				sublime.CompletionItem( #take
+					trigger="function: take", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Create Function: Returns a new array based on &array, with only the first #amount entries", 
+					completion=case("function take")+"(&array[],#amount)"+semicolon+"\n\t"
+									+case("foreach")+"(&array[],&entry,#index)"+semicolon+"\n\t\t"
+									+case("if")+"(#index >= #amount)"+semicolon+"\n\t\t\t"
+									+case("break")+semicolon+"\n\t\t"
+									+case("endif")+semicolon+"\n\n\t\t"
+									+"&result[] = \"%&entry%\""+semicolon+"\n\t"
+									+case("next")+semicolon+"\n\n\t"
+									+case("return")+"(&result[])"+semicolon+"\n"
+									+case("endfunction")+semicolon+"\n"
+				), 
+				sublime.CompletionItem( #take
+					trigger="call: take", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Call Function: Returns a new array based on &array, with only the first #amount entries", 
+					completion=case("take")+args("&${1:array}[],#${2:amount}")+semicolon
+				), 
+
+				sublime.CompletionItem( #pow
+					trigger="function: pow", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Create Function: Exponential function", 
+					completion=case("function pow")+"(#base,#exponent=2)"+semicolon+"\n\t"
+						+"#result = #base"+semicolon+"\n\n\t"	
+						+case("for")+"(#i,2,%#exponent%)"+semicolon+"\n\t\t"
+						+"#result = #result * #base"+semicolon+"\n\t"
+						+case("next")+semicolon+"\n\n\t"
+						+case("return")+"(%#result%)"+semicolon+"\n"
+						+case("endfunction")+"\n"
+				), 
+				sublime.CompletionItem( #pow
+					trigger="call: pow", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Call Function: Exponential function", 
+					completion=case("pow")+args("#${1:base},#${2:exponent}")+semicolon
+				), 
+
 				
 
 			# AEI Module
