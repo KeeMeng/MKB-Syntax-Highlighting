@@ -903,7 +903,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(CodeExporter Module)", 
 					details="Exports all currently running code into the specified directory or macros/exports by default", 
-					completion=case("codeexport")+"(${1:[&directory]})"+semicolon), 
+					completion=case("codeexport")+args("(${1:[&directory]})")+semicolon), 
 
 			# Cloudscript Module
 				sublime.CompletionItem( #run
