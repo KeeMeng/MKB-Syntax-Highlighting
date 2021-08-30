@@ -7,20 +7,24 @@ import webbrowser
 from copy import deepcopy
 
 try:
-	path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "MKBdocs.json")
-	with open(path, "r", encoding="utf-8") as jsondocs:
-		mkbjson = json.load(jsondocs)
-		print("MKBdocs loaded")
-
-except:
+	mkbjson = sublime.load_resource(sublime.find_resources("MKBdocs.json")[0])
+	print("MKBdocs loaded")
+except OSError:
 	try:
-		print("MKBdocs being weird, falling back to web api")
-		from urllib import request
-		with request.urlopen("https://beta.mkb.gorlem.ml/api/docs") as url:
-			mkbjson = json.loads(url.read().decode())
-			print("MKBdocs (Online) loaded")
+		path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "MKBdocs.json")
+		with open(path, "r", encoding="utf-8") as jsondocs:
+			mkbjson = json.load(jsondocs)
+			print("MKBdocs file loaded")
+
 	except:
-		print("MKBdocs offline and online both being weird")
+		try:
+			print("MKBdocs being weird, falling back to web api")
+			from urllib import request
+			with request.urlopen("https://beta.mkb.gorlem.ml/api/docs") as url:
+				mkbjson = json.loads(url.read().decode())
+				print("MKBdocs (Online) loaded")
+		except:
+			print("MKBdocs offline and online both being weird")
 
 functions = []
 
