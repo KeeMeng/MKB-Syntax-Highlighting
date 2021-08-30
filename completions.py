@@ -896,6 +896,15 @@ class mkbcompletions(sublime_plugin.EventListener):
 					details="Returns true if the module is installed", 
 					completion=var_wrap+"MODULECLIPBOARD"+var_wrap), 
 
+			# CodeExporter Module
+				sublime.CompletionItem( #codeexport
+					trigger="codeexport", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(CodeExporter Module)", 
+					details="Exports all currently running code into the specified directory or macros/exports by default", 
+					completion=case("codeexport")+"(${1:[&directory]})"+semicolon), 
+
 			# Cloudscript Module
 				sublime.CompletionItem( #run
 					trigger="run", 
