@@ -557,12 +557,27 @@ class mkbcompletions(sublime_plugin.EventListener):
 					details="Create Function: print(&#60;text&#62)", 
 					completion=case("function")+" "+case("print")+"(&text)"+semicolon+"\n\t"+case("log")+"(\"%&text%\")"+semicolon+"\n"+case("endfunction")+semicolon+"\n"), 
 				sublime.CompletionItem( #print
-					trigger="print", 
+					trigger="call: print", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="", 
-					details="Add Function: call print(&#60;text&#62)", 
+					details="Call Function: call print(&#60;text&#62)", 
 					completion=case("print")+args("${1:<text>}")+semicolon), 
+				sublime.CompletionItem( #array
+					trigger="function: array", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Create Function: create array with the specified values in one line", 
+					completion=case("function array")+args("...&values[]")+semicolon+"\n\t"+case("return")+args("&values[]")+semicolon+"\n"+case("endfunction")+semicolon+""), 
+				sublime.CompletionItem( #array
+					trigger="call: array", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_FUNCTION, 
+					annotation="", 
+					details="Call Function: create array with the specified values in one line", 
+					completion=case("array")+args("...&values[]")+semicolon), 
+				
 
 			# AEI Module
 				sublime.CompletionItem( #getiteminfo
