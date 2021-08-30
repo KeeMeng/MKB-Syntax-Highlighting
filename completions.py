@@ -1635,13 +1635,6 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(Functions Module)", 
 					details="Returns a value inside of a function", 
 					completion=case("return")+args("${1:<value>}")+semicolon), 
-				sublime.CompletionItem( #return
-					trigger="return", 
-					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_KEYWORD, 
-					annotation="(Functions Module)", 
-					details="Returns a value inside of a function", 
-					completion=case("return")+" ${1:<value>}"+semicolon), 
 				sublime.CompletionItem( #call
 					trigger="call", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
