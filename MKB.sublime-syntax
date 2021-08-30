@@ -127,11 +127,11 @@ contexts:
       scope: keyword.other.mkb
 
   numbers:
-    - match: '-?[\d.]+(ms|t)?'
+    - match: '-?[\d]*?\.?[\d]+?(ms|t)?'
       scope: constant.numeric.mkb
 
   operators:
-    - match: '(<|>|==|!=|!|>=|<=|&&|\|\||\bto\b|\bas\b|\bstep\b|=>|\+|\-(?!\d)|\*|\/|=|:=|:)'
+    - match: '(<|>|==|!=|!|>=|<=|&&|\|\||\bto\b|\bas\b|\bstep\b|=>|\+|\-(?!\d)|\*|\/|=|:=|:|\.\.\.)'
       captures:
         1: keyword.operator.mkb
 
