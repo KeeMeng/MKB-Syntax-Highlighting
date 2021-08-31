@@ -550,7 +550,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 
 			# My custom completions
 				sublime.CompletionItem( #print
-					trigger="function: print", 
+					trigger=case("function: print"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -560,7 +560,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 									+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #print
-					trigger="call: print", 
+					trigger=case("call: print"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -569,7 +569,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				), 
 
 				sublime.CompletionItem( #array
-					trigger="function: array", 
+					trigger=case("function: array"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -579,7 +579,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 									+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #array
-					trigger="call: array", 
+					trigger=case("call: array"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -588,7 +588,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				), 
 
 				sublime.CompletionItem( #range
-					trigger="function: range", 
+					trigger=case("function: range"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -606,7 +606,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 									+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #range
-					trigger="call: range", 
+					trigger=case("call: range"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -615,7 +615,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				), 
 
 				sublime.CompletionItem( #fill
-					trigger="function: fill", 
+					trigger=case("function: fill"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -628,7 +628,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 									+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #fill
-					trigger="call: fill", 
+					trigger=case("call: fill"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -637,7 +637,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				), 
 
 				sublime.CompletionItem( #each
-					trigger="function: each", 
+					trigger=case("function: each"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -649,7 +649,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 									+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #each
-					trigger="call: each", 
+					trigger=case("call: each"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -658,7 +658,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				), 
 
 				sublime.CompletionItem( #select
-					trigger="function: select", 
+					trigger=case("function: select"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -671,7 +671,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 									+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #select
-					trigger="call: select", 
+					trigger=case("call: select"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -680,7 +680,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				), 
 
 				sublime.CompletionItem( #where
-					trigger="function: where", 
+					trigger=case("function: where"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -696,7 +696,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 									+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #where
-					trigger="call: where", 
+					trigger=case("call: where"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -705,7 +705,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				), 
 
 				sublime.CompletionItem( #chain
-					trigger="function: chain", 
+					trigger=case("function: chain"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -719,7 +719,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 									+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #chain
-					trigger="call: chain", 
+					trigger=case("call: chain"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -728,7 +728,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				), 
 
 				sublime.CompletionItem( #first
-					trigger="function: first", 
+					trigger=case("function: first"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -742,7 +742,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 									+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #first
-					trigger="call: first", 
+					trigger=case("call: first"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -751,7 +751,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				), 
 
 				sublime.CompletionItem( #last
-					trigger="function: last", 
+					trigger=case("function: last"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -763,7 +763,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 									+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #last
-					trigger="call: last", 
+					trigger=case("call: last"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -772,7 +772,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				), 
 
 				sublime.CompletionItem( #skip
-					trigger="function: skip", 
+					trigger=case("function: skip"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -787,7 +787,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 									+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #skip
-					trigger="call: skip", 
+					trigger=case("call: skip"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -796,7 +796,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				), 
 
 				sublime.CompletionItem( #take
-					trigger="function: take", 
+					trigger=case("function: take"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -812,7 +812,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 									+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #take
-					trigger="call: take", 
+					trigger=case("call: take"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -821,7 +821,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				), 
 
 				sublime.CompletionItem( #pow
-					trigger="function: pow", 
+					trigger=case("function: pow"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
@@ -835,7 +835,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #pow
-					trigger="call: pow", 
+					trigger=case("call: pow"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
 					annotation="(Functions Module)", 
