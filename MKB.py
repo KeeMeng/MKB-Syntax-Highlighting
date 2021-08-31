@@ -1,40 +1,42 @@
 import sublime
 import sublime_plugin
+
 import re
 import json
 import os.path
 import webbrowser
 from copy import deepcopy
 
-try:
-	jsondocs = sublime.load_resource(sublime.find_resources("MKBdocs.json")[0])
-	mkbjson = json.loads(jsondocs)
-	print("MKBdocs loaded")
-except OSError:
-	try:
-		path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "MKBdocs.json")
-		with open(path, "r", encoding="utf-8") as jsondocs:
-			mkbjson = json.load(jsondocs)
-			print("MKBdocs file loaded")
-
-	except:
-		try:
-			print("MKBdocs being weird, falling back to web api")
-			from urllib import request
-			with request.urlopen("https://beta.mkb.gorlem.ml/api/docs") as url:
-				mkbjson = json.loads(url.read().decode())
-				print("MKBdocs (Online) loaded")
-		except:
-			print("MKBdocs offline and online both being weird")
-
+mkbjson = ""
+settings = ""
 functions = []
+globalvars = []
 
 def plugin_loaded():
 	global settings
 	settings = sublime.load_settings("MKB.sublime-settings")
 	print("Settings loaded")
-	global globalvars
-	globalvars = []
+
+	try:
+		jsondocs = sublime.load_resource(sublime.find_resources("MKBdocs.json")[0])
+		mkbjson = json.loads(jsondocs)
+		print("MKBdocs loaded")
+	except OSError:
+		try:
+			path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "MKBdocs.json")
+			with open(path, "r", encoding="utf-8") as jsondocs:
+				mkbjson = json.load(jsondocs)
+				print("MKBdocs file loaded")
+
+		except:
+			try:
+				print("MKBdocs being weird, falling back to web api")
+				from urllib import request
+				with request.urlopen("https://beta.mkb.gorlem.ml/api/docs") as url:
+					mkbjson = json.loads(url.read().decode())
+					print("MKBdocs (Online) loaded")
+			except:
+				print("MKBdocs offline and online both being weird")
 
 def config(key):
 	if settings.get(key):
@@ -258,20 +260,19 @@ class hoverinfo(sublime_plugin.ViewEventListener):
 class mkbvariables(sublime_plugin.TextCommand):
 	def run(self, edit):
 		if self.view.match_selector(0, "source.mkb"):
+			self.mkb_var = []
 			variables = re.findall("(set\(|SET\()?(@&|@#|&|#|@)([a-z_\-1-9]+)", ";".join(viewlines()))
-			global var
-			var = []
 			for i in variables:
-				if i[1]+i[2] not in var:
-					var.append(i[1]+i[2])
+				if i[1]+i[2] not in self.mkb_var:
+					self.mkb_var.append(i[1]+i[2])
 			for i in globalvars:
-				if i not in var:
-					var.append(i)
-			sublime.Window.show_quick_panel(sublime.active_window(), var, self.on_done, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
+				if i not in self.mkb_var:
+					self.mkb_var.append(i)
+			sublime.Window.show_quick_panel(sublime.active_window(), self.mkb_var, self.on_done, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
 	
 	def on_done(self, index):
 		if index != -1:
-			sublime.active_window().run_command("insert", {"characters": var[index]})
+			sublime.active_window().run_command("insert", {"characters": self.mkb_var[index]})
 
 class mkbhint(sublime_plugin.TextCommand):
 	def run(self, edit, event=None):
