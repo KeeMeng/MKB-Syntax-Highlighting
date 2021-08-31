@@ -7,7 +7,8 @@ import webbrowser
 from copy import deepcopy
 
 try:
-	mkbjson = sublime.load_resource(sublime.find_resources("MKBdocs.json")[0])
+	jsondocs = sublime.load_resource(sublime.find_resources("MKBdocs.json")[0])
+	mkbjson = json.loads(jsondocs)
 	print("MKBdocs loaded")
 except OSError:
 	try:
