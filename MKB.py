@@ -21,7 +21,7 @@ def plugin_loaded():
 		jsondocs = sublime.load_resource(sublime.find_resources("MKBdocs.json")[0])
 		mkbjson = json.loads(jsondocs)
 		print("MKBdocs loaded")
-	except OSError:
+	except:
 		try:
 			path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "MKBdocs.json")
 			with open(path, "r", encoding="utf-8") as jsondocs:
