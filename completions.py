@@ -549,11 +549,11 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion=case("endunsafe")+semicolon+"\n"), 
 
 			# My custom completions
-				sublime.CompletionItem( #function
+				sublime.CompletionItem( #print
 					trigger="function: print", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Create Function: print(&#60;text&#62)", 
 					completion=case("function")+" "+case("print")+"(&text)"+semicolon+"\n\t"
 									+case("log")+"(\"%&text%\")"+semicolon+"\n"
@@ -563,7 +563,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="call: print", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Call Function: call print(&#60;text&#62)", 
 					completion=case("print")+args("${1:<text>}")+semicolon
 				), 
@@ -572,7 +572,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="function: array", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Create Function: create array with the specified values in one line", 
 					completion=case("function array")+args("...&values[]")+semicolon+"\n\t"
 									+case("return")+args("&values[]")+semicolon+"\n"
@@ -582,7 +582,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="call: array", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Call Function: Creates an array with the specified values in one line", 
 					completion=case("array")+args("${1:...&values[]}")+semicolon
 				), 
@@ -591,7 +591,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="function: range", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Create Function: Creates an array filled with values between #start and #stop (both inclusive), where the next value is increased by #step", 
 					completion=case("function range")
 									+"(#start,#stop=-1,#step=1)"+semicolon+"\n\t"
@@ -609,7 +609,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="call: range", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Call Function: Creates an array filled with values between #start and #stop (both inclusive), where the next value is increased by #step", 
 					completion=case("range")+args("#${1:<start>},#${2:<stop>}=-1,#${3:<step>}=1")+semicolon
 				), 
@@ -618,7 +618,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="function: fill", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Create Function: creates an array of the size #amount filled with the value of &filler", 
 					completion=case("function fill")+"(#amount,&filler)"+semicolon+"\n\t"
 									+case("for")+"(#i,1,%#amount%)"+semicolon+"\n\t\t"
@@ -631,7 +631,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="call: fill", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Call Function: creates an array of the size #amount filled with the value of &filler", 
 					completion=case("fill")+args("#${1:<amount>},&${2:<filler>}")+semicolon
 				), 
@@ -640,7 +640,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="function: each", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Create Function: Iterates over the &array[] and calls the &function for each entry", 
 					completion=case("function each")+"(&array[],&function)"+semicolon+"\n\t"
 									+case("foreach")+"(&array[],&entry)"+semicolon+"\n\t\t"
@@ -652,7 +652,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="call: each", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Call Function: Iterates over the &array[] and calls the &function for each entry", 
 					completion=case("each")+args("&${1:array}[],&${2:function}")+semicolon
 				), 
@@ -661,7 +661,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="function: select", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Create Function: Iterates over the &array[] and assigns each entry the result of the &function", 
 					completion=case("function select")+"(&array[],&function)"+semicolon+"\n\t"
 									+case("foreach")+"(&array[],&entry,#index)"+semicolon+"\n\t\t"
@@ -674,7 +674,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="call: select", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Call Function: Iterates over the &array[] and assigns each entry the result of the &function", 
 					completion=case("select")+args("&${1:array}[],&${2:function}")+semicolon
 				), 
@@ -683,7 +683,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="function: where", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Create Function: Iterates over the &array[] and filters out every entry where the &function returns false", 
 					completion=case("function where")+"(&array[],&function)"+semicolon+"\n\t"
 									+case("foreach")+"(&array[],&entry)"+semicolon+"\n\t\t"
@@ -699,7 +699,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="call: where", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Call Function: Iterates over the &array[] and filters out every entry where the &function returns false", 
 					completion=case("where")+args("&${1:array}[],&${2:function}")+semicolon
 				), 
@@ -708,7 +708,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="function: chain", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Create Function: Iterates over the &instructions[] and calls a specified function with the &array[] as the first argument and whatever you set after the arrow (->) as the second argument", 
 					completion=case("function chain")+"(&array[],...&instructions[])"+semicolon+"\n\t"
 									+case("foreach")+"(&instructions[],&instruction)"+semicolon+"\n\t\t"
@@ -722,7 +722,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="call: chain", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Call Function: Iterates over the &instructions[] and calls a specified function with the &array[] as the first argument and whatever you set after the arrow (->) as the second argument", 
 					completion=case("chain")+args("&${1:array}[],...&${2:instructions}[]")+semicolon
 				), 
@@ -731,7 +731,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="function: first", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Create Function: Returns the first non-empty entry in the &array[]", 
 					completion=case("function first")+"(&array[])"+semicolon+"\n\t"
 									+case("foreach")+"(&array[],&entry)"+semicolon+"\n\t\t"
@@ -745,7 +745,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="call: first", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Call Function: Returns the first non-empty entry in the &array[]", 
 					completion=case("first")+args("&${1:array}[]")+semicolon
 				), 
@@ -754,7 +754,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="function: last", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Create Function: Returns the last entry in the &array[]", 
 					completion=case("function last")+"(&array[])"+semicolon+"\n\t"
 									+"#size = "+case("arraysize")+"(&array[])"+semicolon+"\n\t"
@@ -766,7 +766,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="call: last", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Call Function: Returns the last entry in the &array[]", 
 					completion=case("last")+args("&${1:array}[]")+semicolon
 				), 
@@ -775,7 +775,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="function: skip", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Create Function: Returns a new array based on &array[], without the first #amount entries", 
 					completion=case("function skip")+"(&array[],#amount)"+semicolon+"\n\t"
 									+case("foreach")+"(&array[],&entry,#index)"+semicolon+"\n\t\t"
@@ -790,7 +790,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="call: skip", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Call Function: Returns a new array based on &array[], without the first #amount entries", 
 					completion=case("skip")+args("&${1:array}[],#${2:amount}")+semicolon
 				), 
@@ -799,7 +799,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="function: take", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Create Function: Returns a new array based on &array, with only the first #amount entries", 
 					completion=case("function take")+"(&array[],#amount)"+semicolon+"\n\t"
 									+case("foreach")+"(&array[],&entry,#index)"+semicolon+"\n\t\t"
@@ -815,7 +815,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="call: take", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Call Function: Returns a new array based on &array, with only the first #amount entries", 
 					completion=case("take")+args("&${1:array}[],#${2:amount}")+semicolon
 				), 
@@ -824,7 +824,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="function: pow", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Create Function: Exponential function", 
 					completion=case("function pow")+"(#base,#exponent=2)"+semicolon+"\n\t"
 						+"#result = #base"+semicolon+"\n\n\t"	
@@ -838,12 +838,10 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger="call: pow", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_FUNCTION, 
-					annotation="", 
+					annotation="(Functions Module)", 
 					details="Call Function: Exponential function", 
 					completion=case("pow")+args("#${1:base},#${2:exponent}")+semicolon
-				), 
-
-				
+				), 		
 
 			# AEI Module
 				sublime.CompletionItem( #getiteminfo
@@ -1909,6 +1907,13 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(Functions Module)", 
 					details="Define a function", 
 					completion=case("function")+" ${1:<functionname>}"+args("${2:[...parameters]}")+semicolon+"\n\t$3\n"+case("endfunction")+semicolon), 
+				sublime.CompletionItem( #endfunction
+					trigger="endfunction", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Functions Module)", 
+					details="Ends a function", 
+					completion=case("endfunction")+semicolon), 
 				sublime.CompletionItem( #return
 					trigger="return", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
