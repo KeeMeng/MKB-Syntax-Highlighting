@@ -644,7 +644,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					details="Create Function: Iterates over the &array[] and calls the &function for each entry", 
 					completion=case("function each")+"(&array[],&function)"+semicolon+"\n\t"
 									+case("foreach")+"(&array[],&entry)"+semicolon+"\n\t\t"
-									+case("call")+"(%&function%,%&entry%)"+semicolon+"\n\t"
+									+case("call")+"(\"%&function%\",\"%&entry%\")"+semicolon+"\n\t"
 									+case("next")+semicolon+"\n"
 									+case("endfunction")+semicolon+"\n"
 				), 
@@ -665,7 +665,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					details="Create Function: Iterates over the &array[] and assigns each entry the result of the &function", 
 					completion=case("function select")+"(&array[],&function)"+semicolon+"\n\t"
 									+case("foreach")+"(&array[],&entry,#index)"+semicolon+"\n\t\t"
-									+"&array[%#index%] = "+case("call")+"(%&function%,%&entry%)"+semicolon+"\n\t"
+									+"&array[%#index%] = "+case("call")+"(\"%&function%\",\"%&entry%\")"+semicolon+"\n\t"
 									+case("next")+semicolon+"\n\n\t"
 									+case("return")+"(&array[])"+semicolon+"\n"
 									+case("endfunction")+semicolon+"\n"
@@ -687,7 +687,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					details="Create Function: Iterates over the &array[] and filters out every entry where the &function returns false", 
 					completion=case("function where")+"(&array[],&function)"+semicolon+"\n\t"
 									+case("foreach")+"(&array[],&entry)"+semicolon+"\n\t\t"
-									+"result = "+case("call")+"(%&function%,%&entry%)"+semicolon+"\n\t\t"
+									+"result = "+case("call")+"(\"%&function%\",\"%&entry%\")"+semicolon+"\n\t\t"
 									+case("if")+"(result)"+semicolon+"\n\t\t\t"
 									+"&result[] = \"%&entry%\""+semicolon+"\n\t\t"
 									+case("endif")+semicolon+"\n\t"
@@ -712,8 +712,8 @@ class mkbcompletions(sublime_plugin.EventListener):
 					details="Create Function: Iterates over the &instructions[] and calls a specified function with the &array[] as the first argument and whatever you set after the arrow (->) as the second argument", 
 					completion=case("function chain")+"(&array[],...&instructions[])"+semicolon+"\n\t"
 									+case("foreach")+"(&instructions[],&instruction)"+semicolon+"\n\t\t"
-									+"&out[] = "+case("split")+"(\"->\",%&instruction%)"+semicolon+"\n\t\t"
-									+"&array[] = "+case("call")+"(%&out[0]%,&array[],%&out[1]%)"+semicolon+"\n\t"
+									+"&out[] = "+case("split")+"(\"->\",\"%&instruction%\")"+semicolon+"\n\t\t"
+									+"&array[] = "+case("call")+"(\"%&out[0]%\",&array[],\"%&out[1]%\")"+semicolon+"\n\t"
 									+case("next")+semicolon+"\n\n\t"
 									+case("return")+"(&array[])"+semicolon+"\n"
 									+case("endfunction")+semicolon+"\n"
@@ -736,7 +736,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion=case("function first")+"(&array[])"+semicolon+"\n\t"
 									+case("foreach")+"(&array[],&entry)"+semicolon+"\n\t\t"
 									+case("if")+"(&entry != \"\")"+semicolon+"\n\t\t\t"
-									+case("return")+"(%&entry%)"+semicolon+"\n\t\t"
+									+case("return")+"(\"%&entry%\")"+semicolon+"\n\t\t"
 									+case("endif")+semicolon+"\n\t"
 									+case("next")+semicolon+"\n"
 									+case("endfunction")+semicolon+"\n"
@@ -759,7 +759,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion=case("function last")+"(&array[])"+semicolon+"\n\t"
 									+"#size = "+case("arraysize")+"(&array[])"+semicolon+"\n\t"
 									+"#index = #size - 1"+semicolon+"\n\t"
-									+case("return")+"(%&array[%#index%]%)"+semicolon+"\n"
+									+case("return")+"(\"%&array[%#index%]%\")"+semicolon+"\n"
 									+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #last
@@ -831,8 +831,8 @@ class mkbcompletions(sublime_plugin.EventListener):
 						+case("for")+"(#i,2,%#exponent%)"+semicolon+"\n\t\t"
 						+"#result = #result * #base"+semicolon+"\n\t"
 						+case("next")+semicolon+"\n\n\t"
-						+case("return")+"(%#result%)"+semicolon+"\n"
-						+case("endfunction")+"\n"
+						+case("return")+"(\"%#result%\")"+semicolon+"\n"
+						+case("endfunction")+semicolon+"\n"
 				), 
 				sublime.CompletionItem( #pow
 					trigger="call: pow", 
