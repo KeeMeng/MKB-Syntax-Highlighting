@@ -721,7 +721,7 @@ class mkb_goto_definition(sublime_plugin.TextCommand):
 					count = 0
 
 					for line in lines:
-						function_name = re.match("^\s*?function {}\(".format(word), line)
+						function_name = re.match("^\s*?function {}\(".format(word), line, re.IGNORECASE)
 						if function_name != None:
 							self.view.run_command('_sublime_linter_move_cursor', {'point': reg[count].a+9+line.count("\t")})
 							break
