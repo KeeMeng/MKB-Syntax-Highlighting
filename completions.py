@@ -1913,7 +1913,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Functions Module)", 
 					details="Ends a function", 
-					completion=case("endfunction")+semicolon), 
+					completion=case("endfunction")+semicolon+"\n"), 
 				sublime.CompletionItem( #return
 					trigger=case("return"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
