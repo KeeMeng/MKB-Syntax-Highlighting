@@ -3019,6 +3019,35 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="(Switch Case Module)", 
 					details="case statement", 
 					completion=case("case")+args("${1:<value>}")+semicolon+"\n\t"), 
+				sublime.CompletionItem( #switch
+					trigger=case("switch"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Switch Case Module)", 
+					details="Switch case statement", 
+					completion=case("switch")+args("${1:<expression>}")+semicolon), 
+				sublime.CompletionItem( #endswitch
+					trigger="endswitch", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Switch Case Module)", 
+					details="Ends a switch case block", 
+					completion=case("endswitch")+semicolon), 
+				sublime.CompletionItem( #default
+					trigger="default", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Switch Case Module)", 
+					details="Default action to perform if none of the cases are valid", 
+					completion=case("default")+semicolon), 
+				sublime.CompletionItem( #MODULESWITCHCASE
+					trigger="MODULESWITCHCASE", 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="(Switch Case Module)", 
+					details="Returns true if the Switch Case module is installed", 
+					completion=var_wrap+"MODULESWITCHCASE"+var_wrap), 
+
 
 			# Utilities Module
 				sublime.CompletionItem( #eval
