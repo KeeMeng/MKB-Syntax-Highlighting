@@ -870,7 +870,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(AEI Module)", 
-					details="Returns true if the module is installed", 
+					details="Returns true if the AEI module is installed", 
 					completion=var_wrap+"MODULEAEI"+var_wrap), 
 
 			# anvilRename Module
@@ -886,7 +886,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(anvilRename Module)", 
-					details="Returns true if the module is installed", 
+					details="Returns true if the anvilRename module is installed", 
 					completion=var_wrap+"MODULEANVIL"+var_wrap), 
 
 			# BaritoneAddon Module
@@ -1112,7 +1112,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(BaritoneAddon Module)", 
-					details="Returns true if the module is installed", 
+					details="Returns true if the BaritoneAddon module is installed", 
 					completion=var_wrap+"MODULEBARITONE"+var_wrap), 
 
 			# charModule
@@ -1149,7 +1149,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(char Module)", 
-					details="Returns true if the module is installed", 
+					details="Returns true if the char module is installed", 
 					completion=var_wrap+"MODULECHARICE"+var_wrap), 
 
 			# Clipboard Module
@@ -1172,7 +1172,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Clipboard Module)", 
-					details="Returns true if the module is installed", 
+					details="Returns true if the Clipboard module is installed", 
 					completion=var_wrap+"MODULECLIPBOARD"+var_wrap), 
 
 			# CodeExporter Module
@@ -1896,7 +1896,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(FarHit Module)", 
-					details="Returns true if the module is installed", 
+					details="Returns true if the FarHit module is installed", 
 					completion=var_wrap+"MODULEFARHIT"+var_wrap), 
 
 			# Functions Module
@@ -1954,7 +1954,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Functions Module)", 
-					details="Returns true if the module is installed", 
+					details="Returns true if the Functions module is installed", 
 					completion=var_wrap+"MODULEFUNCTIONS"+var_wrap), 
 
 			# GetSlotItemExtended Module
@@ -1984,7 +1984,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(GetSlotItemExtended Module)", 
-					details="Returns true if the module is installed", 
+					details="Returns true if the GetSlotItemExtended module is installed", 
 					completion="MODULEGETSLOTITEMEXT"), 
 
 			# HTTP Module
@@ -2035,7 +2035,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(HTTP Module)", 
-					details="Returns true if the module is installed", 
+					details="Returns true if the HTTP module is installed", 
 					completion=var_wrap+"MODULEHTTP"+var_wrap), 
 
 			# JSON Module
@@ -2163,7 +2163,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(JSON Module)", 
-					details="Returns true if the module is installed", 
+					details="Returns true if the JSON module is installed", 
 					completion=var_wrap+"MODULEJSON"+var_wrap), 
 
 			# Klacaiba Module
@@ -2459,7 +2459,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(Klacaiba Module)", 
-					details="Returns true if the module is installed", 
+					details="Returns true if the Klacaiba module is installed", 
 					completion=var_wrap+"MODULENEI"+var_wrap), 
 
 			# Klacaiba variables
@@ -3001,7 +3001,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_VARIABLE, 
 					annotation="(SignText Module)", 
-					details="Returns true if the module is installed", 
+					details="Returns true if the SignText module is installed", 
 					completion=var_wrap+"MODULESIGNTEXT"+var_wrap), 
 
 			# Switch Module
@@ -3043,7 +3043,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				sublime.CompletionItem( #MODULESWITCHCASE
 					trigger="MODULESWITCHCASE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-					kind=sublime.KIND_KEYWORD, 
+					kind=sublime.KIND_VARIABLE, 
 					annotation="(Switch Case Module)", 
 					details="Returns true if the Switch Case module is installed", 
 					completion=var_wrap+"MODULESWITCHCASE"+var_wrap), 
