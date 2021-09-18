@@ -56,11 +56,20 @@
 								}
 							},
 							{
-								"caption": "4) Set color scheme (Paste into this file)",
-								"command": "packagedev_edit_scheme"
+								"caption": "4) Save the file and put it into Packages/User folder",
+								"command": "save"
 							},
 							{
-								"caption": "5) Send this file to TKM to add into package",
+								"caption": "5) Set color scheme by changing the color_scheme setting",
+								"command": "edit_settings",
+								"args":
+								{
+									"base_file": "${packages}/MKB/MKB.sublime-settings",
+									"default": "{\n\t// Change MKB settings here: \n\t\"color_scheme\": \"${1:MKB}.sublime-color-scheme\",\n\t\"autocomplete_caps\": ${2:false},\n\t\"autocomplete_args\": ${3:true},\n\t\"var_wrap\": ${4:true},\n\t\"indent_character\": \"${5:\\t}\", \n\t\"indent_expand\": ${6:true}, \n\t\"semicolon_end\": ${7:true},\n\t\"extra_indent\": ${8:false},\n\t\"enable_indent\": ${9:false},\n\t\"ask_before_indent\": ${10:false},\n\t\"fancy_indent\": ${11:null},\n\t\"message_after_indenting\": ${12:false},\n\t\"show_hints\": ${13:true},\n\t\"popup_line_height\": ${14:3},\n\t\"indent_after_linting\": ${15:false},\n\t\"message_after_linting\": ${16:false},\n\t\"auto_linting\": ${17:false},\n\t\"message_after_minifying\": ${18:false},\n\t\"highlight_color_codes\": ${19:true},\n\t\"functions_underline\": ${20:false},\n\t\"browser\": \"${21:chrome}\"\n}"
+								}
+							},
+							{
+								"caption": "6) (Optional) Send this file to TKM to add into package",
 								"command": "open_url",
 								"args":
 								{
