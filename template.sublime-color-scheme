@@ -95,13 +95,9 @@
 		{
 			// Functions
 			"scope": "meta.function.mkb",
-			"foreground": "#86B28D"
-		},
-		// DO NOT CHANGE MINECRAFT COLOR CODES BELOW
-		{
-			"scope": "meta.function.mkb",
 			"foreground": "#B9F2FF"
 		},
+		// DO NOT CHANGE MINECRAFT COLOR CODES BELOW
 		{
 			"scope": "0.mkb",
 			"foreground": "black",
