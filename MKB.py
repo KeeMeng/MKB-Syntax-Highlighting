@@ -14,6 +14,7 @@ globalvars = []
 
 def plugin_loaded():
 	global settings
+	global mkbjson
 	settings = sublime.load_settings("MKB.sublime-settings")
 	print("Settings loaded")
 
@@ -92,6 +93,7 @@ class mkbindent(sublime_plugin.ViewEventListener):
 				self.openfile(self, True)
 
 	def on_post_save(self):
+		global globalvars
 		variables = re.findall("(@(#|&)?[a-z_\-1-9]+)", ";".join(viewlines()))
 		if variables:
 			for i in variables:
@@ -259,6 +261,7 @@ class hoverinfo(sublime_plugin.ViewEventListener):
 
 class mkbvariables(sublime_plugin.TextCommand):
 	def run(self, edit):
+		global globalvars
 		if self.view.match_selector(0, "source.mkb"):
 			self.mkb_var = []
 			variables = re.findall("(set\(|SET\()?(@&|@#|&|#|@)([a-z_\-1-9]+)", ";".join(viewlines()))
@@ -633,15 +636,15 @@ class jump_down(sublime_plugin.WindowCommand):
 
 class mkbwiki(sublime_plugin.TextCommand):
 	def run(self, edit):
-		array = ["{} ({})".format(i["name"], i["type"]) for i in mkbjson]
+		array = [sublime.QuickPanelItem("{}".format(i["name"]), "", "{}".format(i["type"])) for i in mkbjson]
 		sublime.Window.show_quick_panel(sublime.active_window(), array, self.on_done, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
 
 	def on_done(self, index):
 		if index != -1:
-			array = ["Open Wiki for {}".format(mkbjson[index]["name"])]
+			array = [sublime.QuickPanelItem("Open Wiki for {}".format(mkbjson[index]["name"]), "", "")]
 			for key, value in mkbjson[index].items():
 				if value != None:
-					array.append("{}: {}".format(str(key).title(), value))
+					array.append(sublime.QuickPanelItem("{}: {}".format(str(key).title(), value), "", ""))
 
 			sublime.Window.show_quick_panel(sublime.active_window(), array, self.on_done2, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
 		global wikiindex
@@ -663,10 +666,10 @@ class mkbwiki(sublime_plugin.TextCommand):
 			print("{}: {}".format(array[index-1][0].title(), array[index-1][1]))
 			sublime.active_window().run_command("show_panel", {"panel": "console", "toggle": True})
 
-			array = ["Open Wiki for {}".format(mkbjson[wikiindex]["name"])]
+			array = [sublime.QuickPanelItem("Open Wiki for {}".format(mkbjson[wikiindex]["name"]), "", "")]
 			for key, value in mkbjson[wikiindex].items():
 				if value != None:
-					array.append("{}: {}".format(str(key).title(), value))
+					array.append(sublime.QuickPanelItem("{}: {}".format(str(key).title(), value), "", ""))
 
 			sublime.Window.show_quick_panel(sublime.active_window(), array, self.on_done2, sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
 
