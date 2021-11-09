@@ -691,8 +691,7 @@ class functions_syntax(sublime_plugin.TextCommand):
 					functions.append(function_name.group(1))
 
 				string = "|".join(functions)
-				string = "^\\s*?(\\w+\\s*?\\=\\s*?)?(call\()?(function )?{}( |,|\(|\))".format(string)
-				function_call = re.match(string, line)
+				function_call = re.match("^\s*?([@&#\w]+\s*?\=\s*?)?(call\()?(function )?{}( |,|\(|\))".format(string), line)
 				if function_call != None:
 					if function_call.group(1):
 						extra = len(function_call.group(1))
