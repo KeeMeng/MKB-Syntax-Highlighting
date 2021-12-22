@@ -1,0 +1,181 @@
+{
+	// Template if you want to make a color scheme
+	"globals":
+	// Suggest not to change
+	{
+		"background": "#2B2B2B",
+		"foreground": "#FFFFFF",
+		"line_highlight": "#333333",
+		"caret": "#FFFFFF",
+		"block_caret": "#FFFFFF",
+		"selection": "#363636",
+		"selection_border": "#222222",
+		"invisibles": "#222222",
+		"misspelling": "#FF0000",
+	},
+	"rules": 
+	[
+		{
+			// Default color (Don't change)
+			"scope": "source.mkb",
+			"foreground": "#FFFFFF"
+		},
+		{
+			// Comments
+			"scope": "comment.mkb",
+			"foreground": "808080",
+		},
+		{
+			// Parameters
+			"scope": "variable.parameter.mkb",
+			"foreground": "#FFAA00"
+		},
+		{
+			// Strings
+			"scope": "string.mkb",
+			"foreground": "#6A8759"
+		},
+		{
+			 // Symbols eg %% , ; ( ) [ ]
+			"scope": "keyword.other.mkb",
+			"foreground": "#A9B7C6"
+		},
+		{
+			// Numbers
+			"scope": "constant.numeric.mkb",
+			"foreground": "#6897BB"
+		},
+		{
+			// Actions
+			"scope": "keyword.control.mkb",
+			"foreground": "#F6903F"
+		},
+		{
+			// Built in variables
+			"scope": "variable.mkb",
+			"foreground": "#9775A8"
+		},
+		{
+			// Iterators
+			"scope": "keyword.operator.word.mkb",
+			"foreground": "#9775A8"
+		},
+		{
+			// User defined variables
+			"scope": "punctuation.definition.keyword.mkb",
+			"foreground": "#A9B7C6"
+		},
+		{
+			// Operators eg = < > && ||
+			"scope": "keyword.operator.mkb",
+			"foreground": "#A9B7C6"
+		},
+		{
+			// False
+			"scope": "constant.language.false.mkb",
+			"foreground": "#F6903F"
+		},
+		{
+			// True
+			"scope": "constant.language.true.mkb",
+			"foreground": "#F6903F"
+		},
+		{
+			// Keybinds
+			"scope": "keyword.control.import.mkb",
+			"foreground": "#9775A8"
+		},
+		{
+			// Invalid stuff
+			"scope": "invalid.mkb",
+			"foreground": "#FFFFFF",
+			"background": "#AA0000"
+		},
+		{
+			// Functions
+			"scope": "meta.function.mkb",
+			"foreground": "#B9F2FF"
+		},
+		// DO NOT CHANGE MINECRAFT COLOR CODES BELOW
+		{
+			"scope": "0.mkb",
+			"foreground": "black",
+			"background": "white"
+		},
+		{
+			"scope": "1.mkb",
+			"foreground": "black",
+			"background": "#0000AA"
+		},
+		{
+			"scope": "2.mkb",
+			"foreground": "black",
+			"background": "#00AA00"
+		},
+		{
+			"scope": "3.mkb",
+			"foreground": "black",
+			"background": "#00AAAA"
+		},
+		{
+			"scope": "4.mkb",
+			"foreground": "black",
+			"background": "#AA0000"
+		},
+		{
+			"scope": "5.mkb",
+			"foreground": "black",
+			"background": "#AA00AA"
+		},
+		{
+			"scope": "6.mkb",
+			"foreground": "black",
+			"background": "#FFAA00"
+		},
+		{
+			"scope": "7.mkb",
+			"foreground": "black",
+			"background": "#AAAAAA"
+		},
+		{
+			"scope": "8.mkb",
+			"foreground": "black",
+			"background": "#555555"
+		},
+		{
+			"scope": "9.mkb",
+			"foreground": "black",
+			"background": "#5555FF"
+		},
+		{
+			"scope": "a.mkb",
+			"foreground": "black",
+			"background": "#55FF55"
+		},
+		{
+			"scope": "b.mkb",
+			"foreground": "black",
+			"background": "#55FFFF"
+		},
+		{
+			"scope": "c.mkb",
+			"foreground": "black",
+			"background": "#FF5555"
+		},
+		{
+			"scope": "d.mkb",
+			"foreground": "black",
+			"background": "#FF55FF"
+		},
+		{
+			"scope": "e.mkb",
+			"foreground": "black",
+			"background": "#FFFF55"
+		},
+		{
+			"scope": "f.mkb",
+			"foreground": "black",
+			"background": "#FFFFFF"
+		}
+	]
+}
