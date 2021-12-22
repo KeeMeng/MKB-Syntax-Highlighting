@@ -23,7 +23,7 @@
 		{
 			// Comments
 			"scope": "comment.mkb",
-			"foreground": "808080",
+			"foreground": "#808080",
 		},
 		{
 			// Parameters
