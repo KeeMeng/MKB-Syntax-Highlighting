@@ -91,6 +91,10 @@
 				}
 			},
 			{
+				"caption": "Insert Minecraft ID",
+				"command": "mkb_insert"
+			},
+			{
 				"caption": "Wiki",
 				"command": "mkbwiki"
 			},
