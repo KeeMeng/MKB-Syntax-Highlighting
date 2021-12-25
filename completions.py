@@ -8182,6 +8182,9 @@ class mkbcompletions(sublime_plugin.EventListener):
 			]
 			
 			if in_string:
-				return sublime.CompletionList([completion for completion in completions if completion.kind[0] == 7], flags=sublime.INHIBIT_EXPLICIT_COMPLETIONS)
+				string_completions = [completion for completion in completions if completion.kind[0] == 7]
+				
+				string_completions.extend([])
+				return sublime.CompletionList(string_completions, flags=sublime.INHIBIT_EXPLICIT_COMPLETIONS)
 			else:
 				return sublime.CompletionList(completions, flags=sublime.INHIBIT_EXPLICIT_COMPLETIONS)
