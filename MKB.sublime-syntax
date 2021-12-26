@@ -140,7 +140,7 @@ contexts:
       scope: variable.parameter.mkb
 
   prefixes:
-    - match: '\b(@??[#&\b]??[a-z0-9_-]+(?=\b)(?!\())'
+    - match: '(@??[#&\b]??[a-z0-9_-]+(?=\b)(?!\())'
       scope: punctuation.definition.keyword.mkb
 
   functions:
