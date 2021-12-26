@@ -60,6 +60,9 @@
 	// Whether or not to underline defined functions
 	"functions_underline": false,
 
+	// Whether or not to add minecraft: to id when inserting/auto completing
+	"mc_prefix": true,
+
 	// Which browser to use to open the wiki
 	"browser": "chrome",
 	// Open in OS default browser:
