@@ -21,7 +21,7 @@
 	"reconnect": true,
 	"scaneutils": true,
 	"signtext": true,
-	"switch": true,
+	"switch_case": true,
 	"utilities": true,
 	"utils": true,
 	"windowsnotifications": true,

@@ -7920,7 +7920,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 				] if module_bool("signtext") else [] )
 				+
 				([
-			# Switch Module
+			# Switch Case Module
 					sublime.CompletionItem( #switch
 						trigger=case("switch"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7963,7 +7963,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Switch Case Module)", 
 						details="Returns true if the Switch Case module is installed", 
 						completion=var_wrap+"MODULESWITCHCASE"+var_wrap), 
-				] if module_bool("switch") else [] )
+				] if module_bool("switch_case") else [] )
 				+
 				([
 			# Utilities Module
