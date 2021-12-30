@@ -548,7 +548,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					details="Ends an active unsafe block", 
 					completion=case("endunsafe")+semicolon+"\n"), 
 
-			# My custom completions
+			# Custom functions completions
 				sublime.CompletionItem( #print
 					trigger=case("function: print"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
