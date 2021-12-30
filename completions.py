@@ -2928,6 +2928,15 @@ class mkbcompletions(sublime_plugin.EventListener):
 					details="middle click inventory slot", 
 					completion=case("slotmiddleclick")+args("${1:<slotid>}")+semicolon), 
 
+			# Numericly Module
+				sublime.CompletionItem( #exec
+					trigger=case("runscript"), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_KEYWORD, 
+					annotation="", 
+					details="Numericly run script action", 
+					completion=case("runscript")+args("${1:<scriptfile>},${2:[taskname]}")+semicolon), 
+
 			# Reconnect Module
 				sublime.CompletionItem( #reconnect
 					trigger=case("reconnect"), 
