@@ -5990,7 +5990,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						trigger=case("betterecho"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
-						annotation="", 
+						annotation="(BetterEcho Module)", 
 						details="Sends the specified message to the server and client mods like baritone", 
 						completion=case("betterecho")+args("${1:<text>}")+semicolon), 
 				] if module_bool("betterecho") else [] )
