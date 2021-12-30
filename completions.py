@@ -222,7 +222,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("ifnotbeginswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET,  
-					annotation="…"+case("endif"), 
+					annotation="(Klacaiba Module)"+"…"+case("endif"), 
 					details="Executes if the &#60;haystack&#62; does not start with the &#60;needle&#62;", 
 					completion=case("ifnotbeginswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t$3\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #ifnotcanharvestblock
@@ -236,7 +236,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("ifnotcontains"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
-					annotation="…"+case("endif"), 
+					annotation="(Klacaiba Module)"+"…"+case("endif"), 
 					details="Executes if the &#60;haystack&#62; does not contain the &#60;needle&#62;", 
 					completion=case("ifnotcontains")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t$3\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #ifnotenchanted
@@ -250,7 +250,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("ifnotendswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
-					annotation="…"+case("endif"), 
+					annotation="(Klacaiba Module)"+"…"+case("endif"), 
 					details="Executes if the &#60;haystack&#62; does not end with the &#60;needle&#62;", 
 					completion=case("ifnotendswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t$3\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #ifnotfileexists
@@ -278,7 +278,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("ifnotmatches"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
-					annotation="…"+case("endif"), 
+					annotation="(Klacaiba Module)"+"…"+case("endif"), 
 					details="Executes if the &#60;subject&#62; does not match the &#60;pattern&#62;", 
 					completion=case("ifnotmatches")+args("${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]}")+semicolon+"\n\t$5\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
 
@@ -286,7 +286,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("elseifbeginswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;haystack&#62; starts with the &#60;needle&#62; and no if-clause before evaluated to true", 
 					completion=case("elseifbeginswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t"), 
 				sublime.CompletionItem( #elseifcanharvestblock
@@ -300,7 +300,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("elseifcontains"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;haystack&#62; contains the &#60;needle&#62; and no if-clause before evaluated to true", 
 					completion=case("elseifcontains")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t"), 
 				sublime.CompletionItem( #elseifenchanted
@@ -314,7 +314,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("elseifendswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;haystack&#62; ends with the &#60;needle&#62; and no if-clause before evaluated to true", 
 					completion=case("elseifendswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t"), 
 				sublime.CompletionItem( #elseiffileexist
@@ -342,7 +342,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("elseifmatches"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;subject&#62; matches the &#60;pattern&#62; and no if-clause before evaluated to true", 
 					completion=case("elseifmatches")+args("${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]}")+semicolon+"\n\t"), 
 
@@ -350,7 +350,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("elseifnotbeginswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;haystack&#62; does not start with the &#60;needle&#62; and no if-clause before evaluated to true", 
 					completion=case("elseifnotbeginswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #elseifnotcanharvestblock
@@ -364,7 +364,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("elseifnotcontains"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;haystack&#62; does not contain the &#60;needle&#62; and no if-clause before evaluated to true", 
 					completion=case("elseifnotcontains")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #elseifnotenchanted
@@ -378,7 +378,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("elseifnotendswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;haystack&#62; does not end with the &#60;needle&#62; and no if-clause before evaluated to true", 
 					completion=case("elseifnotendswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #elseifnotfileexist
@@ -406,7 +406,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("elseifnotmatches"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;subject&#62; does not match the &#60;pattern&#62; and no if-clause before evaluated to true", 
 					completion=case("elseifnotmatches")+args("${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]}")+semicolon+"\n\t") if module_bool("klacaiba") else "", 
 
@@ -414,7 +414,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("whilebeginswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Exits do loop if &#60;haystack&#62; does not start with the &#60;needle&#62;", 
 					completion=case("whilebeginswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #whilecanharvestblock
@@ -428,7 +428,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("whilecontains"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Exits do loop if &#60;haystack&#62; does not contain the &#60;needle&#62;", 
 					completion=case("whilecontains")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #whileenchanted
@@ -442,7 +442,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("whileendswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Exits do loop if &#60;haystack&#62; does not end with the &#60;needle&#62;", 
 					completion=case("whileendswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #whilefileexist
@@ -470,7 +470,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("whilematches"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Exits do loop if the &#60;subject&#62; does not match the &#60;pattern&#62;", 
 					completion=case("whilematches")+args("${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]}")+semicolon+"\n") if module_bool("klacaiba") else "", 
 
@@ -478,7 +478,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("untilbeginswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Exits do loop if &#60;haystack&#62; starts with the &#60;needle&#62;", 
 					completion=case("untilbeginswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #untilcanharvestblock
@@ -492,7 +492,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("untilcontains"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Exits do loop if &#60;haystack&#62; contains the &#60;needle&#62;", 
 					completion=case("untilcontains")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #untilenchanted
@@ -506,7 +506,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("untilendswith"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Exits do loop if &#60;haystack&#62; ends with the &#60;needle&#62;", 
 					completion=case("untilendswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #untilfileexist
@@ -534,7 +534,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					trigger=case("untilmatches"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
-					annotation="", 
+					annotation="(Klacaiba Module)", 
 					details="Exits do loop if the &#60;subject&#62; matches the &#60;pattern&#62;", 
 					completion=case("untilmatches")+args("${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]}")+semicolon+"\n") if module_bool("klacaiba") else "", 
 
