@@ -15,7 +15,7 @@
 	"getslotitemextended": true,
 	"http": true,
 	"json": true,
-	"klacaiba": true,
+	"klacaiba": false,
 	"macro_essentials": false,
 	"numericly": false,
 	"reconnect": true,
