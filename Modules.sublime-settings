@@ -14,6 +14,7 @@
 	"functions": true,
 	"getslotitemextended": true,
 	"http": true,
+	"hypixeladditions": false,
 	"json": true,
 	"klacaiba": true,
 	"macro_essentials": false,
