@@ -142,7 +142,6 @@ class lineindenter(sublime_plugin.TextCommand):
 
 # Indenter by Federal
 class Indenter:
-
 	def __init__(self):
 		filelines = sublime.active_window().active_view().substr(sublime.Region(0, len(sublime.active_window().active_view()))).split("\n")
 
@@ -708,7 +707,6 @@ class functions_syntax(sublime_plugin.TextCommand):
 			self.view.add_regions("mkbfunctions", regionlist, "meta.function.mkb", "", sublime.DRAW_NO_FILL|sublime.DRAW_NO_OUTLINE|sublime.DRAW_SOLID_UNDERLINE)
 
 class mkb_goto_definition(sublime_plugin.TextCommand):
-
 	def want_event(self):
 		return True
 
