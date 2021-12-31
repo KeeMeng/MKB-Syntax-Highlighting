@@ -176,6 +176,30 @@
 			"scope": "f.mkb",
 			"foreground": "black",
 			"background": "#FFFFFF"
+		},
+		{
+			"scope": "k.mkb",
+			"font_style": "glow"
+		},
+		{
+			"scope": "l.mkb",
+			"font_style": "bold"
+		},
+		{
+			"scope": "m.mkb",
+			"font_style": "glow"
+		},
+		{
+			"scope": "n.mkb",
+			"font_style": "underline"
+		},
+		{
+			"scope": "o.mkb",
+			"font_style": "italic"
+		},
+		{
+			"scope": "r.mkb",
+			"font_style": "glow"
 		}
 	]
 }
