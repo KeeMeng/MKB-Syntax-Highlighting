@@ -744,15 +744,16 @@ class mkb_color(sublime_plugin.ViewEventListener):
 		if len(re.findall("(?!\w\")[&§]([\da-fn])", text)) != self.total:
 			for i in range(self.total+1):
 				self.view.erase_regions("mkbcolors_{}".format(i))
+			self.total = 0
 
 		for (count, match) in enumerate(matches):
 			pos = match.span()[1]
 			if self.view.match_selector(pos-1, "string.mkb") and not self.view.match_selector(pos-1, "variable.parameter.mkb") and not self.view.match_selector(pos-1, "punctuation.definition.keyword.mkb") and not self.view.match_selector(pos-1, "keyword.other.mkb"):
 				color_code = match.group(1)
 				if color_code == "n":
-					self.view.add_regions("mkbcolors_{}".format(count + 1), [sublime.Region(pos-2, pos)], "string.mkb", "", sublime.DRAW_NO_FILL|sublime.DRAW_NO_OUTLINE|sublime.DRAW_SOLID_UNDERLINE)
+					self.view.add_regions("mkbcolors_{}".format(count+1), [sublime.Region(pos-2, pos)], "string.mkb", "", sublime.DRAW_NO_FILL|sublime.DRAW_NO_OUTLINE|sublime.DRAW_SOLID_UNDERLINE)
 				else:
-					self.view.add_regions("mkbcolors_{}".format(count + 1), [sublime.Region(pos-2, pos)], "{}.mkb".format(color_code))
+					self.view.add_regions("mkbcolors_{}".format(count+1), [sublime.Region(pos-2, pos)], "{}.mkb".format(color_code))
 				self.total = count + 1
 
 	def on_load(self):
