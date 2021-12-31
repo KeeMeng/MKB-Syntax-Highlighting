@@ -69,6 +69,52 @@ contexts:
         7: keyword.other.mkb
       push: strings2
 
+    - match: '&0'
+      scope: 0.mkb
+    - match: '&1'
+      scope: 1.mkb
+    - match: '&2'
+      scope: 2.mkb
+    - match: '&3'
+      scope: 3.mkb
+    - match: '&4'
+      scope: 4.mkb
+    - match: '&5'
+      scope: 5.mkb
+    - match: '&6'
+      scope: 6.mkb
+    - match: '&7'
+      scope: 7.mkb
+    - match: '&8'
+      scope: 8.mkb
+    - match: '&9'
+      scope: 9.mkb
+    - match: '&a'
+      scope: a.mkb
+    - match: '&b'
+      scope: b.mkb
+    - match: '&c'
+      scope: c.mkb
+    - match: '&d'
+      scope: d.mkb
+    - match: '&e'
+      scope: e.mkb
+    - match: '&f'
+      scope: f.mkb
+    - match: '&k'
+      scope: k.mkb
+    - match: '&l'
+      scope: l.mkb
+    - match: '&m'
+      scope: m.mkb
+    - match: '&n'
+      scope: n.mkb
+    - match: '&o'
+      scope: o.mkb
+    - match: '&r'
+      scope: r.mkb
+
+
   strings2:
     - meta_scope: string.mkb
     - match: '((-?[\d.]+(ms|t)?)|(({{booleans_true}})|({{booleans_false}}))|(<|>|==|!=|!|>=|<=|\+|\-(?!\d)|\*|\/|=|:=|:|\(|\))|({{parameters}})|((%)(({{variables}})|([^%\[\]"]*?))(\[|%)))'
