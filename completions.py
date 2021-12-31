@@ -32,7 +32,6 @@ class mkbcompletions(sublime_plugin.EventListener):
 			semicolon = ";" if settings.get("semicolon_end") else ""
 
 			completions = [
-
 			# Control Flow
 				sublime.CompletionItem( #if
 					trigger=case("if"), 
@@ -7364,7 +7363,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Klacaiba Module)", 
 						details="Returns true if the Klacaiba module is installed", 
 						completion=var_wrap+"MODULENEI"+var_wrap), 
-			# Klacaiba variables
+				# Klacaiba variables
 					sublime.CompletionItem( #LATENCY
 						trigger="LATENCY", 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7407,7 +7406,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Klacaiba Module)", 
 						details="Returns the version of klacaiba", 
 						completion=var_wrap+"KLACAIBAVERSION"+var_wrap), 
-			# Klacaiba players iterator
+				# Klacaiba players iterator
 					sublime.CompletionItem( #players
 						trigger=case("players"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7450,7 +7449,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Klacaiba Module - players iterator)", 
 						details="Whether the player uses a legacy account", 
 						completion=var_wrap+"PLAYERISLEGACY"+var_wrap), 
-			# Klacaiba teams iterator
+				# Klacaiba teams iterator
 					sublime.CompletionItem( #teams
 						trigger=case("teams"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7535,7 +7534,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Klacaiba Module - teams iterator)", 
 						details="Membernames of the team", 
 						completion=var_wrap+"TEAMMEMBERS"+var_wrap), 
-			# Klacaiba objective iterator
+				# Klacaiba objective iterator
 					sublime.CompletionItem( #objectives
 						trigger=case("objectives"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7571,7 +7570,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Klacaiba Module - objectives iterator)", 
 						details="Rendertype of the objective", 
 						completion=var_wrap+"OBJECTIVERENDERTYPE"+var_wrap), 
-			# Klacaiba score iterator
+				# Klacaiba score iterator
 					sublime.CompletionItem( #scores
 						trigger=case("scores"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7600,7 +7599,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Klacaiba Module - scores iterator)", 
 						details="Value of the score", 
 						completion=var_wrap+"SCOREVALUE"+var_wrap), 
-			# Klacaiba trades iterator
+				# Klacaiba trades iterator
 					sublime.CompletionItem( #trades
 						trigger=case("trades"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7664,7 +7663,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Klacaiba Module - trades iterator)", 
 						details="", 
 						completion=var_wrap+"TRADEMAXUSES"+var_wrap), 
-			# Klacaiba inventory iterator
+				# Klacaiba inventory iterator
 					sublime.CompletionItem( #inventory
 						trigger=case("inventory"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7707,7 +7706,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Klacaiba Module - inventory iterator)", 
 						details="current tag of slot", 
 						completion=var_wrap+"SLOTTAG"+var_wrap), 
-			# Klacaiba onSound event
+				# Klacaiba onSound event
 					sublime.CompletionItem( #SOUNDXPOSF
 						trigger="SOUNDXPOSF", 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -8055,7 +8054,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Utils Module)", 
 						details="Shuffles an array", 
 						completion=case("shuffle")+args("${1:array[]}")+semicolon), 
-			# Utils actions iterator
+				# Utils actions iterator
 					sublime.CompletionItem( #actions
 						trigger=case("actions"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -8091,7 +8090,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Utils Module - actions iterator)", 
 						details="Action description", 
 						completion=var_wrap+"ACTIONDESCRIPTION"+var_wrap), 
-			# Utils events iterator
+				# Utils events iterator
 					sublime.CompletionItem( #events
 						trigger=case("events"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -8120,7 +8119,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Utils Module - events iterator)", 
 						details="Event help", 
 						completion=var_wrap+"EVENTHELP"+var_wrap), 
-			# Utils iterators iterator
+				# Utils iterators iterator
 					sublime.CompletionItem( #iterators
 						trigger=case("iterators"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -8135,7 +8134,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Utils Module - iterators iterator)", 
 						details="Iterator name", 
 						completion=var_wrap+"ITERATORNAME"+var_wrap), 
-			# Utils onPotionEffect event
+				# Utils onPotionEffect event
 					sublime.CompletionItem( #NEWEFFECT
 						trigger="NEWEFFECT", 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
