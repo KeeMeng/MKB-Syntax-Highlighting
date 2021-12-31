@@ -7001,7 +7001,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(HypixelAdditions Module)", 
 						details="", 
-						completion=case("&${1:[nbt]} = getslotitemnbt(<#slot>,[&id],[#stack],[#metadata],[&nbt])")+args("")+semicolon), 
+						completion="&${1:[nbt]} = "+case("getslotitemnbt")+args("#${2:<slot>},&${3:[id]},#${4:[stack]},#${5:[metadata]},&${1:[nbt]}")+semicolon), 
 					sublime.CompletionItem( #getslotitemenchants
 						trigger="getslotitemenchants", 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7184,7 +7184,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(HypixelAdditions Module)", 
 						details="", 
 						completion="&${1:result} = "+case("ackermann")+args("#${2:<int1>},#${3:<int2>}")+semicolon)
-				] if module_bool("iceshades") else [] )
+				] if module_bool("hypixeladditions") else [] )
 				+
 				([
 			# JSON Module
