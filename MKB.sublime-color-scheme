@@ -20,17 +20,17 @@
 		"mcf": "#FFFFFF"
 	},
 	"globals":
-    {
-        "background": "#000000",
-        "foreground": "#FFFFFF",
-        "line_highlight": "#333333",
-        "caret": "#FFFFFF",
-        "block_caret": "#FFFFFF",
-        "selection": "#363636",
-        "selection_border": "#222222",
-        "invisibles": "#222222",
-        "misspelling": "#FF0000"
-    },
+	{
+		"background": "#000000",
+		"foreground": "#FFFFFF",
+		"line_highlight": "#333333",
+		"caret": "#FFFFFF",
+		"block_caret": "#FFFFFF",
+		"selection": "#363636",
+		"selection_border": "#222222",
+		"invisibles": "#222222",
+		"misspelling": "#FF0000"
+	},
 	"rules": 
 	[
 		{
@@ -45,7 +45,7 @@
 		{
 			"scope": "comment.important.mkb",
 			"foreground": "var(mc6)",
-			"font_style": "bold italic"    
+			"font_style": "bold italic"
 		},
 		{
 			"scope": "variable.parameter.mkb",

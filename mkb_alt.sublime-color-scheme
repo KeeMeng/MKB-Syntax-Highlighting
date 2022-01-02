@@ -25,7 +25,7 @@
 		{
 			"scope": "comment.important.mkb",
 			"foreground": "#FFAA00",
-			"font_style": "bold italic"    
+			"font_style": "bold italic"
 		},
 		{
 			"scope": "variable.parameter.mkb",
