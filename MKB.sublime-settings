@@ -63,6 +63,8 @@
 	// Whether or not to add minecraft: to id when inserting/auto completing
 	"mc_prefix": true,
 
+	"mc_id": true,
+
 	// Which browser to use to open the wiki
 	"browser": "chrome",
 	// Open in OS default browser:
