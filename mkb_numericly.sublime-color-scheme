@@ -42,6 +42,12 @@
 			"scope": "comment.mkb",
 			"foreground": "var(mc7)"
 		},
+
+		{
+			"scope": "comment.important.mkb",
+			"foreground": "var(mc6)",
+			"font_style": "bold italic"    
+		},
 		{
 			"scope": "variable.parameter.mkb",
 			"foreground": "var(mc6)"

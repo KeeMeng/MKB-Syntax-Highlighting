@@ -23,6 +23,11 @@
 			"font_style": "italic"
 		},
 		{
+			"scope": "comment.important.mkb",
+			"foreground": "#FFAA00",
+			"font_style": "bold italic"    
+		},
+		{
 			"scope": "variable.parameter.mkb",
 			"foreground": "#FFAA00"
 		},

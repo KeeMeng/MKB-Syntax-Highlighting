@@ -26,6 +26,11 @@
 			"foreground": "#808080",
 		},
 		{
+			"scope": "comment.important.mkb",
+			"foreground": "#FFAA00",
+			"font_style": "bold italic"    
+		},
+		{
 			// Parameters
 			"scope": "variable.parameter.mkb",
 			"foreground": "#FFAA00"
