@@ -27,7 +27,7 @@
 		},
 		{
 			"scope": "comment.important.mkb",
-			"foreground": "#FFAA00",
+			"foreground": "#A8C023",
 			"font_style": "bold italic"
 		},
 		{
@@ -99,7 +99,7 @@
 		{
 			// Functions
 			"scope": "meta.function.mkb",
-			"foreground": "#B9F2FF"
+			"foreground": "#FFC66D"
 		},
 		// DO NOT CHANGE MINECRAFT COLOR CODES BELOW
 		{
