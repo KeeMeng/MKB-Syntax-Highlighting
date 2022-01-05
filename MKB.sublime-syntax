@@ -155,12 +155,12 @@ contexts:
         3: constant.language.false.mkb
 
   comments:
-    - match: '((^|(;))(\s*\/\/\s*!.*;?)|(\s*\/\/.*;?))|((?<!;)(\/\/[^\"\);]*$))'
+    - match: '((^|(;))((\s*\/\/\s*!.*;?)|(\s*\/\/\s*.*;?)))|((?<!;)(\/\/[^\"\);]*$))'
       captures:
         3: keyword.other.mkb
-        4: comment.important.mkb
-        5: comment.mkb
-        6: invalid.mkb
+        5: comment.important.mkb
+        6: comment.mkb
+        7: invalid.mkb
 
   iterators:
     - match: '(?i:(foreach)((\()(iterators|controls|teams|scores|players|trades|enchantments|env|running|effects|entities|objectives|actions|events|properties|inventory|functions|))?)'
