@@ -6800,7 +6800,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_SNIPPET, 
 						annotation="(Functions Module)", 
 						details="Define a function", 
-						completion=case("function")+" ${1:<functionname>}"+args("${2:[...parameters]}")+semicolon+"\n\t$3\n"+case("endfunction")+semicolon), 
+						completion=case("function")+optional(" ${1:<functionname>}")+args("${2:[...parameters]}")+semicolon+"\n\t$3\n"+case("endfunction")+semicolon), 
 					sublime.CompletionItem( #endfunction
 						trigger=case("endfunction"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
