@@ -30,6 +30,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 			in_string = view.match_selector(sublime.active_window().active_view().sel()[0].a, "string.mkb")
 			var_wrap = "%" if settings.get("var_wrap") or in_string else ""
 			semicolon = ";" if settings.get("semicolon_end") else ""
+			quotes = "\"" if settings.get("parameters_quotes") else ""
 
 			completions = [
 			# Control Flow
@@ -159,7 +160,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_SNIPPET,  
 					annotation="…"+case("endif"), 
 					details="Executes if the &#60;haystack&#62; starts with the &#60;needle&#62;", 
-					completion=case("ifbeginswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t$3\n"+case("endif")+semicolon), 
+					completion=case("ifbeginswith")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n\t$3\n"+case("endif")+semicolon), 
 				sublime.CompletionItem( #ifcanharvestblock
 					trigger=case("ifcanharvestblock"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -173,7 +174,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_SNIPPET, 
 					annotation="…"+case("endif"), 
 					details="Executes if the &#60;haystack&#62; contains the &#60;needle&#62;", 
-					completion=case("ifcontains")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t$3\n"+case("endif")+semicolon), 
+					completion=case("ifcontains")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n\t$3\n"+case("endif")+semicolon), 
 				sublime.CompletionItem( #ifenchanted
 					trigger=case("ifenchanted"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -187,14 +188,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_SNIPPET, 
 					annotation="…"+case("endif"), 
 					details="Executes if the &#60;haystack&#62; ends with the &#60;needle&#62;", 
-					completion=case("ifendswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t$3\n"+case("endif")+semicolon), 
+					completion=case("ifendswith")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n\t$3\n"+case("endif")+semicolon), 
 				sublime.CompletionItem( #iffileexists
 					trigger=case("iffileexists"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="(Klacaiba Module)"+" …"+case("endif"), 
 					details="Executes if the file exists at &#60;path&#62;", 
-					completion=case("iffileexists")+args("${1:<path>},${2:[expression]}")+semicolon+"\n\t$3\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
+					completion=case("iffileexists")+args(quotes+"${1:<path>}"+quotes+","+quotes+"${2:[expression]}"+quotes)+semicolon+"\n\t$3\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #ifininv
 					trigger=case("ifininv"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -215,7 +216,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_SNIPPET, 
 					annotation="…"+case("endif"), 
 					details="Executes if the &#60;subject&#62; matches the &#60;pattern&#62;", 
-					completion=case("ifmatches")+args("${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]}")+semicolon+"\n\t$5\n"+case("endif")+semicolon), 
+					completion=case("ifmatches")+args(quotes+"${1:<subject>}"+quotes+","+quotes+"${2:<pattern>}"+quotes+",&${3:[target]},${4:[group]}")+semicolon+"\n\t$5\n"+case("endif")+semicolon), 
 
 				sublime.CompletionItem( #ifnotbeginswith
 					trigger=case("ifnotbeginswith"), 
@@ -223,7 +224,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_SNIPPET,  
 					annotation="(Klacaiba Module)"+"…"+case("endif"), 
 					details="Executes if the &#60;haystack&#62; does not start with the &#60;needle&#62;", 
-					completion=case("ifnotbeginswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t$3\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
+					completion=case("ifnotbeginswith")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n\t$3\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #ifnotcanharvestblock
 					trigger=case("ifnotcanharvestblock"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -237,7 +238,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_SNIPPET, 
 					annotation="(Klacaiba Module)"+"…"+case("endif"), 
 					details="Executes if the &#60;haystack&#62; does not contain the &#60;needle&#62;", 
-					completion=case("ifnotcontains")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t$3\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
+					completion=case("ifnotcontains")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n\t$3\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #ifnotenchanted
 					trigger=case("ifnotenchanted"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -251,14 +252,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_SNIPPET, 
 					annotation="(Klacaiba Module)"+"…"+case("endif"), 
 					details="Executes if the &#60;haystack&#62; does not end with the &#60;needle&#62;", 
-					completion=case("ifnotendswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t$3\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
+					completion=case("ifnotendswith")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n\t$3\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #ifnotfileexists
 					trigger=case("ifnotfileexists"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_SNIPPET, 
 					annotation="(Klacaiba Module)"+" …"+case("endif"), 
 					details="Executes if the file does not exists at &#60;path&#62;", 
-					completion=case("ifnotfileexists")+args("${1:<path>},${2:[expression]}")+semicolon+"\n\t$3\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
+					completion=case("ifnotfileexists")+args(quotes+"${1:<path>}"+quotes+","+quotes+"${2:[expression]}"+quotes)+semicolon+"\n\t$3\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #ifnotininv
 					trigger=case("ifnotininv"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -279,7 +280,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_SNIPPET, 
 					annotation="(Klacaiba Module)"+"…"+case("endif"), 
 					details="Executes if the &#60;subject&#62; does not match the &#60;pattern&#62;", 
-					completion=case("ifnotmatches")+args("${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]}")+semicolon+"\n\t$5\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
+					completion=case("ifnotmatches")+args(quotes+"${1:<subject>}"+quotes+","+quotes+"${2:<pattern>}"+quotes+",&${3:[target]},${4:[group]}")+semicolon+"\n\t$5\n"+case("endif")+semicolon) if module_bool("klacaiba") else "", 
 
 				sublime.CompletionItem( #elseifbeginswith
 					trigger=case("elseifbeginswith"), 
@@ -287,7 +288,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;haystack&#62; starts with the &#60;needle&#62; and no if-clause before evaluated to true", 
-					completion=case("elseifbeginswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t"), 
+					completion=case("elseifbeginswith")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n\t"), 
 				sublime.CompletionItem( #elseifcanharvestblock
 					trigger=case("elseifcanharvestblock"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -301,7 +302,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;haystack&#62; contains the &#60;needle&#62; and no if-clause before evaluated to true", 
-					completion=case("elseifcontains")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t"), 
+					completion=case("elseifcontains")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n\t"), 
 				sublime.CompletionItem( #elseifenchanted
 					trigger=case("elseifenchanted"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -315,14 +316,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;haystack&#62; ends with the &#60;needle&#62; and no if-clause before evaluated to true", 
-					completion=case("elseifendswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t"), 
+					completion=case("elseifendswith")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n\t"), 
 				sublime.CompletionItem( #elseiffileexist
 					trigger=case("elseiffileexist"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the file exists at &#60;path&#62; and no if-clause before evaluated to true", 
-					completion=case("elseiffileexists")+args("${1:<path>},${2:[expression if file should be created if missing]}")+semicolon+"\n\t") if module_bool("klacaiba") else "", 
+					completion=case("elseiffileexists")+args(quotes+"${1:<path>}"+quotes+","+quotes+"${2:[expression]}"+quotes)+semicolon+"\n\t") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #elseifininv
 					trigger=case("elseifininv"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -343,7 +344,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;subject&#62; matches the &#60;pattern&#62; and no if-clause before evaluated to true", 
-					completion=case("elseifmatches")+args("${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]}")+semicolon+"\n\t"), 
+					completion=case("elseifmatches")+args(quotes+"${1:<subject>}"+quotes+","+quotes+"${2:<pattern>}"+quotes+",&${3:[target]},${4:[group]}")+semicolon+"\n\t"), 
 
 				sublime.CompletionItem( #elseifnotbeginswith
 					trigger=case("elseifnotbeginswith"), 
@@ -351,7 +352,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;haystack&#62; does not start with the &#60;needle&#62; and no if-clause before evaluated to true", 
-					completion=case("elseifnotbeginswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t") if module_bool("klacaiba") else "", 
+					completion=case("elseifnotbeginswith")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n\t") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #elseifnotcanharvestblock
 					trigger=case("elseifnotcanharvestblock"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -365,7 +366,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;haystack&#62; does not contain the &#60;needle&#62; and no if-clause before evaluated to true", 
-					completion=case("elseifnotcontains")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t") if module_bool("klacaiba") else "", 
+					completion=case("elseifnotcontains")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n\t") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #elseifnotenchanted
 					trigger=case("elseifnotenchanted"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -379,14 +380,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;haystack&#62; does not end with the &#60;needle&#62; and no if-clause before evaluated to true", 
-					completion=case("elseifnotendswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n\t") if module_bool("klacaiba") else "", 
+					completion=case("elseifnotendswith")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n\t") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #elseifnotfileexist
 					trigger=case("elseifnotfileexist"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the file does not exist at &#60;path&#62; and no if-clause before evaluated to true", 
-					completion=case("elseifnotfileexists")+args("${1:<path>},${2:[expression if file should be created if missing]}")+semicolon+"\n\t") if module_bool("klacaiba") else "", 
+					completion=case("elseifnotfileexists")+args(quotes+"${1:<path>}"+quotes+","+quotes+"${2:[expression]}"+quotes)+semicolon+"\n\t") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #elseifnotininv
 					trigger=case("elseifnotininv"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -407,7 +408,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Executes if the &#60;subject&#62; does not match the &#60;pattern&#62; and no if-clause before evaluated to true", 
-					completion=case("elseifnotmatches")+args("${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]}")+semicolon+"\n\t") if module_bool("klacaiba") else "", 
+					completion=case("elseifnotmatches")+args(quotes+"${1:<subject>}"+quotes+","+quotes+"${2:<pattern>}"+quotes+",&${3:[target]},${4:[group]}")+semicolon+"\n\t") if module_bool("klacaiba") else "", 
 
 				sublime.CompletionItem( #whilebeginswith
 					trigger=case("whilebeginswith"), 
@@ -415,7 +416,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Exits do loop if &#60;haystack&#62; does not start with the &#60;needle&#62;", 
-					completion=case("whilebeginswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n") if module_bool("klacaiba") else "", 
+					completion=case("whilebeginswith")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #whilecanharvestblock
 					trigger=case("whilecanharvestblock"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -429,7 +430,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Exits do loop if &#60;haystack&#62; does not contain the &#60;needle&#62;", 
-					completion=case("whilecontains")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n") if module_bool("klacaiba") else "", 
+					completion=case("whilecontains")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #whileenchanted
 					trigger=case("whileenchanted"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -443,14 +444,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Exits do loop if &#60;haystack&#62; does not end with the &#60;needle&#62;", 
-					completion=case("whileendswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n") if module_bool("klacaiba") else "", 
+					completion=case("whileendswith")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #whilefileexist
 					trigger=case("whilefileexist"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Exits do loop if the file does not exist at &#60;path&#62;", 
-					completion=case("whilefileexists")+args("${1:<path>},${2:[expression if file should be created if missing]}")+semicolon+"\n") if module_bool("klacaiba") else "", 
+					completion=case("whilefileexists")+args(quotes+"${1:<path>}"+quotes+","+quotes+"${2:[expression]}"+quotes)+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #whileininv
 					trigger=case("whileininv"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -471,7 +472,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Exits do loop if the &#60;subject&#62; does not match the &#60;pattern&#62;", 
-					completion=case("whilematches")+args("${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]}")+semicolon+"\n") if module_bool("klacaiba") else "", 
+					completion=case("whilematches")+args(quotes+"${1:<subject>}"+quotes+","+quotes+"${2:<pattern>}"+quotes+",&${3:[target]},${4:[group]}")+semicolon+"\n") if module_bool("klacaiba") else "", 
 
 				sublime.CompletionItem( #untilbeginswith
 					trigger=case("untilbeginswith"), 
@@ -479,7 +480,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Exits do loop if &#60;haystack&#62; starts with the &#60;needle&#62;", 
-					completion=case("untilbeginswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n") if module_bool("klacaiba") else "", 
+					completion=case("untilbeginswith")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #untilcanharvestblock
 					trigger=case("untilcanharvestblock"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -493,7 +494,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Exits do loop if &#60;haystack&#62; contains the &#60;needle&#62;", 
-					completion=case("untilcontains")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n") if module_bool("klacaiba") else "", 
+					completion=case("untilcontains")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #untilenchanted
 					trigger=case("untilenchanted"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -507,14 +508,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Exits do loop if &#60;haystack&#62; ends with the &#60;needle&#62;", 
-					completion=case("untilendswith")+args("${1:<haystack>},${2:<needle>}")+semicolon+"\n") if module_bool("klacaiba") else "", 
+					completion=case("untilendswith")+args(quotes+"${1:<haystack>}"+quotes+","+quotes+"${2:<needle>}"+quotes)+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #untilfileexist
 					trigger=case("untilfileexist"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Exits do loop if the file exists at &#60;path&#62;", 
-					completion=case("untilfileexists")+args("${1:<path>},${2:[expression if file should be created if missing]}")+semicolon+"\n") if module_bool("klacaiba") else "", 
+					completion=case("untilfileexists")+args(quotes+"${1:<path>}"+quotes+","+quotes+"${2:[expression]}"+quotes)+semicolon+"\n") if module_bool("klacaiba") else "", 
 				sublime.CompletionItem( #untilininv
 					trigger=case("untilininv"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -535,7 +536,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(Klacaiba Module)", 
 					details="Exits do loop if the &#60;subject&#62; matches the &#60;pattern&#62;", 
-					completion=case("untilmatches")+args("${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]}")+semicolon+"\n") if module_bool("klacaiba") else "", 
+					completion=case("untilmatches")+args(quotes+"${1:<subject>}"+quotes+","+quotes+"${2:<pattern>}"+quotes+",&${3:[target]},${4:[group]}")+semicolon+"\n") if module_bool("klacaiba") else "", 
 
 				sublime.CompletionItem( #unsafe
 					trigger=case("unsafe"), 
@@ -3500,7 +3501,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Displays a popup you get when completing an advancement with a custom message and optionally a custom item", 
-					completion=case("achievementget")+args("${1:<text>},${2:[itemid]}:${3:[damage]}")+semicolon), 
+					completion=case("achievementget")+args(quotes+"${1:<text>}"+quotes+",${2:[itemid]}:${3:[damage]}")+semicolon), 
 				sublime.CompletionItem( #AMBIENTVOLUME
 					trigger="AMBIENTVOLUME", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -3787,7 +3788,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Switch to the specified configuration", 
-					completion=case("config")+args("${1:<configname>}")+semicolon), 
+					completion=case("config")+args(quotes+"${1:<configname>}"+quotes)+semicolon), 
 				sublime.CompletionItem( #CONFIG
 					trigger="CONFIG", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -3899,7 +3900,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Converts an string from base64 back to an normal string", 
-					completion=case("decode")+args("${1:<input>},${2:[&output]}")+semicolon), 
+					completion=case("decode")+args(quotes+"${1:<input>}"+quotes+",${2:[&output]}")+semicolon), 
 				sublime.CompletionItem( #DIFFICULTY
 					trigger="DIFFICULTY", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -3962,7 +3963,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Sends the specified message to the server", 
-					completion=case("echo")+args("${1:<text>}")+semicolon), 
+					completion=case("echo")+args(quotes+"${1:<text>}"+quotes)+semicolon), 
 				sublime.CompletionItem( #effects
 					trigger=case("effects"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -4039,7 +4040,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Converts an string to base 64", 
-					completion=case("encode")+args("${1:<input>},&${2:[output]}")+semicolon), 
+					completion=case("encode")+args(quotes+"${1:<input>}"+quotes+",&${2:[output]}")+semicolon), 
 				sublime.CompletionItem( #env
 					trigger=case("env"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -4060,7 +4061,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Creates a task by running the specified script file", 
-					completion=case("exec")+args("${1:<file.txt>},${2:[taskname]},${3:[params]}")+semicolon), 
+					completion=case("exec")+args(quotes+"${1:<file.txt>}"+quotes+","+quotes+"${2:[taskname]}"+quotes+","+quotes+"${3:[params]}"+quotes)+semicolon), 
 				sublime.CompletionItem( #filter
 					trigger=case("filter"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -4172,7 +4173,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Opens the specified gui screen", 
-					completion=case("gui")+args("${1:[name]}")+semicolon), 
+					completion=case("gui")+args(quotes+"${1:[name]}"+quotes)+semicolon), 
 				sublime.CompletionItem( #GUI
 					trigger="GUI", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -4235,14 +4236,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Inline IF statement", 
-					completion=case("iif")+args("${1:<condition>},${2:<truetext>},${3:[falsetext]}")+semicolon), 
+					completion=case("iif")+args("${1:<condition>},"+quotes+"${2:<truetext>}"+quotes+","+quotes+"${3:[falsetext]}"+quotes)+semicolon), 
 				sublime.CompletionItem( #import
 					trigger=case("import"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Overlay the specified configuration", 
-					completion=case("import")+args("${1:<configname>}")+semicolon), 
+					completion=case("import")+args(quotes+"${1:<configname>}"+quotes)+semicolon), 
 				sublime.CompletionItem( #inc
 					trigger=case("inc"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -4403,7 +4404,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Converts the input string to lower case and stores it in output", 
-					completion=case("lcase")+args("${1:<input>},&${2:[output]}")+semicolon), 
+					completion=case("lcase")+args(quotes+"${1:<input>}"+quotes+",&${2:[output]}")+semicolon), 
 				sublime.CompletionItem( #LEGGINGSDAMAGE
 					trigger="LEGGINGSDAMAGE", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -4459,21 +4460,21 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Shows the specified text only on the client-side in the chat window", 
-					completion=case("log")+args("${1:<text>}")+semicolon), 
+					completion=case("log")+args(quotes+"${1:<text>}"+quotes)+semicolon), 
 				sublime.CompletionItem( #lograw
 					trigger=case("lograw"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Similar to minecraft tellraw command", 
-					completion=case("lograw")+args("${1:<json>}")+semicolon), 
+					completion=case("lograw")+args(quotes+"${1:ƒ<json>}"+quotes)+semicolon), 
 				sublime.CompletionItem( #logto
 					trigger=case("logto"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Outputs the specified text into the specified target", 
-					completion=case("logto")+args("${1:<target>},${2:<text>}")+semicolon), 
+					completion=case("logto")+args("${1:<target>},"+quotes+"${2:<text>}"+quotes)+semicolon), 
 				sublime.CompletionItem( #look
 					trigger=case("look"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -4578,21 +4579,21 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(<subject>,<pattern>,[&target],[group],[default])", 
 					details="Runs a regular expression match on the subject", 
-					completion=case("match")+args("${1:<subject>},${2:<pattern>},&${3:[target]},${4:[group]},${5:[default]}")+semicolon), 
+					completion=case("match")+args(quotes+"${1:<subject>}"+quotes+","+quotes+"${2:<pattern>}"+quotes+",&${3:[target]},${4:[group]},${5:[default]}")+semicolon), 
 				sublime.CompletionItem( #match alt
 					trigger=case("match"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(<subject>,<pattern>,{&target1,&target2,&target3})", 
 					details="Runs a regular expression match on the subject", 
-					completion=case("match")+args("${1:<subject>},${2:<pattern>},{${3:&target1,&target2...}}")+semicolon), 
+					completion=case("match")+args(quotes+"${1:<subject>}"+quotes+","+quotes+"${2:<pattern>}"+quotes+",{${3:&target1,&target2...}}")+semicolon), 
 				sublime.CompletionItem( #match alt 2
 					trigger=case("match"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="(<subject>,<pattern>,&target[])", 
 					details="Runs a regular expression match on the subject", 
-					completion=case("match")+args("${1:<subject>},${2:<pattern>},&${3:[target]}[]")+semicolon), 
+					completion=case("match")+args(quotes+"${1:<subject>}"+quotes+","+quotes+"${2:<pattern>}"+quotes+",&${3:[target]}[]")+semicolon), 
 				sublime.CompletionItem( #MAXPLAYERS
 					trigger="MAXPLAYERS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -4830,14 +4831,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Injects the specified key event directly into the keyboard buffer for 1 tick", 
-					completion=case("press")+args("${1:<lwjgl_name>},${2:[deep]}")+semicolon), 
+					completion=case("press")+args(quotes+"${1:<lwjgl_name>}"+quotes+",${2:[deep]}")+semicolon), 
 				sublime.CompletionItem( #prompt
 					trigger=case("prompt"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Displays a prompt by parsing the params in paramstring", 
-					completion=case("prompt")+args("&${1:<target>},${2:<paramstring>},${3:[prompt]},${4:[override]},${5:[default]}")+semicolon), 
+					completion=case("prompt")+args("&${1:<target>},"+quotes+"${2:<paramstring>}"+quotes+","+quotes+"${3:[prompt]}"+quotes+","+quotes+"${4:[override]}"+quotes+","+quotes+"${5:[default]}"+quotes)+semicolon), 
 				sublime.CompletionItem( #properties
 					trigger=case("properties"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -4907,7 +4908,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Replace all matches of pattern with replace in &subject", 
-					completion=case("regexreplace")+args("&${1:<subject>},${2:<pattern>},${3:[replace]}")+semicolon), 
+					completion=case("regexreplace")+args(quotes+"${1:<subject>}"+quotes+","+quotes+"${2:<pattern>}"+quotes+",${3:[replace]}")+semicolon), 
 				sublime.CompletionItem( #reloadresources
 					trigger=case("reloadresources"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -4928,7 +4929,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Replace all occurrences of search with replace in &subject", 
-					completion=case("replace")+args("&${1:<subject>},${2:<search>},${3:[replace]}")+semicolon), 
+					completion=case("replace")+args(quotes+"${1:<subject>}"+quotes+","+quotes+"${2:<pattern>}"+quotes+",${3:[replace]}")+semicolon), 
 				sublime.CompletionItem( #resourcepacks
 					trigger=case("resourcepacks"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -5040,7 +5041,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Sets the text (and optionally binding) of the specified label", 
-					completion=case("setlabel")+args("${1:<labelname>},${2:<text>},${3:[binding]}")+semicolon), 
+					completion=case("setlabel")+args(quotes+"${1:<labelname>}"+quotes+","+quotes+"${2:<text>}"+quotes+",${3:[binding]}")+semicolon), 
 				sublime.CompletionItem( #setproperty
 					trigger=case("setproperty"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -5124,7 +5125,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Splits the supplied source string on every delimiter into output[]", 
-					completion=case("split")+args("${1:<delimiter>},${2:<source>},${3:[output]}[]")+semicolon), 
+					completion=case("split")+args(quotes+"${1:<delimiter>}"+quotes+","+quotes+"${2:<source>}"+quotes+",${3:[output]}[]")+semicolon), 
 				sublime.CompletionItem( #sprint
 					trigger=case("sprint"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -5159,21 +5160,21 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Stores a value into one of the predefined parameter lists", 
-					completion=case("store")+args("${1:<type>},${2:[name]}")+semicolon), 
+					completion=case("store")+args("${1:<type>},"+quotes+"${2:[name]}"+quotes)+semicolon), 
 				sublime.CompletionItem( #storeover
 					trigger=case("storeover"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Stores a value into one of the predefined parameter lists", 
-					completion=case("storeover")+args("${1:<type>},${2:[name]}")+semicolon), 
+					completion=case("storeover")+args("${1:<type>},"+quotes+"${2:[name]}"+quotes)+semicolon), 
 				sublime.CompletionItem( #strip
 					trigger=case("strip"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Strips all formatting codes from the specified text and assigns the result to &target", 
-					completion=case("strip")+args("&${1:<target>},${2:<text>}")+semicolon), 
+					completion=case("strip")+args("&${1:<target>},"+quotes+"${2:<text>}"+quotes)+semicolon), 
 				sublime.CompletionItem( #TICKS
 					trigger="TICKS", 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -5229,7 +5230,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Displays an user-defined toast", 
-					completion=case("toast")+args("${1:[type]},${2:[icon]},${3:[text1]},${4:[text2]},${5:[ticks]}")+semicolon), 
+					completion=case("toast")+args("${1:[type]},${2:[icon]},"+quotes+"${3:[text1]}"+quotes+","+quotes+"${4:[text2]}"+quotes+",${5:[ticks]}")+semicolon), 
 				sublime.CompletionItem( #toggle
 					trigger=case("toggle"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -5264,14 +5265,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Injects the specified key sequence directly into the keyboard buffer at a rate of 1 key per tick", 
-					completion=case("type")+args("${1:<text>}")+semicolon), 
+					completion=case("type")+args(quotes+"${1:<text>}"+quotes)+semicolon), 
 				sublime.CompletionItem( #ucase
 					trigger=case("ucase"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Converts the input string to upper case and stores it in output", 
-					completion=case("ucase")+args("${1:<input>},&${2:[output]}")+semicolon), 
+					completion=case("ucase")+args(quotes+"${1:<input>}"+quotes+",&${2:[output]}")+semicolon), 
 				sublime.CompletionItem( #unimport
 					trigger=case("unimport"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -5426,7 +5427,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_FUNCTION, 
 						annotation="(Functions Module)", 
 						details="Call Function: call print(&#60;text&#62;)", 
-						completion=case("print")+args("${1:<text>}")+semicolon
+						completion=case("print")+args(quotes+"${1:<text>}"+quotes)+semicolon
 					), 
 
 					sublime.CompletionItem( #array
@@ -5745,7 +5746,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(anvilRename Module)", 
 						details="set name to string", 
-						completion=case("setanviltext")+args("${1:<string>}")+semicolon), 
+						completion=case("setanviltext")+args(quotes+"${1:<string>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #MODULEANVIL
 						trigger="MODULEANVIL", 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -5763,7 +5764,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(BaritoneAddon Module)", 
 						details="Runs any baritone command", 
-						completion=case("baritone")+args("${1:<command>}")+semicolon), 
+						completion=case("baritone")+args(quotes+"${1:<command>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #goto
 						trigger=case("goto"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -5991,7 +5992,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(BetterEcho Module)", 
 						details="Sends the specified message to the server and client mods like baritone", 
-						completion=case("betterecho")+args("${1:<text>}")+semicolon), 
+						completion=case("betterecho")+args(quotes+"${1:<text>}"+quotes)+semicolon), 
 				] if module_bool("betterecho") else [] )
 				+
 				([
@@ -6041,14 +6042,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Clipboard Module)", 
 						details="Returns content of clipboard", 
-						completion=case("getclipboard")+args("&${1:[text]}")+semicolon), 
+						completion=case("getclipboard")+args("&${1:<text>}")+semicolon), 
 					sublime.CompletionItem( #setclipboard
 						trigger=case("setclipboard"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Clipboard Module)", 
 						details="Sets the clipboard text", 
-						completion=case("setclipboard")+args("${1:<text>}")+semicolon), 
+						completion=case("setclipboard")+args(quotes+"${1:<text>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #MODULECLIPBOARD
 						trigger="MODULECLIPBOARD", 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -6165,7 +6166,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Documentor Module)", 
 						details="Returns documentation of action", 
-						completion="&${1:docs}[] = "+case("listdocs")+args("${2:[name]}")+semicolon), 
+						completion="&${1:docs}[] = "+case("listdocs")+args(quotes+"${2:[name]}"+quotes)+semicolon), 
 				] if module_bool("documentor") else [] )
 				+
 				([
@@ -6821,14 +6822,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Functions Module)", 
 						details="Calling functions", 
-						completion="${1:[value]} = "+case("call")+args("${2:<functionname>},${3:[...parameters]}")+semicolon), 
+						completion="${1:[value]} = "+case("call")+args(quotes+"${2:<functionname>}"+quotes+",${3:[...parameters]}")+semicolon), 
 					sublime.CompletionItem( #call2
 						trigger="call2", 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Functions Module)", 
 						details="Alternative way of calling functions", 
-						completion="${1:[value]} = "+"${2:<functionname>}"+args("${3:[...parameters]}")+semicolon), 
+						completion="${1:[value]} = "+quotes+"${2:<functionname>}"+quotes+args("${3:[...parameters]}")+semicolon), 
 					sublime.CompletionItem( #FUNCTIONNAME
 						trigger="FUNCTIONNAME", 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -6860,7 +6861,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(GetSlotItemExtended Module)", 
 						details="+ Argument for the itemname of item", 
-						completion=optional("${2:&${1:[itemid]} = }")+case("getslotitemext")+args("#${3:<slotid>},&${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[itemname]}")+semicolon), 
+						completion=optional("${2:&${1:[itemid]} = }")+case("getslotitemext")+args("#${3:<slotid>},&${1:[itemid]},${4:[stacksize]},${5:[damage]},"+quotes+"${6:[itemname]}"+quotes)+semicolon), 
 					sublime.CompletionItem( #getslotitemnbt
 						trigger=case("getslotitemnbt"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -6920,7 +6921,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(HTTP Module)", 
 						details="Url encodes the string", 
-						completion="${2:&${1:[output]} = }"+case("urlencode")+args("${3:<string>},&${1:[output]}")+semicolon), 
+						completion="${2:&${1:[output]} = }"+case("urlencode")+args(quotes+"${3:<string>}"+quotes+",&${1:[output]}")+semicolon), 
 					sublime.CompletionItem( #setrequestheader
 						trigger=case("setrequestheader"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7194,119 +7195,119 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Checks if the value is a boolean", 
-						completion="${2:[${1:bool}] = }"+case("isboolean")+args("${3:<string>},${1:[bool]}")+semicolon), 
+						completion="${2:[${1:bool}] = }"+case("isboolean")+args(quotes+"${3:<string>}"+quotes+",${1:[bool]}")+semicolon), 
 					sublime.CompletionItem( #isfloat
 						trigger=case("isfloat"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Checks if the value is a float", 
-						completion="${2:${1:[bool]} = }"+case("isfloat")+args("${3:<string>},${1:[bool]}")+semicolon), 
+						completion="${2:${1:[bool]} = }"+case("isfloat")+args(quotes+"${3:<string>}"+quotes+",${1:[bool]}")+semicolon), 
 					sublime.CompletionItem( #isinteger
 						trigger=case("isinteger"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Checks if the value is an integer", 
-						completion="${2:${1:[bool]} = }"+case("isinteger")+args("${3:<string>},${1:[bool]}")+semicolon), 
+						completion="${2:${1:[bool]} = }"+case("isinteger")+args(quotes+"${3:<string>}"+quotes+",${1:[bool]}")+semicolon), 
 					sublime.CompletionItem( #isjsonarray
 						trigger=case("isjsonarray"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Checks if the value is a json array", 
-						completion="${2:${1:[bool]} = }"+case("isjsonarray")+args("${3:<string>},${1:[bool]}")+semicolon), 
+						completion="${2:${1:[bool]} = }"+case("isjsonarray")+args(quotes+"${3:<string>}"+quotes+",${1:[bool]}")+semicolon), 
 					sublime.CompletionItem( #isjsonobject
 						trigger=case("isjsonobject"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Checks if the value is a json object", 
-						completion="${2:${1:[bool]} = }"+case("isjsonobject")+args("${3:<string>},${1:[bool]}")+semicolon), 
+						completion="${2:${1:[bool]} = }"+case("isjsonobject")+args(quotes+"${3:<string>}"+quotes+",${1:[bool]}")+semicolon), 
 					sublime.CompletionItem( #isjsonprimitive
 						trigger=case("isjsonprimitive"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Checks if value isjson primitive", 
-						completion="${2:${1:[bool]} = }"+case("isjsonprimitive")+args("${3:<string>}${1:,[bool}]")+semicolon), 
+						completion="${2:${1:[bool]} = }"+case("isjsonprimitive")+args(quotes+"${3:<string>}"+quotes+"${1:,[bool}]")+semicolon), 
 					sublime.CompletionItem( #isnumber
 						trigger=case("isnumber"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Checks if the value is a number", 
-						completion="${2:${1:[bool]} = }"+case("isnumber")+args("${3:<string>},${1:[bool]}")+semicolon), 
+						completion="${2:${1:[bool]} = }"+case("isnumber")+args(quotes+"${3:<string>}"+quotes+",${1:[bool]}")+semicolon), 
 					sublime.CompletionItem( #isstring
 						trigger=case("isstring"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Checks if the value is a string", 
-						completion="${2:${1:[bool]} = }"+case("isstring")+args("${3:<string>},${1:[bool]}")+semicolon), 
+						completion="${2:${1:[bool]} = }"+case("isstring")+args(quotes+"${3:<string>}"+quotes+",${1:[bool]}")+semicolon), 
 					sublime.CompletionItem( #jsonadd
 						trigger=case("jsonadd"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Adds key and value to the json", 
-						completion="${2:&${1:[output]} = }"+case("jsonadd")+args("${3:<json>},${4:<key>},${5:<value>},&${1:[output]}")+semicolon), 
+						completion="${2:&${1:[output]} = }"+case("jsonadd")+args(quotes+"${3:<json>}"+quotes+",${4:<key>},${5:<value>},&${1:[output]}")+semicolon), 
 					sublime.CompletionItem( #jsonget
 						trigger=case("jsonget"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Gets value of a key", 
-						completion="${2:&${1:[output]} = }"+case("jsonget")+args("${3:<json>},${4:<key>},&${1:[output]}")+semicolon), 
+						completion="${2:&${1:[output]} = }"+case("jsonget")+args(quotes+"${3:<json>}"+quotes+",${4:<key>},&${1:[output]}")+semicolon), 
 					sublime.CompletionItem( #jsonhas
 						trigger=case("jsonhas"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Returns if the json contains the key", 
-						completion="${2:${1:[bool]} = }"+case("jsonhas")+args("${3:<json>},${4:<key>},${1:[bool]}")+semicolon), 
+						completion="${2:${1:[bool]} = }"+case("jsonhas")+args(quotes+"${3:<json>}"+quotes+",${4:<key>},${1:[bool]}")+semicolon), 
 					sublime.CompletionItem( #jsonremove
 						trigger=case("jsonremove"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Removes a key-value-pair from the json", 
-						completion="${2:&${1:[output]} = }"+case("jsonremove")+args("${3:<json>},${4:<key>},&${1:[output]}")+semicolon), 
+						completion="${2:&${1:[output]} = }"+case("jsonremove")+args(quotes+"${3:<json>}"+quotes+",${4:<key>},&${1:[output]}")+semicolon), 
 					sublime.CompletionItem( #getjsonkeys
 						trigger=case("getjsonkeys"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Returns list of all keys of the json", 
-						completion="${2:&${1:[keys]} = }"+case("getjsonkeys")+args("${3:<json>},&${1:[keys]}[]")+semicolon), 
+						completion="${2:&${1:[keys]} = }"+case("getjsonkeys")+args(quotes+"${3:<json>}"+quotes+",&${1:[keys]}[]")+semicolon), 
 					sublime.CompletionItem( #getjsonarray
 						trigger=case("getjsonarray"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Returns json as key:value array", 
-						completion=optional("${2:&${1:[array]} = }")+case("getjsonasarray")+args("${3:<json>},${1:[array]}[]")+semicolon), 
+						completion=optional("${2:&${1:[array]} = }")+case("getjsonasarray")+args(quotes+"${3:<json>}"+quotes+",${1:[array]}[]")+semicolon), 
 					sublime.CompletionItem( #jsonarrayadd
 						trigger=case("jsonarrayadd"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Adds an element to the json array", 
-						completion="${2:&${1:[jsonarray]} = }"+case("jsonarrayadd")+args("${3:<jsonarray>},${4:<element>},&${1:[jsonarray]}")+semicolon), 
+						completion="${2:&${1:[jsonarray]} = }"+case("jsonarrayadd")+args(quotes+"${3:<json>}"+quotes+",${4:<element>},&${1:[jsonarray]}")+semicolon), 
 					sublime.CompletionItem( #jsonarrayget
 						trigger=case("jsonarrayget"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Returns the element of the jsonarray", 
-						completion="${2:&${1:[output]} = }"+case("jsonarrayget")+args("${3:<jsonarray>},${4:<index>},&${1:[output]}")+semicolon), 
+						completion="${2:&${1:[output]} = }"+case("jsonarrayget")+args(quotes+"${3:<json>}"+quotes+",${4:<index>},&${1:[output]}")+semicolon), 
 					sublime.CompletionItem( #jsonarraysize
 						trigger=case("jsonarraysize"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Returns the size of the jsonarray", 
-						completion="${2:#${1:[size]} = }"+case("jsonarraysize")+args("${3:<jsonarray>},#${1:[size]}")+semicolon), 
+						completion="${2:#${1:[size]} = }"+case("jsonarraysize")+args(quotes+"${3:<json>}"+quotes+",#${1:[size]}")+semicolon), 
 					sublime.CompletionItem( #MODULEJSON
 						trigger="MODULEJSON", 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7345,42 +7346,42 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Creates directory", 
-						completion=case("mkdir")+args("${1:<path>}")+semicolon), 
+						completion=case("mkdir")+args(quotes+"${1:<path>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #readfile
 						trigger=case("readfile"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Reads file into array, files can start with ~ to be relative to minecraft directory", 
-						completion=optional("${2:&${1:<content>}[] = }")+case("readfile")+args("&${1:[content]}[],${3:<path>}")+semicolon), 
+						completion=optional("${2:&${1:<content>}[] = }")+case("readfile")+args("&${1:[content]}[],"+quotes+"${3:<path>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #writefile
 						trigger=case("writefile"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Writes array to file", 
-						completion=case("writefile")+args("${1:<path>},&${2:<writefile>}[],${3:[append]}")+semicolon), 
+						completion=case("writefile")+args(quotes+"${1:<path>}"+quotes+",&${2:<writefile>}[],${3:[append]}")+semicolon), 
 					sublime.CompletionItem( #getjsonasarray
 						trigger=case("getjsonasarray"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Returns json as key:value array", 
-						completion=optional("&${1:array}[] = ")+case("getjsonasarray")+args("${2:<json>},${3:[format]}")+semicolon), 
+						completion=optional("&${1:array}[] = ")+case("getjsonasarray")+args(quotes+"${2:<json>}"+quotes+",${3:[format]}")+semicolon), 
 					sublime.CompletionItem( #getjsonkeys
 						trigger=case("getjsonkeys"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Retuns list of the keys of json", 
-						completion=optional("&${1:keys}[] = ")+case("getjsonkeys")+args("${2:<json>}")+semicolon), 
+						completion=optional("&${1:keys}[] = ")+case("getjsonkeys")+args(quotes+"${2:<json>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #jsonget
 						trigger=case("jsonget"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Retuns object of key of specified json", 
-						completion=optional("&${1:object} = ")+case("jsonget")+args("${2:<json>},${3:<key>}")+semicolon), 
+						completion=optional("&${1:object} = ")+case("jsonget")+args(quotes+"${2:<json>}"+quotes+",${3:<key>}")+semicolon), 
 					sublime.CompletionItem( #sort
 						trigger=case("sort"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7401,7 +7402,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Returns score of player in objective", 
-						completion=optional("<${1:&score|&scores[]|&obectives[]}> = ")+case("score")+args("${2:[objectivename]},${3:[playername]}")+semicolon), 
+						completion=optional("<${1:&score|&scores[]|&obectives[]}> = ")+case("score")+args(quotes+"${2:[objectivename]}"+quotes+","+quotes+"${3:[playername]}"+quotes)+semicolon), 
 					sublime.CompletionItem( #countdownto
 						trigger=case("countdownto"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7499,7 +7500,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Spawns particles similar to the vanilla command", 
-						completion=optional("${2:&${1:errors}[] = }")+case("particle")+args("${3:<particlename>},${4:<x>},${5:<y>},${6:<z>},${7:<dx>},${8:<dy>},${9:<dz>},${10:[count]},${11:[mode]}")+semicolon), 
+						completion=optional("${2:&${1:errors}[] = }")+case("particle")+args(quotes+"${3:<particlename>}"+quotes+",${4:<x>},${5:<y>},${6:<z>},${7:<dx>},${8:<dy>},${9:<dz>},${10:[count]},${11:[mode]}")+semicolon), 
 					sublime.CompletionItem( #countitem
 						trigger=case("countitem"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7527,7 +7528,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Deletes a control by name from any gui", 
-						completion=case("deletecontrol")+args("${1:<controlname>}")+semicolon), 
+						completion=case("deletecontrol")+args(quotes+"${1:<controlname>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #timestamptodate
 						trigger=case("timestamptodate"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7548,7 +7549,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Returns the length of the string or 0 if none is present", 
-						completion=optional("#${1:length} = ")+case("strlen")+args("${2:<string>}")+semicolon), 
+						completion=optional("#${1:length} = ")+case("strlen")+args(quotes+"${2:<string>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #getbreakspeed
 						trigger=case("getbreakspeed"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -8050,7 +8051,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Macro Modules Essential)", 
 						details="Get nbt of item in slot", 
-						completion=case("getslotnbt")+args("${1:<slotid>},${2:<path>},&${3:[itemId]},#${4:[stackSize]},#${5:[damage]}")+semicolon), 
+						completion=case("getslotnbt")+args("${1:<slotid>},"+quotes+"${2:<path>}"+quotes+",&${3:[itemId]},#${4:[stackSize]},#${5:[damage]}")+semicolon), 
 					sublime.CompletionItem( #pressbutton
 						trigger=case("pressbutton"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -8064,7 +8065,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Macro Modules Essential)", 
 						details="gets property of block at coordinates", 
-						completion=case("getprop")+args("${1:<x>},${2:<y>},${3:<z>},${4:<propname>},#${5:[propvar]}")+semicolon), 
+						completion=case("getprop")+args("${1:<x>},${2:<y>},${3:<z>},"+quotes+"${4:<propname>}"+quotes+",#${5:[propvar]}")+semicolon), 
 					sublime.CompletionItem( #slotmiddleclick
 						trigger=case("slotmiddleclick"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -8221,7 +8222,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Utilities Module)", 
 						details="Evaluates an expression", 
-						completion=optional("${2:&${1:[result]} = }")+case("eval")+args("&${1:[result]},${3:<expression string>}")+semicolon), 
+						completion=optional("${2:&${1:[result]} = }")+case("eval")+args("&${1:[result]},"+quotes+"${3:<expression>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #char
 						trigger=case("char"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -8242,14 +8243,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Utilities Module)", 
 						details="Gets the past names of a user", 
-						completion=case("oldname")+args("&${1:<names>}[],${2:<username>}")+semicolon), 
+						completion=case("oldname")+args("&${1:<names>}[],"+quotes+"${2:<username>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #readfile
 						trigger=case("readfile"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Utilities Module)", 
 						details="Gets the content of a file", 
-						completion=case("readfile")+args("&${1:<content>}[],${2:<filename>}")+semicolon), 
+						completion=case("readfile")+args("&${1:<content>}[],"+quotes+"${2:<filename>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #unix
 						trigger=case("unix"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -8284,7 +8285,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Returns the previous names of the player with this name or uuid", 
-						completion=optional("${2:&${1:result}[] = }")+case("oldname")+args("&${1:<result>}[],${3:<name|uuid>}")+semicolon), 
+						completion=optional("${2:&${1:result}[] = }")+case("oldname")+args("&${1:<result>}[],"+quotes+"${3:<name|uuid>}"+quotes)+semicolon), 
 				] if module_bool("utilities") else [] )
 				+
 				([

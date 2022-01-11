@@ -66,6 +66,9 @@
 	// Whether or not to show minecraft id in string completions
 	"mc_id": true,
 
+	// Whether or not to add quotation marks to string parameters auto complete
+	"parameters_quotes": true,
+
 	// Which browser to use to open the wiki
 	"browser": "chrome",
 	// Open in OS default browser:
