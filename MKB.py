@@ -66,6 +66,7 @@ def viewlines():
 		if temp.replace("\\\\", "").replace("\\\"", "").count("\"") % 2 == 0:
 			lines.append(temp)
 			temp = ""
+	print(lines)
 	return lines
 
 def load(words):
@@ -151,8 +152,8 @@ class Indenter:
 			self.top = min(positions)
 			self.bottom = max(positions)
 		else:
-			self.top = 0
-			self.bottom = len(filelines)
+			self.top = -1
+			self.bottom = -1
 
 		splitted = viewlines()
 
@@ -208,7 +209,7 @@ class Indenter:
 		for line in self.lines:
 			count += 1
 			l = line.strip()
-			if count < self.top or count > self.bottom:
+			if self.top != -1 and self.bottom != -1 and (count < self.top or count > self.bottom):
 				self.indent_line(l, False)
 				continue
 			closed = False
