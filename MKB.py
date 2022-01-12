@@ -229,13 +229,13 @@ class Indenter:
 				self.stack.append("|".join(self.blocks[command.lower()]))
 				if not closed: # If the block was already closed, there's no reason to repeat the line
 					self.indent_line(l)
-					if "switch" in l:
+					if re.match("\t*?switch\(", l):
 						self.extra += 1
 				self.level += 1 # Backwards the indentation
 				errorstring = " Error found on line "+str(count)+": "+line
 				self.lintlines.append(line)
 			elif not closed:
-				if "case" in l or "default" in l:
+				if re.match("\t*?case\(", l) or re.match("\t*?default", l):
 					self.extra -= 1
 					self.indent_line(l)
 					self.extra += 1
