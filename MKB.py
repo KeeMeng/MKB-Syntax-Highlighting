@@ -222,7 +222,7 @@ class Indenter:
 			elif Indenter.related_command(l, self.openings) is None:
 				teststring = re.match("elseif|elseifnot|else|endif|next|until|while|loop|endunsafe|endswitch|function", line, re.IGNORECASE)
 				if teststring is not None and debug:
-					print(" Error found on line "+str(count)+": "+line)
+					print(" Stack error found on line "+str(count)+": "+line)
 					errorbool = True
 			command = Indenter.related_command(l, self.openings) # Get tries to extract a block opening word
 			if command is not None:
@@ -232,7 +232,7 @@ class Indenter:
 					if re.match("\t*?switch\(", l):
 						self.extra += 1
 				self.level += 1 # Backwards the indentation
-				errorstring = " Error found on line "+str(count)+": "+line
+				errorstring = " Stack error found on line "+str(count)+": "+line
 				self.lintlines.append(line)
 			elif not closed:
 				if re.match("\t*?case\(", l) or re.match("\t*?default", l):
