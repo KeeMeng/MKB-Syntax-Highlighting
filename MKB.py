@@ -66,7 +66,6 @@ def viewlines():
 		if temp.replace("\\\\", "").replace("\\\"", "").count("\"") % 2 == 0:
 			lines.append(temp)
 			temp = ""
-	print(lines)
 	return lines
 
 def load(words):
@@ -731,45 +730,7 @@ class mkb_goto_definition(sublime_plugin.TextCommand):
 							self.view.show(point)
 							break
 						count += 1
-				
-# class mkb_color(sublime_plugin.ViewEventListener):
-# 	def display(self):
-# 		try:
-# 			self.total
-# 		except AttributeError:
-# 			self.total = 0
-
-# 		text = self.view.substr(sublime.Region(0, len(self.view)))
-# 		matches = re.finditer("(?!\w\")[&§]([\da-flno])", text)
-
-# 		if len(re.findall("(?!\w\")[&§]([\da-fn])", text)) != self.total:
-# 			for i in range(self.total+1):
-# 				self.view.erase_regions("mkbcolors_{}".format(i))
-# 			self.total = 0
-
-# 		for (count, match) in enumerate(matches):
-# 			pos = match.span()[1]
-# 			if self.view.match_selector(pos-1, "string.mkb") and not self.view.match_selector(pos-1, "variable.parameter.mkb") and not self.view.match_selector(pos-1, "punctuation.definition.keyword.mkb") and not self.view.match_selector(pos-1, "keyword.other.mkb"):
-# 				color_code = match.group(1)
-# 				print(color_code)
-# 				if color_code == "n":
-# 					self.view.add_regions("mkbcolors_{}".format(count+1), [sublime.Region(pos-2, pos)], "string.mkb", "", sublime.DRAW_NO_FILL|sublime.DRAW_NO_OUTLINE|sublime.DRAW_SOLID_UNDERLINE)
-# 				elif color_code == "o":
-# 					self.view.add_regions("mkbcolors_{}".format(count+1), [sublime.Region(pos-2, pos)], "o.mkb")
-# 				elif color_code == "l":
-# 					self.view.add_regions("mkbcolors_{}".format(count+1), [sublime.Region(pos-2, pos)], "l.mkb")
-# 				else:
-# 					self.view.add_regions("mkbcolors_{}".format(count+1), [sublime.Region(pos-2, pos)], "{}.mkb".format(color_code))
-# 				self.total = count + 1
-
-# 	def on_load(self):
-# 		if self.view.match_selector(0, "source.mkb") and config("highlight_color_codes"):
-# 			self.display()
-
-# 	def on_modified_async(self):
-# 		if self.view.match_selector(0, "source.mkb") and config("highlight_color_codes"):
-# 			self.display()
-
+		
 class mkb_insert(sublime_plugin.TextCommand):
 	def run(self, edit):
 		if self.view.match_selector(0, "source.mkb"):
