@@ -1,6 +1,7 @@
+import re
+import json
 import sublime
 import sublime_plugin
-import json
 
 def plugin_loaded():
 	global settings
@@ -21,6 +22,34 @@ def optional(text):
 def module_bool(module):
 	return module_bools.get(module)
 
+def config(key):
+	if settings.get(key):
+		return settings.get(key)
+
+def viewlines():
+	filelines = sublime.active_window().active_view().substr(sublime.Region(0, len(sublime.active_window().active_view()))).split("\n")
+	if config("indent_expand"):
+		string = ""
+		for l in filelines:
+			l = l.strip()
+			if l.endswith(";"):
+				string += l
+			else:
+				string += l + ";"
+		splitted = string.split(";")
+	else:
+		splitted = [f[:-1] if f.endswith(";") else f for f in filelines]
+
+	# Splits line properly and excludes semicolons in strings
+	temp = ""
+	lines = []
+	for i in splitted:
+		temp += ("" if temp == "" else ";") + i
+
+		if temp.replace("\\\\", "").replace("\\\"", "").count("\"") % 2 == 0:
+			lines.append(temp)
+			temp = ""
+	return lines
 
 class mkbcompletions(sublime_plugin.EventListener):
 	def on_query_completions(self, view, prefix, locations):
@@ -32,7 +61,19 @@ class mkbcompletions(sublime_plugin.EventListener):
 			semicolon = ";" if settings.get("semicolon_end") else ""
 			quotes = "\"" if settings.get("parameters_quotes") else ""
 
-			completions = [
+			completions = []
+			variables = re.findall("(set\(|SET\()?(@&|@#|&|#|@)([a-z_\-1-9]+)", ";".join(viewlines()))
+			for i in variables:
+				completions.append(
+					sublime.CompletionItem(
+						trigger=(i[1]+i[2]), 
+						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+						kind=sublime.KIND_VARIABLE, 
+						completion=(i[1]+i[2])), 
+				)
+
+
+			completions.extend([
 			# Control Flow
 				sublime.CompletionItem( #if
 					trigger=case("if"), 
@@ -5406,7 +5447,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					annotation="", 
 					details="The position in Z direction with three decimal places after the comma as a string", 
 					completion=var_wrap+"ZPOS"+var_wrap)
-			]
+			])
 
 			completions.extend(
 				([
