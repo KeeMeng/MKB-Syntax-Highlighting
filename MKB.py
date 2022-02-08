@@ -193,7 +193,7 @@ class Indenter:
 			self.openings += "|\\$\\${"
 
 	def related_command(line, pattern):
-		match = re.match(r"^({}\w*?)".format(pattern), line, re.IGNORECASE)
+		match = re.match(r"\t*?({}\w*?)".format(pattern), line, re.IGNORECASE)
 		return None if not match else match.groups()[0]
 
 	def indent_line(self, line, indent=True):
@@ -220,7 +220,7 @@ class Indenter:
 				self.indent_line(l)
 				closed = True
 			elif Indenter.related_command(l, self.openings) is None:
-				teststring = re.match("elseif|elseifnot|else|endif|next|until|while|loop|endunsafe|endswitch|function", line, re.IGNORECASE)
+				teststring = re.match("\t*?(elseif|elseifnot|else|endif|next|until|while|loop|endunsafe|endswitch|function)", line, re.IGNORECASE)
 				if teststring is not None and debug:
 					print(" Stack error found on line "+str(count)+": "+line)
 					errorbool = True
