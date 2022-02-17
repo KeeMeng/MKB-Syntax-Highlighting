@@ -352,14 +352,14 @@ class mkbmini(sublime_plugin.TextCommand):
 				a = 0
 				b = len(filelines)
 
-			splitted = [f[:-1] if f.endswith(";") else f for f in filelines]
+			splitted = viewlines()
 			temp = ""
 			lines = []
 			for i in splitted:
 				temp += ("" if temp == "" else ";") + i
 
 				if temp.replace("\\\\", "").replace("\\\"", "").count("\"") % 2 == 0:
-					lines.append(temp)
+					lines.append(temp.strip())
 					temp = ""
 
 			string = ";".join(lines[a:b+1])
