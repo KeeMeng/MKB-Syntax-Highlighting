@@ -767,3 +767,12 @@ class mkb_insert(sublime_plugin.TextCommand):
 			else:
 				sublime.Window.show_quick_panel(sublime.active_window(), ids, lambda index: sublime.active_window().run_command("insert", {"characters": json_data[index]["name"] if index != -1 else ""}), sublime.KEEP_OPEN_ON_FOCUS_LOST, 0, None)
 
+class mkb_edit_new_file(sublime_plugin.TextCommand):
+	def run(self, edit):
+		# add selection to string
+		string = "$${\n" + "\n".join([self.view.substr(sel) for sel in self.view.sel()]) + "\n}$$"
+		# open a new file
+		view = sublime.active_window().new_file(syntax="MKB.sublime-syntax")
+		# insert selected text into the new file
+		view.insert(edit, 0, string)
+

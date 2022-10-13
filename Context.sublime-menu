@@ -99,6 +99,10 @@
 				}
 			},
 			{
+				"caption": "Copy selected text to new file",
+				"command": "mkb_edit_new_file"
+			},
+			{
 				"caption": "Insert Minecraft ID",
 				"command": "mkb_insert"
 			},
