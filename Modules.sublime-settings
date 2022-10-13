@@ -23,6 +23,7 @@
 	"scaneutils": true,
 	"signtext": true,
 	"switch_case": true,
+	"title": true,
 	"utilities": true,
 	"utils": true,
 	"windowsnotifications": true,

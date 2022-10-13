@@ -8256,6 +8256,52 @@ class mkbcompletions(sublime_plugin.EventListener):
 				] if module_bool("switch_case") else [] )
 				+
 				([
+			# Title Module
+					sublime.CompletionItem( #gettitle
+						trigger=case("gettitle"), 
+						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+						kind=sublime.KIND_KEYWORD, 
+						annotation="(Title Module)", 
+						details="Returns the currently displayed title", 
+						completion=optional("&${1:title} = ")+case("gettitle")+args("")+semicolon), 
+					sublime.CompletionItem( #getsubtitle
+						trigger=case("getsubtitle"), 
+						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+						kind=sublime.KIND_KEYWORD, 
+						annotation="(Title Module)", 
+						details="Returns the currently displayed subtitle", 
+						completion=optional("&${1:subtitle} = ")+case("getsubtitle")+args("")+semicolon), 
+					sublime.CompletionItem( #getbossbartext
+						trigger=case("getbossbartext"), 
+						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+						kind=sublime.KIND_KEYWORD, 
+						annotation="(Title Module)", 
+						details="Returns the currently displayed string above the bossbar", 
+						completion=optional("&${1:bossbartext} = ")+case("getbossbartext")+args("")+semicolon), 
+					sublime.CompletionItem( #getbossbarcolor
+						trigger=case("getbossbarcolor"), 
+						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+						kind=sublime.KIND_KEYWORD, 
+						annotation="(Title Module)", 
+						details="Returns the color of the bossbar", 
+						completion=optional("&${1:bossbarcolor} = ")+case("getbossbarcolor")+args("")+semicolon), 
+					sublime.CompletionItem( #getbossbarpercentage
+						trigger=case("getbossbarpercentage"), 
+						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+						kind=sublime.KIND_KEYWORD, 
+						annotation="(Title Module)", 
+						details="Returns the percentage value the bossbar currently is at", 
+						completion=optional("&${1:bossbarpercentage} = ")+case("getbossbarpercentage")+args("")+semicolon), 
+					sublime.CompletionItem( #MODULETITLE
+						trigger="MODULETITLE", 
+						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+						kind=sublime.KIND_VARIABLE, 
+						annotation="(Title Module)", 
+						details="Returns true if the Title module is installed", 
+						completion=var_wrap+"MODULETITLE"+var_wrap), 
+				] if module_bool("title") else [] )
+				+
+				([
 			# Utilities Module
 					sublime.CompletionItem( #eval
 						trigger=case("eval"), 
