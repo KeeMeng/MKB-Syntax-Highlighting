@@ -64,13 +64,13 @@ class mkbcompletions(sublime_plugin.EventListener):
 			completions = []
 			variables = re.findall("(set\(|SET\()?(@&|@#|&|#|@)([a-z_\-1-9]+)", ";".join(viewlines()))
 			for i in variables:
-				completions.append(
-					sublime.CompletionItem(
-						trigger=(i[1]+i[2]), 
-						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
-						kind=sublime.KIND_VARIABLE, 
-						completion=(i[1]+i[2])), 
-				)
+				variable_completion = sublime.CompletionItem(
+					trigger=(i[1]+i[2]), 
+					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+					kind=sublime.KIND_VARIABLE, 
+					completion=(i[1]+i[2]))
+				if variable_completion not in completions:
+					completions.append(variable_completion)
 
 
 			completions.extend([
