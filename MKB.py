@@ -332,8 +332,8 @@ class mkbhint(sublime_plugin.TextCommand):
 				<small>{}{}</small>
 				""".format(data["extendedName"], data["type"], data["category"], data["description"], example, data["example"], )
 			if data != None:
-				page = data["resource"].replace("api", "")
-				linkstring = "https://mkb.ddoerr.com{}".format(str(page)[1:])
+				page = data["resource"].replace("/api", "")
+				linkstring = "https://mkb.ddoerr.com{}".format(str(page))
 				self.view.show_popup(html, sublime.COOPERATE_WITH_AUTO_COMPLETE|sublime.HIDE_ON_MOUSE_MOVE_AWAY, pos, self.view.viewport_extent()[0], self.view.line_height()*config("popup_line_height")+4, lambda link: webbrowser.get(using=config("browser")).open(linkstring, new=2), "")
 
 			else:
@@ -653,8 +653,8 @@ class mkbwiki(sublime_plugin.TextCommand):
 		if index == -1:
 			sublime.active_window().run_command("mkbwiki")
 		elif index == 0:
-			page = mkbjson[wikiindex]["resource"].replace("api", "")
-			linkstring = "https://mkb.ddoerr.com{}".format(str(page)[1:])
+			page = mkbjson[wikiindex]["resource"].replace("/api", "")
+			linkstring = "https://mkb.ddoerr.com{}".format(str(page))
 			webbrowser.get(using=config("browser")).open(linkstring, new=2)
 		else:
 			array = []
