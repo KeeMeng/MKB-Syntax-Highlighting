@@ -33,7 +33,7 @@ def plugin_loaded():
 			try:
 				print("MKBdocs being weird, falling back to web api")
 				from urllib import request
-				with request.urlopen("https://beta.mkb.gorlem.ml/api/docs") as url:
+				with request.urlopen("https://mkb.ddoerr.com/api/docs") as url:
 					mkbjson = json.loads(url.read().decode())
 					print("MKBdocs (Online) loaded")
 			except:
@@ -333,7 +333,7 @@ class mkbhint(sublime_plugin.TextCommand):
 				""".format(data["extendedName"], data["type"], data["category"], data["description"], example, data["example"], )
 			if data != None:
 				page = data["resource"].replace("api", "")
-				linkstring = "https://beta.mkb.gorlem.ml{}".format(str(page)[1:])
+				linkstring = "https://mkb.ddoerr.com{}".format(str(page)[1:])
 				self.view.show_popup(html, sublime.COOPERATE_WITH_AUTO_COMPLETE|sublime.HIDE_ON_MOUSE_MOVE_AWAY, pos, self.view.viewport_extent()[0], self.view.line_height()*config("popup_line_height")+4, lambda link: webbrowser.get(using=config("browser")).open(linkstring, new=2), "")
 
 			else:
@@ -654,7 +654,7 @@ class mkbwiki(sublime_plugin.TextCommand):
 			sublime.active_window().run_command("mkbwiki")
 		elif index == 0:
 			page = mkbjson[wikiindex]["resource"].replace("api", "")
-			linkstring = "https://beta.mkb.gorlem.ml{}".format(str(page)[1:])
+			linkstring = "https://mkb.ddoerr.com{}".format(str(page)[1:])
 			webbrowser.get(using=config("browser")).open(linkstring, new=2)
 		else:
 			array = []

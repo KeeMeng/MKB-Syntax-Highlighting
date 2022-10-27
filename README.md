@@ -13,7 +13,7 @@ Join [my discord](https://discord.gg/m9yfJtb) for support/suggestions/bugs.
 
 ## Introduction:
 
-This package was made to help coding for Macro Keybind Mod easier. To help you, I made auto complete to suggest possible actions and variable to you, and if you hover over the keywords, you can see a description and example of the command, which was taken from [MKB docs](https://beta.mkb.gorlem.ml/api/docs). (Thanks Gorlem!) It also has an indenter made by Federal, with a fancy indent function too! After making your code, you can also use a linter to find possible bugs, such as missing brackets. To personalize this package, go to the Context Menu or `Edit` > `MKB` menu at the top of Sublime Text 3/4, and modify `Package Settings`. 
+This package was made to help coding for Macro Keybind Mod easier. To help you, I made auto complete to suggest possible actions and variable to you, and if you hover over the keywords, you can see a description and example of the command, which was taken from [MKB docs](https://mkb.ddoerr.com/docs/actions). (Thanks Gorlem!) It also has an indenter made by Federal, with a fancy indent function too! After making your code, you can also use a linter to find possible bugs, such as missing brackets. To personalize this package, go to the Context Menu or `Edit` > `MKB` menu at the top of Sublime Text 3/4, and modify `Package Settings`. 
 
 Brief description of the files in the package include: 
 ```
@@ -168,7 +168,7 @@ template.sublime-color-scheme | Template to make your own color scheme (You can 
 
 ## Extra: 
 
-**MKBdocs.css**: Is a css file to make https://beta.mkb.gorlem.ml/docs/actions have a dark mode. You can use a chrome extension called stylus to change the css. 
+**MKBdocs.css**: Is a css file to make https://mkb.ddoerr.com/docs/actions have a dark mode. You can use a chrome extension called stylus to change the css. 
 
 - [Chrome Extension](https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne?hl=en-GB)
 - [Safari Modify Elements](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/Web_Inspector_Tutorial/EditingCode/EditingCode.html)
@@ -202,3 +202,4 @@ Credits to:
 - https://www.sublimetext.com/docs/3/api_reference.html
 - https://www.youtube.com/channel/UCJAB_XF3kAMqwF85y0hxcXQ
 - https://beta.mkb.gorlem.ml/api/docs
+- https://mkb.ddoerr.com/docs/actions
