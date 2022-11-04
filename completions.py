@@ -6902,21 +6902,21 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(GetSlotItemExtended Module)", 
 						details="+ Argument for the itemname of item", 
-						completion=optional("${2:&${1:[itemid]} = }")+case("getslotitemext")+args("#${3:<slotid>},&${1:[itemid]},${4:[stacksize]},${5:[damage]},"+quotes+"${6:[itemname]}"+quotes)+semicolon), 
+						completion=case("getslotitemext")+args("#${3:<slotid>},&${1:[itemid]},${4:[stacksize]},${5:[damage]},"+quotes+"${6:[itemname]}"+quotes)+semicolon), 
 					sublime.CompletionItem( #getslotitemnbt
 						trigger=case("getslotitemnbt"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(GetSlotItemExtended Module)", 
 						details="+ Argument for the nbt of item", 
-						completion=optional("${2:&${1:[itemid]} = }")+case("getslotitemnbt")+args("#${3:<slotid>},${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[nbt]}")+semicolon), 
+						completion=case("getslotitemnbt")+args("#${3:<slotid>},${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[nbt]}")+semicolon), 
 					sublime.CompletionItem( #getslotitemenchants
 						trigger=case("getslotitemenchants"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(GetSlotItemExtended Module)", 
 						details="+ Argument for enchantments", 
-						completion=optional("${2:&${1:[itemid]} = }")+case("getslotitemenchants")+args("#${3:<slotid>},${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[enchants]}")+semicolon), 
+						completion=case("getslotitemenchants")+args("#${3:<slotid>},${1:[itemid]},${4:[stacksize]},${5:[damage]},${6:[enchants]}")+semicolon), 
 					sublime.CompletionItem( #MODULEGETSLOTITEMEXT
 						trigger="MODULEGETSLOTITEMEXT", 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7327,7 +7327,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(JSON Module)", 
 						details="Returns json as key:value array", 
-						completion=optional("${2:&${1:[array]} = }")+case("getjsonasarray")+args(quotes+"${3:<json>}"+quotes+",${1:[array]}[]")+semicolon), 
+						completion=case("getjsonasarray")+args(quotes+"${3:<json>}"+quotes+",${1:[array]}[]")+semicolon), 
 					sublime.CompletionItem( #jsonarrayadd
 						trigger=case("jsonarrayadd"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7394,7 +7394,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Reads file into array, files can start with ~ to be relative to minecraft directory", 
-						completion=optional("${2:&${1:<content>}[] = }")+case("readfile")+args("&${1:[content]}[],"+quotes+"${3:<path>}"+quotes)+semicolon), 
+						completion=case("readfile")+args("&${1:[content]}[],"+quotes+"${3:<path>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #writefile
 						trigger=case("writefile"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7499,14 +7499,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Gets info about the held item", 
-						completion=optional("${2:&${1:[id]} = }")+case("getmouseitem")+args("&${1:[id]},#${3:[stacksizevar]},#${4:[datavar]},&${5:[nbt]}")+semicolon), 
+						completion=case("getmouseitem")+args("&${1:[id]},#${3:[stacksizevar]},#${4:[datavar]},&${5:[nbt]}")+semicolon), 
 					sublime.CompletionItem( #getslotiteminv
 						trigger=case("getslotiteminv"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Gets information about the item in the specified slot", 
-						completion=optional("${2:[&${1:<id>}] = }")+case("getslotiteminv")+args("${3:<slotid>},&${1:<id>},#${4:[stacksizevar]},#${5:[datavar]},&${6:[nbt]}")+semicolon), 
+						completion=case("getslotiteminv")+args("${3:<slotid>},&${1:<id>},#${4:[stacksizevar]},#${5:[datavar]},&${6:[nbt]}")+semicolon), 
 					sublime.CompletionItem( #getslotinv
 						trigger=case("getslotinv"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7527,7 +7527,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Get the x, y and z (3dp) of the bobber", 
-						completion=optional("${2:#${1:[ytotal]} = }")+case("getfishhook")+args("#${3:[x]},#${4:[xprecision]},#${5:[y]},#${6:[yprecision]},#${7:[z]},#${8:[zprecision]}")+semicolon), 
+						completion=optional("#${1:[ytotal]} = ")+case("getfishhook")+args("#${3:[x]},#${4:[xprecision]},#${5:[y]},#${6:[yprecision]},#${7:[z]},#${8:[zprecision]}")+semicolon), 
 					sublime.CompletionItem( #map
 						trigger=case("map"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7541,7 +7541,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Spawns particles similar to the vanilla command", 
-						completion=optional("${2:&${1:errors}[] = }")+case("particle")+args(quotes+"${3:<particlename>}"+quotes+",${4:<x>},${5:<y>},${6:<z>},${7:<dx>},${8:<dy>},${9:<dz>},${10:[count]},${11:[mode]}")+semicolon), 
+						completion=optional("&${1:errors}[] = ")+case("particle")+args(quotes+"${3:<particlename>}"+quotes+",${4:<x>},${5:<y>},${6:<z>},${7:<dx>},${8:<dy>},${9:<dz>},${10:[count]},${11:[mode]}")+semicolon), 
 					sublime.CompletionItem( #countitem
 						trigger=case("countitem"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7562,7 +7562,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Creates a control on the specified screen at row and column position", 
-						completion=optional("${2:[&${1:controlname}] = }")+case("createcontrol")+args("${3:<screenname|layouts|types>},${4:[element type]},${5:[row]},${6:[column]}")+semicolon), 
+						completion=optional("[&${1:controlname}] = ")+case("createcontrol")+args("${3:<screenname|layouts|types>},${4:[element type]},${5:[row]},${6:[column]}")+semicolon), 
 					sublime.CompletionItem( #deletecontrol
 						trigger=case("deletecontrol"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -7632,14 +7632,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="(Char) Returns the character of the character expression", 
-						completion=optional("${2:&${1:<result>} = }")+case("char")+args("&${1:<result>},&${3:<char expression>}")+semicolon), 
+						completion=case("char")+args("&${1:<result>},&${3:<char expression>}")+semicolon), 
 					sublime.CompletionItem( #char
 						trigger=case("char"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="(Array) Returns the characters of the character expressiond", 
-						completion=optional("${2:&${1:<result>} = }")+case("char")+args("&${1:<result>},&${3:<char expression>}")+semicolon), 
+						completion=case("char")+args("&${1:<result>},&${3:<char expression>}")+semicolon), 
 					sublime.CompletionItem( #unix
 						trigger=case("unix"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -8185,14 +8185,14 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(SignText Module)", 
 						details="Returns signtext of hit sign", 
-						completion=optional("${2:&${1:[outarray]}[] = }")+case("gethitsigntext")+args("&${1:[outarray]}[]")+semicolon), 
+						completion=case("gethitsigntext")+args("&${1:[outarray]}[]")+semicolon), 
 					sublime.CompletionItem( #getsigntext
 						trigger=case("getsigntext"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(SignText Module)", 
 						details="Returns signtext at coordinates", 
-						completion=optional("${2:&${1:[outarray]} = }")+case("getsigntext")+args("${3:<x>},${4:<y>},${5:<z>},&${1:[outarray]}")+semicolon), 
+						completion=case("getsigntext")+args("${3:<x>},${4:<y>},${5:<z>},&${1:[outarray]}")+semicolon), 
 					sublime.CompletionItem( #setsigntext
 						trigger=case("setsigntext"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -8309,7 +8309,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Utilities Module)", 
 						details="Evaluates an expression", 
-						completion=optional("${2:&${1:[result]} = }")+case("eval")+args("&${1:[result]},"+quotes+"${3:<expression>}"+quotes)+semicolon), 
+						completion=case("eval")+args("&${1:[result]},"+quotes+"${3:<expression>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #char
 						trigger=case("char"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -8344,21 +8344,21 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Utilities Module)", 
 						details="Gets the s/ms of current timestamp", 
-						completion=optional("${2:#${1:[seconds]} = }")+case("unix")+args("#${1:[seconds]},#${3:[milliseconds]}")+semicolon), 
+						completion=case("unix")+args("#${1:[seconds]},#${3:[milliseconds]}")+semicolon), 
 					sublime.CompletionItem( #eval
 						trigger=case("eval"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Evaluates an expression with float values", 
-						completion=optional("${3:${2:[&#]}${1:<result>} = }")+case("eval")+args("${2:[&#]}${1:<result>},${4:<expression>}")+semicolon), 
+						completion=case("eval")+args("${2:[&#]}${1:<result>},${4:<expression>}")+semicolon), 
 					sublime.CompletionItem( #mod
 						trigger=case("mod"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Performs the modulo operation on the given values", 
-						completion=optional("${2:#${1:[result]} = }")+case("mod")+args("#${1:[result]},${3:<dividend>},${4:<divisor>}")+semicolon), 
+						completion=case("mod")+args("#${1:[result]},${3:<dividend>},${4:<divisor>}")+semicolon), 
 					sublime.CompletionItem( #restart
 						trigger=case("restart"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -8372,7 +8372,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
 						details="Returns the previous names of the player with this name or uuid", 
-						completion=optional("${2:&${1:result}[] = }")+case("oldname")+args("&${1:<result>}[],"+quotes+"${3:<name|uuid>}"+quotes)+semicolon), 
+						completion=case("oldname")+args("&${1:<result>}[],"+quotes+"${3:<name|uuid>}"+quotes)+semicolon), 
 				] if module_bool("utilities") else [] )
 				+
 				([
