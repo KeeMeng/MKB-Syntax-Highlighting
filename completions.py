@@ -7697,6 +7697,20 @@ class mkbcompletions(sublime_plugin.EventListener):
 						annotation="(Klacaiba Module)", 
 						details="Returns the version of klacaiba", 
 						completion=var_wrap+"KLACAIBAVERSION"+var_wrap), 
+					sublime.CompletionItem( #formatnumber
+						trigger="formatnumber", 
+						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+						kind=sublime.KIND_KEYWORD, 
+						annotation="(Klacaiba Module)", 
+						details="Formats number", 
+						completion=case("formatnumber")+args("${1:<&string>},"+quotes+"${2:0}"+quotes)+semicolon), 
+					sublime.CompletionItem( #getplayeruuid
+						trigger="getplayeruuid", 
+						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
+						kind=sublime.KIND_KEYWORD, 
+						annotation="(Klacaiba Module)", 
+						details="Get Player UUID", 
+						completion=case("getplayeruuid")+args("")+semicolon), 
 				# Klacaiba players iterator
 					sublime.CompletionItem( #players
 						trigger=case("players"), 
