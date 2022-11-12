@@ -8346,12 +8346,12 @@ class mkbcompletions(sublime_plugin.EventListener):
 						details="Gets the s/ms of current timestamp", 
 						completion=case("unix")+args("#${1:[seconds]},#${3:[milliseconds]}")+semicolon), 
 					sublime.CompletionItem( #eval
-						trigger=case("eval"), 
+						trigger=case("calc"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
-						details="Evaluates an expression with float values", 
-						completion=case("eval")+args("${2:[&#]}${1:<result>},${4:<expression>}")+semicolon), 
+						details="Calcuates an expression with float values", 
+						completion=case("calc")+args("&${1:[result]},"+quotes+"${3:<expression>}"+quotes)+semicolon), 
 					sublime.CompletionItem( #mod
 						trigger=case("mod"), 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
