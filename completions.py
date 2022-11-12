@@ -7702,8 +7702,8 @@ class mkbcompletions(sublime_plugin.EventListener):
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
-						details="Formats number", 
-						completion=case("formatnumber")+args("${1:<&string>},"+quotes+"${2:0}"+quotes)+semicolon), 
+						details="Format number according to format https://docs.oracle.com/javase/7/docs/api/java/text/DecimalFormat.html", 
+						completion=optional("${1:&number} = ")+case("formatnumber")+args("${2:<number>},${3:<format>}")+semicolon), 
 					sublime.CompletionItem( #getplayeruuid
 						trigger="getplayeruuid", 
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
