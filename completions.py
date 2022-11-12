@@ -7709,8 +7709,8 @@ class mkbcompletions(sublime_plugin.EventListener):
 						completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
 						kind=sublime.KIND_KEYWORD, 
 						annotation="(Klacaiba Module)", 
-						details="Get Player UUID", 
-						completion=case("getplayeruuid")+args("")+semicolon), 
+						details="Get the UUID of an online player", 
+						completion=optional("${1:&uuid} = ")+case("getplayeruuid")+args("${2:<playername>}")+semicolon), 
 				# Klacaiba players iterator
 					sublime.CompletionItem( #players
 						trigger=case("players"), 
