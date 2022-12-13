@@ -130,6 +130,7 @@ contexts:
         47: keyword.other.mkb
     - match: '\]%'
       scope: keyword.other.mkb
+      pop: true
     - match: '\b\"|'
       pop: true
 
