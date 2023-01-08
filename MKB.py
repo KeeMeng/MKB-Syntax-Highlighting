@@ -251,11 +251,8 @@ class Indenter:
 class hoverinfo(sublime_plugin.ViewEventListener):
 	def on_hover(self, point, hover_zone):
 		if self.view.match_selector(0, "source.mkb"):
-			hoverword = self.view.substr(self.view.word(point))
-			data = load(hoverword)
+			data = load(self.view.substr(self.view.word(point)))
 			if data:
-				mkbhint.showpopup(self, data, point, False)
-			else:
 				mkbhint.showpopup(self, data, point, False)
 
 class mkbvariables(sublime_plugin.TextCommand):
@@ -280,11 +277,10 @@ class mkbhint(sublime_plugin.TextCommand):
 	def run(self, edit, event=None):
 		if self.view.match_selector(0, "source.mkb"):
 			if event:
-				pos = self.view.window_to_text((event["x"], event["y"]))
-			word = self.view.substr(self.view.word(pos))
-			data = load(word)
-			if data:
-				self.showpopup(data, pos, True)
+				point = self.view.window_to_text((event["x"], event["y"]))
+				data = load(self.view.substr(self.view.word(point)))
+				if data:
+					self.showpopup(data, point, True)
 
 	def want_event(self):
 		return True
