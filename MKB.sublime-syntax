@@ -69,49 +69,49 @@ contexts:
         7: keyword.other.mkb
       push: strings2
 
-    - match: '&0'
+    - match: '(&|§)0'
       scope: 0.mkb
-    - match: '&1'
+    - match: '(&|§)1'
       scope: 1.mkb
-    - match: '&2'
+    - match: '(&|§)2'
       scope: 2.mkb
-    - match: '&3'
+    - match: '(&|§)3'
       scope: 3.mkb
-    - match: '&4'
+    - match: '(&|§)4'
       scope: 4.mkb
-    - match: '&5'
+    - match: '(&|§)5'
       scope: 5.mkb
-    - match: '&6'
+    - match: '(&|§)6'
       scope: 6.mkb
-    - match: '&7'
+    - match: '(&|§)7'
       scope: 7.mkb
-    - match: '&8'
+    - match: '(&|§)8'
       scope: 8.mkb
-    - match: '&9'
+    - match: '(&|§)9'
       scope: 9.mkb
-    - match: '&a'
+    - match: '(&|§)a'
       scope: a.mkb
-    - match: '&b'
+    - match: '(&|§)b'
       scope: b.mkb
-    - match: '&c'
+    - match: '(&|§)c'
       scope: c.mkb
-    - match: '&d'
+    - match: '(&|§)d'
       scope: d.mkb
-    - match: '&e'
+    - match: '(&|§)e'
       scope: e.mkb
-    - match: '&f'
+    - match: '(&|§)f'
       scope: f.mkb
-    - match: '&k'
+    - match: '(&|§)k'
       scope: k.mkb
-    - match: '&l'
+    - match: '(&|§)l'
       scope: l.mkb
-    - match: '&m'
+    - match: '(&|§)m'
       scope: m.mkb
-    - match: '&n'
+    - match: '(&|§)n'
       scope: n.mkb
-    - match: '&o'
+    - match: '(&|§)o'
       scope: o.mkb
-    - match: '&r'
+    - match: '(&|§)r'
       scope: r.mkb
 
 
