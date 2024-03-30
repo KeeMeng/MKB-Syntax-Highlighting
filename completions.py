@@ -4949,7 +4949,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Replace all matches of pattern with replace in &subject", 
-					completion=case("regexreplace")+args(quotes+"${1:<subject>}"+quotes+","+quotes+"${2:<pattern>}"+quotes+","+quotes+"${3:[replace]}"+quotes)+semicolon), 
+					completion=case("regexreplace")+args("${1:<&subject>}"+","+quotes+"${2:<pattern>}"+quotes+","+quotes+"${3:[replace]}"+quotes)+semicolon), 
 				sublime.CompletionItem( #reloadresources
 					trigger=case("reloadresources"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
@@ -4970,7 +4970,7 @@ class mkbcompletions(sublime_plugin.EventListener):
 					kind=sublime.KIND_KEYWORD, 
 					annotation="", 
 					details="Replace all occurrences of search with replace in &subject", 
-					completion=case("replace")+args(quotes+"${1:<subject>}"+quotes+","+quotes+"${2:<pattern>}"+quotes+","+quotes+"${3:[replace]}"+quotes)+semicolon), 
+					completion=case("replace")+args("${1:<&subject>}"+","+quotes+"${2:<search>}"+quotes+","+quotes+"${3:[replace]}"+quotes)+semicolon), 
 				sublime.CompletionItem( #resourcepacks
 					trigger=case("resourcepacks"), 
 					completion_format=sublime.COMPLETION_FORMAT_SNIPPET, 
