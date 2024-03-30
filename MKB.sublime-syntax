@@ -156,7 +156,7 @@ contexts:
         3: constant.language.false.mkb
 
   comments:
-    - match: '((^|(?<=;))(\s*\/\/\s*![^;]*;?))|((^|(?<=;))(\s*\/\/\s*[^;]*;?))|((\/\/[^\"\)]*$))'
+    - match: '((^|(?<=;))(\s*\/\/\s*!.*))|((^|(?<=;))(\s*\/\/\s*.*))|((\/\/[^\"\)]*$))'
       captures:
         3: comment.important.mkb
         6: comment.mkb
